@@ -1,0 +1,13 @@
+name: 'Self-Hosted Renovate'
+description: 'GitHub Action to run self-hosted Renovate.'
+author: 'Jeroen de Bruijn'
+inputs:
+  configurationFile:
+    description: 'Renovate configuration file'
+    required: false
+    default: 'src/config.js'
+runs:
+  using: 'docker'
+  image: 'src/Dockerfile'
+  args:
+    - ${{ inputs.configurationFile }}
