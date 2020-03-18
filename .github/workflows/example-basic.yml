@@ -5,7 +5,7 @@ on:
       - master
   pull_request:
 jobs:
-  commitlint:
+  basic-example:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

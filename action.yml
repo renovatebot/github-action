@@ -8,6 +8,6 @@ inputs:
     default: 'src/config.js'
 runs:
   using: 'docker'
-  image: 'src/Dockerfile'
+  image: 'src/DockerFile'
   args:
     - ${{ inputs.configurationFile }}
