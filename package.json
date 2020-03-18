@@ -1,7 +1,7 @@
 {
-  "name": "repo-template",
-  "version": "1.0.0",
-  "description": "A template for creating new repositories.",
+  "name": "github-action-renovate",
+  "version": "0.1.0",
+  "description": "GitHub Action to run Renovate self-hosted.",
   "scripts": {
     "lint": "eslint --ignore-path .prettierignore --ext .ts,.tsx,.js,.jsx,.json .",
     "lint-file": "eslint --ignore-path .prettierignore",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vidavidorra/repo-template.git"
+    "url": "git+https://github.com/vidavidorra/github-action-renovate.git"
   },
   "author": "Jeroen de Bruijn",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/vidavidorra/repo-template/issues"
+    "url": "https://github.com/vidavidorra/github-action-renovate/issues"
   },
-  "homepage": "https://github.com/vidavidorra/repo-template#readme",
+  "homepage": "https://github.com/vidavidorra/github-action-renovate#readme",
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
