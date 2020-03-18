@@ -1,0 +1,49 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: "startsWith(github.event.commits[0].message, 'chore(release): trigger release process [ci release]')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Fetch tags
+        run: git fetch --tags
+      - name: Setup Git user
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install project
+        run: npm ci
+      - name: Release as major
+        if: endsWith(github.event.commits[0].message, '[ci release][major]')
+        run: npx --no-install standard-version --release-as major
+      - name: Release as minor
+        if: endsWith(github.event.commits[0].message, '[ci release][minor]')
+        run: npx --no-install standard-version --release-as minor
+      - name: Release as patch
+        if: endsWith(github.event.commits[0].message, '[ci release][patch]')
+        run: npx --no-install standard-version --release-as patch
+      - name: Release
+        if: endsWith(github.event.commits[0].message, '[ci release]')
+        run: npx --no-install standard-version
+      - name: Push release
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  prevent_failed_status:
+    name: Prevent failed status when skipped
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prevent failed status when skipped
+        run: echo "Run this job to prevent the workflow status from showing as failed when all other jobs are skipped."

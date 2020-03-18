@@ -1,0 +1,20 @@
+name: Lint
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install project
+        run: npm ci
+      - name: Lint
+        run: npm run lint
