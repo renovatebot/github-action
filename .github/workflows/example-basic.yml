@@ -7,15 +7,9 @@ on:
 jobs:
   basic-example:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: ls
-        run: npm ci
       - name: Renovate
         uses: ./
         with:
