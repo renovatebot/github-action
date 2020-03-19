@@ -6,6 +6,14 @@ inputs:
     description: 'Renovate configuration file'
     required: false
     default: 'src/config.js'
+  token:
+    description: |
+      Personal access token that Renovate should use. This should be configured
+      using a GitHub secret.
+    required: true
 runs:
   using: 'docker'
   image: 'src/Dockerfile'
+  args:
+    - ${{ inputs.configurationFile }}
+    - ${{ inputs.token }}

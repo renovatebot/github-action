@@ -1,11 +1,11 @@
-name: Basic example
+name: Example
 on:
   push:
     branches:
       - master
   pull_request:
 jobs:
-  basic-example:
+  example:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,3 +14,4 @@ jobs:
         uses: ./
         with:
           configurationFile: 'test/config.js'
+          token: ${{ secrets.RENOVATE_TOKEN }}
