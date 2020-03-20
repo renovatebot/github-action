@@ -24,6 +24,7 @@ GitHub Action to run Renovate self-hosted.
 | <a href="https://renovatebot.com"><img alt="Renovate enabled" src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square"></a>                                                                                         | Dependencies         | Renovate             |
 | <a href="https://github.com/vidavidorra/github-action-renovate/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/vidavidorra/github-action-renovate/Lint%20commit%20messages?style=flat-square"></a> | Lint commit messages | GitHub Actions       |
 | <a href="https://github.com/vidavidorra/github-action-renovate/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/vidavidorra/github-action-renovate/Lint?style=flat-square"></a>                     | Lint                 | GitHub Actions       |
+| <a href="https://github.com/vidavidorra/github-action-renovate/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/vidavidorra/github-action-renovate/Example?style=flat-square"></a>                  | Example              | GitHub Actions       |
 
 <a name="options"></a>
 
