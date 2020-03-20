@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Renovate
+      - name: Renovate example
         uses: ./
         with:
-          configurationFile: 'test/config.js'
+          configurationFile: example/config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
