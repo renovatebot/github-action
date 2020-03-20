@@ -44,7 +44,9 @@ The [`branchPrefix`](https://docs.renovatebot.com/configuration-options/#branchp
 
 ## `token`
 
-[Generate a personal access token](https://github.com/settings/tokens), with `public_repo` rights for only public repositories or `repo` rights for public and private repositories, and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`. The name of the secret can be anything as long as it matches the argument given to the `token` option.
+[Generate a personal access token](https://github.com/settings/tokens), with `public_repo` rights for only public repositories or `repo` rights for public and private repositories, and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`. This token is only used by Renovate, see the [token configuration](https://docs.renovatebot.com/self-hosted-configuration/#token), and gives it access to the repositories. The name of the secret can be anything as long as it matches the argument given to the `token` option.
+
+Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate.
 
 <a name="example"></a>
 
