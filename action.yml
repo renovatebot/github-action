@@ -2,7 +2,7 @@ name: 'Self-Hosted Renovate'
 description: 'GitHub Action to run self-hosted Renovate.'
 author: 'Jeroen de Bruijn'
 branding:
-  icon: tool
+  icon: refresh-cw
   color: blue
 inputs:
   configurationFile:
