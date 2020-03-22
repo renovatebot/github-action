@@ -6,7 +6,11 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: "startsWith(github.event.commits[0].message, 'chore(release): trigger release process [ci release]')"
+    if: |
+      github.event.commits[0].message == 'chore(release): trigger release process [ci release]' ||
+      github.event.commits[0].message == 'chore(release): trigger release process [ci release][major]' ||
+      github.event.commits[0].message == 'chore(release): trigger release process [ci release][minor]' ||
+      github.event.commits[0].message == 'chore(release): trigger release process [ci release][patch]'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,25 +29,37 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install project
         run: npm ci
-      - name: Release as major
-        if: endsWith(github.event.commits[0].message, '[ci release][major]')
-        run: npx --no-install standard-version --release-as major
-      - name: Release as minor
-        if: endsWith(github.event.commits[0].message, '[ci release][minor]')
-        run: npx --no-install standard-version --release-as minor
-      - name: Release as patch
-        if: endsWith(github.event.commits[0].message, '[ci release][patch]')
-        run: npx --no-install standard-version --release-as patch
       - name: Release
-        if: endsWith(github.event.commits[0].message, '[ci release]')
-        run: npx --no-install standard-version
-      - name: Push release
-        uses: ad-m/github-push-action@v0.5.0
+        run: |
+          readonly COMMIT_MESSAGE="${{ github.event.commits[0].message }}"
+          if [[ "${COMMIT_MESSAGE: -11: -1}" == 'ci release' ]]; then
+            echo "::set-env name=NEXT_VERSION::$(npm run release:version --silent)"
+            npx --no-install standard-version
+          else
+            readonly RELEASE_TYPE="${COMMIT_MESSAGE: -6: -1}"
+            echo "::set-env name=NEXT_VERSION::$(
+                npm run release:version --silent -- --releaseAs "${RELEASE_TYPE}"
+                )"
+            npx --no-install standard-version --release-as "${RELEASE_TYPE}"
+          fi
+      - name: Publish release
+        run: git push --follow-tags
+      - name: Publish GitHub release
+        uses: actions/create-release@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: v${{ env.NEXT_VERSION }}
+          release_name: v${{ env.NEXT_VERSION }}
+          body: |
+            See the the [changelog](
+              https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md
+            ) for the changes included in this release.
   prevent_failed_status:
     name: Prevent failed status when skipped
     runs-on: ubuntu-latest
     steps:
       - name: Prevent failed status when skipped
-        run: echo "Run this job to prevent the workflow status from showing as failed when all other jobs are skipped."
+        run: |
+          echo "Run this job to prevent the workflow status from showing as" \
+               "failed when all other jobs are skipped."
