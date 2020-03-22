@@ -5,5 +5,12 @@
     ":timezone(Europe/Amsterdam)",
     ":assignee(vidavidorra)"
   ],
-  "schedule": ["before 6am"]
+  "schedule": ["before 6am"],
+  "packageRules": [
+    {
+      "languages": ["dockerfile"],
+      "paths": ["src/**/?(*.)Dockerfile"],
+      "semanticCommitType": "fix"
+    }
+  ]
 }
