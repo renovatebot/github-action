@@ -8,7 +8,7 @@
   "schedule": ["before 6am"],
   "packageRules": [
     {
-      "languages": ["dockerfile"],
+      "languages": ["docker"],
       "paths": ["src/**/?(*.)Dockerfile"],
       "semanticCommitType": "fix"
     }
