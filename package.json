@@ -4,7 +4,9 @@
   "description": "GitHub Action to run Renovate self-hosted.",
   "scripts": {
     "lint": "eslint --ignore-path .prettierignore --ext .ts,.tsx,.js,.jsx,.json .",
+    "lint:fix": "eslint --ignore-path .prettierignore --ext .ts,.tsx,.js,.jsx,.json --fix .",
     "lint-file": "eslint --ignore-path .prettierignore",
+    "lint-file:fix": "eslint --ignore-path .prettierignore --fix",
     "format": "concurrently \"npm:format:default\"",
     "format:default": "prettier --write \"**/*.{js,jsx,vue,ts,css,less,scss,html,htm,json,md,markdown,yml,yaml}\"",
     "format-file:default": "prettier --write",
