@@ -1,4 +1,4 @@
-FROM renovate/renovate:19.176.3
+FROM renovate/renovate:19.181.0
 
 COPY entrypoint.sh /usr/entrypoint.sh
 
