@@ -53,7 +53,7 @@ Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-an
 
 ## Example
 
-This example uses a personal access token that is a Secret named `RENOVATE_TOKEN`.
+This example uses a personal access token that is a GitHub secret named `RENOVATE_TOKEN`.
 
 ```yml
 name: Example

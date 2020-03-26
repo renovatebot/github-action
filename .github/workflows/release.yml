@@ -13,7 +13,7 @@ jobs:
       github.event.commits[0].message == 'chore(release): trigger release process [ci release][patch]'
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.0.0
         with:
           fetch-depth: 0
       - name: Fetch tags
@@ -23,10 +23,9 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Setup node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v1.4.1
         with:
           node-version: '12.x'
-          registry-url: 'https://registry.npmjs.org'
       - name: Install project
         run: npm ci
       - name: Release
