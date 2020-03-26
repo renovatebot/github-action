@@ -2,6 +2,7 @@
   "name": "github-action-renovate",
   "version": "1.0.2",
   "description": "GitHub Action to run Renovate self-hosted.",
+  "private": true,
   "scripts": {
     "lint": "eslint --ignore-path .prettierignore --ext .ts,.tsx,.js,.jsx,.json .",
     "lint:fix": "eslint --ignore-path .prettierignore --ext .ts,.tsx,.js,.jsx,.json --fix .",
