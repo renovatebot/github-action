@@ -53,18 +53,23 @@ Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-an
 
 ## Example
 
-This example uses a personal access token that is a GitHub secret named `RENOVATE_TOKEN`.
+This example uses a personal access token and will run every 15 minutes. The personal access token is configured as a GitHub secret named `RENOVATE_TOKEN`. This example uses the [`example/config.js`](./example/config.js) file as configuration.
+You can also see a live example of this action in my [github-renovate](https://github.com/vidavidorra/github-renovate) repository, which also includes a more [advanced configuration](https://github.com/vidavidorra/github-renovate/blob/master/src/config.js) for updating GitHub Action workflows.
 
 ```yml
-name: Example
-on: push
+name: Renovate
+on:
+  schedule:
+    # The "*" (#42, asterisk) character has special semantics in YAML, so this
+    # string has to be quoted.
+    - cron: '0/15 * * * *'
 jobs:
-  example:
+  renovate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Self-hosted Renovate example
+        uses: actions/checkout@v2.0.0
+      - name: Self-hosted Renovate
         uses: vidavidorra/github-action-renovate@v1.0.0
         with:
           configurationFile: example/config.js
