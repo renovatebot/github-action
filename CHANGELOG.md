@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://github.com/vidavidorra/github-action-renovate/compare/v1.0.3...v1.0.4) (2020-03-28)
+
+### Bug Fixes
+
+- **deps:** update renovate/renovate docker tag to v19.184.2 ([#10](https://github.com/vidavidorra/github-action-renovate/issues/10)) ([32ae3cb](https://github.com/vidavidorra/github-action-renovate/commit/32ae3cb974963fdc7987adee6de3ad402ca2361b))
+
 ### [1.0.3](https://github.com/vidavidorra/github-action-renovate/compare/v1.0.2...v1.0.3) (2020-03-27)
 
 ### Bug Fixes
