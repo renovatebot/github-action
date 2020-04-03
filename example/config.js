@@ -5,5 +5,5 @@ module.exports = {
   logLevel: 'debug',
   onboarding: false,
   platform: 'github',
-  repositories: ['vidavidorra/github-action-renovate'],
+  repositories: ['renovatebot/github-action'],
 };
