@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.1.0
       - name: Setup node
         uses: actions/setup-node@v1.4.1
         with:
