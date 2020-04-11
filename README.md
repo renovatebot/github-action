@@ -41,6 +41,13 @@ Configuration file to configure Renovate. The configurations that can be done in
 
 The [`branchPrefix`](https://docs.renovatebot.com/configuration-options/#branchprefix) option is important to configure and should be configured to a value other than the default to prevent interference with e.g. the Renovate GitHub App.
 
+If you want to use this with just the single configuration file, make sure to include the following two configuration lines. This disables the requirement of a configuration file for the repository and disables onboarding.
+
+```js
+  onboarding: false,
+  requireConfig: false,
+```
+
 <a name="option-token"></a>
 
 ## `token`
@@ -75,4 +82,3 @@ jobs:
           configurationFile: example/config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
-
