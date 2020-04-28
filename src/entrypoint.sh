@@ -33,7 +33,7 @@ export RENOVATE_TOKEN="${TOKEN}"
 
 echo "Running image: $RENOVATE_VERSION"
 set -x
-docker run --rm -e RENOVATE_TOKEN -v /tmp:/tmp -v ${RENOVATE_CONFIG_FILE}:/usr/src/app${CONFIG} renovate/renovate:$RENOVATE_VERSION
+docker run --rm -e RENOVATE_TOKEN -v /tmp:/tmp -v ${RENOVATE_CONFIG_FILE}:/usr/src/app/${CONFIG} renovate/renovate:$RENOVATE_VERSION
 set +x
 
 echo "Done"
