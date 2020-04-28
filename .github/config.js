@@ -6,4 +6,12 @@ module.exports = {
   onboarding: false,
   platform: 'github',
   repositories: ['renovatebot/github-action'],
+  packageRules: [
+    {
+      description: 'lockFileMaintenance',
+      updateTypes: ['lockFileMaintenance'],
+      enabled: true,
+      schedule: [],
+    },
+  ],
 };

@@ -1,0 +1,45 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+        with:
+          fetch-depth: 0
+      - name: Lint commit messages
+        uses: wagoid/commitlint-github-action@v1.6.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+      - name: Setup node
+        uses: actions/setup-node@v1.4.1
+        with:
+          node-version: '12.x'
+      - name: Install project
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+      - name: Renovate test
+        uses: ./
+        with:
+          configurationFile: .github/config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+
+  build:
+    needs: [lint, commitlint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Dummy'
