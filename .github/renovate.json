@@ -5,12 +5,27 @@
     ":timezone(Europe/Amsterdam)",
     ":assignee(vidavidorra)"
   ],
+  "prCreation": "not-pending",
   "schedule": ["before 6am"],
   "packageRules": [
     {
       "languages": ["docker"],
       "paths": ["src/**/?(*.)Dockerfile"],
       "semanticCommitType": "fix"
+    },
+    {
+      "description": "Automerge devDependencies updates",
+      "depTypeList": ["devDependencies"],
+      "updateTypes": ["pin", "digest", "patch", "minor"],
+      "automerge": true,
+      "automergeType": "branch",
+    },
+    {
+      "description": "Automerge renovate minor and patch updates",
+      "packageNames": ["renovate/renovate"],
+      "updateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "branch"
     }
   ]
 }
