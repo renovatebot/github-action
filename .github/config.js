@@ -11,11 +11,16 @@ module.exports = {
     enabled: true,
     schedule: null,
   },
-  schedule: null,
   packageRules: [
     {
       packagePattern: '.*',
       schedule: null,
+      lockFileMaintenance: {
+        enabled: true,
+      },
     },
   ],
+  force: {
+    lockFileMaintenance: { enabled: true },
+  },
 };
