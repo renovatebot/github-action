@@ -11,7 +11,7 @@ module.exports = {
       description: 'lockFileMaintenance',
       updateTypes: ['lockFileMaintenance'],
       enabled: true,
-      schedule: [],
+      schedule: ['at any time'],
     },
   ],
 };
