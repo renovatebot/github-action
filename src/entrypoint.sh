@@ -2,8 +2,8 @@
 #
 # Entrypoint for Docker.
 
-readonly CONFIGURATION_FILE="${1}"
-readonly TOKEN="${2}"
+readonly CONFIGURATION_FILE="${INPUT_CONFIGURATIONFILE}"
+readonly TOKEN="${INPUT_TOKEN}"
 
 export RENOVATE_CONFIG_FILE="${GITHUB_WORKSPACE}/${CONFIGURATION_FILE}"
 
