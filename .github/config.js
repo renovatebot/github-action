@@ -7,11 +7,15 @@ module.exports = {
   platform: 'github',
   repositories: ['renovatebot/github-action'],
   printConfig: true,
-  force: {
-    schedule: ['at any time'],
-    lockFileMaintenance: {
-      enabled: true,
-      schedule: ['at any time'],
-    },
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: null,
   },
+  schedule: null,
+  packageRules: [
+    {
+      packagePattern: '.*',
+      schedule: null,
+    },
+  ],
 };
