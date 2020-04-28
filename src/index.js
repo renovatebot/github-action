@@ -5,4 +5,6 @@ const cfg = process.env[`INPUT_CONFIGURATIONFILE`];
 const token = process.env[`INPUT_TOKEN`];
 const ws = process.env.GITHUB_WORKSPACE;
 
+console.dir(process.env);
+
 execSync(`bash -c ${ws}/src/entrypoint.sh '${cfg}' '${token}'`);
