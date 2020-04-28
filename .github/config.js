@@ -10,4 +10,13 @@ module.exports = {
     enabled: true,
     schedule: ['at any time'],
   },
+  printConfig: true,
+  packageRules: [
+    {
+      description: 'lockFileMaintenance',
+      updateTypes: ['lockFileMaintenance'],
+      enabled: true,
+      schedule: ['at any time'],
+    },
+  ],
 };
