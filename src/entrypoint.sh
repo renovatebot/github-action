@@ -5,7 +5,7 @@
 readonly CONFIGURATION_FILE="${INPUT_CONFIGURATIONFILE}"
 readonly TOKEN="${INPUT_TOKEN}"
 
-export RENOVATE_CONFIG_FILE="${GITHUB_WORKSPACE}/${CONFIGURATION_FILE}"
+RENOVATE_CONFIG_FILE="${GITHUB_WORKSPACE}/${CONFIGURATION_FILE}"
 
 if [[ ! -f "${RENOVATE_CONFIG_FILE}" ]]; then
   echo "ERROR: Couldn't find file ${RENOVATE_CONFIG_FILE}" 1>&2
@@ -24,8 +24,13 @@ CONFIG=$(basename RENOVATE_CONFIG_FILE)
 # renovate: datasource=docker depName=renovate/renovate versioning=docker
 RENOVATE_VERSION=19.219.11-slim
 
+echo "Pulling image: $RENOVATE_VERSION"
 docker pull renovate/renovate:$RENOVATE_VERSION
 
 export RENOVATE_TOKEN="${TOKEN}" RENOVATE_CONFIG_FILE="/${CONFIG}"
 
+echo "Running image: $RENOVATE_VERSION"
 docker run --rm -e RENOVATE_TOKEN -e RENOVATE_CONFIG_FILE -v /tmp:/tmp -v ${RENOVATE_CONFIG_FILE}:/${CONFIG} renovate/renovate:$RENOVATE_VERSION
+
+
+echo "Done"
