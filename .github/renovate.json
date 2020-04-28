@@ -18,7 +18,7 @@
       "depTypeList": ["devDependencies"],
       "updateTypes": ["pin", "digest", "patch", "minor"],
       "automerge": true,
-      "automergeType": "branch",
+      "automergeType": "branch"
     },
     {
       "description": "Automerge renovate minor and patch updates",
