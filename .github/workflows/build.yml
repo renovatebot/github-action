@@ -33,7 +33,7 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-  test:
+  e2e:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -45,7 +45,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 
   build:
-    needs: [lint, commitlint, test]
+    needs: [lint, commitlint, e2e]
     runs-on: ubuntu-latest
     steps:
       - run: echo 'Dummy'
