@@ -21,10 +21,10 @@ fi
 # https://github.com/renovatebot/renovate/blob/19.175.3/Dockerfile#L220
 #RENOVATE_TOKEN="${TOKEN}" node /usr/src/app/dist/renovate.js
 
-CONFIG=$(basename CONFIGURATION_FILE)
+CONFIG=$(basename $CONFIGURATION_FILE)
 
 # renovate: datasource=docker depName=renovate/renovate versioning=docker
-RENOVATE_VERSION=19.219.11-slim
+RENOVATE_VERSION=19.221.0-slim
 
 echo "Pulling image: $RENOVATE_VERSION"
 docker pull renovate/renovate:$RENOVATE_VERSION
@@ -33,8 +33,6 @@ export RENOVATE_TOKEN="${TOKEN}"
 
 echo "Running image: $RENOVATE_VERSION"
 set -x
-
-docker run --rm  -v ${RENOVATE_CONFIG_FILE}:/usr/src/app/${CONFIG} renovate/renovate:$RENOVATE_VERSION cat /usr/src/app/${CONFIG}
 docker run --rm -e RENOVATE_TOKEN -v /tmp:/tmp -v ${RENOVATE_CONFIG_FILE}:/usr/src/app${CONFIG} renovate/renovate:$RENOVATE_VERSION
 set +x
 
