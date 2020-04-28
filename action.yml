@@ -14,9 +14,13 @@ inputs:
       GitHub personal access token that Renovate should use. This should be
       configured using a Secret.
     required: true
+#runs:
+# using: docker
+# image: src/Dockerfile
+# args:
+#   - ${{ inputs.configurationFile }}
+#   - ${{ inputs.token }}
+
 runs:
-  using: docker
-  image: src/Dockerfile
-  args:
-    - ${{ inputs.configurationFile }}
-    - ${{ inputs.token }}
+  using: 'node12'
+  main: 'src/index.js'
