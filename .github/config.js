@@ -11,6 +11,7 @@ module.exports = {
     enabled: true,
     schedule: null,
   },
+  baseBranches: ['feat/slim-image'],
   packageRules: [
     {
       packagePattern: '.*',
