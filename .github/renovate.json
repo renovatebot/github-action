@@ -7,6 +7,12 @@
   ],
   "prCreation": "not-pending",
   "schedule": ["before 6am"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["at any time"],
+    "stabilityDays": 0,
+    "masterIssueApproval": true
+  },
   "packageRules": [
     {
       "languages": ["docker"],
