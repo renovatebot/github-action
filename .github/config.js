@@ -5,7 +5,11 @@ module.exports = {
   logLevel: 'debug',
   onboarding: false,
   platform: 'github',
-  repositories: ['renovatebot/github-action'],
+  repositories: [
+    'renovatebot/github-action',
+    'renovate-tests/cocoapods1',
+    'renovate-tests/gomod1',
+  ],
   packageRules: [
     {
       description: 'lockFileMaintenance',
