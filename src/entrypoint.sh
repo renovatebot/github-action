@@ -16,5 +16,5 @@ fi
 #
 # Mimic the original ENTRYPOINT of the renovate/renovate Docker container. See
 # the following link for this entry.
-# https://github.com/renovatebot/renovate/blob/19.175.3/Dockerfile#L220
-RENOVATE_TOKEN="${TOKEN}" node /usr/src/app/dist/renovate.js
+# https://github.com/renovatebot/docker-renovate/blob/d3aa0d99931ea7ad7e901a1e538eba0d61268229/Dockerfile#L63
+RENOVATE_TOKEN="${TOKEN}" renovate
