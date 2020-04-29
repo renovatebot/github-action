@@ -1,5 +1,5 @@
 module.exports = {
-  branchPrefix: 'ga-renovate/',
+  branchPrefix: 'test-renovate/',
   dryRun: true,
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
   logLevel: 'debug',
@@ -9,9 +9,16 @@ module.exports = {
   packageRules: [
     {
       description: 'lockFileMaintenance',
-      updateTypes: ['lockFileMaintenance'],
-      enabled: true,
-      schedule: [],
+      updateTypes: [
+        'pin',
+        'digest',
+        'patch',
+        'minor',
+        'major',
+        'lockFileMaintenance',
+      ],
+      masterIssueApproval: false,
+      stabilityDays: 0,
     },
   ],
 };

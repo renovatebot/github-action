@@ -10,7 +10,10 @@
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["at any time"],
-    "stabilityDays": 0,
+    "masterIssueApproval": true
+  },
+  "major": {
+    "stabilityDays": 3,
     "masterIssueApproval": true
   },
   "packageRules": [
@@ -23,6 +26,7 @@
       "description": "Automerge devDependencies updates",
       "depTypeList": ["devDependencies"],
       "updateTypes": ["pin", "digest", "patch", "minor"],
+      "schedule": ["at any time"],
       "automerge": true,
       "automergeType": "branch"
     },
@@ -30,6 +34,7 @@
       "description": "Automerge renovate minor and patch updates",
       "packageNames": ["renovate/renovate"],
       "updateTypes": ["minor", "patch"],
+      "schedule": ["at any time"],
       "automerge": true,
       "automergeType": "branch"
     }
