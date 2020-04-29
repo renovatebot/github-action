@@ -1,9 +1,12 @@
 {
   "extends": [
     "config:base",
+    ":rebaseStalePrs",
     ":pinDependencies",
+    ":masterIssue",
     ":timezone(Europe/Amsterdam)",
-    ":assignee(vidavidorra)"
+    ":assignee(vidavidorra)",
+    "docker:enableMajor"
   ],
   "prCreation": "not-pending",
   "schedule": ["before 6am"],
