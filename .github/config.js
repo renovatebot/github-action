@@ -5,6 +5,7 @@ module.exports = {
   logLevel: 'debug',
   onboarding: false,
   platform: 'github',
+  includeForks: true,
   repositories: [
     'renovatebot/github-action',
     'renovate-tests/cocoapods1',
