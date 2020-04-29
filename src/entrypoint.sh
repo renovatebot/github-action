@@ -5,6 +5,9 @@
 export RENOVATE_TOKEN="${2}"
 export RENOVATE_CONFIG_FILE="${GITHUB_WORKSPACE}/${1}"
 
+# We are running as ubuntu, so no write access to /github/home
+export HOME=/home/ubuntu
+
 if [[ ! -f "${RENOVATE_CONFIG_FILE}" ]]; then
   echo "ERROR: Couldn't find file ${RENOVATE_CONFIG_FILE}" 1>&2
   exit 1
