@@ -2,8 +2,8 @@
 #
 # Entrypoint for Docker.
 
-export RENOVATE_TOKEN="${2}"
 export RENOVATE_CONFIG_FILE="${GITHUB_WORKSPACE}/${1}"
+readonly _RENOVATE_TOKEN="${2}"
 
 # We are running as ubuntu, so no write access to /github/home
 export HOME=/home/ubuntu
@@ -19,4 +19,4 @@ fi
 # the following link for this entry.
 # https://github.com/renovatebot/docker-renovate/blob/d3aa0d99931ea7ad7e901a1e538eba0d61268229/Dockerfile#L63
 
-/usr/local/bin/docker-entrypoint.sh
+RENOVATE_TOKEN="${_RENOVATE_TOKEN}" /usr/local/bin/docker-entrypoint.sh
