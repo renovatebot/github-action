@@ -1,0 +1,68 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+      - 'renovate/**'
+
+  pull_request:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: github-cleanup
+        uses: renovatebot/internal-tools@v0
+        continue-on-error: true
+        with:
+          command: github-cleanup
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  commitlint:
+    needs: [cleanup]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+        with:
+          fetch-depth: 0
+      - name: Lint commit messages
+        uses: wagoid/commitlint-github-action@v1.6.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    needs: [cleanup]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+      - name: Setup node
+        uses: actions/setup-node@v1.4.1
+        with:
+          node-version: '12.x'
+      - name: Install project
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+
+  e2e:
+    needs: [cleanup]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+      - name: Renovate test
+        uses: ./
+        with:
+          configurationFile: .github/config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+
+  build:
+    needs: [lint, commitlint, e2e]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Dummy'

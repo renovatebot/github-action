@@ -1,12 +1,24 @@
 {
   "extends": [
     "config:base",
+    ":rebaseStalePrs",
     ":pinDependencies",
+    ":masterIssue",
     ":timezone(Europe/Amsterdam)",
-    ":assignee(vidavidorra)"
+    ":assignee(vidavidorra)",
+    "docker:enableMajor"
   ],
   "prCreation": "not-pending",
   "schedule": ["before 6am"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["at any time"],
+    "masterIssueApproval": true
+  },
+  "major": {
+    "stabilityDays": 3,
+    "masterIssueApproval": true
+  },
   "packageRules": [
     {
       "languages": ["docker"],
@@ -17,6 +29,7 @@
       "description": "Automerge devDependencies updates",
       "depTypeList": ["devDependencies"],
       "updateTypes": ["pin", "digest", "patch", "minor"],
+      "schedule": ["at any time"],
       "automerge": true,
       "automergeType": "branch"
     },
@@ -24,6 +37,7 @@
       "description": "Automerge renovate minor and patch updates",
       "packageNames": ["renovate/renovate"],
       "updateTypes": ["minor", "patch"],
+      "schedule": ["at any time"],
       "automerge": true,
       "automergeType": "branch"
     }
