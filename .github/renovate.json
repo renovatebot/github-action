@@ -30,16 +30,14 @@
       "depTypeList": ["devDependencies"],
       "updateTypes": ["pin", "digest", "patch", "minor"],
       "schedule": ["at any time"],
-      "automerge": true,
-      "automergeType": "branch"
+      "automerge": true
     },
     {
       "description": "Automerge renovate minor and patch updates",
       "packageNames": ["renovate/renovate"],
       "updateTypes": ["minor", "patch"],
       "schedule": ["at any time"],
-      "automerge": true,
-      "automergeType": "branch"
+      "automerge": true
     }
   ]
 }
