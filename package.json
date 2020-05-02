@@ -1,5 +1,5 @@
 {
-  "name": "github-action-renovate",
+  "name": "github-action",
   "version": "1.0.5",
   "description": "GitHub Action to run Renovate self-hosted.",
   "private": true,
@@ -20,14 +20,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vidavidorra/github-action-renovate.git"
+    "url": "git+https://github.com/renovatebot/github-action.git"
   },
   "author": "Jeroen de Bruijn",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/vidavidorra/github-action-renovate/issues"
+    "url": "https://github.com/renovatebot/github-action/issues"
   },
-  "homepage": "https://github.com/vidavidorra/github-action-renovate#readme",
+  "homepage": "https://github.com/renovatebot/github-action#readme",
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "8.3.5",

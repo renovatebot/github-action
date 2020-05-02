@@ -17,14 +17,13 @@ GitHub Action to run Renovate self-hosted.
 
 ## Badges
 
-| Badge                                                                                                                                                                                                                                            | Description          | Service              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- | -------------------- |
-| <a href="https://github.com/prettier/prettier#readme"><img alt="code style" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>                                                                             | Code style           | Prettier             |
-| <a href="https://conventionalcommits.org"><img alt="Conventional Commits: 1.0.0" src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square"></a>                                                               | Commit style         | Conventional Commits |
-| <a href="https://renovatebot.com"><img alt="Renovate enabled" src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square"></a>                                                                                         | Dependencies         | Renovate             |
-| <a href="https://github.com/vidavidorra/github-action-renovate/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/vidavidorra/github-action-renovate/Lint%20commit%20messages?style=flat-square"></a> | Lint commit messages | GitHub Actions       |
-| <a href="https://github.com/vidavidorra/github-action-renovate/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/vidavidorra/github-action-renovate/Lint?style=flat-square"></a>                     | Lint                 | GitHub Actions       |
-| <a href="https://github.com/vidavidorra/github-action-renovate/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/vidavidorra/github-action-renovate/Example?style=flat-square"></a>                  | Example              | GitHub Actions       |
+| Badge                                                                                                                                                                                                         | Description  | Service              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------- |
+| <a href="https://github.com/prettier/prettier#readme"><img alt="code style" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>                                          | Code style   | Prettier             |
+| <a href="https://conventionalcommits.org"><img alt="Conventional Commits: 1.0.0" src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square"></a>                            | Commit style | Conventional Commits |
+| <a href="https://renovatebot.com"><img alt="Renovate enabled" src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square"></a>                                                      | Dependencies | Renovate             |
+| <a href="https://github.com/renovatebot/github-action/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/renovatebot/github-action/Build?style=flat-square"></a>   | Build        | GitHub Actions       |
+| <a href="https://github.com/renovatebot/github-action/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/renovatebot/github-action/Example?style=flat-square"></a> | Example      | GitHub Actions       |
 
 <a name="options"></a>
 
@@ -77,7 +76,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.0.0
       - name: Self-hosted Renovate
-        uses: vidavidorra/github-action-renovate@v1.0.0
+        uses: renovatebot/github-action@v1.0.0
         with:
           configurationFile: example/config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
