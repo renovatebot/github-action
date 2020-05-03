@@ -3,7 +3,7 @@
   "version": "1.0.5",
   "description": "GitHub Action to run Renovate self-hosted.",
   "private": true,
-  "main": "dist/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "concurrently npm:lint-es",
     "lint:fix": "concurrently npm:lint-es:fix",
