@@ -14,9 +14,9 @@ class Renovate {
   runDockerContainer(): void {
     const commandArguments = [
       '--rm',
-      this.docker.image(),
       `--env ${this.configurationFileEnv}='${this.configurationFile}`,
       `--env ${this.tokenEnv}='${this.token}`,
+      this.docker.image(),
     ];
     const command = `docker run ${commandArguments.join(' ')}`;
 
