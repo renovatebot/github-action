@@ -62,7 +62,7 @@ jobs:
       - name: Renovate test
         uses: ./
         with:
-          configurationFile: .github/config.js
+          configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
 
   build:
