@@ -2,11 +2,14 @@ import * as core from '@actions/core';
 import Input from './input';
 import Renovate from './renovate';
 
-try {
+function run(): Promise<void> {
   const input = new Input();
   const renovate = new Renovate(input.configurationFile, input.token);
-  renovate.runDockerContainer();
-} catch (error) {
-  console.log(error);
-  core.setFailed(error.message);
+
+  return renovate.runDockerContainer();
 }
+
+run().catch((error) => {
+  console.error(error);
+  core.setFailed(error.message);
+});
