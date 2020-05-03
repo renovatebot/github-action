@@ -3,7 +3,7 @@ import child from 'child_process';
 
 class Renovate {
   private configurationFileEnv = 'RENOVATE_CONFIG_FILE';
-  private tokenEnv = 'RENOVATE_CONFIG_FILE';
+  private tokenEnv = 'RENOVATE_TOKEN';
 
   private docker: Docker;
 
