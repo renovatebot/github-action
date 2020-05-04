@@ -3,6 +3,7 @@
   "version": "1.0.5",
   "description": "GitHub Action to run Renovate self-hosted.",
   "private": true,
+  "main": "dist/index.js",
   "scripts": {
     "lint": "concurrently npm:lint-es",
     "lint:fix": "concurrently npm:lint-es:fix",
@@ -16,7 +17,8 @@
     "release:changelog": "standard-version --dry-run --skip.commit=true --skip.tag=true",
     "release:commit": "git commit --allow-empty -m \"chore(release): trigger release process [ci release]\"",
     "release:message": "chalk -t \"Run {green.bold git push} to publish the release or {red.bold git reset HEAD^} to undo the release.\"",
-    "release": "run-s release:changelog release:commit release:message"
+    "release": "run-s release:changelog release:commit release:message",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -28,10 +30,14 @@
     "url": "https://github.com/renovatebot/github-action/issues"
   },
   "homepage": "https://github.com/renovatebot/github-action#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@actions/core": "1.2.4",
+    "@actions/exec": "1.0.4"
+  },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
+    "@types/node": "13.13.4",
     "@typescript-eslint/eslint-plugin": "2.30.0",
     "@typescript-eslint/parser": "2.30.0",
     "chalk-cli": "4.1.0",

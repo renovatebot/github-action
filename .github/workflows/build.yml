@@ -55,10 +55,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.1.0
+      - name: Install project
+        run: npm ci
+      - name: Build
+        run: npm run build
       - name: Renovate test
         uses: ./
         with:
-          configurationFile: .github/config.js
+          configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
 
   build:
