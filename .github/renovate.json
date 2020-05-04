@@ -6,7 +6,6 @@
     ":masterIssue",
     ":timezone(Europe/Amsterdam)"
   ],
-  "enabledManagers": ["npm", "regex"],
   "prCreation": "not-pending",
   "schedule": ["before 6am"],
   "lockFileMaintenance": {
