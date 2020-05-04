@@ -4,10 +4,9 @@
     ":rebaseStalePrs",
     ":pinDependencies",
     ":masterIssue",
-    ":timezone(Europe/Amsterdam)",
-    ":assignee(vidavidorra)",
-    "docker:enableMajor"
+    ":timezone(Europe/Amsterdam)"
   ],
+  "enabledManagers": ["npm", "regex"],
   "prCreation": "not-pending",
   "schedule": ["before 6am"],
   "lockFileMaintenance": {
@@ -31,10 +30,16 @@
       "updateTypes": ["pin", "digest", "patch", "minor"],
       "schedule": ["at any time"],
       "automerge": true
-    },
+    }
+  ],
+  "regexManagers": [
     {
-      "description": "Automerge renovate minor and patch updates",
-      "packageNames": ["renovate/renovate"],
+      "fileMatch": ["^src/docker\\.ts$"],
+      "matchStrings": [
+        "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s[A-Z_]+?tag = '(?<currentValue>.+?)'\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
+      "semanticCommitType": "fix",
       "updateTypes": ["minor", "patch"],
       "schedule": ["at any time"],
       "automerge": true
