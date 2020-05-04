@@ -20,28 +20,20 @@ class Renovate {
   }
 
   runDockerContainer(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const commandArguments = [
-        '--rm',
-        `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
-        `--env ${this.tokenEnv}=${this.token}`,
-        `--volume ${this.configFile}:${this.configFileMountPath()}`,
-        this.docker.image(),
-      ];
-      const command = `docker run ${commandArguments.join(' ')}`;
-
-      exec(command)
-        .then((code) => {
-          if (code === 0) {
-            resolve();
-          } else {
-            reject(new Error(`'docker run' failed with exit code ${code}.`));
-          }
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    const commandArguments = [
+      'run',
+      '--rm',
+      `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
+      `--env ${this.tokenEnv}=${this.token}`,
+      `--volume ${this.configFile}:${this.configFileMountPath()}`,
+      this.docker.image(),
+    ];
+    const command = `docker`;
+    
+    const code = exec(command, commandArguments);
+    if (code !== 0) {
+      new Error(`'docker run' failed with exit code ${code}.`);
+    }
   }
 
   private validateArguments(): void {
