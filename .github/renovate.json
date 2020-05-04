@@ -20,15 +20,18 @@
   },
   "packageRules": [
     {
-      "languages": ["docker"],
-      "paths": ["src/**/?(*.)Dockerfile"],
-      "semanticCommitType": "fix"
-    },
-    {
       "description": "Automerge devDependencies updates",
       "depTypeList": ["devDependencies"],
       "updateTypes": ["pin", "digest", "patch", "minor"],
       "schedule": ["at any time"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge renovate minor and patch updates",
+      "packageNames": ["renovate/renovate"],
+      "updateTypes": ["minor", "patch"],
+      "schedule": ["at any time"],
+      "semanticCommitType": "fix",
       "automerge": true
     }
   ],
@@ -38,11 +41,7 @@
       "matchStrings": [
         "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s[A-Z_]+?tag = '(?<currentValue>.+?)'\\s"
       ],
-      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
-      "semanticCommitType": "fix",
-      "updateTypes": ["minor", "patch"],
-      "schedule": ["at any time"],
-      "automerge": true
+      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
     }
   ]
 }
