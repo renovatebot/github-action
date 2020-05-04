@@ -4,9 +4,7 @@
     ":rebaseStalePrs",
     ":pinDependencies",
     ":masterIssue",
-    ":timezone(Europe/Amsterdam)",
-    ":assignee(vidavidorra)",
-    "docker:enableMajor"
+    ":timezone(Europe/Amsterdam)"
   ],
   "prCreation": "not-pending",
   "schedule": ["before 6am"],
@@ -21,11 +19,6 @@
   },
   "packageRules": [
     {
-      "languages": ["docker"],
-      "paths": ["src/**/?(*.)Dockerfile"],
-      "semanticCommitType": "fix"
-    },
-    {
       "description": "Automerge devDependencies updates",
       "depTypeList": ["devDependencies"],
       "updateTypes": ["pin", "digest", "patch", "minor"],
@@ -37,7 +30,17 @@
       "packageNames": ["renovate/renovate"],
       "updateTypes": ["minor", "patch"],
       "schedule": ["at any time"],
+      "semanticCommitType": "fix",
       "automerge": true
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["^src/docker\\.ts$"],
+      "matchStrings": [
+        "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s[A-Z_]+?tag = '(?<currentValue>.+?)'\\s"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
     }
   ]
 }
