@@ -3,7 +3,6 @@
     "target": "es2020",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

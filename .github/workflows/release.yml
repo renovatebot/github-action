@@ -32,22 +32,29 @@ jobs:
             echo Not a semver like version - aborting: ${1}
             exit 1
           fi
-          "::set-env name=NEXT_VERSION::${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
-          readonly COMMIT_MESSAGE="${{ github.event.commits[0].message }}"
-          npx --no-install standard-version
+          NEXT_VERSION="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+          MAJOR_VERSION="${BASH_REMATCH[1]}"
+          "::set-env name=NEXT_VERSION::${NEXT_VERSION}"
+          "::set-env name=MAJOR_VERSION::${MAJOR_VERSION}"
+          npm version ${NEXT_VERSION} -m "chore(release): ${NEXT_VERSION}"
+          git tag "v${MAJOR_VERSION}"
+
       - name: Publish release
-        run: git push --follow-tags
-      - name: Publish GitHub release
-        uses: actions/create-release@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ env.NEXT_VERSION }}
-          release_name: v${{ env.NEXT_VERSION }}
-          body: |
-            See the the [changelog](
-              https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md
-            ) for the changes included in this release.
+        run: |
+          git push origin "v${NEXT_VERSION}"
+          git push -f origin "v${MAJOR_VERSION}"
+
+      # - name: Publish GitHub release
+      #   uses: actions/create-release@v1.0.1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: v${{ env.NEXT_VERSION }}
+      #     release_name: v${{ env.NEXT_VERSION }}
+      #     body: |
+      #       See the the [changelog](
+      #         https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md
+      #       ) for the changes included in this release.
   prevent_failed_status:
     name: Prevent failed status when skipped
     runs-on: ubuntu-latest
