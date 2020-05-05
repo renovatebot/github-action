@@ -7,10 +7,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     if: |
-      github.event.commits[0].message == 'chore(release): trigger release process [ci release]' ||
-      github.event.commits[0].message == 'chore(release): trigger release process [ci release][major]' ||
-      github.event.commits[0].message == 'chore(release): trigger release process [ci release][minor]' ||
-      github.event.commits[0].message == 'chore(release): trigger release process [ci release][patch]'
+      startsWith(github.event.commits[0].message, 'fix(deps): update renovate/renovate docker tag ')
     steps:
       - name: Checkout
         uses: actions/checkout@v2.1.0
@@ -30,17 +27,14 @@ jobs:
         run: npm ci
       - name: Release
         run: |
-          readonly COMMIT_MESSAGE="${{ github.event.commits[0].message }}"
-          if [[ "${COMMIT_MESSAGE: -11: -1}" == 'ci release' ]]; then
-            echo "::set-env name=NEXT_VERSION::$(npm run release:version --silent)"
-            npx --no-install standard-version
-          else
-            readonly RELEASE_TYPE="${COMMIT_MESSAGE: -6: -1}"
-            echo "::set-env name=NEXT_VERSION::$(
-                npm run release:version --silent -- --releaseAs "${RELEASE_TYPE}"
-                )"
-            npx --no-install standard-version --release-as "${RELEASE_TYPE}"
+          SEMVER_REGEX="v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)"
+          if [[ ! "${{ github.event.commits[0].message }}" =~ ${SEMVER_REGEX} ]]; then
+            echo Not a semver like version - aborting: ${1}
+            exit 1
           fi
+          "::set-env name=NEXT_VERSION::${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+          readonly COMMIT_MESSAGE="${{ github.event.commits[0].message }}"
+          npx --no-install standard-version
       - name: Publish release
         run: git push --follow-tags
       - name: Publish GitHub release
