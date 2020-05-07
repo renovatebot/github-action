@@ -23,7 +23,7 @@ class Renovate {
     const groups = await fs.promises.readFile('/etc/group', {
       encoding: 'utf-8',
     });
-    const [, group] = /^docker:x:([1-9][0-9]*):$/.exec(groups);
+    const [, group] = /^docker:x:([1-9][0-9]*):$/m.exec(groups);
     // await exec('sudo', ['chmod', 'o=rw', '/var/run/docker.sock']);
     const commandArguments = [
       '--rm',
