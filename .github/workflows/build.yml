@@ -14,6 +14,8 @@ jobs:
     timeout-minutes: 5
 
     steps:
+      - run: cat /etc/groups
+      - run: cat /etc/passwd
       - name: github-cleanup
         uses: renovatebot/internal-tools@v0
         continue-on-error: true
