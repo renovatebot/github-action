@@ -26,9 +26,9 @@ class Renovate {
       `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
       `--env ${this.tokenEnv}=${this.token}`,
       `--volume ${this.configFile}:${this.configFileMountPath()}`,
-      `-v /var/run/docker.sock:/var/run/docker.sock`,
-      `-v /tmp:/tmp`,
-      `-u 1000:${group}`,
+      `--volume /var/run/docker.sock:/var/run/docker.sock`,
+      `--volume /tmp:/tmp`,
+      `--user 1000:${group}`,
       this.docker.image(),
     ];
     const command = `docker run ${commandArguments.join(' ')}`;
