@@ -20,11 +20,7 @@ class Renovate {
   }
 
   async runDockerContainer(): Promise<void> {
-    const groups = await fs.promises.readFile('/etc/group', {
-      encoding: 'utf-8',
-    });
-    const [, group] = /^docker:x:([1-9][0-9]*):$/m.exec(groups);
-    // await exec('sudo', ['chmod', 'o=rw', '/var/run/docker.sock']);
+    const group = await this.getDockerGroup();
     const commandArguments = [
       '--rm',
       `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
@@ -41,6 +37,18 @@ class Renovate {
     if (code !== 0) {
       new Error(`'docker run' failed with exit code ${code}.`);
     }
+  }
+
+  /**
+   * Fetch the host docker group on github.
+   * Container user needs this to access the docker socket.
+   */
+  private async getDockerGroup(): Promise<string> {
+    const groups = await fs.promises.readFile('/etc/group', {
+      encoding: 'utf-8',
+    });
+    const [, group] = /^docker:x:([1-9][0-9]*):$/m.exec(groups);
+    return group;
   }
 
   private validateArguments(): void {
