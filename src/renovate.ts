@@ -20,7 +20,8 @@ class Renovate {
   }
 
   async runDockerContainer(): Promise<void> {
-    await exec('usermod', ['-aG', 'docker', '1000']);
+    await exec('whoami');
+    await exec('sudo', ['usermod', '-aG', 'docker', 'runneradmin']);
     const commandArguments = [
       '--rm',
       `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
