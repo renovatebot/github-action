@@ -20,16 +20,14 @@ class Renovate {
   }
 
   async runDockerContainer(): Promise<void> {
+    await exec('sudo', ['chmod', 'o=rw', '/var/run/docker.sock']);
     const commandArguments = [
       '--rm',
       `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
       `--env ${this.tokenEnv}=${this.token}`,
-      `-e RENOVATE_DOCKER_USER=1001`,
-      `-e HOME=/home/ubuntu`,
       `--volume ${this.configFile}:${this.configFileMountPath()}`,
       `-v /var/run/docker.sock:/var/run/docker.sock`,
       `-v /tmp:/tmp`,
-      `-u 1001`,
       this.docker.image(),
     ];
     const command = `docker run ${commandArguments.join(' ')}`;

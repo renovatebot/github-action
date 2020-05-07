@@ -14,7 +14,6 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - run: ls -lrth /var/run/docker.sock
       - name: github-cleanup
         uses: renovatebot/internal-tools@v0
         continue-on-error: true
