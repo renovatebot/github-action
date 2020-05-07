@@ -20,8 +20,11 @@ class Renovate {
   }
 
   async runDockerContainer(): Promise<void> {
-    // workaround for docker group missmatch: 116 (host) vs 999 (container)
-    await exec('sudo', ['chmod', 'o=rw', '/var/run/docker.sock']);
+    const groups = await fs.promises.readFile('/etc/group', {
+      encoding: 'utf-8',
+    });
+    const [, group] = /^docker:x:([1-9][0-9]*):$/.exec(groups);
+    // await exec('sudo', ['chmod', 'o=rw', '/var/run/docker.sock']);
     const commandArguments = [
       '--rm',
       `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
@@ -29,6 +32,7 @@ class Renovate {
       `--volume ${this.configFile}:${this.configFileMountPath()}`,
       `-v /var/run/docker.sock:/var/run/docker.sock`,
       `-v /tmp:/tmp`,
+      `-u 1000:${group}`,
       this.docker.image(),
     ];
     const command = `docker run ${commandArguments.join(' ')}`;

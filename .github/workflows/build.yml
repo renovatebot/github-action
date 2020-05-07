@@ -14,8 +14,6 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - run: command -v docker
-      - run: ls -la $(command -v docker)
       - name: github-cleanup
         uses: renovatebot/internal-tools@v0
         continue-on-error: true
