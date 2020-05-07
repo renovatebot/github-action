@@ -20,6 +20,7 @@ class Renovate {
   }
 
   async runDockerContainer(): Promise<void> {
+    // workaround for docker group missmatch: 116 (host) vs 999 (container)
     await exec('sudo', ['chmod', 'o=rw', '/var/run/docker.sock']);
     const commandArguments = [
       '--rm',
