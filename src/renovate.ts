@@ -20,11 +20,16 @@ class Renovate {
   }
 
   async runDockerContainer(): Promise<void> {
+    const renovateDockerUser = 'ubuntu';
+    const githubActionsDockerGroupId = this.getDockerGroupId();
     const commandArguments = [
       '--rm',
       `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
       `--env ${this.tokenEnv}=${this.token}`,
       `--volume ${this.configFile}:${this.configFileMountPath()}`,
+      `--volume /var/run/docker.sock:/var/run/docker.sock`,
+      `--volume /tmp:/tmp`,
+      `--user ${renovateDockerUser}:${githubActionsDockerGroupId}`,
       this.docker.image(),
     ];
     const command = `docker run ${commandArguments.join(' ')}`;
@@ -33,6 +38,27 @@ class Renovate {
     if (code !== 0) {
       new Error(`'docker run' failed with exit code ${code}.`);
     }
+  }
+
+  /**
+   * Fetch the host docker group of the GitHub Action runner.
+   *
+   * The Renovate container needs access to this group in order to have the
+   * required permissions on the Docker socket.
+   */
+  private getDockerGroupId(): string {
+    const groups = fs.readFileSync('/etc/group', {
+      encoding: 'utf-8',
+    });
+
+    /**
+     * The group file has `groupname:group-password:GID:username-list` as
+     * structure and we're interested in the `GID` (the group ID).
+     *
+     * Source: https://www.thegeekdiary.com/etcgroup-file-explained/
+     */
+    const [, group] = /^docker:x:([1-9][0-9]*):$/m.exec(groups);
+    return group;
   }
 
   private validateArguments(): void {
