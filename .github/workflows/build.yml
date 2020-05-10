@@ -65,8 +65,59 @@ jobs:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
 
-  build:
+  release:
     needs: [lint, commitlint, e2e]
     runs-on: ubuntu-latest
+    if: |
+      startsWith(github.event.commits[0].message,
+          'fix(deps): update renovate/renovate docker tag ')
+      && github.ref == 'refs/heads/master'
     steps:
-      - run: echo 'Dummy'
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+        with:
+          fetch-depth: 0
+          ref: 'release'
+      - name: Fetch tags
+        run: git fetch --tags
+      - name: Setup Git user
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Merge master
+        run: |
+          git merge -m 'chore(release): merge master (${{ github.sha }})' ${{ github.sha }}
+      - name: Setup node
+        uses: actions/setup-node@v1.4.1
+        with:
+          node-version: '12.x'
+      - name: Install project
+        run: npm ci --ignore-scripts
+      - name: Get version
+        id: release
+        run: npm run release:version
+      - name: Release
+        run: npm run release -- "${{ steps.release.outputs.version }}"
+      - name: Get changelog section
+        id: changelog
+        run: |
+          changelog="$(git show --unified=0 CHANGELOG.md \
+              | tail +12 \
+              | sed -e 's/^\+//' \
+              | sed -z 's/\n/%0A/g;s/\r/%0D/g')"
+          echo "::set-output name=changelog::${changelog}"
+      - name: Publish release
+        run: git push --follow-tags
+      - name: Publish GitHub release
+        uses: actions/create-release@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.release.outputs.version }}
+          release_name: v${{ steps.release.outputs.version }}
+          body: |
+            *See the the [changelog](
+              https://github.com/${{ github.repository }}/blob/release/CHANGELOG.md
+            ) for changes in all releases.*
+
+            ${{ steps.changelog.outputs.changelog }}
