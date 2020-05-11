@@ -64,9 +64,14 @@ jobs:
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
+  build:
+    needs: [lint, commitlint, e2e]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'dummy'
 
   release:
-    needs: [lint, commitlint, e2e]
+    needs: [build]
     runs-on: ubuntu-latest
     if: |
       startsWith(github.event.commits[0].message,
