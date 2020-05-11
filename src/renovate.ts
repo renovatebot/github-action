@@ -6,6 +6,7 @@ import path from 'path';
 class Renovate {
   private configFileEnv = 'RENOVATE_CONFIG_FILE';
   private tokenEnv = 'RENOVATE_TOKEN';
+  private dockerGroupName = 'docker';
   private configFileMountDir = '/github-action';
 
   private configFile: string;
@@ -47,7 +48,8 @@ class Renovate {
    * required permissions on the Docker socket.
    */
   private getDockerGroupId(): string {
-    const groups = fs.readFileSync('/etc/group', {
+    const groupFile = '/etc/group';
+    const groups = fs.readFileSync(groupFile, {
       encoding: 'utf-8',
     });
 
@@ -57,8 +59,15 @@ class Renovate {
      *
      * Source: https://www.thegeekdiary.com/etcgroup-file-explained/
      */
-    const [, group] = /^docker:x:([1-9][0-9]*):$/m.exec(groups);
-    return group;
+    const re = new RegExp(`^${this.dockerGroupName}:x:([1-9][0-9]*):`, 'm');
+    const match = re.exec(groups);
+    if (!match || match.length < 2) {
+      throw new Error(
+        `Could not find group '${this.dockerGroupName}' in ${groupFile}`
+      );
+    }
+
+    return match[1];
   }
 
   private validateArguments(): void {

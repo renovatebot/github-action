@@ -8,12 +8,10 @@ GitHub Action to run Renovate self-hosted.
 
 - [Badges](#badges)
 - [Options](#options)
-  - [`configurationFile`](#option-configurationFile)
-  - [`token`](#option-token)
+  - [`configurationFile`](#configurationfile)
+  - [`token`](#token)
 - [Example](#example)
 - [License](#license)
-
-<a name="badges"></a>
 
 ## Badges
 
@@ -25,15 +23,13 @@ GitHub Action to run Renovate self-hosted.
 | <a href="https://github.com/renovatebot/github-action/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/renovatebot/github-action/Build?style=flat-square"></a>   | Build        | GitHub Actions       |
 | <a href="https://github.com/renovatebot/github-action/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/renovatebot/github-action/Example?style=flat-square"></a> | Example      | GitHub Actions       |
 
-<a name="options"></a>
-
 ## Options
-
-<a name="option-configurationFile"></a>
 
 ## `configurationFile`
 
-Configuration file to configure Renovate. The configurations that can be done in this file consists of two parts, as listed below. Refer to the links to the [Renovate Docs](https://docs.renovatebot.com/) for all options and see the [`example/config.js`](./example/config.js) for an example configuration.
+Configuration file to configure Renovate. The supported configurations files can be one of the configuration files listed in the Renovate Docs for [Configuration Options](https://docs.renovatebot.com/configuration-options/) or a JavaScript file that exports a configuration object. For both of these options, an example can be found in the [example](./example) directory.
+
+The configurations that can be done in this file consists of two parts, as listed below. Refer to the links to the [Renovate Docs](https://docs.renovatebot.com/) for all options.
 
 1. [Self-Hosted Configuration Options](https://docs.renovatebot.com/self-hosted-configuration/)
 2. [Configuration Options](https://docs.renovatebot.com/configuration-options/)
@@ -47,15 +43,11 @@ If you want to use this with just the single configuration file, make sure to in
   requireConfig: false,
 ```
 
-<a name="option-token"></a>
-
 ## `token`
 
 [Generate a personal access token](https://github.com/settings/tokens), with the `repo:public_repo` scope for only public repositories or the `repo` scope for public and private repositories, and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`. You can also create a token without a specific scope, which gives read-only access to public repositories, for testing. This token is only used by Renovate, see the [token configuration](https://docs.renovatebot.com/self-hosted-configuration/#token), and gives it access to the repositories. The name of the secret can be anything as long as it matches the argument given to the `token` option.
 
 Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate.
-
-<a name="example"></a>
 
 ## Example
 
@@ -78,6 +70,6 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v1.0.0
         with:
-          configurationFile: example/config.js
+          configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
