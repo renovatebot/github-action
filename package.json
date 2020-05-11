@@ -13,7 +13,7 @@
     "lint-es:file": "eslint --ext .ts,.tsx,.js,.jsx,.json",
     "lint-es:fix": "eslint --ext .ts,.tsx,.js,.jsx,.json --fix .",
     "lint-es:file:fix": "eslint --ext .ts,.tsx,.js,.jsx,.json --fix",
-    "release:version": "node_modules/.bin/ts-node src/get-release-version",
+    "release:version": "node_modules/.bin/ts-node src/get-version",
     "release:commit": "git add --force dist",
     "release:standard-version": "standard-version --release-as",
     "release": "run-s build release:commit \"release:standard-version -- {1}\" --",
