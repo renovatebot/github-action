@@ -3,7 +3,8 @@
     "config:base",
     ":rebaseStalePrs",
     ":pinDependencies",
-    ":masterIssue"
+    ":masterIssue",
+    "docker:enableMajor"
   ],
   "prCreation": "not-pending",
   "lockFileMaintenance": {
