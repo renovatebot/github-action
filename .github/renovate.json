@@ -25,7 +25,7 @@
     {
       "description": "Automerge renovate minor and patch updates",
       "packageNames": ["renovate/renovate"],
-      "updateTypes": ["minor", "patch"],
+      "updateTypes": ["major", "minor", "patch"],
       "semanticCommitType": "fix",
       "automerge": true
     }
