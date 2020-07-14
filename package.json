@@ -37,7 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
-    "@types/node": "13.13.12",
+    "@types/node": "13.13.14",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "@zeit/ncc": "0.22.3",
@@ -52,6 +52,6 @@
     "prettier": "2.0.5",
     "standard-version": "7.1.0",
     "ts-node": "8.10.2",
-    "typescript": "3.9.5"
+    "typescript": "3.9.6"
   }
 }
