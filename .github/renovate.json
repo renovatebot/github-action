@@ -27,7 +27,8 @@
       "packageNames": ["renovate/renovate"],
       "updateTypes": ["major", "minor", "patch"],
       "semanticCommitType": "fix",
-      "automerge": true
+      "automerge": true,
+      "masterIssueApproval": false
     }
   ],
   "regexManagers": [
