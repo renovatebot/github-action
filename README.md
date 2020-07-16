@@ -54,6 +54,8 @@ Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-an
 This example uses a personal access token and will run every 15 minutes. The personal access token is configured as a GitHub secret named `RENOVATE_TOKEN`. This example uses the [`example/config.js`](./example/config.js) file as configuration.
 You can also see a live example of this action in my [github-renovate](https://github.com/vidavidorra/github-renovate) repository, which also includes a more [advanced configuration](https://github.com/vidavidorra/github-renovate/blob/master/src/config.js) for updating GitHub Action workflows.
 
+**Remark** Update the action version to the most current, see [here](https://github.com/renovatebot/github-action/releases/latest) for latest release.
+
 ```yml
 name: Renovate
 on:
@@ -68,7 +70,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.0.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v1.0.0
+        uses: renovatebot/github-action@v21.30.0
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
