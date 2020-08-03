@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [22.8.0](https://github.com/renovatebot/github-action/compare/v22.7.0...v22.8.0) (2020-08-03)
+
+
+### Bug Fixes
+
+* **deps:** update renovate/renovate docker tag to v22.8.0 ([#177](https://github.com/renovatebot/github-action/issues/177)) ([b14d3a5](https://github.com/renovatebot/github-action/commit/b14d3a5291d1de734b915daeab166896938c016a))
+
 ## [22.7.0](https://github.com/renovatebot/github-action/compare/v22.6.3...v22.7.0) (2020-07-30)
 
 
