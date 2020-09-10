@@ -1061,7 +1061,7 @@ class Docker {
     constructor() {
         this.repository = 'renovate/renovate';
         // renovate: datasource=docker depName=renovate/renovate versioning=docker
-        this.tag = '23.20.4-slim';
+        this.tag = '23.20.5-slim';
         this.tagSuffix = '-slim';
     }
     image() {
