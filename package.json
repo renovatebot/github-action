@@ -37,7 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "9.1.2",
     "@commitlint/config-conventional": "9.1.2",
-    "@types/node": "13.13.18",
+    "@types/node": "13.13.19",
     "@typescript-eslint/eslint-plugin": "3.10.1",
     "@typescript-eslint/parser": "3.10.1",
     "@zeit/ncc": "0.22.3",
