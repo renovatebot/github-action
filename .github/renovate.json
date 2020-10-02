@@ -1,21 +1,22 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
     ":rebaseStalePrs",
     ":pinDependencies",
-    ":masterIssue",
+    ":dependencyDashboard",
     "docker:enableMajor"
   ],
   "prCreation": "not-pending",
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": null,
-    "masterIssueApproval": true,
-    "automerge": true
+    "automerge": true,
+    "dependencyDashboardApproval": true
   },
   "major": {
     "stabilityDays": 3,
-    "masterIssueApproval": true
+    "dependencyDashboardApproval": true
   },
   "packageRules": [
     {
@@ -30,14 +31,14 @@
       "updateTypes": ["major", "minor", "patch"],
       "semanticCommitType": "fix",
       "automerge": true,
-      "masterIssueApproval": false
+      "dependencyDashboardApproval": false
     }
   ],
   "regexManagers": [
     {
       "fileMatch": ["^src/docker\\.ts$"],
       "matchStrings": [
-        "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s+readonly\\s+tag\\s+=\\s+'(?<currentValue>.+?)';"
+        "// renovate: datasource=(?[a-z-]+?) depName=(?.+?)(?: versioning=(?[a-z-]+?))?\\s+readonly\\s+tag\\s+=\\s+'(?.+?)';"
       ],
       "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
     }
