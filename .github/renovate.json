@@ -38,7 +38,7 @@
     {
       "fileMatch": ["^src/docker\\.ts$"],
       "matchStrings": [
-        "// renovate: datasource=(?[a-z-]+?) depName=(?.+?)(?: versioning=(?[a-z-]+?))?\\s+readonly\\s+tag\\s+=\\s+'(?.+?)';"
+        "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s+readonly\\s+tag\\s+=\\s+'(?<currentValue>.+?)';"
       ],
       "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
     }
