@@ -1,21 +1,22 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
     ":rebaseStalePrs",
     ":pinDependencies",
-    ":masterIssue",
+    ":dependencyDashboard",
     "docker:enableMajor"
   ],
   "prCreation": "not-pending",
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": null,
-    "masterIssueApproval": true,
-    "automerge": true
+    "automerge": true,
+    "dependencyDashboardApproval": true
   },
   "major": {
     "stabilityDays": 3,
-    "masterIssueApproval": true
+    "dependencyDashboardApproval": true
   },
   "packageRules": [
     {
@@ -30,7 +31,7 @@
       "updateTypes": ["major", "minor", "patch"],
       "semanticCommitType": "fix",
       "automerge": true,
-      "masterIssueApproval": false
+      "dependencyDashboardApproval": false
     }
   ],
   "regexManagers": [
