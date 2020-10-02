@@ -9,6 +9,7 @@
   "prCreation": "not-pending",
   "lockFileMaintenance": {
     "enabled": true,
+    "schedule": null,
     "masterIssueApproval": true,
     "automerge": true
   },
