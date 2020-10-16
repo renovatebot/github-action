@@ -41,6 +41,12 @@
         "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s+readonly\\s+tag\\s+=\\s+'(?<currentValue>.+?)';"
       ],
       "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
+    },
+    {
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+      "matchStrings": ["uses: (?<depName>[a-z-/]+?)@(?<currentValue>.+?)\\s"],
+      "datasourceTemplate": "github-tags",
+      "versioningTemplate": "docker"
     }
   ]
 }
