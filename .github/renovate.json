@@ -1,37 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":rebaseStalePrs",
-    ":pinDependencies",
-    ":dependencyDashboard",
-    "docker:enableMajor"
-  ],
-  "prCreation": "not-pending",
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": null,
-    "automerge": true,
-    "dependencyDashboardApproval": true
-  },
+  "extends": ["github>renovatebot/presets-internal:node", ":pinDependencies"],
   "major": {
-    "stabilityDays": 3,
-    "dependencyDashboardApproval": true
+    "stabilityDays": 3
   },
   "packageRules": [
-    {
-      "description": "Automerge devDependencies updates",
-      "depTypeList": ["devDependencies"],
-      "updateTypes": ["pin", "digest", "patch", "minor"],
-      "automerge": true
-    },
     {
       "description": "Automerge Renovate updates",
       "packageNames": ["renovate/renovate"],
       "updateTypes": ["major", "minor", "patch"],
-      "semanticCommitType": "fix",
-      "automerge": true,
-      "dependencyDashboardApproval": false
+      "semanticCommitType": "fix"
     }
   ],
   "regexManagers": [
@@ -41,12 +19,6 @@
         "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s+readonly\\s+tag\\s+=\\s+'(?<currentValue>.+?)';"
       ],
       "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
-    },
-    {
-      "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
-      "matchStrings": ["uses: (?<depName>[a-z-/]+?)@(?<currentValue>.+?)\\s"],
-      "datasourceTemplate": "github-tags",
-      "versioningTemplate": "docker"
     }
   ]
 }
