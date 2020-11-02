@@ -9,20 +9,7 @@ on:
   pull_request:
 
 jobs:
-  cleanup:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: github-cleanup
-        uses: renovatebot/internal-tools@v0
-        continue-on-error: true
-        with:
-          command: github-cleanup
-          token: ${{ secrets.GITHUB_TOKEN }}
-
   commitlint:
-    needs: [cleanup]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,7 +20,6 @@ jobs:
         uses: wagoid/commitlint-github-action@v2.1.0
 
   lint:
-    needs: [cleanup]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -48,7 +34,6 @@ jobs:
         run: npm run lint
 
   e2e:
-    needs: [cleanup]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
