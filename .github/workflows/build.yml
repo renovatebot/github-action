@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: github-cleanup
-        uses: renovatebot/internal-tools@v0
+        uses: renovatebot/internal-tools@v1.1.14
         continue-on-error: true
         with:
           command: github-cleanup
