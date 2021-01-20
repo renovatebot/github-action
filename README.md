@@ -75,3 +75,51 @@ jobs:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
+
+## Example with GitHub App
+
+Instead of using a Personal Access Token (PAT) that is tied to a particular user you can use a [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps) where permissions can be even better tuned. [Create a new app](https://docs.github.com/en/developers/apps/creating-a-github-app) and give it the following permissions:
+
+| Permission      | Level               |
+|-----------------|---------------------|
+| `Contents`      | `Read & write`      |
+| `Metadata`      | `Read-only`         |
+| `Pull requests` | `Read & write`      |
+
+Store the app ID as a secret with name `APP_ID` and generate a new private key for the app and add it as a secret to the repository as `APP_PEM` in the repository where the action will run from. Note that `APP_PEM` needs to be base64 encoded. You can encode your private key file like this from the terminal:
+
+```bash
+cat your_app_key.pem | base64 -w 0 && echo
+```
+
+Going forward we will be using the [machine-learning-apps/actions-app-token](https://github.com/machine-learning-apps/actions-app-token) action in order to exchange the GitHub App certificate for an access token that renovate can use.
+
+The final workflow will look like this:
+
+```yaml
+name: Renovate
+on:
+  schedule:
+    # The "*" (#42, asterisk) character has special semantics in YAML, so this
+    # string has to be quoted.
+    - cron: '0/15 * * * *'
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get token
+        id: get_token
+        uses: machine-learning-apps/actions-app-token@master
+        with:
+          APP_PEM: ${{ secrets.APP_PEM }}
+          APP_ID: ${{ secrets.APP_ID }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v21.30.0
+        with:
+          configurationFile: example/renovate-config.js
+          token: "x-access-token:${{ steps.get_token.outputs.app_token }}"
+```
