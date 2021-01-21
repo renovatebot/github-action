@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
       - name: Setup node
-        uses: actions/setup-node@v1.4.4
+        uses: actions/setup-node@v2.1.4
         with:
           node-version: '12.x'
       - name: Install project
@@ -81,7 +81,7 @@ jobs:
         run: |
           git merge -m 'chore(release): merge master (${{ github.sha }})' ${{ github.sha }}
       - name: Setup node
-        uses: actions/setup-node@v1.4.4
+        uses: actions/setup-node@v2.1.4
         with:
           node-version: '12.x'
       - name: Install project
