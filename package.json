@@ -1,6 +1,6 @@
 {
   "name": "github-action",
-  "version": "24.27.3",
+  "version": "24.27.4",
   "description": "GitHub Action to run Renovate self-hosted.",
   "private": true,
   "main": "src/index.ts",
