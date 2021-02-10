@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [24.43.0](https://github.com/renovatebot/github-action/compare/v24.42.3...v24.43.0) (2021-02-10)
+
+
+### Bug Fixes
+
+* **deps:** replace `@zeit/ncc`, which is deprecated, with `@vercel/ncc` ([#531](https://github.com/renovatebot/github-action/issues/531)) ([d36f35f](https://github.com/renovatebot/github-action/commit/d36f35f4c453a8bc5d169da7ff88b712aff4fc5f)), closes [#530](https://github.com/renovatebot/github-action/issues/530)
+* **deps:** update renovate/renovate docker tag to v24.43.0 ([b0d2019](https://github.com/renovatebot/github-action/commit/b0d2019f2f916d5e5738938c37eecab6faa4d1a1))
+
 ### [24.42.3](https://github.com/renovatebot/github-action/compare/v24.42.2...v24.42.3) (2021-02-09)
 
 
