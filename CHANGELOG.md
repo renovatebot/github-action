@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [24.66.3](https://github.com/renovatebot/github-action/compare/v24.66.0...v24.66.3) (2021-02-27)
+
+
+### Bug Fixes
+
+* **deps:** update renovate/renovate docker tag to v24.66.3 ([1f2afe4](https://github.com/renovatebot/github-action/commit/1f2afe4bc4dedda0bc69432de9635896afe3919f))
+
 ## [24.66.0](https://github.com/renovatebot/github-action/compare/v24.64.3...v24.66.0) (2021-02-27)
 
 
