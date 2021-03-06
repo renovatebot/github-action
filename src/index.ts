@@ -5,7 +5,7 @@ import Renovate from './renovate';
 async function run(): Promise<void> {
   try {
     const input = new Input();
-    const renovate = new Renovate(input.configurationFile, input.token);
+    const renovate = new Renovate(input);
 
     await renovate.runDockerContainer();
   } catch (error) {

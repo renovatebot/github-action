@@ -48,6 +48,8 @@ jobs:
         run: npm run build
       - name: Renovate test
         uses: ./
+        env:
+          LOG_LEVEL: debug
         with:
           configurationFile: ${{ matrix.configurationFile }}
           token: ${{ secrets.RENOVATE_TOKEN }}

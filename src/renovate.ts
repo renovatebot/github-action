@@ -1,20 +1,16 @@
 import Docker from './docker';
+import { Input } from './input';
 import { exec } from '@actions/exec';
 import fs from 'fs';
 import path from 'path';
 
 class Renovate {
-  private configFileEnv = 'RENOVATE_CONFIG_FILE';
-  private tokenEnv = 'RENOVATE_TOKEN';
   private dockerGroupName = 'docker';
   private configFileMountDir = '/github-action';
 
-  private configFile: string;
   private docker: Docker;
 
-  constructor(configFile: string, private token: string) {
-    this.configFile = path.resolve(configFile);
-
+  constructor(private input: Input) {
     this.validateArguments();
 
     this.docker = new Docker();
@@ -22,18 +18,28 @@ class Renovate {
 
   async runDockerContainer(): Promise<void> {
     const renovateDockerUser = 'ubuntu';
-    const githubActionsDockerGroupId = this.getDockerGroupId();
-    const commandArguments = [
-      '--rm',
-      `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
-      `--env ${this.tokenEnv}=${this.token}`,
-      `--volume ${this.configFile}:${this.configFileMountPath()}`,
-      `--volume /var/run/docker.sock:/var/run/docker.sock`,
-      `--volume /tmp:/tmp`,
-      `--user ${renovateDockerUser}:${githubActionsDockerGroupId}`,
-      this.docker.image(),
-    ];
-    const command = `docker run ${commandArguments.join(' ')}`;
+
+    const dockerArguments = [
+      ...this.input.toEnvironmentVariables(),
+      {
+        key: this.input.options.configurationFile.env,
+        value: this.configFileMountPath(),
+      },
+    ]
+      .map((e) => {
+        const quotedValue = /\s/.test(e.value) ? `'${e.value}'` : e.value;
+        return `--env ${e.key}=${quotedValue}`;
+      })
+      .concat([
+        `--volume ${this.input.configurationFile()}:${this.configFileMountPath()}`,
+        '--volume /var/run/docker.sock:/var/run/docker.sock',
+        '--volume /tmp:/tmp',
+        `--user ${renovateDockerUser}:${this.getDockerGroupId()}`,
+        '--rm',
+        this.docker.image(),
+      ]);
+
+    const command = `docker run ${dockerArguments.join(' ')}`;
 
     const code = await exec(command);
     if (code !== 0) {
@@ -71,15 +77,15 @@ class Renovate {
   }
 
   private validateArguments(): void {
-    if (!fs.existsSync(this.configFile)) {
+    if (!fs.existsSync(this.input.configurationFile())) {
       throw new Error(
-        `Could not locate configuration file '${this.configFile}'.`
+        `Could not locate configuration file '${this.input.configurationFile()}'.`
       );
     }
   }
 
   private configFileName(): string {
-    return path.basename(this.configFile);
+    return path.basename(this.input.configurationFile());
   }
 
   private configFileMountPath(): string {
