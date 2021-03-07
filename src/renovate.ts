@@ -19,25 +19,27 @@ class Renovate {
   async runDockerContainer(): Promise<void> {
     const renovateDockerUser = 'ubuntu';
 
-    const dockerArguments = [
-      ...this.input.toEnvironmentVariables(),
-      {
-        key: this.input.options.configurationFile.env,
-        value: this.configFileMountPath(),
-      },
-    ]
-      .map((e) => {
-        const quotedValue = /\s/.test(e.value) ? `'${e.value}'` : e.value;
-        return `--env ${e.key}=${quotedValue}`;
-      })
-      .concat([
-        `--volume ${this.input.configurationFile()}:${this.configFileMountPath()}`,
-        '--volume /var/run/docker.sock:/var/run/docker.sock',
-        '--volume /tmp:/tmp',
-        `--user ${renovateDockerUser}:${this.getDockerGroupId()}`,
-        '--rm',
-        this.docker.image(),
-      ]);
+    const dockerArguments = this.input
+      .toEnvironmentVariables()
+      .map((e) => `--env ${e.key}`)
+      .concat([`--env ${this.input.token.key}=${this.input.token.value}`]);
+
+    if (this.input.configurationFile() !== null) {
+      const baseName = path.basename(this.input.configurationFile().value);
+      const mountPath = path.join(this.configFileMountDir, baseName);
+      dockerArguments.push(
+        `--env ${this.input.configurationFile().key}=${mountPath}`,
+        `--volume ${this.input.configurationFile().value}:${mountPath}`
+      );
+    }
+
+    dockerArguments.push(
+      '--volume /var/run/docker.sock:/var/run/docker.sock',
+      '--volume /tmp:/tmp',
+      `--user ${renovateDockerUser}:${this.getDockerGroupId()}`,
+      '--rm',
+      this.docker.image()
+    );
 
     const command = `docker run ${dockerArguments.join(' ')}`;
 
@@ -77,19 +79,20 @@ class Renovate {
   }
 
   private validateArguments(): void {
-    if (!fs.existsSync(this.input.configurationFile())) {
+    if (/\s/.test(this.input.token.value)) {
+      throw new Error('Token MUST NOT contain whitespace');
+    }
+
+    const configurationFile = this.input.configurationFile();
+    if (
+      configurationFile !== null &&
+      (!fs.existsSync(configurationFile.value) ||
+        !fs.statSync(configurationFile.value).isFile())
+    ) {
       throw new Error(
-        `Could not locate configuration file '${this.input.configurationFile()}'.`
+        `configuration file '${configurationFile.value}' MUST be an existing file`
       );
     }
-  }
-
-  private configFileName(): string {
-    return path.basename(this.input.configurationFile());
-  }
-
-  private configFileMountPath(): string {
-    return path.join(this.configFileMountDir, this.configFileName());
   }
 }
 

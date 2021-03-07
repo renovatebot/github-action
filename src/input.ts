@@ -12,14 +12,18 @@ class Input {
     configurationFile: {
       input: 'configurationFile',
       env: 'RENOVATE_CONFIG_FILE',
+      optional: true,
     },
     token: {
       input: 'token',
       env: 'RENOVATE_TOKEN',
+      optional: false,
     },
   } as const;
+  readonly token: Readonly<EnvironmentVariable>;
 
   private readonly _environmentVariables: Map<string, string>;
+  private readonly _configurationFile: Readonly<EnvironmentVariable>;
 
   constructor() {
     this._environmentVariables = new Map(
@@ -28,27 +32,35 @@ class Input {
       )
     );
 
-    this.setEnvironmentVariable(
+    this.token = this.get(
       this.options.token.input,
-      this.options.token.env
+      this.options.token.env,
+      this.options.token.optional
     );
-    this.setEnvironmentVariable(
+    this._configurationFile = this.get(
       this.options.configurationFile.input,
-      this.options.configurationFile.env
+      this.options.configurationFile.env,
+      this.options.configurationFile.optional
     );
   }
 
-  configurationFile(): string {
-    return path.resolve(
-      this._environmentVariables.get(this.options.configurationFile.env)
-    );
+  configurationFile(): EnvironmentVariable | null {
+    if (this._configurationFile.value !== '') {
+      return {
+        key: this._configurationFile.key,
+        value: path.resolve(this._configurationFile.value),
+      };
+    }
+
+    return null;
   }
 
   /**
    * Convert to environment variables.
    *
-   * @note The environment variable for the configuration file is filtered out
-   * and is available with `configurationFile()` instead.
+   * @note The environment variables listed below are filtered out.
+   * - Token, available with the `token` property.
+   * - Configuration file, available with the `configurationFile()` method.
    */
   toEnvironmentVariables(): EnvironmentVariable[] {
     return [...this._environmentVariables].map(([key, value]) => ({
@@ -57,9 +69,15 @@ class Input {
     }));
   }
 
-  private setEnvironmentVariable(input: string, env: string) {
-    const optionalInput = core.getInput(input);
-    if (optionalInput === '' && !this._environmentVariables.has(env)) {
+  private get(
+    input: string,
+    env: string,
+    optional: boolean
+  ): EnvironmentVariable {
+    const fromInput = core.getInput(input);
+    const fromEnv = this._environmentVariables.get(env);
+
+    if (fromInput === '' && fromEnv === undefined && !optional) {
       throw new Error(
         [
           `'${input}' MUST be passed using its input or the '${env}'`,
@@ -68,9 +86,11 @@ class Input {
       );
     }
 
-    if (optionalInput !== '') {
-      this._environmentVariables.set(env, optionalInput);
+    this._environmentVariables.delete(env);
+    if (fromInput !== '') {
+      return { key: env, value: fromInput };
     }
+    return { key: env, value: fromEnv !== undefined ? fromEnv : '' };
   }
 }
 
