@@ -43,7 +43,7 @@
     "@vercel/ncc": "0.27.0",
     "concurrently": "6.0.0",
     "eslint": "7.12.1",
-    "eslint-config-prettier": "7.2.0",
+    "eslint-config-prettier": "8.1.0",
     "eslint-plugin-json": "2.1.2",
     "eslint-plugin-prettier": "3.1.4",
     "husky": "4.3.8",
