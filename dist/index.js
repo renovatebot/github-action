@@ -1554,7 +1554,7 @@ class Docker {
     constructor() {
         this.repository = 'renovate/renovate';
         // renovate: datasource=docker depName=renovate/renovate versioning=docker
-        this.tag = '24.76.0-slim';
+        this.tag = '24.77.2-slim';
         this.tagSuffix = '-slim';
     }
     image() {
@@ -1602,7 +1602,7 @@ const renovate_1 = __importDefault(__nccwpck_require__(932));
 async function run() {
     try {
         const input = new input_1.default();
-        const renovate = new renovate_1.default(input.configurationFile, input.token);
+        const renovate = new renovate_1.default(input);
         await renovate.runDockerContainer();
     }
     catch (error) {
@@ -1638,22 +1638,71 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Input = void 0;
 const core = __importStar(__nccwpck_require__(186));
+const path_1 = __importDefault(__nccwpck_require__(622));
 class Input {
     constructor() {
-        this.configurationFile = core.getInput('configurationFile', {
-            required: true,
-        });
-        this.token = core.getInput('token', { required: true });
-        this.validate();
+        this.options = {
+            envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL)$/,
+            configurationFile: {
+                input: 'configurationFile',
+                env: 'RENOVATE_CONFIG_FILE',
+                optional: true,
+            },
+            token: {
+                input: 'token',
+                env: 'RENOVATE_TOKEN',
+                optional: false,
+            },
+        };
+        this._environmentVariables = new Map(Object.entries(process.env).filter(([key]) => this.options.envRegex.test(key)));
+        this.token = this.get(this.options.token.input, this.options.token.env, this.options.token.optional);
+        this._configurationFile = this.get(this.options.configurationFile.input, this.options.configurationFile.env, this.options.configurationFile.optional);
     }
-    validate() {
-        if (this.token === '') {
-            throw new Error('input.token MUST NOT be empty');
+    configurationFile() {
+        if (this._configurationFile.value !== '') {
+            return {
+                key: this._configurationFile.key,
+                value: path_1.default.resolve(this._configurationFile.value),
+            };
         }
+        return null;
+    }
+    /**
+     * Convert to environment variables.
+     *
+     * @note The environment variables listed below are filtered out.
+     * - Token, available with the `token` property.
+     * - Configuration file, available with the `configurationFile()` method.
+     */
+    toEnvironmentVariables() {
+        return [...this._environmentVariables].map(([key, value]) => ({
+            key,
+            value,
+        }));
+    }
+    get(input, env, optional) {
+        const fromInput = core.getInput(input);
+        const fromEnv = this._environmentVariables.get(env);
+        if (fromInput === '' && fromEnv === undefined && !optional) {
+            throw new Error([
+                `'${input}' MUST be passed using its input or the '${env}'`,
+                'environment variable',
+            ].join(' '));
+        }
+        this._environmentVariables.delete(env);
+        if (fromInput !== '') {
+            return { key: env, value: fromInput };
+        }
+        return { key: env, value: fromEnv !== undefined ? fromEnv : '' };
     }
 }
+exports.Input = Input;
 exports.default = Input;
 
 
@@ -1672,30 +1721,26 @@ const exec_1 = __nccwpck_require__(514);
 const fs_1 = __importDefault(__nccwpck_require__(747));
 const path_1 = __importDefault(__nccwpck_require__(622));
 class Renovate {
-    constructor(configFile, token) {
-        this.token = token;
-        this.configFileEnv = 'RENOVATE_CONFIG_FILE';
-        this.tokenEnv = 'RENOVATE_TOKEN';
+    constructor(input) {
+        this.input = input;
         this.dockerGroupName = 'docker';
         this.configFileMountDir = '/github-action';
-        this.configFile = path_1.default.resolve(configFile);
         this.validateArguments();
         this.docker = new docker_1.default();
     }
     async runDockerContainer() {
         const renovateDockerUser = 'ubuntu';
-        const githubActionsDockerGroupId = this.getDockerGroupId();
-        const commandArguments = [
-            '--rm',
-            `--env ${this.configFileEnv}=${this.configFileMountPath()}`,
-            `--env ${this.tokenEnv}=${this.token}`,
-            `--volume ${this.configFile}:${this.configFileMountPath()}`,
-            `--volume /var/run/docker.sock:/var/run/docker.sock`,
-            `--volume /tmp:/tmp`,
-            `--user ${renovateDockerUser}:${githubActionsDockerGroupId}`,
-            this.docker.image(),
-        ];
-        const command = `docker run ${commandArguments.join(' ')}`;
+        const dockerArguments = this.input
+            .toEnvironmentVariables()
+            .map((e) => `--env ${e.key}`)
+            .concat([`--env ${this.input.token.key}=${this.input.token.value}`]);
+        if (this.input.configurationFile() !== null) {
+            const baseName = path_1.default.basename(this.input.configurationFile().value);
+            const mountPath = path_1.default.join(this.configFileMountDir, baseName);
+            dockerArguments.push(`--env ${this.input.configurationFile().key}=${mountPath}`, `--volume ${this.input.configurationFile().value}:${mountPath}`);
+        }
+        dockerArguments.push('--volume /var/run/docker.sock:/var/run/docker.sock', '--volume /tmp:/tmp', `--user ${renovateDockerUser}:${this.getDockerGroupId()}`, '--rm', this.docker.image());
+        const command = `docker run ${dockerArguments.join(' ')}`;
         const code = await exec_1.exec(command);
         if (code !== 0) {
             new Error(`'docker run' failed with exit code ${code}.`);
@@ -1726,15 +1771,15 @@ class Renovate {
         return match[1];
     }
     validateArguments() {
-        if (!fs_1.default.existsSync(this.configFile)) {
-            throw new Error(`Could not locate configuration file '${this.configFile}'.`);
+        if (/\s/.test(this.input.token.value)) {
+            throw new Error('Token MUST NOT contain whitespace');
         }
-    }
-    configFileName() {
-        return path_1.default.basename(this.configFile);
-    }
-    configFileMountPath() {
-        return path_1.default.join(this.configFileMountDir, this.configFileName());
+        const configurationFile = this.input.configurationFile();
+        if (configurationFile !== null &&
+            (!fs_1.default.existsSync(configurationFile.value) ||
+                !fs_1.default.statSync(configurationFile.value).isFile())) {
+            throw new Error(`configuration file '${configurationFile.value}' MUST be an existing file`);
+        }
     }
 }
 exports.default = Renovate;

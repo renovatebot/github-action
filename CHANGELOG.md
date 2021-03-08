@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [24.77.2](https://github.com/renovatebot/github-action/compare/v24.76.0...v24.77.2) (2021-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* The `configurationFile` input no longer has a default value. This means that a
+value for it is now required using the `configurationFile` input or the `RENOVATE_CONFIG_FILE`
+environment variable.
+
+Co-authored-by: Michael Kriese <michael.kriese@visualon.de>
+
+### Features
+
+* add passing of Renovate environment variables ([#534](https://github.com/renovatebot/github-action/issues/534)) ([9c8a784](https://github.com/renovatebot/github-action/commit/9c8a784d88c81a96b2a4efa04d99cbc8cb42b72b))
+
+
+### Bug Fixes
+
+* **deps:** update renovate/renovate docker tag to v24.77.2 ([048afa3](https://github.com/renovatebot/github-action/commit/048afa3eea45d91c0380f5736a071abdcba378db))
+
 ## [24.76.0](https://github.com/renovatebot/github-action/compare/v24.75.0...v24.76.0) (2021-03-08)
 
 
