@@ -6,14 +6,16 @@ branding:
   color: blue
 inputs:
   configurationFile:
-    description: 'Configuration file to configure Renovate'
+    description: |
+      Configuration file to configure Renovate. Either use this input or the
+      'RENOVATE_CONFIG_FILE' environment variable.
     required: false
-    default: src/config.js
   token:
     description: |
       GitHub personal access token that Renovate should use. This should be
-      configured using a Secret.
-    required: true
+      configured using a Secret. Either use this input or the 'RENOVATE_TOKEN'
+      environment variable.
+    required: false
 runs:
   using: node12
   main: dist/index.js
