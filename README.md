@@ -25,6 +25,8 @@ GitHub Action to run Renovate self-hosted.
 
 ## Options
 
+Options can be passed using the inputs of this action or the corresponding environment variables. When both are passed, the input takes precedence over the environment variable. For the available environment variables see the Renovate [Self-Hosted Configuration](https://docs.renovatebot.com/self-hosted-configuration/) and [Self-Hosting](https://docs.renovatebot.com/self-hosting/) docs.
+
 ## `configurationFile`
 
 Configuration file to configure Renovate. The supported configurations files can be one of the configuration files listed in the Renovate Docs for [Configuration Options](https://docs.renovatebot.com/configuration-options/) or a JavaScript file that exports a configuration object. For both of these options, an example can be found in the [example](./example) directory.
@@ -80,11 +82,11 @@ jobs:
 
 Instead of using a Personal Access Token (PAT) that is tied to a particular user you can use a [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps) where permissions can be even better tuned. [Create a new app](https://docs.github.com/en/developers/apps/creating-a-github-app) and give it the following permissions:
 
-| Permission      | Level               |
-|-----------------|---------------------|
-| `Contents`      | `Read & write`      |
-| `Metadata`      | `Read-only`         |
-| `Pull requests` | `Read & write`      |
+| Permission      | Level          |
+| --------------- | -------------- |
+| `Contents`      | `Read & write` |
+| `Metadata`      | `Read-only`    |
+| `Pull requests` | `Read & write` |
 
 Store the app ID as a secret with name `APP_ID` and generate a new private key for the app and add it as a secret to the repository as `APP_PEM` in the repository where the action will run from. Note that `APP_PEM` needs to be base64 encoded. You can encode your private key file like this from the terminal:
 
@@ -121,5 +123,5 @@ jobs:
         uses: renovatebot/github-action@v21.30.0
         with:
           configurationFile: example/renovate-config.js
-          token: "x-access-token:${{ steps.get_token.outputs.app_token }}"
+          token: 'x-access-token:${{ steps.get_token.outputs.app_token }}'
 ```
