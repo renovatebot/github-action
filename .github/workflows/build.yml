@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
       - 'renovate/**'
 
   pull_request:
@@ -66,7 +66,7 @@ jobs:
     if: |
       startsWith(github.event.commits[0].message,
           'fix(deps): update renovate/renovate docker tag ')
-      && github.ref == 'refs/heads/master'
+      && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
@@ -79,9 +79,9 @@ jobs:
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Merge master
+      - name: Merge main
         run: |
-          git merge -m 'chore(release): merge master (${{ github.sha }})' ${{ github.sha }}
+          git merge -m 'chore(release): merge main (${{ github.sha }})' ${{ github.sha }}
       - name: Setup node
         uses: actions/setup-node@v2.1.5
         with:
