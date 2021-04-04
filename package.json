@@ -37,7 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "12.0.1",
     "@commitlint/config-conventional": "12.0.1",
-    "@types/node": "13.13.47",
+    "@types/node": "13.13.48",
     "@typescript-eslint/eslint-plugin": "4.6.0",
     "@typescript-eslint/parser": "4.6.0",
     "@vercel/ncc": "0.27.0",
