@@ -53,7 +53,7 @@ If you want to use this with just the single configuration file, make sure to in
 
 Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate.
 
-Also note that if you want to use the `github-actions` manager, see the [special token requirements](#special-token-requirements-when-using-the-github-actions-manager).
+If you want to use the `github-actions` manager, you must setup a [special token](#special-token-requirements-when-using-the-github-actions-manager) with some requirements.
 
 ## Example
 
@@ -132,9 +132,11 @@ jobs:
 
 ## Troubleshooting
 
-### Debug Logging
+### Debug logging
+
 In case of issues, it's always a good idea to enable debug logging first.
 To enable debug logging, add the environment variable `LOG_LEVEL: 'debug'` to the action:
+
 ```yml
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v21.30.0
@@ -147,4 +149,5 @@ To enable debug logging, add the environment variable `LOG_LEVEL: 'debug'` to th
 
 ### Special token requirements when using the `github-actions` manager
 
-If you want to use the `github-actions` [manager](https://docs.renovatebot.com/modules/manager/github-actions/) in renovate, ensure that the `token` you provide contains the `workflow` scope. Otherwise, Github does not allow Renovate to update worklow files and therefore it will be unable to create update PR's for affected packages (like `actions/checkout` or `renovatebot/github-action` itself).
+If you want to use the `github-actions` [manager](https://docs.renovatebot.com/modules/manager/github-actions/) in Renovate, ensure that the `token` you provide contains the `workflow` scope.
+Otherwise, GitHub does not allow Renovate to update worklow files and therefore it will be unable to create update PRs for affected packages (like `actions/checkout` or `renovatebot/github-action` itself).
