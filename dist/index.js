@@ -1955,7 +1955,7 @@ class Docker {
     constructor() {
         this.repository = 'renovate/renovate';
         // renovate: datasource=docker depName=renovate/renovate versioning=docker
-        this.tag = '25.50.0-slim';
+        this.tag = '25.51.0-slim';
         this.tagSuffix = '-slim';
     }
     image() {
