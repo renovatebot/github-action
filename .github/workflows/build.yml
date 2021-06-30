@@ -28,6 +28,7 @@ jobs:
         uses: actions/setup-node@v2.2.0
         with:
           node-version: '12.x'
+          cache: 'npm'
       - name: Install project
         run: npm ci
       - name: Lint
