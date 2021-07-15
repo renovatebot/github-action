@@ -70,9 +70,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v21.30.0
+        uses: renovatebot/github-action@v25.51.5
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -117,10 +117,10 @@ jobs:
           APP_ID: ${{ secrets.APP_ID }}
 
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v2.3.4
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v21.30.0
+        uses: renovatebot/github-action@v25.51.5
         with:
           configurationFile: example/renovate-config.js
           token: 'x-access-token:${{ steps.get_token.outputs.app_token }}'
