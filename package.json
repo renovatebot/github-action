@@ -18,7 +18,8 @@
     "release:standard-version": "standard-version --release-as",
     "release": "run-s build release:commit \"release:standard-version -- {1}\" --",
     "build": "ncc build -o dist",
-    "start": "run-s build && node dist"
+    "start": "run-s build && node dist",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
