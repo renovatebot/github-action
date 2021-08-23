@@ -11,7 +11,9 @@ GitHub Action to run Renovate self-hosted.
   - [`configurationFile`](#configurationfile)
   - [`token`](#token)
 - [Example](#example)
-- [License](#license)
+- [Troubleshooting](#troubleshooting)
+  - [Debug Logging](#debug-logging)
+  - [Special token requirements when using the `github-actions` manager](#special-token-requirements-when-using-the-github-actions-manager)
 
 ## Badges
 
@@ -51,6 +53,8 @@ If you want to use this with just the single configuration file, make sure to in
 
 Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate.
 
+If you want to use the `github-actions` manager, you must setup a [special token](#special-token-requirements-when-using-the-github-actions-manager) with some requirements.
+
 ## Example
 
 This example uses a personal access token and will run every 15 minutes. The personal access token is configured as a GitHub secret named `RENOVATE_TOKEN`. This example uses the [`example/config.js`](./example/config.js) file as configuration.
@@ -72,7 +76,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.0.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v21.30.0
+        uses: renovatebot/github-action@v21.33.15
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -120,8 +124,30 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v21.30.0
+        uses: renovatebot/github-action@v21.33.15
         with:
           configurationFile: example/renovate-config.js
           token: 'x-access-token:${{ steps.get_token.outputs.app_token }}'
 ```
+
+## Troubleshooting
+
+### Debug logging
+
+In case of issues, it's always a good idea to enable debug logging first.
+To enable debug logging, add the environment variable `LOG_LEVEL: 'debug'` to the action:
+
+```yml
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v21.33.15
+        with:
+          configurationFile: example/renovate-config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          LOG_LEVEL: 'debug'
+```
+
+### Special token requirements when using the `github-actions` manager
+
+If you want to use the `github-actions` [manager](https://docs.renovatebot.com/modules/manager/github-actions/) in Renovate, ensure that the `token` you provide contains the `workflow` scope.
+Otherwise, GitHub does not allow Renovate to update worklow files and therefore it will be unable to create update PRs for affected packages (like `actions/checkout` or `renovatebot/github-action` itself).

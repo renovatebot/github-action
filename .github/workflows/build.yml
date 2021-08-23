@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
       - 'renovate/**'
 
   pull_request:
@@ -13,21 +13,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2.3.4
         with:
           fetch-depth: 0
       - name: Lint commit messages
-        uses: wagoid/commitlint-github-action@v3.0.6
+        uses: wagoid/commitlint-github-action@baffd3c16c570c0a26bf89be729b81bb796e9bd5 # renovate: tag=v3.1.4
 
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2.3.4
       - name: Setup node
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@25316bbc1f10ac9d8798711f44914b1cf3c4e954 # renovate: tag=v2.4.0
         with:
           node-version: '12.x'
+          cache: 'npm'
       - name: Install project
         run: npm ci
       - name: Lint
@@ -41,7 +42,7 @@ jobs:
         configurationFile: [example/renovate-config.js, example/renovate.json]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2.3.4
       - name: Install project
         run: npm ci
       - name: Build
@@ -66,10 +67,10 @@ jobs:
     if: |
       startsWith(github.event.commits[0].message,
           'fix(deps): update renovate/renovate docker tag ')
-      && github.ref == 'refs/heads/master'
+      && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2.3.4
         with:
           fetch-depth: 0
           ref: 'release'
@@ -79,11 +80,11 @@ jobs:
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Merge master
+      - name: Merge main
         run: |
-          git merge -m 'chore(release): merge master (${{ github.sha }})' ${{ github.sha }}
+          git merge -m 'chore(release): merge main (${{ github.sha }})' ${{ github.sha }}
       - name: Setup node
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@25316bbc1f10ac9d8798711f44914b1cf3c4e954 # renovate: tag=v2.4.0
         with:
           node-version: '12.x'
       - name: Install project
@@ -104,7 +105,7 @@ jobs:
       - name: Publish release
         run: git push --follow-tags
       - name: Publish GitHub release
-        uses: actions/create-release@v1.1.4
+        uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # renovate: tag=v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
