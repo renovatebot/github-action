@@ -63,8 +63,6 @@ jobs:
 
   build:
     needs: [lint, commitlint, e2e]
-    if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
-
     runs-on: ubuntu-latest
     steps:
       - run: echo 'dummy'
