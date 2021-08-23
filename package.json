@@ -18,7 +18,8 @@
     "release:standard-version": "standard-version --release-as",
     "release": "run-s build release:commit \"release:standard-version -- {1}\" --",
     "build": "ncc build -o dist",
-    "start": "run-s build && node dist"
+    "start": "run-s build && node dist",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -38,20 +39,20 @@
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@types/node": "13.13.52",
-    "@typescript-eslint/eslint-plugin": "4.29.0",
-    "@typescript-eslint/parser": "4.29.0",
-    "@vercel/ncc": "0.29.0",
-    "concurrently": "6.2.0",
+    "@typescript-eslint/eslint-plugin": "4.29.1",
+    "@typescript-eslint/parser": "4.29.1",
+    "@vercel/ncc": "0.29.1",
+    "concurrently": "6.2.1",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-json": "2.1.2",
     "eslint-plugin-prettier": "3.4.0",
-    "husky": "4.3.8",
+    "husky": "7.0.1",
     "lint-staged": "10.5.4",
     "npm-run-all": "4.1.5",
     "prettier": "2.3.2",
     "standard-version": "9.3.1",
-    "ts-node": "9.1.1",
+    "ts-node": "10.2.0",
     "typescript": "4.3.5"
   }
 }

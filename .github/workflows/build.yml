@@ -2,25 +2,29 @@ name: Build
 
 on:
   push:
-    branches:
-      - main
-      - 'renovate/**'
-
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   commitlint:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2.3.4
         with:
           fetch-depth: 0
       - name: Lint commit messages
-        uses: wagoid/commitlint-github-action@baffd3c16c570c0a26bf89be729b81bb796e9bd5 # renovate: tag=v3.1.4
+        uses: wagoid/commitlint-github-action@59203cb6ee1ce85035e6fe7b3aa878cf80653739 # renovate: tag=v4.1.1
 
   lint:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2.3.4
@@ -28,6 +32,7 @@ jobs:
         uses: actions/setup-node@25316bbc1f10ac9d8798711f44914b1cf3c4e954 # renovate: tag=v2.4.0
         with:
           node-version: '12.x'
+          cache: 'npm'
       - name: Install project
         run: npm ci
       - name: Lint
@@ -35,6 +40,8 @@ jobs:
 
   e2e:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -46,13 +53,24 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+
+      - name: Configure renovate token
+        run: |
+          if [[ "${RENOVATE_TOKEN}" != ""  ]]; then
+            echo "RENOVATE_TOKEN=${RENOVATE_TOKEN}" >> $GITHUB_ENV
+          else
+            echo "RENOVATE_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+
       - name: Renovate test
         uses: ./
         env:
           LOG_LEVEL: debug
         with:
           configurationFile: ${{ matrix.configurationFile }}
-          token: ${{ secrets.RENOVATE_TOKEN }}
 
   build:
     needs: [lint, commitlint, e2e]
