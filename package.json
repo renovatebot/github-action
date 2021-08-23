@@ -18,7 +18,8 @@
     "release:standard-version": "standard-version --release-as",
     "release": "run-s build release:commit \"release:standard-version -- {1}\" --",
     "build": "ncc build -o dist",
-    "start": "run-s build && node dist"
+    "start": "run-s build && node dist",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -46,7 +47,7 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-json": "2.1.2",
     "eslint-plugin-prettier": "3.4.0",
-    "husky": "4.3.8",
+    "husky": "7.0.1",
     "lint-staged": "10.5.4",
     "npm-run-all": "4.1.5",
     "prettier": "2.3.2",
