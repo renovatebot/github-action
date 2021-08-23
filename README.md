@@ -138,13 +138,13 @@ In case of issues, it's always a good idea to enable debug logging first.
 To enable debug logging, add the environment variable `LOG_LEVEL: 'debug'` to the action:
 
 ```yml
-      - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v21.33.15
-        with:
-          configurationFile: example/renovate-config.js
-          token: ${{ secrets.RENOVATE_TOKEN }}
-        env:
-          LOG_LEVEL: 'debug'
+- name: Self-hosted Renovate
+  uses: renovatebot/github-action@v21.33.15
+  with:
+    configurationFile: example/renovate-config.js
+    token: ${{ secrets.RENOVATE_TOKEN }}
+  env:
+    LOG_LEVEL: 'debug'
 ```
 
 ### Special token requirements when using the `github-actions` manager

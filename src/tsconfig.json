@@ -3,6 +3,7 @@
   "compilerOptions": {
     "sourceMap": false,
     "declaration": false,
+    "allowJs": false,
     "rootDir": ".",
     "outDir": "dist",
     "types": ["node"]
