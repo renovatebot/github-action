@@ -7,8 +7,8 @@
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,vue,ts,css,less,scss,html,htm,json,md,markdown,yml,yaml}\"",
     "format:file": "prettier --write",
-    "lint": "concurrently npm:lint-es",
-    "lint:fix": "concurrently npm:lint-es:fix",
+    "lint": "run-s lint-es",
+    "lint:fix": "run-s lint-es:fix",
     "lint-es": "eslint --ext .ts,.tsx,.js,.jsx,.json .",
     "lint-es:file": "eslint --ext .ts,.tsx,.js,.jsx,.json",
     "lint-es:fix": "eslint --ext .ts,.tsx,.js,.jsx,.json --fix .",
@@ -42,7 +42,6 @@
     "@typescript-eslint/eslint-plugin": "4.29.1",
     "@typescript-eslint/parser": "4.29.1",
     "@vercel/ncc": "0.29.1",
-    "concurrently": "6.2.1",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-json": "2.1.2",
