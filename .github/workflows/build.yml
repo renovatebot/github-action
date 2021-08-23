@@ -53,13 +53,24 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+
+      - name: Configure renovate token
+        run: |
+          if [[ "${RENOVATE_TOKEN}" != ""  ]]; then
+            echo "RENOVATE_TOKEN=${RENOVATE_TOKEN}" >> $GITHUB_ENV
+          else
+            echo "RENOVATE_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+
       - name: Renovate test
         uses: ./
         env:
           LOG_LEVEL: debug
         with:
           configurationFile: ${{ matrix.configurationFile }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     needs: [lint, commitlint, e2e]
