@@ -17,7 +17,7 @@ class Renovate {
   }
 
   async runDockerContainer(): Promise<void> {
-    const renovateDockerUser = 'ubuntu';
+    const renovateDockerUser = '1000';
 
     const dockerArguments = this.input
       .toEnvironmentVariables()
@@ -36,7 +36,7 @@ class Renovate {
     dockerArguments.push(
       '--volume /var/run/docker.sock:/var/run/docker.sock',
       '--volume /tmp:/tmp',
-      // `--user ${renovateDockerUser}:${this.getDockerGroupId()}`,
+      `--user ${renovateDockerUser}:${this.getDockerGroupId()}`,
       '--rm',
       this.docker.image()
     );
