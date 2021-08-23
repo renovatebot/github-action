@@ -1,15 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>renovatebot/presets-internal:node", ":pinDependencies"],
-  "major": {
-    "stabilityDays": 3
-  },
+  "extends": ["github>renovatebot/.github", ":pinDependencies"],
   "packageRules": [
     {
       "description": "Automerge Renovate updates",
       "packageNames": ["renovate/renovate"],
       "updateTypes": ["major", "minor", "patch"],
       "semanticCommitType": "fix"
+    },
+    {
+      "description": "Update references in markdown files weekly",
+      "matchPaths": [".md"],
+      "extends": ["schedule:weekly"],
+      "automerge": true,
+      "stabilityDays": 0,
+      "commitMessageTopic": "references to {{{depName}}}",
+      "semanticCommitType": "docs",
+      "semanticCommitScope": null,
+      "additionalBranchPrefix": "docs-"
     }
   ],
   "regexManagers": [
