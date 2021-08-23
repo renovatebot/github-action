@@ -2,10 +2,6 @@ name: Build
 
 on:
   push:
-    branches:
-      - main
-      - 'renovate/**'
-
   pull_request:
 
 jobs:
