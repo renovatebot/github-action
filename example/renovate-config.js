@@ -22,8 +22,8 @@ module.exports = {
         'major',
         'lockFileMaintenance',
       ],
-      masterIssueApproval: false,
-      stabilityDays: 0,
+      dependencyDashboardApproval: false,
+      matchUpdateTypes: 0,
     },
   ],
 };
