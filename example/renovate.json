@@ -14,7 +14,7 @@
   "packageRules": [
     {
       "description": "lockFileMaintenance",
-      "updateTypes": [
+      "matchUpdateTypes": [
         "pin",
         "digest",
         "patch",
@@ -22,7 +22,7 @@
         "major",
         "lockFileMaintenance"
       ],
-      "masterIssueApproval": false,
+      "dependencyDashboardApproval": false,
       "stabilityDays": 0
     }
   ]
