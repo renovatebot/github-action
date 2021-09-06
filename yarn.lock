@@ -366,10 +366,10 @@
     "@typescript-eslint/types" "4.29.3"
     eslint-visitor-keys "^2.0.0"
 
-"@vercel/ncc@0.29.2":
-  version "0.29.2"
-  resolved "https://registry.yarnpkg.com/@vercel/ncc/-/ncc-0.29.2.tgz#29a35d21b03267a538b536168af766f4270ae8f4"
-  integrity sha512-eUxibZD92k+rY0oZJFZooGqdVpGkDrrHlUhj9UAWrtoyXCGmNOWC1Kcr2KPrZoHRSlWwHOcRnkn2nGT+aHY2KA==
+"@vercel/ncc@0.30.0":
+  version "0.30.0"
+  resolved "https://registry.yarnpkg.com/@vercel/ncc/-/ncc-0.30.0.tgz#e940f5cfe30dfd0b7b30c4d7f9f6f00fcf754577"
+  integrity sha512-16ePj2GkwjomvE0HLL5ny+d+sudOwvZNYW8vjpMh3cyWdFxoMI8KSQiolVxeHBULbU1C5mVxLK5nL9NtnnpIew==
 
 JSONStream@^1.0.4:
   version "1.3.5"
@@ -542,7 +542,7 @@ camelcase-keys@^6.2.2:
     map-obj "^4.0.0"
     quick-lru "^4.0.1"
 
-camelcase@^5.0.0, camelcase@^5.3.1:
+camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
@@ -824,9 +824,9 @@ conventional-recommended-bump@6.1.0:
     q "^1.5.1"
 
 core-util-is@~1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
-  integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
+  integrity sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==
 
 cosmiconfig@^7.0.0:
   version "7.0.1"
@@ -889,15 +889,15 @@ decamelize-keys@^1.1.0:
     decamelize "^1.1.0"
     map-obj "^1.0.0"
 
-decamelize@^1.1.0, decamelize@^1.2.0:
+decamelize@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
   integrity sha1-9lNNFRSCabIDUue+4m9QH5oZEpA=
 
 deep-is@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
-  integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
+  integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
 
 define-properties@^1.1.3:
   version "1.1.3"
@@ -1313,14 +1313,14 @@ get-own-enumerable-property-symbols@^3.0.0:
   integrity sha512-I0UBV/XOz1XkIJHEUDMZAbzCThU/H8DxmSfmdGcKPnVhu2VfFqr34jr9777IyaTYvxjedWhqVIilEDsCdP5G6g==
 
 get-pkg-repo@^4.0.0:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/get-pkg-repo/-/get-pkg-repo-4.1.2.tgz#c4ffd60015cf091be666a0212753fc158f01a4c0"
-  integrity sha512-/FjamZL9cBYllEbReZkxF2IMh80d8TJoC4e3bmLNif8ibHw95aj0N/tzqK0kZz9eU/3w3dL6lF4fnnX/sDdW3A==
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/get-pkg-repo/-/get-pkg-repo-4.2.0.tgz#a585cffc33ba5dde2cdcf68cdea1d96ead9ae0e8"
+  integrity sha512-eiSexNxIsij+l+IZzkqT52t4Lh+0ChN9l6Z3oennXLQT8OaJNvp9ecoXpmZ220lPYMwwM1KDal4w4ZA+smVLHA==
   dependencies:
     "@hutson/parse-repository-url" "^3.0.0"
     hosted-git-info "^4.0.0"
-    meow "^7.0.0"
     through2 "^2.0.0"
+    yargs "^17.0.1"
 
 get-stream@^6.0.0:
   version "6.0.1"
@@ -1782,9 +1782,9 @@ lint-staged@11.1.2:
     stringify-object "^3.3.0"
 
 listr2@^3.8.2:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-3.11.0.tgz#9771b02407875aa78e73d6e0ff6541bbec0aaee9"
-  integrity sha512-XLJVe2JgXCyQTa3FbSv11lkKExYmEyA4jltVo8z4FX10Vt1Yj8IMekBfwim0BSOM9uj1QMTJvDQQpHyuPbB/dQ==
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-3.11.1.tgz#a9bab5cd5874fd3cb7827118dbea6fedefbcb43f"
+  integrity sha512-ZXQvQfmH9iWLlb4n3hh31yicXDxlzB0pE7MM1zu6kgbVL4ivEsO4H8IPh4E682sC8RjnYO9anose+zT52rrpyg==
   dependencies:
     cli-truncate "^2.1.0"
     colorette "^1.2.2"
@@ -1903,23 +1903,6 @@ memorystream@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/memorystream/-/memorystream-0.3.1.tgz#86d7090b30ce455d63fbae12dda51a47ddcaf9b2"
   integrity sha1-htcJCzDORV1j+64S3aUaR93K+bI=
-
-meow@^7.0.0:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/meow/-/meow-7.1.1.tgz#7c01595e3d337fcb0ec4e8eed1666ea95903d306"
-  integrity sha512-GWHvA5QOcS412WCo8vwKDlTelGLsCGBVevQB5Kva961rmNfun0PCbv5+xta2kUMFJyR8/oWnn7ddeKdosbAPbA==
-  dependencies:
-    "@types/minimist" "^1.2.0"
-    camelcase-keys "^6.2.2"
-    decamelize-keys "^1.1.0"
-    hard-rejection "^2.1.0"
-    minimist-options "4.1.0"
-    normalize-package-data "^2.5.0"
-    read-pkg-up "^7.0.1"
-    redent "^3.0.0"
-    trim-newlines "^3.0.0"
-    type-fest "^0.13.1"
-    yargs-parser "^18.1.3"
 
 meow@^8.0.0:
   version "8.1.2"
@@ -2825,11 +2808,6 @@ type-check@^0.4.0, type-check@~0.4.0:
   dependencies:
     prelude-ls "^1.2.1"
 
-type-fest@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.13.1.tgz#0172cb5bce80b0bd542ea348db50c7e21834d934"
-  integrity sha512-34R7HTnG0XIJcBSn5XhDd7nNFPRcXYRZrBB2O2jdKqYODldSzBAqzsWoZYYvduky73toYS/ESqxPvkDf/F0XMg==
-
 type-fest@^0.18.0:
   version "0.18.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.18.1.tgz#db4bc151a4a2cf4eebf9add5db75508db6cc841f"
@@ -2860,10 +2838,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@4.3.5:
-  version "4.3.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.5.tgz#4d1c37cc16e893973c45a06886b7113234f119f4"
-  integrity sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==
+typescript@4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.2.tgz#6d618640d430e3569a1dfb44f7d7e600ced3ee86"
+  integrity sha512-gzP+t5W4hdy4c+68bfcv0t400HVJMMd2+H9B7gae1nQlBzCqvrXX+6GL/b3GAgyTH966pzrZ70/fRjwAtZksSQ==
 
 uglify-js@^3.1.4:
   version "3.14.1"
@@ -3019,14 +2997,6 @@ yaml@^1.10.0:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-yargs-parser@^18.1.3:
-  version "18.1.3"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-18.1.3.tgz#be68c4975c6b2abf469236b0c870362fab09a7b0"
-  integrity sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==
-  dependencies:
-    camelcase "^5.0.0"
-    decamelize "^1.2.0"
-
 yargs-parser@^20.2.2, yargs-parser@^20.2.3:
   version "20.2.9"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.9.tgz#2eb7dc3b0289718fc295f362753845c41a0c94ee"
@@ -3045,7 +3015,7 @@ yargs@^16.0.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@^17.0.0:
+yargs@^17.0.0, yargs@^17.0.1:
   version "17.1.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.1.1.tgz#c2a8091564bdb196f7c0a67c1d12e5b85b8067ba"
   integrity sha512-c2k48R0PwKIqKhPMWjeiF6y2xY/gPMUlro0sgxqXpbOIohWiLNXWslsootttv7E1e73QPAMQSg5FeySbVcpsPQ==
