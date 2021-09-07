@@ -1,6 +1,4 @@
 module.exports = {
-  '*.{ts,tsx,js,jsx,json}': ['npm run lint-es:file:fix'],
-  '*.{vue,ts,css,less,scss,html,htm,md,markdown,yml,yaml}': [
-    'npm run format:file',
-  ],
+  '*.{ts,tsx,js,jsx,json}': ['yarn lint-es:file:fix'],
+  '*.{js,jsx,ts,tsx,md,yml,yaml,json}': ['yarn format:file'],
 };
