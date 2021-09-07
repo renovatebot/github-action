@@ -14,7 +14,7 @@ module.exports = {
   packageRules: [
     {
       description: 'lockFileMaintenance',
-      updateTypes: [
+      matchUpdateTypes: [
         'pin',
         'digest',
         'patch',
@@ -22,7 +22,7 @@ module.exports = {
         'major',
         'lockFileMaintenance',
       ],
-      masterIssueApproval: false,
+      dependencyDashboardApproval: false,
       stabilityDays: 0,
     },
   ],

@@ -32,25 +32,25 @@
   },
   "homepage": "https://github.com/renovatebot/github-action#readme",
   "dependencies": {
-    "@actions/core": "1.4.0",
+    "@actions/core": "1.5.0",
     "@actions/exec": "1.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "13.1.0",
     "@commitlint/config-conventional": "13.1.0",
     "@types/node": "13.13.52",
-    "@typescript-eslint/eslint-plugin": "4.29.1",
-    "@typescript-eslint/parser": "4.29.1",
-    "@vercel/ncc": "0.29.1",
+    "@typescript-eslint/eslint-plugin": "4.30.0",
+    "@typescript-eslint/parser": "4.30.0",
+    "@vercel/ncc": "0.30.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-json": "2.1.2",
-    "husky": "7.0.1",
-    "lint-staged": "10.5.4",
+    "eslint-plugin-json": "3.1.0",
+    "husky": "7.0.2",
+    "lint-staged": "11.1.2",
     "npm-run-all": "4.1.5",
     "prettier": "2.3.2",
     "standard-version": "9.3.1",
-    "ts-node": "10.2.0",
-    "typescript": "4.3.5"
+    "ts-node": "10.2.1",
+    "typescript": "4.4.2"
   }
 }
