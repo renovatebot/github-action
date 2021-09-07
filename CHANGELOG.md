@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [26.21.1](https://github.com/renovatebot/github-action/compare/v26.4.2...v26.21.1) (2021-09-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @actions/core to v1.5.0 ([9710805](https://github.com/renovatebot/github-action/commit/97108050052e8487e86b9bd67e3ae4e9d2d2a7e6))
+* **deps:** update renovate/renovate docker tag to v26.10.0 ([f8b8a1e](https://github.com/renovatebot/github-action/commit/f8b8a1e289e5e1cab173e1f2c6897e7d29cc5861))
+* **deps:** update renovate/renovate docker tag to v26.12.0 ([fe94b49](https://github.com/renovatebot/github-action/commit/fe94b4927741f15cd6494de6913d898ca943588a))
+* **deps:** update renovate/renovate docker tag to v26.13.2 ([f925bbe](https://github.com/renovatebot/github-action/commit/f925bbe72433f7c6de9fc11e67ccfb59ab5fd65b))
+* **deps:** update renovate/renovate docker tag to v26.13.3 ([c67be05](https://github.com/renovatebot/github-action/commit/c67be054cbde95553f5a8589e1bc52c63a2a5b6a))
+* **deps:** update renovate/renovate docker tag to v26.13.5 ([186a8fd](https://github.com/renovatebot/github-action/commit/186a8fd9c7a84a1cc019025a217598a79e0679d1))
+* **deps:** update renovate/renovate docker tag to v26.13.7 ([2bc9dc5](https://github.com/renovatebot/github-action/commit/2bc9dc53601a8071aa52b038d5047264876f81c0))
+* **deps:** update renovate/renovate docker tag to v26.13.8 ([520a4cb](https://github.com/renovatebot/github-action/commit/520a4cb7824f974e031fc0c2fbb739d7ad959c2e))
+* **deps:** update renovate/renovate docker tag to v26.14.0 ([6e6ed14](https://github.com/renovatebot/github-action/commit/6e6ed148f4868d1780f09479838c9dcfd4e4e174))
+* **deps:** update renovate/renovate docker tag to v26.14.1 ([745e499](https://github.com/renovatebot/github-action/commit/745e4993c4d73734a9ae325bccdc309755e76542))
+* **deps:** update renovate/renovate docker tag to v26.15.2 ([483506c](https://github.com/renovatebot/github-action/commit/483506c9017912d312faac3386f7c2f83f3809ff))
+* **deps:** update renovate/renovate docker tag to v26.15.3 ([a7805d2](https://github.com/renovatebot/github-action/commit/a7805d294729f64083fed8d8300bb170d1bb5f66))
+* **deps:** update renovate/renovate docker tag to v26.16.0 ([b0f82b3](https://github.com/renovatebot/github-action/commit/b0f82b3df6505cead89f5310b13f736ce4557287))
+* **deps:** update renovate/renovate docker tag to v26.17.1 ([8b059dc](https://github.com/renovatebot/github-action/commit/8b059dc33f9617aef1db8d6daba258d04fa3749f))
+* **deps:** update renovate/renovate docker tag to v26.18.1 ([8c36eff](https://github.com/renovatebot/github-action/commit/8c36eff69c75a0c1cf0d78ab573acd048f464567))
+* **deps:** update renovate/renovate docker tag to v26.18.3 ([e6a4a67](https://github.com/renovatebot/github-action/commit/e6a4a6704927941139c5c922f55bbba0fdd40263))
+* **deps:** update renovate/renovate docker tag to v26.19.0 ([3634a17](https://github.com/renovatebot/github-action/commit/3634a17ee3b57df1bf06348c7e026d69e039897a))
+* **deps:** update renovate/renovate docker tag to v26.19.1 ([c4189fb](https://github.com/renovatebot/github-action/commit/c4189fb65128dbf6d18d90f3d45d230bf64f7d98))
+* **deps:** update renovate/renovate docker tag to v26.20.0 ([f5f7a7c](https://github.com/renovatebot/github-action/commit/f5f7a7c98a7753fec6f57fa794a771bf37f6345c))
+* **deps:** update renovate/renovate docker tag to v26.20.2 ([6f71014](https://github.com/renovatebot/github-action/commit/6f71014293afdb3f81b650d9cce2a15ab20f8d56))
+* **deps:** update renovate/renovate docker tag to v26.21.1 ([96b7b26](https://github.com/renovatebot/github-action/commit/96b7b26c4fc0db7c0006a74237c8016dadd206e4))
+* **deps:** update renovate/renovate docker tag to v26.4.3 ([a7d9f11](https://github.com/renovatebot/github-action/commit/a7d9f1121e2ff79d7a4c520f0d3f46f21b528356))
+* **deps:** update renovate/renovate docker tag to v26.4.5 ([265a048](https://github.com/renovatebot/github-action/commit/265a0484f4a36c2dc078b1d1d0ca396bfd6c9fb7))
+* **deps:** update renovate/renovate docker tag to v26.5.1 ([67300be](https://github.com/renovatebot/github-action/commit/67300be6bbed8e33fa273725cf5e67a688db02bd))
+* **deps:** update renovate/renovate docker tag to v26.6.0 ([92e9124](https://github.com/renovatebot/github-action/commit/92e9124957e82705249354e663c20be914156c65))
+* **deps:** update renovate/renovate docker tag to v26.7.0 ([06b0308](https://github.com/renovatebot/github-action/commit/06b0308f8cc54b35f17fa2b343f5a8e6e114e23c))
+* **deps:** update renovate/renovate docker tag to v26.8.0 ([7294f34](https://github.com/renovatebot/github-action/commit/7294f3413cc7a4c5dfef58f4077c779505dc59fc))
+* **deps:** update renovate/renovate docker tag to v26.9.0 ([c5b0d31](https://github.com/renovatebot/github-action/commit/c5b0d31a86596a124702059593ecc5c2ffd33f4e))
+* **deps:** update renovate/renovate docker tag to v26.9.1 ([266c15d](https://github.com/renovatebot/github-action/commit/266c15d57c6028cb357799d4620ad582560de2be))
+* use numeric docker user ([#553](https://github.com/renovatebot/github-action/issues/553)) ([d7c9fe4](https://github.com/renovatebot/github-action/commit/d7c9fe4fd76644e3acba0da8fe63756bac210d94))
+
 ### [26.4.2](https://github.com/renovatebot/github-action/compare/v26.4.1...v26.4.2) (2021-08-22)
 
 
