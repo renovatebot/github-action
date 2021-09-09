@@ -27,7 +27,7 @@ GitHub Action to run Renovate self-hosted.
 
 ## Options
 
-Options can be passed using the inputs of this action or the corresponding environment variables. When both are passed, the input takes precedence over the environment variable. For the available environment variables see the Renovate [Self-Hosted Configuration](https://docs.renovatebot.com/self-hosted-configuration/) and [Self-Hosting](https://docs.renovatebot.com/self-hosting/) docs.
+Options can be passed using the inputs of this action or the corresponding environment variables. When both are passed, the input takes precedence over the environment variable. For the available environment variables see the Renovate [Self-Hosted Configuration](https://docs.renovatebot.com/self-hosted-configuration/) docs.
 
 ## `configurationFile`
 
