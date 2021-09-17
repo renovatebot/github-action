@@ -1923,20 +1923,23 @@ var external_path_default = /*#__PURE__*/__nccwpck_require__.n(external_path_);
 
 
 class Input {
+    options = {
+        envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL)$/,
+        configurationFile: {
+            input: 'configurationFile',
+            env: 'RENOVATE_CONFIG_FILE',
+            optional: true,
+        },
+        token: {
+            input: 'token',
+            env: 'RENOVATE_TOKEN',
+            optional: false,
+        },
+    };
+    token;
+    _environmentVariables;
+    _configurationFile;
     constructor() {
-        this.options = {
-            envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL)$/,
-            configurationFile: {
-                input: 'configurationFile',
-                env: 'RENOVATE_CONFIG_FILE',
-                optional: true,
-            },
-            token: {
-                input: 'token',
-                env: 'RENOVATE_TOKEN',
-                optional: false,
-            },
-        };
         this._environmentVariables = new Map(Object.entries(process.env).filter(([key]) => this.options.envRegex.test(key)));
         this.token = this.get(this.options.token.input, this.options.token.env, this.options.token.optional);
         this._configurationFile = this.get(this.options.configurationFile.input, this.options.configurationFile.env, this.options.configurationFile.optional);
@@ -1984,12 +1987,10 @@ class Input {
 
 ;// CONCATENATED MODULE: ./src/docker.ts
 class Docker {
-    constructor() {
-        this.repository = 'renovate/renovate';
-        // renovate: datasource=docker depName=renovate/renovate versioning=docker
-        this.tag = '27.11.1-slim';
-        this.tagSuffix = '-slim';
-    }
+    repository = 'renovate/renovate';
+    // renovate: datasource=docker depName=renovate/renovate versioning=docker
+    tag = '27.12.0-slim';
+    tagSuffix = '-slim';
     image() {
         return `${this.repository}:${this.tag}`;
     }
@@ -2010,10 +2011,12 @@ var external_fs_default = /*#__PURE__*/__nccwpck_require__.n(external_fs_);
 
 
 class Renovate {
+    input;
+    dockerGroupName = 'docker';
+    configFileMountDir = '/github-action';
+    docker;
     constructor(input) {
         this.input = input;
-        this.dockerGroupName = 'docker';
-        this.configFileMountDir = '/github-action';
         this.validateArguments();
         this.docker = new docker();
     }
