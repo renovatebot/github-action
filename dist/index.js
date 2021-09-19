@@ -1989,7 +1989,7 @@ class Input {
 class Docker {
     repository = 'renovate/renovate';
     // renovate: datasource=docker depName=renovate/renovate versioning=docker
-    tag = '27.13.0-slim';
+    tag = '27.14.0-slim';
     tagSuffix = '-slim';
     image() {
         return `${this.repository}:${this.tag}`;
