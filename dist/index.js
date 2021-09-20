@@ -1767,6 +1767,249 @@ function copyFile(srcFile, destFile, force) {
 
 /***/ }),
 
+/***/ 512:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+class Docker {
+    constructor() {
+        this.repository = 'renovate/renovate';
+        // renovate: datasource=docker depName=renovate/renovate versioning=docker
+        this.tag = '27.14.1-slim';
+        this.tagSuffix = '-slim';
+    }
+    image() {
+        return `${this.repository}:${this.tag}`;
+    }
+    version() {
+        return this.tag.replace(this.tagSuffix, '');
+    }
+}
+exports.default = Docker;
+
+
+/***/ }),
+
+/***/ 144:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core = __importStar(__nccwpck_require__(186));
+const input_1 = __importDefault(__nccwpck_require__(461));
+const renovate_1 = __importDefault(__nccwpck_require__(932));
+async function run() {
+    try {
+        const input = new input_1.default();
+        const renovate = new renovate_1.default(input);
+        await renovate.runDockerContainer();
+    }
+    catch (error) {
+        console.error(error);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        core.setFailed(error.message);
+    }
+}
+void run();
+
+
+/***/ }),
+
+/***/ 461:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Input = void 0;
+const core = __importStar(__nccwpck_require__(186));
+const path_1 = __importDefault(__nccwpck_require__(622));
+class Input {
+    constructor() {
+        this.options = {
+            envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL)$/,
+            configurationFile: {
+                input: 'configurationFile',
+                env: 'RENOVATE_CONFIG_FILE',
+                optional: true,
+            },
+            token: {
+                input: 'token',
+                env: 'RENOVATE_TOKEN',
+                optional: false,
+            },
+        };
+        this._environmentVariables = new Map(Object.entries(process.env).filter(([key]) => this.options.envRegex.test(key)));
+        this.token = this.get(this.options.token.input, this.options.token.env, this.options.token.optional);
+        this._configurationFile = this.get(this.options.configurationFile.input, this.options.configurationFile.env, this.options.configurationFile.optional);
+    }
+    configurationFile() {
+        if (this._configurationFile.value !== '') {
+            return {
+                key: this._configurationFile.key,
+                value: path_1.default.resolve(this._configurationFile.value),
+            };
+        }
+        return null;
+    }
+    /**
+     * Convert to environment variables.
+     *
+     * @note The environment variables listed below are filtered out.
+     * - Token, available with the `token` property.
+     * - Configuration file, available with the `configurationFile()` method.
+     */
+    toEnvironmentVariables() {
+        return [...this._environmentVariables].map(([key, value]) => ({
+            key,
+            value,
+        }));
+    }
+    get(input, env, optional) {
+        const fromInput = core.getInput(input);
+        const fromEnv = this._environmentVariables.get(env);
+        if (fromInput === '' && fromEnv === undefined && !optional) {
+            throw new Error([
+                `'${input}' MUST be passed using its input or the '${env}'`,
+                'environment variable',
+            ].join(' '));
+        }
+        this._environmentVariables.delete(env);
+        if (fromInput !== '') {
+            return { key: env, value: fromInput };
+        }
+        return { key: env, value: fromEnv !== undefined ? fromEnv : '' };
+    }
+}
+exports.Input = Input;
+exports.default = Input;
+
+
+/***/ }),
+
+/***/ 932:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const docker_1 = __importDefault(__nccwpck_require__(512));
+const exec_1 = __nccwpck_require__(514);
+const fs_1 = __importDefault(__nccwpck_require__(747));
+const path_1 = __importDefault(__nccwpck_require__(622));
+class Renovate {
+    constructor(input) {
+        this.input = input;
+        this.dockerGroupName = 'docker';
+        this.configFileMountDir = '/github-action';
+        this.validateArguments();
+        this.docker = new docker_1.default();
+    }
+    async runDockerContainer() {
+        const renovateDockerUser = '1000';
+        const dockerArguments = this.input
+            .toEnvironmentVariables()
+            .map((e) => `--env ${e.key}`)
+            .concat([`--env ${this.input.token.key}=${this.input.token.value}`]);
+        if (this.input.configurationFile() !== null) {
+            const baseName = path_1.default.basename(this.input.configurationFile().value);
+            const mountPath = path_1.default.join(this.configFileMountDir, baseName);
+            dockerArguments.push(`--env ${this.input.configurationFile().key}=${mountPath}`, `--volume ${this.input.configurationFile().value}:${mountPath}`);
+        }
+        dockerArguments.push('--volume /var/run/docker.sock:/var/run/docker.sock', '--volume /tmp:/tmp', `--user ${renovateDockerUser}:${this.getDockerGroupId()}`, '--rm', this.docker.image());
+        const command = `docker run ${dockerArguments.join(' ')}`;
+        const code = await (0, exec_1.exec)(command);
+        if (code !== 0) {
+            new Error(`'docker run' failed with exit code ${code}.`);
+        }
+    }
+    /**
+     * Fetch the host docker group of the GitHub Action runner.
+     *
+     * The Renovate container needs access to this group in order to have the
+     * required permissions on the Docker socket.
+     */
+    getDockerGroupId() {
+        const groupFile = '/etc/group';
+        const groups = fs_1.default.readFileSync(groupFile, {
+            encoding: 'utf-8',
+        });
+        /**
+         * The group file has `groupname:group-password:GID:username-list` as
+         * structure and we're interested in the `GID` (the group ID).
+         *
+         * Source: https://www.thegeekdiary.com/etcgroup-file-explained/
+         */
+        const re = new RegExp(`^${this.dockerGroupName}:x:([1-9][0-9]*):`, 'm');
+        const match = re.exec(groups);
+        if (!match || match.length < 2) {
+            throw new Error(`Could not find group '${this.dockerGroupName}' in ${groupFile}`);
+        }
+        return match[1];
+    }
+    validateArguments() {
+        if (/\s/.test(this.input.token.value)) {
+            throw new Error('Token MUST NOT contain whitespace');
+        }
+        const configurationFile = this.input.configurationFile();
+        if (configurationFile !== null &&
+            (!fs_1.default.existsSync(configurationFile.value) ||
+                !fs_1.default.statSync(configurationFile.value).isFile())) {
+            throw new Error(`configuration file '${configurationFile.value}' MUST be an existing file`);
+        }
+    }
+}
+exports.default = Renovate;
+
+
+/***/ }),
+
 /***/ 357:
 /***/ ((module) => {
 
@@ -1863,239 +2106,17 @@ module.exports = require("util");
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__nccwpck_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__nccwpck_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__nccwpck_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__nccwpck_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
-// ESM COMPAT FLAG
-__nccwpck_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __nccwpck_require__(186);
-// EXTERNAL MODULE: external "path"
-var external_path_ = __nccwpck_require__(622);
-var external_path_default = /*#__PURE__*/__nccwpck_require__.n(external_path_);
-;// CONCATENATED MODULE: ./src/input.ts
-
-
-class Input {
-    options = {
-        envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL)$/,
-        configurationFile: {
-            input: 'configurationFile',
-            env: 'RENOVATE_CONFIG_FILE',
-            optional: true,
-        },
-        token: {
-            input: 'token',
-            env: 'RENOVATE_TOKEN',
-            optional: false,
-        },
-    };
-    token;
-    _environmentVariables;
-    _configurationFile;
-    constructor() {
-        this._environmentVariables = new Map(Object.entries(process.env).filter(([key]) => this.options.envRegex.test(key)));
-        this.token = this.get(this.options.token.input, this.options.token.env, this.options.token.optional);
-        this._configurationFile = this.get(this.options.configurationFile.input, this.options.configurationFile.env, this.options.configurationFile.optional);
-    }
-    configurationFile() {
-        if (this._configurationFile.value !== '') {
-            return {
-                key: this._configurationFile.key,
-                value: external_path_default().resolve(this._configurationFile.value),
-            };
-        }
-        return null;
-    }
-    /**
-     * Convert to environment variables.
-     *
-     * @note The environment variables listed below are filtered out.
-     * - Token, available with the `token` property.
-     * - Configuration file, available with the `configurationFile()` method.
-     */
-    toEnvironmentVariables() {
-        return [...this._environmentVariables].map(([key, value]) => ({
-            key,
-            value,
-        }));
-    }
-    get(input, env, optional) {
-        const fromInput = core.getInput(input);
-        const fromEnv = this._environmentVariables.get(env);
-        if (fromInput === '' && fromEnv === undefined && !optional) {
-            throw new Error([
-                `'${input}' MUST be passed using its input or the '${env}'`,
-                'environment variable',
-            ].join(' '));
-        }
-        this._environmentVariables.delete(env);
-        if (fromInput !== '') {
-            return { key: env, value: fromInput };
-        }
-        return { key: env, value: fromEnv !== undefined ? fromEnv : '' };
-    }
-}
-/* harmony default export */ const src_input = (Input);
-
-
-;// CONCATENATED MODULE: ./src/docker.ts
-class Docker {
-    repository = 'renovate/renovate';
-    // renovate: datasource=docker depName=renovate/renovate versioning=docker
-    tag = '27.14.0-slim';
-    tagSuffix = '-slim';
-    image() {
-        return `${this.repository}:${this.tag}`;
-    }
-    version() {
-        return this.tag.replace(this.tagSuffix, '');
-    }
-}
-/* harmony default export */ const docker = (Docker);
-
-// EXTERNAL MODULE: ./node_modules/@actions/exec/lib/exec.js
-var exec = __nccwpck_require__(514);
-// EXTERNAL MODULE: external "fs"
-var external_fs_ = __nccwpck_require__(747);
-var external_fs_default = /*#__PURE__*/__nccwpck_require__.n(external_fs_);
-;// CONCATENATED MODULE: ./src/renovate.ts
-
-
-
-
-class Renovate {
-    input;
-    dockerGroupName = 'docker';
-    configFileMountDir = '/github-action';
-    docker;
-    constructor(input) {
-        this.input = input;
-        this.validateArguments();
-        this.docker = new docker();
-    }
-    async runDockerContainer() {
-        const renovateDockerUser = '1000';
-        const dockerArguments = this.input
-            .toEnvironmentVariables()
-            .map((e) => `--env ${e.key}`)
-            .concat([`--env ${this.input.token.key}=${this.input.token.value}`]);
-        if (this.input.configurationFile() !== null) {
-            const baseName = external_path_default().basename(this.input.configurationFile().value);
-            const mountPath = external_path_default().join(this.configFileMountDir, baseName);
-            dockerArguments.push(`--env ${this.input.configurationFile().key}=${mountPath}`, `--volume ${this.input.configurationFile().value}:${mountPath}`);
-        }
-        dockerArguments.push('--volume /var/run/docker.sock:/var/run/docker.sock', '--volume /tmp:/tmp', `--user ${renovateDockerUser}:${this.getDockerGroupId()}`, '--rm', this.docker.image());
-        const command = `docker run ${dockerArguments.join(' ')}`;
-        const code = await (0,exec.exec)(command);
-        if (code !== 0) {
-            new Error(`'docker run' failed with exit code ${code}.`);
-        }
-    }
-    /**
-     * Fetch the host docker group of the GitHub Action runner.
-     *
-     * The Renovate container needs access to this group in order to have the
-     * required permissions on the Docker socket.
-     */
-    getDockerGroupId() {
-        const groupFile = '/etc/group';
-        const groups = external_fs_default().readFileSync(groupFile, {
-            encoding: 'utf-8',
-        });
-        /**
-         * The group file has `groupname:group-password:GID:username-list` as
-         * structure and we're interested in the `GID` (the group ID).
-         *
-         * Source: https://www.thegeekdiary.com/etcgroup-file-explained/
-         */
-        const re = new RegExp(`^${this.dockerGroupName}:x:([1-9][0-9]*):`, 'm');
-        const match = re.exec(groups);
-        if (!match || match.length < 2) {
-            throw new Error(`Could not find group '${this.dockerGroupName}' in ${groupFile}`);
-        }
-        return match[1];
-    }
-    validateArguments() {
-        if (/\s/.test(this.input.token.value)) {
-            throw new Error('Token MUST NOT contain whitespace');
-        }
-        const configurationFile = this.input.configurationFile();
-        if (configurationFile !== null &&
-            (!external_fs_default().existsSync(configurationFile.value) ||
-                !external_fs_default().statSync(configurationFile.value).isFile())) {
-            throw new Error(`configuration file '${configurationFile.value}' MUST be an existing file`);
-        }
-    }
-}
-/* harmony default export */ const src_renovate = (Renovate);
-
-;// CONCATENATED MODULE: ./src/index.ts
-
-
-
-async function run() {
-    try {
-        const input = new src_input();
-        const renovate = new src_renovate(input);
-        await renovate.runDockerContainer();
-    }
-    catch (error) {
-        console.error(error);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        core.setFailed(error.message);
-    }
-}
-void run();
-
-})();
-
-module.exports = __webpack_exports__;
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __nccwpck_require__(144);
+/******/ 	module.exports = __webpack_exports__;
+/******/ 	
 /******/ })()
 ;
