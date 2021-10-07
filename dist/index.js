@@ -2832,7 +2832,7 @@ class Docker {
     constructor() {
         this.repository = 'renovate/renovate';
         // renovate: datasource=docker depName=renovate/renovate versioning=docker
-        this.tag = '27.28.1-slim';
+        this.tag = '27.30.0-slim';
         this.tagSuffix = '-slim';
     }
     image() {
@@ -2929,7 +2929,7 @@ const path_1 = __importDefault(__nccwpck_require__(622));
 class Input {
     constructor() {
         this.options = {
-            envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL)$/,
+            envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN)$/,
             configurationFile: {
                 input: 'configurationFile',
                 env: 'RENOVATE_CONFIG_FILE',
