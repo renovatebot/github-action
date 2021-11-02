@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # renovate: tag=v2.3.5
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
         with:
           fetch-depth: 0
       - name: Lint commit messages
@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # renovate: tag=v2.3.5
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
       - name: Setup node
         uses: actions/setup-node@270253e841af726300e85d718a5f606959b2903c # renovate: tag=v2.4.1
         with:
@@ -50,7 +50,7 @@ jobs:
         configurationFile: [example/renovate-config.js, example/renovate.json]
     steps:
       - name: Checkout
-        uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # renovate: tag=v2.3.5
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
 
       - name: Install project
         run: yarn install --frozen-lockfile
@@ -90,7 +90,7 @@ jobs:
       && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
-        uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # renovate: tag=v2.3.5
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
         with:
           fetch-depth: 0
           ref: 'release'
