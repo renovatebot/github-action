@@ -30,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
       - name: Setup node
-        uses: actions/setup-node@270253e841af726300e85d718a5f606959b2903c # renovate: tag=v2.4.1
+        uses: actions/setup-node@04c56d2f954f1e4c69436aa54cfef261a018f458 # renovate: tag=v2.5.0
         with:
           node-version: '12.x'
           cache: 'yarn'
@@ -104,7 +104,7 @@ jobs:
         run: |
           git merge -m 'chore(release): merge main (${{ github.sha }})' ${{ github.sha }}
       - name: Setup node
-        uses: actions/setup-node@270253e841af726300e85d718a5f606959b2903c # renovate: tag=v2.4.1
+        uses: actions/setup-node@04c56d2f954f1e4c69436aa54cfef261a018f458 # renovate: tag=v2.5.0
         with:
           node-version: '12.x'
       - name: Install project
