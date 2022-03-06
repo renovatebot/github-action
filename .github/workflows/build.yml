@@ -3,6 +3,7 @@ name: Build
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -32,7 +33,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@9ced9a43a244f3ac94f13bfd896db8c8f30da67a # tag=v3.0.0
         with:
-          node-version: '12.x'
+          node-version: '16.x'
           cache: 'yarn'
 
       - name: Install project
@@ -85,8 +86,11 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     if: |
-      startsWith(github.event.commits[0].message,
-          'fix(deps): update renovate/renovate docker tag ')
+      (
+        startsWith(github.event.commits[0].message, 'fix(deps): update renovate/renovate docker tag ')
+        || startsWith(github.event.commits[0].message, 'fix(deps): update dependency renovate/renovate ')
+        || github.event_name == 'workflow_dispatch'
+      )
       && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
@@ -106,7 +110,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@9ced9a43a244f3ac94f13bfd896db8c8f30da67a # tag=v3.0.0
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       - name: Install project
         run: yarn install --frozen-lockfile --ignore-scripts
       - name: Get version
