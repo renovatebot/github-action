@@ -4,6 +4,10 @@
   "description": "GitHub Action to run Renovate self-hosted.",
   "private": true,
   "main": "src/index.ts",
+  "engines": {
+    "node": " >=16.0.0",
+    "yarn": ">=1.22.0"
+  },
   "scripts": {
     "format": "prettier --ignore-unknown --write \"**/*.*\"",
     "format:file": "prettier --write",
@@ -17,7 +21,7 @@
     "release:commit": "git add --force dist",
     "release:standard-version": "standard-version --release-as",
     "release": "run-s build release:commit \"release:standard-version -- {1}\" --",
-    "build": "ncc build -o dist",
+    "build": "ncc build -o dist --target es2021",
     "start": "run-s build && node dist",
     "prepare": "husky install"
   },
