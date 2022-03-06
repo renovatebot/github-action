@@ -32,7 +32,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@9ced9a43a244f3ac94f13bfd896db8c8f30da67a # tag=v3.0.0
         with:
-          node-version: '12.x'
+          node-version: '16.x'
           cache: 'yarn'
 
       - name: Install project
@@ -106,7 +106,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@9ced9a43a244f3ac94f13bfd896db8c8f30da67a # tag=v3.0.0
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       - name: Install project
         run: yarn install --frozen-lockfile --ignore-scripts
       - name: Get version
