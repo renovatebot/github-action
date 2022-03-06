@@ -3,6 +3,7 @@ name: Build
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -85,8 +86,11 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     if: |
-      startsWith(github.event.commits[0].message,
-          'fix(deps): update renovate/renovate docker tag ')
+      (
+        startsWith(github.event.commits[0].message, 'fix(deps): update renovate/renovate docker tag ')
+        || startsWith(github.event.commits[0].message, 'fix(deps): update dependency renovate/renovate ')
+        || github.event_name == 'workflow_dispatch'
+      )
       && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
