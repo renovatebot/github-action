@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [32.0.1](https://github.com/renovatebot/github-action/compare/v31.81.3...v32.0.1) (2022-03-06)
+
+
+### Features
+
+* migrate to node v16 ([#611](https://github.com/renovatebot/github-action/issues/611)) ([825caf3](https://github.com/renovatebot/github-action/commit/825caf3e3b63ce4b203f39dafa130e3a2c8b7c90))
+
+
+### Bug Fixes
+
+* **deps:** update dependency renovate/renovate to v31.81.5 ([b0fe268](https://github.com/renovatebot/github-action/commit/b0fe26865651233480e3d4d1c30c7e7cbe8023e9))
+* **deps:** update dependency renovate/renovate to v31.81.7 ([e7152c1](https://github.com/renovatebot/github-action/commit/e7152c19a1a6bb64ffc325cd4da35c36c5719581))
+* **deps:** update dependency renovate/renovate to v31.82.1 ([d30051a](https://github.com/renovatebot/github-action/commit/d30051a625274fc6f8e3fa3a8c1244ece02d31b7))
+* **deps:** update dependency renovate/renovate to v31.84.0 ([4d75df0](https://github.com/renovatebot/github-action/commit/4d75df0fd3fa8271d379ca5d8e74e64406149e78))
+* **deps:** update dependency renovate/renovate to v31.84.2 ([a5ec67f](https://github.com/renovatebot/github-action/commit/a5ec67fb85c954bb0cdee89c63a194bb19d911ce))
+* **deps:** update dependency renovate/renovate to v31.84.3 ([91d84af](https://github.com/renovatebot/github-action/commit/91d84af8dac2ff94b75405275fc136ed5c55e06e))
+* **deps:** update dependency renovate/renovate to v31.86.0 ([1061ce6](https://github.com/renovatebot/github-action/commit/1061ce66f20f482aa1d7cc4d8d470f24867c19fe))
+* **deps:** update dependency renovate/renovate to v31.86.1 ([e7a587d](https://github.com/renovatebot/github-action/commit/e7a587dab65aad5566e7c088756271b43b160ab2))
+* **deps:** update dependency renovate/renovate to v31.89.0 ([149c094](https://github.com/renovatebot/github-action/commit/149c09469d3e3ff6862075349bc3af5b3dc6fc96))
+* **deps:** update dependency renovate/renovate to v31.89.1 ([f7af25b](https://github.com/renovatebot/github-action/commit/f7af25b1896f35f304f1ce6f6ea0cca7232ff32b))
+* **deps:** update dependency renovate/renovate to v31.89.10 ([8699498](https://github.com/renovatebot/github-action/commit/86994988c8f755e2158909e97cbad6f1fcfd59e8))
+* **deps:** update dependency renovate/renovate to v31.89.12 ([6b551d9](https://github.com/renovatebot/github-action/commit/6b551d9179b2fb44991cd5d57188c73f4dc8e223))
+* **deps:** update dependency renovate/renovate to v31.89.2 ([e634d4a](https://github.com/renovatebot/github-action/commit/e634d4ad087eab9a051b16a6b515ea1855a64e79))
+* **deps:** update dependency renovate/renovate to v31.89.3 ([d0922b4](https://github.com/renovatebot/github-action/commit/d0922b4958e6fb09faa38fb11fd3159abd808b45))
+* **deps:** update dependency renovate/renovate to v31.89.4 ([a2c70c1](https://github.com/renovatebot/github-action/commit/a2c70c19a8bc847ac8df05b4ac9342605949132e))
+* **deps:** update dependency renovate/renovate to v31.89.5 ([c3bedb9](https://github.com/renovatebot/github-action/commit/c3bedb9f8496a0d7daf85122c33ad321af831a97))
+* **deps:** update dependency renovate/renovate to v31.89.6 ([bdcdfa4](https://github.com/renovatebot/github-action/commit/bdcdfa477b880248c54a4ec10356d3db066e7404))
+* **deps:** update dependency renovate/renovate to v31.89.8 ([017bde9](https://github.com/renovatebot/github-action/commit/017bde917f1e8f71ce98fba6b24efb4ba2aedda5))
+* **deps:** update dependency renovate/renovate to v31.89.9 ([c1bc64e](https://github.com/renovatebot/github-action/commit/c1bc64ed47f9cfa2adc2e5e45214545c837650b9))
+* **deps:** update dependency renovate/renovate to v31.90.1 ([7baac9d](https://github.com/renovatebot/github-action/commit/7baac9da4048fb7db56f59a3ff4b88212a843e86))
+* **deps:** update dependency renovate/renovate to v31.91.0 ([7c54599](https://github.com/renovatebot/github-action/commit/7c545991d3aa29d8cc95b39831b4b85efb79d346))
+* **deps:** update dependency renovate/renovate to v31.92.0 ([bfe99be](https://github.com/renovatebot/github-action/commit/bfe99be986138f32394b52fbde7d4996746c4109))
+* **deps:** update dependency renovate/renovate to v31.94.0 ([ed02230](https://github.com/renovatebot/github-action/commit/ed02230800f5801b52932361d1bc3c05c123c64f))
+* **deps:** update dependency renovate/renovate to v31.95.1 ([f775065](https://github.com/renovatebot/github-action/commit/f77506528625c91f84334396765e12d4f73ef6a2))
+* **deps:** update dependency renovate/renovate to v31.96.0 ([2660dbc](https://github.com/renovatebot/github-action/commit/2660dbc0cd0ca5135bf1cc61b0525db566968639))
+* **deps:** update dependency renovate/renovate to v31.96.2 ([5fd5c12](https://github.com/renovatebot/github-action/commit/5fd5c1240dff2ce9b938e7d3cc985a85a3ba71b2))
+* **deps:** update dependency renovate/renovate to v31.97.0 ([0230dda](https://github.com/renovatebot/github-action/commit/0230ddabb38ecd9a7b4ca5a0499b0a663a51c6f2))
+* **deps:** update dependency renovate/renovate to v31.97.1 ([562a8bd](https://github.com/renovatebot/github-action/commit/562a8bd1a325c22f03705a198fdeb4bae5fa89dd))
+* **deps:** update dependency renovate/renovate to v31.97.3 ([3eaedc5](https://github.com/renovatebot/github-action/commit/3eaedc501163edbb6c99268c7fc31aeab9e290b6))
+* **deps:** update dependency renovate/renovate to v32 ([#604](https://github.com/renovatebot/github-action/issues/604)) ([ec397c4](https://github.com/renovatebot/github-action/commit/ec397c49706037c698821622f9de3c33f3ede7d3))
+
 ### [31.81.3](https://github.com/renovatebot/github-action/compare/v31.81.2...v31.81.3) (2022-02-14)
 
 
