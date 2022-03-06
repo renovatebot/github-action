@@ -3,6 +3,7 @@ name: Build
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -15,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # tag=v3.0.0
         with:
           fetch-depth: 0
       - name: Lint commit messages
@@ -28,11 +29,11 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # tag=v3.0.0
       - name: Setup node
-        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # renovate: tag=v2.5.1
+        uses: actions/setup-node@9ced9a43a244f3ac94f13bfd896db8c8f30da67a # tag=v3.0.0
         with:
-          node-version: '12.x'
+          node-version: '16.x'
           cache: 'yarn'
 
       - name: Install project
@@ -50,7 +51,7 @@ jobs:
         configurationFile: [example/renovate-config.js, example/renovate.json]
     steps:
       - name: Checkout
-        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # tag=v3.0.0
 
       - name: Install project
         run: yarn install --frozen-lockfile
@@ -85,12 +86,15 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     if: |
-      startsWith(github.event.commits[0].message,
-          'fix(deps): update renovate/renovate docker tag ')
+      (
+        startsWith(github.event.commits[0].message, 'fix(deps): update renovate/renovate docker tag ')
+        || startsWith(github.event.commits[0].message, 'fix(deps): update dependency renovate/renovate ')
+        || github.event_name == 'workflow_dispatch'
+      )
       && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
-        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
+        uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # tag=v3.0.0
         with:
           fetch-depth: 0
           ref: 'release'
@@ -104,9 +108,9 @@ jobs:
         run: |
           git merge -m 'chore(release): merge main (${{ github.sha }})' ${{ github.sha }}
       - name: Setup node
-        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # renovate: tag=v2.5.1
+        uses: actions/setup-node@9ced9a43a244f3ac94f13bfd896db8c8f30da67a # tag=v3.0.0
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       - name: Install project
         run: yarn install --frozen-lockfile --ignore-scripts
       - name: Get version

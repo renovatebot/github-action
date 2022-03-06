@@ -4,6 +4,10 @@
   "description": "GitHub Action to run Renovate self-hosted.",
   "private": true,
   "main": "src/index.ts",
+  "engines": {
+    "node": " >=16.0.0",
+    "yarn": ">=1.22.0"
+  },
   "scripts": {
     "format": "prettier --ignore-unknown --write \"**/*.*\"",
     "format:file": "prettier --write",
@@ -17,7 +21,7 @@
     "release:commit": "git add --force dist",
     "release:standard-version": "standard-version --release-as",
     "release": "run-s build release:commit \"release:standard-version -- {1}\" --",
-    "build": "ncc build -o dist",
+    "build": "ncc build -o dist --target es2021",
     "start": "run-s build && node dist",
     "prepare": "husky install"
   },
@@ -36,21 +40,21 @@
     "@actions/exec": "1.1.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "13.2.1",
-    "@commitlint/config-conventional": "13.2.0",
+    "@commitlint/cli": "16.2.1",
+    "@commitlint/config-conventional": "16.2.1",
     "@types/node": "13.13.52",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
-    "@vercel/ncc": "0.33.1",
+    "@vercel/ncc": "0.33.3",
     "eslint": "7.32.0",
-    "eslint-config-prettier": "8.3.0",
+    "eslint-config-prettier": "8.4.0",
     "eslint-plugin-json": "3.1.0",
     "husky": "7.0.4",
-    "lint-staged": "11.2.6",
+    "lint-staged": "12.3.4",
     "npm-run-all": "4.1.5",
     "prettier": "2.5.1",
     "standard-version": "9.3.2",
-    "ts-node": "10.4.0",
+    "ts-node": "10.5.0",
     "typescript": "4.5.5"
   }
 }
