@@ -2832,7 +2832,7 @@ class Docker {
     constructor() {
         this.repository = 'renovate/renovate';
         // renovate: datasource=docker depName=renovate/renovate versioning=docker
-        this.tag = '32.0.1-slim';
+        this.tag = '32.0.2-slim';
         this.tagSuffix = '-slim';
     }
     image() {
@@ -2886,8 +2886,7 @@ async function run() {
     }
     catch (error) {
         console.error(error);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        core.setFailed(error.message);
+        core.setFailed(error);
     }
 }
 void run();
