@@ -10,8 +10,7 @@ async function run(): Promise<void> {
     await renovate.runDockerContainer();
   } catch (error) {
     console.error(error);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    core.setFailed(error.message);
+    core.setFailed(error as Error);
   }
 }
 
