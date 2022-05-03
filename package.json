@@ -36,15 +36,15 @@
   },
   "homepage": "https://github.com/renovatebot/github-action#readme",
   "dependencies": {
-    "@actions/core": "1.6.0",
+    "@actions/core": "1.7.0",
     "@actions/exec": "1.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
-    "@types/node": "16.11.27",
-    "@typescript-eslint/eslint-plugin": "5.20.0",
-    "@typescript-eslint/parser": "5.20.0",
+    "@types/node": "16.11.29",
+    "@typescript-eslint/eslint-plugin": "5.21.0",
+    "@typescript-eslint/parser": "5.21.0",
     "@vercel/ncc": "0.33.4",
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
