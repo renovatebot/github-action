@@ -6,7 +6,7 @@
   "main": "src/index.ts",
   "engines": {
     "node": " >=16.0.0",
-    "yarn": ">=1.22.0"
+    "yarn": "^1.22.0"
   },
   "scripts": {
     "format": "prettier --ignore-unknown --write \"**/*.*\"",
