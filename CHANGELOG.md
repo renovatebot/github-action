@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [32.102.2](https://github.com/renovatebot/github-action/compare/v32.100.4...v32.102.2) (2022-07-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency renovate/renovate to v32.102.2 ([0dcf445](https://github.com/renovatebot/github-action/commit/0dcf445e419252b37d365a7c83cd013b2085f240))
+
 ### [32.100.4](https://github.com/renovatebot/github-action/compare/v32.100.3...v32.100.4) (2022-07-01)
 
 
