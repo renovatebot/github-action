@@ -1,17 +1,30 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>renovatebot/.github", ":pinDependencies"],
+  "extends": [
+    "github>renovatebot/.github",
+    ":pinDependencies"
+  ],
   "packageRules": [
     {
       "description": "Automerge Renovate updates",
-      "packageNames": ["renovate/renovate"],
-      "updateTypes": ["major", "minor", "patch"],
-      "semanticCommitType": "fix"
+      "semanticCommitType": "fix",
+      "matchPackageNames": [
+        "renovate/renovate"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ]
     },
     {
       "description": "Update references in markdown files weekly",
-      "matchPaths": [".md"],
-      "extends": ["schedule:weekly"],
+      "matchPaths": [
+        ".md"
+      ],
+      "extends": [
+        "schedule:weekly"
+      ],
       "automerge": true,
       "stabilityDays": 0,
       "separateMajorMinor": false,
@@ -23,14 +36,18 @@
   ],
   "regexManagers": [
     {
-      "fileMatch": ["^src/docker\\.ts$"],
+      "fileMatch": [
+        "^src/docker\\.ts$"
+      ],
       "matchStrings": [
         "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s+readonly\\s+tag\\s+=\\s+'(?<currentValue>.+?)';"
       ],
       "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
     },
     {
-      "fileMatch": ["^README\\.md$"],
+      "fileMatch": [
+        "^README\\.md$"
+      ],
       "matchStrings": [
         "uses: renovatebot/github-action@(?<currentValue>[^\\s]+)"
       ],
