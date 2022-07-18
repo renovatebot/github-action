@@ -76,7 +76,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.0.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v32.0.1
+        uses: renovatebot/github-action@v32.118.0
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -124,7 +124,7 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v32.0.1
+        uses: renovatebot/github-action@v32.118.0
         with:
           configurationFile: example/renovate-config.js
           token: 'x-access-token:${{ steps.get_token.outputs.app_token }}'
@@ -139,7 +139,7 @@ To enable debug logging, add the environment variable `LOG_LEVEL: 'debug'` to th
 
 ```yml
 - name: Self-hosted Renovate
-  uses: renovatebot/github-action@v32.0.1
+  uses: renovatebot/github-action@v32.118.0
   with:
     configurationFile: example/renovate-config.js
     token: ${{ secrets.RENOVATE_TOKEN }}
