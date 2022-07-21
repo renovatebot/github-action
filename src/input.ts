@@ -55,6 +55,10 @@ class Input {
     return null;
   }
 
+  useSlim(): boolean {
+      return core.getInput(`useSlim`) !== 'false';
+  }
+
   /**
    * Convert to environment variables.
    *

@@ -13,7 +13,7 @@ class Renovate {
   constructor(private input: Input) {
     this.validateArguments();
 
-    this.docker = new Docker();
+    this.docker = new Docker(input);
   }
 
   async runDockerContainer(): Promise<void> {
