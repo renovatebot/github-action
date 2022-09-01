@@ -126,6 +126,10 @@ jobs:
               | sed -e 's/^\+//' \
               | sed -z 's/\n/%0A/g;s/\r/%0D/g')"
           echo "::set-output name=changelog::${changelog}"
+      - name: Add major version tag
+        run: |
+          MAJOR_VERSION=$(echo "v${{ steps.release.outputs.version }}" | | cut -d . -f 1)
+          git tag "${MAJOR_VERSION}"
       - name: Publish release
         run: git push --follow-tags
       - name: Publish GitHub release
