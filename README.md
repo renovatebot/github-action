@@ -11,6 +11,7 @@ GitHub Action to run Renovate self-hosted.
   - [`configurationFile`](#configurationfile)
   - [`token`](#token)
 - [Example](#example)
+- [Environment Variables](#environment-variables)
 - [Troubleshooting](#troubleshooting)
   - [Debug Logging](#debug-logging)
   - [Special token requirements when using the `github-actions` manager](#special-token-requirements-when-using-the-github-actions-manager)
@@ -82,7 +83,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
-## Example with GitHub App
+### Example with GitHub App
 
 Instead of using a Personal Access Token (PAT) that is tied to a particular user you can use a [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps) where permissions can be even better tuned. [Create a new app](https://docs.github.com/en/developers/apps/creating-a-github-app) and give it the following permissions:
 
@@ -128,6 +129,44 @@ jobs:
         with:
           configurationFile: example/renovate-config.js
           token: 'x-access-token:${{ steps.get_token.outputs.app_token }}'
+```
+
+## Environment Variables
+
+If you wish to pass through environment variables through to the Docker Run that powers this action you need to prefix the environment variable with `RENOVATE_`. 
+
+For example if you wish to pass through some credentials for a [host rule](https://docs.renovatebot.com/configuration-options/#hostrules) to the `config.js` then you should do so like this.
+
+1. In your workflow pass in the environment variable
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v32.118.0
+        with:
+          configurationFile: example/renovate-config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          RENOVATE_TFE_TOKEN: ${{ secrets.MY_TFE_TOKEN }}
+```
+
+2. In `example/renovate-config.js` include the hostRules block 
+```js
+
+module.exports = {
+  hostRules: [
+  {
+      hostType: 'terraform-module',
+      matchHost: 'app.terraform.io',
+      token: proccess.env.RENOVATE_TFE_TOKEN
+    }
+  ]
+ };
 ```
 
 ## Troubleshooting
