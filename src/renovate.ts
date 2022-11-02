@@ -17,7 +17,7 @@ class Renovate {
   }
 
   async runDockerContainer(): Promise<void> {
-    const renovateDockerUser = '1000';
+    const renovateDockerUser = '1001';
 
     const dockerArguments = this.input
       .toEnvironmentVariables()
