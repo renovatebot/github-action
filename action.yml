@@ -1,4 +1,4 @@
-name: 'Self-Hosted Renovate'
+name: 'Renovate Bot'
 description: 'GitHub Action to run self-hosted Renovate.'
 author: 'Jeroen de Bruijn'
 branding:
