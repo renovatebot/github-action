@@ -1,22 +1,26 @@
 name: Update Main Version
-run-name: Move ${{ github.event.inputs.main_version }} to ${{ github.event.inputs.target }}
 
 on:
-  workflow_dispatch:
-    inputs:
-      target:
-        description: The tag or reference to use
-        required: true
-      main_version:
-        type: choice
-        description: The main version to update
-        options:
-          - v34
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   tag:
     runs-on: ubuntu-latest
     steps:
+    - uses: nowsprinting/check-version-format-action@v3
+      id: version
+      with:
+        prefix: 'v'
+
+    - name: Version tag only step
+      run: |
+        echo "Found valid version format in tag!"
+        echo "Full version: ${{ steps.version.outputs.full }}"
+        echo "Major version: ${{ steps.version.outputs.major }}"
+        echo "Major with pre-release: ${{ steps.version.outputs.major_prerelease }}"
+      if: steps.version.outputs.is_valid == 'true'
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -25,6 +29,6 @@ jobs:
         git config user.name github-actions
         git config user.email github-actions@github.com
     - name: Tag new target
-      run: git tag -f ${{ github.event.inputs.main_version }} ${{ github.event.inputs.target }}
+      run: git tag -f ${{ steps.version.outputs.major }} ${{ github.ref_name }}
     - name: Push new tag
-      run: git push origin ${{ github.event.inputs.main_version }} --force
+      run: git push origin ${{ steps.version.outputs.major }} --force
