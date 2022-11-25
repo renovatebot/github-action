@@ -84,19 +84,15 @@ jobs:
 
 ## Example with GitHub App
 
-Instead of using a Personal Access Token (PAT) that is tied to a particular user you can use a [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps) where permissions can be even better tuned. [Create a new app](https://docs.github.com/en/developers/apps/creating-a-github-app) and give it the following permissions:
-
-| Permission      | Level          |
-| --------------- | -------------- |
-| `Contents`      | `Read & write` |
-| `Metadata`      | `Read-only`    |
-| `Pull requests` | `Read & write` |
+Instead of using a Personal Access Token (PAT) that is tied to a particular user you can use a [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps) where permissions can be even better tuned. [Create a new app](https://docs.github.com/en/developers/apps/creating-a-github-app) and configure the app permissions and your `config.js` as described in the [Renovate documentation](https://docs.renovatebot.com/modules/platform/github/#running-as-a-github-app).
 
 Store the app ID as a secret with name `APP_ID` and generate a new private key for the app and add it as a secret to the repository as `APP_PEM` in the repository where the action will run from. Note that `APP_PEM` needs to be base64 encoded. You can encode your private key file like this from the terminal on Linux (omit the `-w 0` if you're on a Mac):
 
 ```bash
 cat your_app_key.pem | base64 -w 0
 ```
+
+Adjust your Renovate configuration file to specify the username of your bot.
 
 Going forward we will be using the [machine-learning-apps/actions-app-token](https://github.com/machine-learning-apps/actions-app-token) action in order to exchange the GitHub App certificate for an access token that renovate can use.
 
