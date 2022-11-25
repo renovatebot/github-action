@@ -92,10 +92,10 @@ Instead of using a Personal Access Token (PAT) that is tied to a particular user
 | `Metadata`      | `Read-only`    |
 | `Pull requests` | `Read & write` |
 
-Store the app ID as a secret with name `APP_ID` and generate a new private key for the app and add it as a secret to the repository as `APP_PEM` in the repository where the action will run from. Note that `APP_PEM` needs to be base64 encoded. You can encode your private key file like this from the terminal:
+Store the app ID as a secret with name `APP_ID` and generate a new private key for the app and add it as a secret to the repository as `APP_PEM` in the repository where the action will run from. Note that `APP_PEM` needs to be base64 encoded. You can encode your private key file like this from the terminal on Linux (omit the `-w 0` if you're on a Mac):
 
 ```bash
-cat your_app_key.pem | base64 -w 0 && echo
+cat your_app_key.pem | base64 -w 0
 ```
 
 Going forward we will be using the [machine-learning-apps/actions-app-token](https://github.com/machine-learning-apps/actions-app-token) action in order to exchange the GitHub App certificate for an access token that renovate can use.
