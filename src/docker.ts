@@ -1,7 +1,7 @@
 class Docker {
   readonly repository = 'renovate/renovate';
   // renovate: datasource=docker depName=renovate/renovate versioning=docker
-  readonly tag = '34.48.4-slim';
+  readonly tag = '34.49.0-slim';
   readonly tagSuffix = '-slim';
 
   image(): string {
