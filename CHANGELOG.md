@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [34.70.1](https://github.com/renovatebot/github-action/compare/v34.70.0...v34.70.1) (2022-12-22)
+
+
+### Bug Fixes
+
+* **deps:** update renovate/renovate docker tag to v34.70.1 ([e495f8a](https://github.com/renovatebot/github-action/commit/e495f8a7513ec2ed4f82647ae9ad7e0913855368))
+
 ## [34.70.0](https://github.com/renovatebot/github-action/compare/v34.68.0...v34.70.0) (2022-12-21)
 
 
