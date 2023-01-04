@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v3.2.0
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v34.82.0
         with:
@@ -117,7 +117,7 @@ jobs:
           APP_ID: ${{ secrets.APP_ID }}
 
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v3.2.0
 
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v34.82.0
@@ -141,7 +141,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v3.2.0
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v34.82.0
         with:
