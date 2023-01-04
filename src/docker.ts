@@ -1,4 +1,4 @@
-import { Input } from './input';
+import type { Input } from './input';
 
 class Docker {
   readonly repository = 'renovate/renovate';
@@ -8,7 +8,7 @@ class Docker {
   readonly fullTag: string;
 
   constructor(private input: Input) {
-    this.fullTag = input.useSlim() ? this.tag : this.version();
+    this.fullTag = input.useSlim() ? this.tag : this.tag.replace(this.tagSuffix, '');
   }
 
   image(): string {
@@ -16,7 +16,7 @@ class Docker {
   }
 
   version(): string {
-    return this.tag.replace(this.tagSuffix, '');
+    return this.fullTag;
   }
 }
 
