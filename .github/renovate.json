@@ -20,7 +20,7 @@
     {
       "description": "Update references in markdown files weekly",
       "matchPaths": [
-        ".md"
+        "**/*.md"
       ],
       "extends": [
         "schedule:weekly"
