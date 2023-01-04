@@ -18,13 +18,12 @@ GitHub Action to run Renovate self-hosted.
 
 ## Badges
 
-| Badge                                                                                                                                                                                                         | Description  | Service              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------- |
-| <a href="https://github.com/prettier/prettier#readme"><img alt="code style" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>                                          | Code style   | Prettier             |
-| <a href="https://conventionalcommits.org"><img alt="Conventional Commits: 1.0.0" src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square"></a>                            | Commit style | Conventional Commits |
-| <a href="https://renovatebot.com"><img alt="Renovate enabled" src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square"></a>                                                      | Dependencies | Renovate             |
-| <a href="https://github.com/renovatebot/github-action/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/renovatebot/github-action/Build?style=flat-square"></a>   | Build        | GitHub Actions       |
-| <a href="https://github.com/renovatebot/github-action/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/workflow/status/renovatebot/github-action/Example?style=flat-square"></a> | Example      | GitHub Actions       |
+| Badge                                                                                                                                                                                                                   | Description  | Service              |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------- |
+| <a href="https://github.com/prettier/prettier#readme"><img alt="code style" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>                                                    | Code style   | Prettier             |
+| <a href="https://conventionalcommits.org"><img alt="Conventional Commits: 1.0.0" src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square"></a>                                      | Commit style | Conventional Commits |
+| <a href="https://renovatebot.com"><img alt="Renovate enabled" src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square"></a>                                                                | Dependencies | Renovate             |
+| <a href="https://github.com/renovatebot/github-action/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/actions/workflow/status/renovatebot/github-action/build.yml?style=flat-square"></a> | Build        | GitHub Actions       |
 
 ## Options
 
@@ -52,7 +51,7 @@ If you want to use this with just the single configuration file, make sure to in
 
 [Generate a personal access token](https://github.com/settings/tokens), with the `repo:public_repo` scope for only public repositories or the `repo` scope for public and private repositories, and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`. You can also create a token without a specific scope, which gives read-only access to public repositories, for testing. This token is only used by Renovate, see the [token configuration](https://docs.renovatebot.com/self-hosted-configuration/#token), and gives it access to the repositories. The name of the secret can be anything as long as it matches the argument given to the `token` option.
 
-Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate because it has too restrictive permissions.  In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more types of Github Workflows results in `Pull Requests` that [do not trigger your `Pull Request` and `Push` CI events](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow).
+Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate because it has too restrictive permissions. In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more types of Github Workflows results in `Pull Requests` that [do not trigger your `Pull Request` and `Push` CI events](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow).
 
 If you want to use the `github-actions` manager, you must setup a [special token](#special-token-requirements-when-using-the-github-actions-manager) with some requirements.
 
@@ -129,11 +128,12 @@ jobs:
 
 ## Environment Variables
 
-If you wish to pass through environment variables through to the Docker Run that powers this action you need to prefix the environment variable with `RENOVATE_`. 
+If you wish to pass through environment variables through to the Docker Run that powers this action you need to prefix the environment variable with `RENOVATE_`.
 
 For example if you wish to pass through some credentials for a [host rule](https://docs.renovatebot.com/configuration-options/#hostrules) to the `config.js` then you should do so like this.
 
 1. In your workflow pass in the environment variable
+
 ```yml
 ....
 jobs:
@@ -151,18 +151,18 @@ jobs:
           RENOVATE_TFE_TOKEN: ${{ secrets.MY_TFE_TOKEN }}
 ```
 
-2. In `example/renovate-config.js` include the hostRules block 
-```js
+2. In `example/renovate-config.js` include the hostRules block
 
+```js
 module.exports = {
   hostRules: [
-  {
+    {
       hostType: 'terraform-module',
       matchHost: 'app.terraform.io',
-      token: proccess.env.RENOVATE_TFE_TOKEN
-    }
-  ]
- };
+      token: proccess.env.RENOVATE_TFE_TOKEN,
+    },
+  ],
+};
 ```
 
 ## Troubleshooting
