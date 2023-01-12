@@ -159,7 +159,7 @@ module.exports = {
     {
       hostType: 'terraform-module',
       matchHost: 'app.terraform.io',
-      token: proccess.env.RENOVATE_TFE_TOKEN,
+      token: process.env.RENOVATE_TFE_TOKEN,
     },
   ],
 };
