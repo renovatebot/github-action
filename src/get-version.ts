@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
-import { Input } from './input';
 import Docker from './docker';
+import { Input } from './input';
 
 const input = new Input();
 const docker = new Docker(input);
