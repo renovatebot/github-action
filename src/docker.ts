@@ -3,7 +3,7 @@ import type { Input } from './input';
 class Docker {
   readonly repository = 'renovate/renovate';
   // renovate: datasource=docker depName=renovate/renovate versioning=docker
-  readonly tag = '34.82.0-slim';
+  readonly tag = '34.108.5-slim';
   readonly tagSuffix = '-slim';
   readonly fullTag: string;
 
