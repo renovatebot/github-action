@@ -6,6 +6,7 @@ module.exports = {
   onboarding: false,
   platform: 'github',
   includeForks: true,
+  dryRun: 'full',
   repositories: [
     'renovate-tests/cocoapods1',
     'renovate-tests/gomod1',
