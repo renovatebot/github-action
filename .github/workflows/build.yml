@@ -10,14 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    needs: [lint, commitlint, e2e]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'dummy'
-
   release:
-    needs: [build]
     runs-on: ubuntu-latest
     if: |
       (
