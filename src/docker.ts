@@ -1,22 +1,23 @@
 import type { Input } from './input';
 
-class Docker {
-  readonly repository = 'renovate/renovate';
-  // renovate: datasource=docker depName=renovate/renovate versioning=docker
-  readonly tag = '34.121.0-slim';
-  readonly tagSuffix = '-slim';
-  readonly fullTag: string;
+// renovate: datasource=docker depName=renovate/renovate versioning=docker
+const tag = '34.121.0-slim';
 
-  constructor(private input: Input) {
-    this.fullTag = input.useSlim() ? this.tag : this.tag.replace(this.tagSuffix, '');
+class Docker {
+  private static readonly repository = 'renovate/renovate';
+  private static readonly tagSuffix = '-slim';
+  private readonly fullTag: string;
+
+  constructor(input: Input) {
+    this.fullTag = input.useSlim() ? tag : tag.replace(Docker.tagSuffix, '');
   }
 
   image(): string {
-    return `${this.repository}:${this.fullTag}`;
+    return `${Docker.repository}:${this.fullTag}`;
   }
 
-  version(): string {
-    return this.fullTag;
+  static version(): string {
+    return tag.replace(Docker.tagSuffix, '');
   }
 }
 
