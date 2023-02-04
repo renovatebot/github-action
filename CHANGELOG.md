@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [34.122.0](https://github.com/renovatebot/github-action/compare/v34.109.1...v34.122.0) (2023-02-04)
+
+
+### Features
+
+* Allow using non-slim renovate image ([#626](https://github.com/renovatebot/github-action/issues/626)) ([e18dc08](https://github.com/renovatebot/github-action/commit/e18dc08b6216f4c637d0f5151849e2a550fa49f0))
+
+
+### Bug Fixes
+
+* broken release ([#687](https://github.com/renovatebot/github-action/issues/687)) ([0a8bd9a](https://github.com/renovatebot/github-action/commit/0a8bd9aa4a0c46ef09c34206e39a0f12368af65b))
+* **deps:** update renovate/renovate docker tag to v34.111.1 ([6231276](https://github.com/renovatebot/github-action/commit/62312765541a935482f09db2912803b289c7ebb0))
+* **deps:** update renovate/renovate docker tag to v34.113.0 ([8949164](https://github.com/renovatebot/github-action/commit/8949164003761296e35121854c89ab751de3cbf9))
+* **deps:** update renovate/renovate docker tag to v34.114.0 ([673af1b](https://github.com/renovatebot/github-action/commit/673af1b1263d2e18310679e39d2b28d9c91219a5))
+* **deps:** update renovate/renovate docker tag to v34.114.1 ([#683](https://github.com/renovatebot/github-action/issues/683)) ([76551df](https://github.com/renovatebot/github-action/commit/76551dff2800b48957eb66f982e4f93eeba6198d))
+* **deps:** update renovate/renovate docker tag to v34.115.1 ([f879033](https://github.com/renovatebot/github-action/commit/f8790339bc7c2f15d3eef052f795ce5c0395dcb4))
+* **deps:** update renovate/renovate docker tag to v34.116.0 ([493d6ca](https://github.com/renovatebot/github-action/commit/493d6ca03ab14f4f7862d957ca711a41fd345a5b))
+* **deps:** update renovate/renovate docker tag to v34.116.1 ([985cb3a](https://github.com/renovatebot/github-action/commit/985cb3ae03ec66a75a9bdb5fbe6f8932541ff3f8))
+* **deps:** update renovate/renovate docker tag to v34.117.1 ([d29dda5](https://github.com/renovatebot/github-action/commit/d29dda575afbf46ef64b26ae2f680e99f3cfacac))
+* **deps:** update renovate/renovate docker tag to v34.118.2 ([38ae6ca](https://github.com/renovatebot/github-action/commit/38ae6cabc330732aeca4bbe5e9adf9ae23958f9a))
+* **deps:** update renovate/renovate docker tag to v34.119.5 ([aeff215](https://github.com/renovatebot/github-action/commit/aeff215213e0fa48ee2fa9832e825fe353946119))
+* **deps:** update renovate/renovate docker tag to v34.120.0 ([d005484](https://github.com/renovatebot/github-action/commit/d005484bdf37244a32ea88f292caceed5bd7e931))
+* **deps:** update renovate/renovate docker tag to v34.121.0 ([bf8b93a](https://github.com/renovatebot/github-action/commit/bf8b93a565d55bdec7d715ed3e2c5518f6394e70))
+* **deps:** update renovate/renovate docker tag to v34.122.0 ([4793a06](https://github.com/renovatebot/github-action/commit/4793a06c41749dac0eb3012c2248866e86b8b109))
+
 ### [34.109.1](https://github.com/renovatebot/github-action/compare/v34.108.5...v34.109.1) (2023-01-23)
 
 

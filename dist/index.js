@@ -3961,20 +3961,21 @@ exports["default"] = _default;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+// renovate: datasource=docker depName=renovate/renovate versioning=docker
+const tag = '34.122.0-slim';
 class Docker {
-    constructor() {
-        this.repository = 'renovate/renovate';
-        // renovate: datasource=docker depName=renovate/renovate versioning=docker
-        this.tag = '34.109.1-slim';
-        this.tagSuffix = '-slim';
+    constructor(input) {
+        this.fullTag = input.useSlim() ? tag : tag.replace(Docker.tagSuffix, '');
     }
     image() {
-        return `${this.repository}:${this.tag}`;
+        return `${Docker.repository}:${this.fullTag}`;
     }
-    version() {
-        return this.tag.replace(this.tagSuffix, '');
+    static version() {
+        return tag.replace(Docker.tagSuffix, '');
     }
 }
+Docker.repository = 'renovate/renovate';
+Docker.tagSuffix = '-slim';
 exports["default"] = Docker;
 
 
@@ -4094,6 +4095,9 @@ class Input {
         }
         return null;
     }
+    useSlim() {
+        return core.getInput(`useSlim`) !== 'false';
+    }
     /**
      * Convert to environment variables.
      *
@@ -4148,7 +4152,7 @@ class Renovate {
         this.dockerGroupName = 'docker';
         this.configFileMountDir = '/github-action';
         this.validateArguments();
-        this.docker = new docker_1.default();
+        this.docker = new docker_1.default(input);
     }
     async runDockerContainer() {
         const renovateDockerUser = '1000';
