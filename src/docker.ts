@@ -1,15 +1,23 @@
-class Docker {
-  readonly repository = 'renovate/renovate';
-  // renovate: datasource=docker depName=renovate/renovate versioning=docker
-  readonly tag = '34.109.1-slim';
-  readonly tagSuffix = '-slim';
+import type { Input } from './input';
 
-  image(): string {
-    return `${this.repository}:${this.tag}`;
+// renovate: datasource=docker depName=renovate/renovate versioning=docker
+const tag = '34.122.0-slim';
+
+class Docker {
+  private static readonly repository = 'renovate/renovate';
+  private static readonly tagSuffix = '-slim';
+  private readonly fullTag: string;
+
+  constructor(input: Input) {
+    this.fullTag = input.useSlim() ? tag : tag.replace(Docker.tagSuffix, '');
   }
 
-  version(): string {
-    return this.tag.replace(this.tagSuffix, '');
+  image(): string {
+    return `${Docker.repository}:${this.fullTag}`;
+  }
+
+  static version(): string {
+    return tag.replace(Docker.tagSuffix, '');
   }
 }
 
