@@ -8,7 +8,12 @@ interface EnvironmentVariable {
 
 class Input {
   readonly options = {
-    envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$/,
+    defaultEnvRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$/,
+    envRegex: {
+      input: 'envRegex',
+      env: 'RENOVATE_ENV_REGEX',
+      optional: true,
+    },
     configurationFile: {
       input: 'configurationFile',
       env: 'RENOVATE_CONFIG_FILE',
@@ -19,14 +24,21 @@ class Input {
       env: 'RENOVATE_TOKEN',
       optional: false,
     },
+
   } as const;
   readonly token: Readonly<EnvironmentVariable>;
 
+  private readonly _envRegex: Readonly<EnvironmentVariable>;
   private readonly _environmentVariables: Map<string, string>;
   private readonly _configurationFile: Readonly<EnvironmentVariable>;
 
   constructor() {
-    const envRegex = process.env.RENOVATE_ENV_REGEX ? new RegExp(process.env.RENOVATE_ENV_REGEX) : this.options.envRegex;
+    this._envRegex = this.get(
+      this.options.envRegex.input,
+      this.options.envRegex.env,
+      this.options.envRegex.optional
+    );
+    const envRegex = this._envRegex.value !== '' ? new RegExp(this._envRegex.value) : this.options.defaultEnvRegex;
     this._environmentVariables = new Map(
       Object.entries(process.env).filter(([key]) =>
         envRegex.test(key)
