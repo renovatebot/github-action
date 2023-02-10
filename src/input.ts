@@ -19,7 +19,6 @@ class Input {
       env: 'RENOVATE_TOKEN',
       optional: false,
     },
-
   } as const;
   readonly token: Readonly<EnvironmentVariable>;
 
