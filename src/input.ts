@@ -33,7 +33,7 @@ class Input {
 
   constructor() {
     const envRegexInput = core.getInput('env-regex');
-    const envRegex = this._envRegex.value !== '' ? new RegExp(this._envRegex.value) : this.options.defaultEnvRegex;
+    const envRegex = envRegexInput ? new RegExp(envRegexInput) : this.options.envRegex;
     this._environmentVariables = new Map(
       Object.entries(process.env).filter(([key]) =>
         envRegex.test(key)
