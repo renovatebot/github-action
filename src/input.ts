@@ -32,11 +32,7 @@ class Input {
   private readonly _configurationFile: Readonly<EnvironmentVariable>;
 
   constructor() {
-    this._envRegex = this.get(
-      this.options.envRegex.input,
-      this.options.envRegex.env,
-      this.options.envRegex.optional
-    );
+    const envRegexInput = core.getInput('env-regex');
     const envRegex = this._envRegex.value !== '' ? new RegExp(this._envRegex.value) : this.options.defaultEnvRegex;
     this._environmentVariables = new Map(
       Object.entries(process.env).filter(([key]) =>
