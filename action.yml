@@ -21,6 +21,11 @@ inputs:
       Use a lightweight renovate container without any third-party binaries.
       Defaults to true if not set.
     required: false
+  env-regex:
+    description: |
+      Override the environment variables which will be passsed into the renovate container.
+      Defaults to /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$/
+    required: false
 runs:
   using: node16
   main: dist/index.js
