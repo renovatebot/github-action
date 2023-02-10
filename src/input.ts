@@ -11,7 +11,6 @@ class Input {
     defaultEnvRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$/,
     envRegex: {
       input: 'envRegex',
-      env: 'RENOVATE_ENV_REGEX',
       optional: true,
     },
     configurationFile: {
