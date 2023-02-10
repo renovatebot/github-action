@@ -26,9 +26,10 @@ class Input {
   private readonly _configurationFile: Readonly<EnvironmentVariable>;
 
   constructor() {
+    const envRegex = process.env.RENOVATE_ENV_REGEX ? new RegExp(process.env.RENOVATE_ENV_REGEX) : this.options.envRegex;
     this._environmentVariables = new Map(
       Object.entries(process.env).filter(([key]) =>
-        this.options.envRegex.test(key)
+        envRegex.test(key)
       )
     );
 
