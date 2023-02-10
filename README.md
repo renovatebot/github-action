@@ -161,6 +161,30 @@ module.exports = {
 };
 ```
 
+### Passing other environment variables
+
+If you want to pass other variables to the Docker container use the `env-regex` input to override the regular expression that is used to allow environment variables.
+
+In your workflow pass the environment variable and whitelist it by specifying the `env-regex`:
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v34.82.0
+        with:
+          configurationFile: example/renovate-config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+          env-regex: "/^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|AWS_TOKEN)$/"
+        env:
+          AWS_TOKEN: ${{ secrets.AWS_TOKEN }}
+```
+
 ## Troubleshooting
 
 ### Debug logging
