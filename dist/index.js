@@ -3962,7 +3962,7 @@ exports["default"] = _default;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 // renovate: datasource=docker depName=renovate/renovate versioning=docker
-const tag = '34.136.0-slim';
+const tag = '34.138.1-slim';
 class Docker {
     constructor(input) {
         this.fullTag = input.useSlim() ? tag : tag.replace(Docker.tagSuffix, '');
