@@ -1,7 +1,7 @@
 import type { Input } from './input';
 
 // renovate: datasource=docker depName=renovate/renovate versioning=docker
-const tag = '34.132.1-slim';
+const tag = '34.136.0-slim';
 
 class Docker {
   private static readonly repository = 'renovate/renovate';
