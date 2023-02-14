@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [34.136.0](https://github.com/renovatebot/github-action/compare/v34.132.1...v34.136.0) (2023-02-14)
+
+
+### Features
+
+* allow override env regex ([#692](https://github.com/renovatebot/github-action/issues/692)) ([62d65f0](https://github.com/renovatebot/github-action/commit/62d65f0924ef75952a663a20fa652849532c1e82))
+
+
+### Bug Fixes
+
+* **deps:** update renovate/renovate docker tag to v34.136.0 ([eca6de4](https://github.com/renovatebot/github-action/commit/eca6de43e409920569ee6c5d3a28cfa983b875be))
+
 ### [34.132.1](https://github.com/renovatebot/github-action/compare/v34.132.0...v34.132.1) (2023-02-12)
 
 

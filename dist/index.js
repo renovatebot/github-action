@@ -3962,7 +3962,7 @@ exports["default"] = _default;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 // renovate: datasource=docker depName=renovate/renovate versioning=docker
-const tag = '34.132.1-slim';
+const tag = '34.136.0-slim';
 class Docker {
     constructor(input) {
         this.fullTag = input.useSlim() ? tag : tag.replace(Docker.tagSuffix, '');
@@ -4082,7 +4082,9 @@ class Input {
                 optional: false,
             },
         };
-        this._environmentVariables = new Map(Object.entries(process.env).filter(([key]) => this.options.envRegex.test(key)));
+        const envRegexInput = core.getInput('env-regex');
+        const envRegex = envRegexInput ? new RegExp(envRegexInput) : this.options.envRegex;
+        this._environmentVariables = new Map(Object.entries(process.env).filter(([key]) => envRegex.test(key)));
         this.token = this.get(this.options.token.input, this.options.token.env, this.options.token.optional);
         this._configurationFile = this.get(this.options.configurationFile.input, this.options.configurationFile.env, this.options.configurationFile.optional);
     }
