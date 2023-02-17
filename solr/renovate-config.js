@@ -9,5 +9,5 @@ module.exports = {
     'cominvent/renovate-test'
   ],
   allowedPostUpgradeCommands: ["./gradlew.*"],
-  dryRun: "full"
+  logFileLevel: "debug"
 };
