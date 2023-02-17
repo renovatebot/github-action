@@ -16,4 +16,4 @@ jobs:
           configurationFile: solr/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
         env:
-          RENOVATE_FORK_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+          RENOVATE_FORK_TOKEN: ${{ secrets.RENOVATE_FORK_TOKEN }}
