@@ -1,3 +1,5 @@
+.idea
+
 #####################################################
 # macOS                                             #
 # Source: https://www.gitignore.io                  #
@@ -187,7 +189,7 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
+# react / gatsby
 public/
 
 # vuepress build output

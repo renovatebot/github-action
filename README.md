@@ -1,6 +1,11 @@
-# GitHub Action Renovate
+# Renovate Github Action for Apache Solr
 
-GitHub Action to run Renovate self-hosted.
+GitHub Action to run Renovate self-hosted for the Apache Solr 
+
+This action configuration is forked from https://github.com/renovatebot/github-action.
+
+See `.github/workflows/renovate.yml` for the workflow and `solr/` folder for custom config.
+Below are the original instructions from the forked project.
 
 <a name="toc"></a>
 
@@ -31,7 +36,7 @@ Options can be passed using the inputs of this action or the corresponding envir
 
 ## `configurationFile`
 
-Configuration file to configure Renovate. The supported configurations files can be one of the configuration files listed in the Renovate Docs for [Configuration Options](https://docs.renovatebot.com/configuration-options/) or a JavaScript file that exports a configuration object. For both of these options, an example can be found in the [example](./example) directory.
+Configuration file to configure Renovate. The supported configurations files can be one of the configuration files listed in the Renovate Docs for [Configuration Options](https://docs.renovatebot.com/configuration-options/) or a JavaScript file that exports a configuration object. For both of these options, an example can be found in the [example](./solr) directory.
 
 The configurations that can be done in this file consists of two parts, as listed below. Refer to the links to the [Renovate Docs](https://docs.renovatebot.com/) for all options.
 
@@ -57,7 +62,7 @@ If you want to use the `github-actions` manager, you must setup a [special token
 
 ## Example
 
-This example uses a personal access token and will run every 15 minutes. The personal access token is configured as a GitHub secret named `RENOVATE_TOKEN`. This example uses the [`example/renovate-config.js`](./example/renovate-config.js) file as configuration.
+This example uses a personal access token and will run every 15 minutes. The personal access token is configured as a GitHub secret named `RENOVATE_TOKEN`. This example uses the [`example/renovate-config.js`](solr/renovate-config.js) file as configuration.
 You can also see a live example of this action in my [github-renovate](https://github.com/vidavidorra/github-renovate) repository, which also includes a more [advanced configuration](https://github.com/vidavidorra/github-renovate/blob/master/src/renovate-config.ts) for updating GitHub Action workflows.
 
 **Remark** Update the action version to the most current, see [here](https://github.com/renovatebot/github-action/releases/latest) for latest release.
