@@ -40,8 +40,8 @@
     "@actions/exec": "1.1.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.4.2",
-    "@commitlint/config-conventional": "17.4.2",
+    "@commitlint/cli": "17.4.3",
+    "@commitlint/config-conventional": "17.4.3",
     "@types/node": "16.18.12",
     "@typescript-eslint/eslint-plugin": "5.51.0",
     "@typescript-eslint/parser": "5.51.0",
