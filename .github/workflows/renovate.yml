@@ -10,15 +10,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '11'
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v34.143.1
         with:
           configurationFile: solr/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
+          useSlim: false
         env:
           RENOVATE_FORK_TOKEN: ${{ secrets.RENOVATE_FORK_TOKEN }}
           LOG_LEVEL: "debug"
