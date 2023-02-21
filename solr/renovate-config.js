@@ -1,10 +1,9 @@
 module.exports = {
-  branchPrefix: 'renovate/',
   gitAuthor: 'SolrBot <solrbot@cominvent.com>',
   onboarding: false,
   requireConfig: false,
   platform: 'github',
-  includeForks: false,
+  includeForks: true,
   repositories: [
     'cominvent/renovate-test'
   ],
