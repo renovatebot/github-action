@@ -5,7 +5,7 @@ module.exports = {
   platform: 'github',
   includeForks: false,
   repositories: [
-    'cominvent/renovate-test'
+    'cominvent/solr-playground'
   ],
   allowedPostUpgradeCommands: ["./gradlew.*"]
 };
