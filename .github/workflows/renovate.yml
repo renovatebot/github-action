@@ -17,3 +17,4 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
         env:
           RENOVATE_FORK_TOKEN: ${{ secrets.RENOVATE_FORK_TOKEN }}
+          LOG_LEVEL: "debug"
