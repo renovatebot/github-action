@@ -18,5 +18,5 @@ jobs:
         env:
           RENOVATE_FORK_TOKEN: ${{ secrets.RENOVATE_FORK_TOKEN }}
           LOG_LEVEL: "debug"
-          RENOVATE_DOCKER_USER: "500:0"
+          RENOVATE_DOCKER_USER: "1000:0"
           RENOVATE_BINARY_SOURCE: "docker"
