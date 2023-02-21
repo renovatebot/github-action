@@ -3,10 +3,9 @@ module.exports = {
   onboarding: false,
   requireConfig: false,
   platform: 'github',
-  includeForks: true,
+  includeForks: false,
   repositories: [
     'cominvent/renovate-test'
   ],
-  allowedPostUpgradeCommands: ["./gradlew.*"],
-  logFileLevel: "debug"
+  allowedPostUpgradeCommands: ["./gradlew.*"]
 };

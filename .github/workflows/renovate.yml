@@ -3,13 +3,18 @@ on:
   schedule:
     # The "*" (#42, asterisk) character has special semantics in YAML, so this
     # string has to be quoted.
-    - cron: '*/15 * * * *'
+    - cron: '*/5 * * * *'
 jobs:
   renovate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'gradle'
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v34.143.1
         with:
