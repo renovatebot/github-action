@@ -1,11 +1,11 @@
 module.exports = {
-  gitAuthor: 'SolrBot <solrbot@cominvent.com>',
+  gitAuthor: 'SolrBot <solrbot@solr.apache.org>',
   onboarding: false,
-  requireConfig: "optional",
+  requireConfig: "required",
   platform: 'github',
   includeForks: false,
   repositories: [
-    'cominvent/solr-playground'
+    'apache/solr'
   ],
   allowedPostUpgradeCommands: ["./gradlew.*"]
 };
