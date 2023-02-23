@@ -17,7 +17,9 @@ the project is scanned by this bot. See `dev-docs/dependency-upgrades.adoc` in t
 If you want to help maintain this bot, start by filing an issue or PR. Solr committers can
 ask to be given direct commit access.
 
+Maintenance is mainly limited to once in a while updating the version of renovate, and to maintain `solr/renovate-config.js`.
+
 ## Contributing to PRs filed by this bot
 
 Some dependency upgrades will require further work in Solr before they pass tests.
-The PR branches live in [a fork of the apache/solr git repository](https://github.com/solrbot/apache-_-solr), but Solr committers should be able to commit to the PR brahch.
+The PR branches live in [a fork of the apache/solr git repository](https://github.com/solrbot/apache-_-solr), but Solr committers should be able to commit to the PR branch.
