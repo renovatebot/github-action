@@ -5,7 +5,8 @@ module.exports = {
   platform: 'github',
   includeForks: false,
   repositories: [
-    'apache/solr'
+    'apache/solr',
+    'cominvent/solr-playground'
   ],
   allowedPostUpgradeCommands: ["./gradlew.*"]
 };
