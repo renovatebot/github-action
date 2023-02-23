@@ -1,5 +1,5 @@
 module.exports = {
-  gitAuthor: 'SolrBot <solrbot@solr.apache.org>',
+  gitAuthor: 'SolrBot <solrbot@cominvent.com>',
   onboarding: false,
   requireConfig: "required",
   platform: 'github',
