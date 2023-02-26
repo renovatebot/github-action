@@ -125,7 +125,7 @@ jobs:
               | tail +12 \
               | sed -e 's/^\+//' \
               | sed -z 's/\n/%0A/g;s/\r/%0D/g')"
-          echo "::set-output name=changelog::${changelog}"
+          echo "changelog=${changelog}" >> $GITHUB_OUTPUT
       - name: Publish release
         run: git push --follow-tags
       - name: Publish GitHub release
