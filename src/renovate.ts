@@ -2,6 +2,7 @@ import Docker from './docker';
 import { Input } from './input';
 import { exec } from '@actions/exec';
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 
 class Renovate {
@@ -30,9 +31,11 @@ class Renovate {
       );
     }
 
+    const user = os.userInfo();
+
     dockerArguments.push(
       '--volume /tmp:/tmp',
-      `--user ${process.env.UID}:0}`,
+      `--user ${user.uid}:0}`,
       '--rm',
       this.docker.image()
     );
