@@ -35,7 +35,7 @@ class Renovate {
 
     dockerArguments.push(
       '--volume /tmp:/tmp',
-      `--user ${user.uid}:0}`,
+      `--user ${user.uid}:0`,
       '--rm',
       this.docker.image()
     );
