@@ -3962,7 +3962,7 @@ exports["default"] = _default;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 // renovate: datasource=docker depName=renovate/renovate versioning=docker
-const tag = '34.159.2-slim';
+const tag = '35.0.0-slim';
 class Docker {
     constructor(input) {
         this.fullTag = input.useSlim() ? tag : tag.replace(Docker.tagSuffix, '');
@@ -4147,17 +4147,16 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const docker_1 = __importDefault(__nccwpck_require__(512));
 const exec_1 = __nccwpck_require__(514);
 const fs_1 = __importDefault(__nccwpck_require__(147));
+const os_1 = __importDefault(__nccwpck_require__(37));
 const path_1 = __importDefault(__nccwpck_require__(17));
 class Renovate {
     constructor(input) {
         this.input = input;
-        this.dockerGroupName = 'docker';
         this.configFileMountDir = '/github-action';
         this.validateArguments();
         this.docker = new docker_1.default(input);
     }
     async runDockerContainer() {
-        const renovateDockerUser = '1000';
         const dockerArguments = this.input
             .toEnvironmentVariables()
             .map((e) => `--env ${e.key}`)
@@ -4167,36 +4166,13 @@ class Renovate {
             const mountPath = path_1.default.join(this.configFileMountDir, baseName);
             dockerArguments.push(`--env ${this.input.configurationFile().key}=${mountPath}`, `--volume ${this.input.configurationFile().value}:${mountPath}`);
         }
-        dockerArguments.push('--volume /var/run/docker.sock:/var/run/docker.sock', '--volume /tmp:/tmp', `--user ${renovateDockerUser}:${this.getDockerGroupId()}`, '--rm', this.docker.image());
+        const user = os_1.default.userInfo();
+        dockerArguments.push('--volume /tmp:/tmp', `--user ${user.uid}:0`, '--rm', this.docker.image());
         const command = `docker run ${dockerArguments.join(' ')}`;
         const code = await (0, exec_1.exec)(command);
         if (code !== 0) {
             new Error(`'docker run' failed with exit code ${code}.`);
         }
-    }
-    /**
-     * Fetch the host docker group of the GitHub Action runner.
-     *
-     * The Renovate container needs access to this group in order to have the
-     * required permissions on the Docker socket.
-     */
-    getDockerGroupId() {
-        const groupFile = '/etc/group';
-        const groups = fs_1.default.readFileSync(groupFile, {
-            encoding: 'utf-8',
-        });
-        /**
-         * The group file has `groupname:group-password:GID:username-list` as
-         * structure and we're interested in the `GID` (the group ID).
-         *
-         * Source: https://www.thegeekdiary.com/etcgroup-file-explained/
-         */
-        const re = new RegExp(`^${this.dockerGroupName}:x:([1-9][0-9]*):`, 'm');
-        const match = re.exec(groups);
-        if (!match || match.length < 2) {
-            throw new Error(`Could not find group '${this.dockerGroupName}' in ${groupFile}`);
-        }
-        return match[1];
     }
     validateArguments() {
         if (/\s/.test(this.input.token.value)) {

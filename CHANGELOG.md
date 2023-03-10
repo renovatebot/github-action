@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [35.0.0](https://github.com/renovatebot/github-action/compare/v34.159.2...v35.0.0) (2023-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update renovate/renovate docker tag to v35 (#702)
+* remove docker socket and change to current user (#700)
+
+### Features
+
+* remove docker socket and change to current user ([#700](https://github.com/renovatebot/github-action/issues/700)) ([827e518](https://github.com/renovatebot/github-action/commit/827e51874a2f7544d608b0bd2f70df46ec1bb2d3))
+
+
+### Bug Fixes
+
+* **deps:** update renovate/renovate docker tag to v35 ([#702](https://github.com/renovatebot/github-action/issues/702)) ([fedfacb](https://github.com/renovatebot/github-action/commit/fedfacb882fd7868a046812a437c6175928bcfd3))
+
 ### [34.159.2](https://github.com/renovatebot/github-action/compare/v34.159.1...v34.159.2) (2023-03-09)
 
 
