@@ -94,14 +94,8 @@ jobs:
           configurationFile: ${{ matrix.configurationFile }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
 
-  build:
-    needs: [lint, commitlint, e2e]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo 'dummy'
-
   release:
-    needs: [build]
+    needs: [lint, commitlint, e2e]
     runs-on: ubuntu-latest
     steps:
       - name: Setup Git user
