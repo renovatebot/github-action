@@ -126,7 +126,7 @@ jobs:
       - name: Merge main
         id: merge
         run: |
-          git merge --no-ff -m 'skip: merge (${{ github.sha }}) [skip release]' ${{ github.sha }}
+          git merge --no-ff -Xtheirs -m 'skip: merge (${{ github.sha }}) [skip release]' ${{ github.sha }}
           commit=$(git rev-parse HEAD)
 
       - name: Setup node
