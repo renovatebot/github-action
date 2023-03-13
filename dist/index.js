@@ -3961,21 +3961,20 @@ exports["default"] = _default;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-// renovate: datasource=docker depName=renovate/renovate versioning=docker
-const tag = '35.2.0-slim';
 class Docker {
     constructor(input) {
-        this.fullTag = input.useSlim() ? tag : tag.replace(Docker.tagSuffix, '');
+        const tag = input.getVersion();
+        this.fullTag = input.useSlim()
+            ? tag
+                ? `${tag}-slim`
+                : 'slim'
+            : tag ?? 'latest';
     }
     image() {
         return `${Docker.repository}:${this.fullTag}`;
     }
-    static version() {
-        return tag.replace(Docker.tagSuffix, '');
-    }
 }
 Docker.repository = 'renovate/renovate';
-Docker.tagSuffix = '-slim';
 exports["default"] = Docker;
 
 
@@ -4083,7 +4082,9 @@ class Input {
             },
         };
         const envRegexInput = core.getInput('env-regex');
-        const envRegex = envRegexInput ? new RegExp(envRegexInput) : this.options.envRegex;
+        const envRegex = envRegexInput
+            ? new RegExp(envRegexInput)
+            : this.options.envRegex;
         this._environmentVariables = new Map(Object.entries(process.env).filter(([key]) => envRegex.test(key)));
         this.token = this.get(this.options.token.input, this.options.token.env, this.options.token.optional);
         this._configurationFile = this.get(this.options.configurationFile.input, this.options.configurationFile.env, this.options.configurationFile.optional);
@@ -4098,7 +4099,11 @@ class Input {
         return null;
     }
     useSlim() {
-        return core.getInput(`useSlim`) !== 'false';
+        return core.getInput('useSlim') !== 'false';
+    }
+    getVersion() {
+        const version = core.getInput('renovate-version');
+        return !!version && version !== '' ? version : null;
     }
     /**
      * Convert to environment variables.
