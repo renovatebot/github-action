@@ -55,6 +55,51 @@ Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-an
 
 If you want to use the `github-actions` manager, you must setup a [special token](#special-token-requirements-when-using-the-github-actions-manager) with some requirements.
 
+## `renovate-version`
+
+The Renovate version to use.
+If omited and `useSlim !== false` the action will use the `slim` docker tag and the `latest` tag otherwise.
+If a version is definded, the action will add `-slim` suffix to the tag if `useSlim !== false`.
+Checkout docker hub for available [tag](https://hub.docker.com/r/renovate/renovate/tags).
+
+This sample will use `renovate/renovate:35.0.0-slim` image.
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          renovate-version: 35.0.0
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
+This sample will use `renovate/renovate:latest` image.
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          useSlim: false
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
+## `useSlim`
+
+If set to `false` the action will use the full renovate image instead of the slim image.
+
 ## Example
 
 This example uses a personal access token and will run every 15 minutes. The personal access token is configured as a GitHub secret named `RENOVATE_TOKEN`. This example uses the [`example/renovate-config.js`](./example/renovate-config.js) file as configuration.
