@@ -2,6 +2,8 @@
 
 GitHub Action to run Renovate self-hosted.
 
+<!-- markdownlint-disable no-inline-html -->
+
 <a name="toc"></a>
 
 ## Table of contents
@@ -10,6 +12,8 @@ GitHub Action to run Renovate self-hosted.
 - [Options](#options)
   - [`configurationFile`](#configurationfile)
   - [`token`](#token)
+  - [`renovate-version`](#renovate-version)
+  - [`useSlim`](#useslim)
 - [Example](#example)
 - [Environment Variables](#environment-variables)
 - [Troubleshooting](#troubleshooting)
