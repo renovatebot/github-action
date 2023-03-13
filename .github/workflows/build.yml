@@ -9,6 +9,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
+env:
+  NODE_VERSION: 18
+  RENOVATE_VERSION: 35.0.0 # renovate: datasource=docker depName=renovate packageName=renovate/renovate
+
 jobs:
   commitlint:
     runs-on: ubuntu-latest
@@ -33,8 +37,11 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
         with:
-          node-version: '16.x'
-          cache: 'yarn'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
+
+      - name: enable corepack
+        run: corepack enable
 
       - name: Install project
         run: yarn install --frozen-lockfile
@@ -53,8 +60,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
 
+      - name: Setup node
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
+
+      - name: enable corepack
+        run: corepack enable
+
       - name: Install project
         run: yarn install --frozen-lockfile
+
       - name: Build
         run: yarn build
 
@@ -75,6 +92,7 @@ jobs:
           LOG_LEVEL: debug
         with:
           configurationFile: ${{ matrix.configurationFile }}
+          renovate-version: ${{ env.RENOVATE_VERSION }}
 
   build:
     needs: [lint, commitlint, e2e]
@@ -85,59 +103,53 @@ jobs:
   release:
     needs: [build]
     runs-on: ubuntu-latest
-    if: |
-      (
-        startsWith(github.event.commits[0].message, 'fix(deps): update renovate/renovate docker tag ')
-        || startsWith(github.event.commits[0].message, 'fix(deps): update dependency renovate/renovate ')
-        || github.event_name == 'workflow_dispatch'
-      )
-      && github.ref == 'refs/heads/main'
     steps:
+      - name: Setup Git user
+        shell: bash
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.symlinks true
+          git config --global user.email 'bot@renovateapp.com'
+          git config --global user.name  'Renovate Bot'
+          yarn config set version-git-tag false
+
       - name: Checkout
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           fetch-depth: 0
           ref: 'release'
-      - name: Fetch tags
-        run: git fetch --tags
-      - name: Setup Git user
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: fetch pr
+        if: ${{github.event_name == 'pull_request'}}
+        run: git fetch origin +${{ github.sha }}:${{ github.ref }}
+
       - name: Merge main
+        id: merge
         run: |
-          git merge -m 'chore(release): merge main (${{ github.sha }})' ${{ github.sha }}
+          git merge --no-ff -Xtheirs -m 'skip: merge (${{ github.sha }}) [skip release]' ${{ github.sha }}
+          commit=$(git rev-parse HEAD)
+
       - name: Setup node
         uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
         with:
-          node-version: '16.x'
-      - name: Install project
-        run: yarn install --frozen-lockfile --ignore-scripts
-      - name: Get version
-        id: release
-        run: yarn release:version
-      - name: Release
-        run: yarn release -- "${{ steps.release.outputs.version }}"
-      - name: Get changelog section
-        id: changelog
-        run: |
-          changelog="$(git show --unified=0 CHANGELOG.md \
-              | tail +12 \
-              | sed -e 's/^\+//' \
-              | sed -z 's/\n/%0A/g;s/\r/%0D/g')"
-          echo "changelog=${changelog}" >> $GITHUB_OUTPUT
-      - name: Publish release
-        run: git push --follow-tags
-      - name: Publish GitHub release
-        uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # renovate: tag=v1.1.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ steps.release.outputs.version }}
-          release_name: v${{ steps.release.outputs.version }}
-          body: |
-            *See the the [changelog](
-              https://github.com/${{ github.repository }}/blob/release/CHANGELOG.md
-            ) for changes in all releases.*
+          node-version: ${{ env.NODE_VERSION }}
+          cache: yarn
 
-            ${{ steps.changelog.outputs.changelog }}
+      - name: enable corepack
+        run: corepack enable
+
+      - name: Install project
+        run: yarn install --frozen-lockfile
+
+      - name: Push release branch
+        run: git push origin release:release
+        if: ${{github.ref == 'refs/heads/main'}}
+
+      - name: Release
+        run: |
+          # override for semantic-release
+          export GITHUB_REF=refs/heads/release GITHUB_SHA=${{ steps.merge.outputs.commit }}
+          yarn release
+        if: ${{github.ref == 'refs/heads/main'}}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

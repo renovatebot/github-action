@@ -27,11 +27,11 @@ class Input {
 
   constructor() {
     const envRegexInput = core.getInput('env-regex');
-    const envRegex = envRegexInput ? new RegExp(envRegexInput) : this.options.envRegex;
+    const envRegex = envRegexInput
+      ? new RegExp(envRegexInput)
+      : this.options.envRegex;
     this._environmentVariables = new Map(
-      Object.entries(process.env).filter(([key]) =>
-        envRegex.test(key)
-      )
+      Object.entries(process.env).filter(([key]) => envRegex.test(key))
     );
 
     this.token = this.get(
@@ -58,7 +58,12 @@ class Input {
   }
 
   useSlim(): boolean {
-      return core.getInput(`useSlim`) !== 'false';
+    return core.getInput('useSlim') !== 'false';
+  }
+
+  getVersion(): string | null {
+    const version = core.getInput('renovate-version');
+    return !!version && version !== '' ? version : null;
   }
 
   /**

@@ -26,6 +26,10 @@ inputs:
       Override the environment variables which will be passsed into the renovate container.
       Defaults to `^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$`
     required: false
+  renovate-version:
+    description: |
+      Renovate version to use. Defaults to latest.
+    required: false
 runs:
   using: node16
   main: dist/index.js
