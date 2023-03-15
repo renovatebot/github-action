@@ -19,16 +19,25 @@
       "semanticCommitType": "docs",
       "semanticCommitScope": null,
       "additionalBranchPrefix": "docs-"
+    },
+    {
+      "description": "use build semanctic type for some deps",
+      "matchPackageNames": [
+        "@vercel/ncc",
+        "conventional-changelog-conventionalcommits",
+        "semantic-release",
+        "typescript"
+      ],
+      "matchPackagePrefixes": ["@semantic-release/"],
+      "semanticCommitType": "build"
+    },
+    {
+      "description": "use ci semanctic type for some deps",
+      "matchPaths": [".github/workflows/**"],
+      "semanticCommitType": "ci"
     }
   ],
   "regexManagers": [
-    {
-      "fileMatch": ["^src/docker\\.ts$"],
-      "matchStrings": [
-        "// renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>.+?)(?: versioning=(?<versioning>[a-z-]+?))?\\s+const\\s+tag\\s+=\\s+'(?<currentValue>.+?)';"
-      ],
-      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
-    },
     {
       "fileMatch": ["^README\\.md$"],
       "matchStrings": [
