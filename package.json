@@ -1,6 +1,6 @@
 {
   "name": "github-action",
-  "version": "36.0.1",
+  "version": "36.0.2",
   "private": true,
   "description": "GitHub Action to run Renovate self-hosted.",
   "license": "GPL-3.0-or-later",
