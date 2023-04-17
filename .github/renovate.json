@@ -13,7 +13,7 @@
       "matchPaths": ["**/*.md"],
       "extends": ["schedule:weekly"],
       "automerge": true,
-      "stabilityDays": 0,
+      "minimumReleaseAge": null,
       "separateMajorMinor": false,
       "commitMessageTopic": "references to {{{depName}}}",
       "semanticCommitType": "docs",
