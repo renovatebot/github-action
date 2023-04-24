@@ -190,7 +190,7 @@ jobs:
 
 ## Environment Variables
 
-If you wish to pass through environment variables through to the Docker run (OR SHOULD IT BE CONTAINER?) that powers this action you need to prefix the environment variable with `RENOVATE_`.
+If you wish to pass through environment variables through to the Docker container that powers this action you need to prefix the environment variable with `RENOVATE_`.
 
 For example if you wish to pass through some credentials for a [host rule](https://docs.renovatebot.com/configuration-options/#hostrules) to the `config.js` then you should do so like this.
 
