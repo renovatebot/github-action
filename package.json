@@ -45,6 +45,7 @@
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "8.0.7",
     "@semantic-release/npm": "9.0.2",
+    "@tsconfig/node16": "1.0.3",
     "@types/node": "16.18.23",
     "@typescript-eslint/eslint-plugin": "5.59.0",
     "@typescript-eslint/parser": "5.59.0",
