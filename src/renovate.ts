@@ -22,12 +22,13 @@ class Renovate {
       .map((e) => `--env ${e.key}`)
       .concat([`--env ${this.input.token.key}=${this.input.token.value}`]);
 
-    if (this.input.configurationFile() !== null) {
-      const baseName = path.basename(this.input.configurationFile().value);
+    const configurationFile = this.input.configurationFile();
+    if (configurationFile !== null) {
+      const baseName = path.basename(configurationFile.value);
       const mountPath = path.join(this.configFileMountDir, baseName);
       dockerArguments.push(
-        `--env ${this.input.configurationFile().key}=${mountPath}`,
-        `--volume ${this.input.configurationFile().value}:${mountPath}`
+        `--env ${configurationFile.key}=${mountPath}`,
+        `--volume ${configurationFile.value}:${mountPath}`
       );
     }
 

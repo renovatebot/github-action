@@ -31,7 +31,9 @@ class Input {
       ? new RegExp(envRegexInput)
       : this.options.envRegex;
     this._environmentVariables = new Map(
-      Object.entries(process.env).filter(([key]) => envRegex.test(key))
+      Object.entries(process.env)
+        .filter(([key]) => envRegex.test(key))
+        .filter((pair): pair is [string, string] => pair[1] !== undefined)
     );
 
     this.token = this.get(
