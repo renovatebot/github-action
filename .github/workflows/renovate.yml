@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v4.1.1
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v36.0.3
+        uses: renovatebot/github-action@v39.2.1
         with:
           configurationFile: solr/renovate-config.js
-          renovate-version: 35.69
+          renovate-version: 37.87.2
           token: ${{ secrets.RENOVATE_TOKEN }}
           useSlim: false
         env:
