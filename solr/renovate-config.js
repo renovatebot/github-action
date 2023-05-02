@@ -3,7 +3,7 @@ module.exports = {
   onboarding: false,
   requireConfig: "required",
   platform: 'github',
-  includeForks: false,
+  forkProcessing: "disabled",
   repositories: [
     'apache/solr'
   ],
