@@ -13,7 +13,7 @@ jobs:
         uses: renovatebot/github-action@v36.0.3
         with:
           configurationFile: solr/renovate-config.js
-          renovate-version: 35.67.1
+          renovate-version: 35.69
           token: ${{ secrets.RENOVATE_TOKEN }}
           useSlim: false
         env:
