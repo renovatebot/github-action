@@ -4048,7 +4048,7 @@ const path_1 = __importDefault(__nccwpck_require__(17));
 class Input {
     constructor() {
         this.options = {
-            envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$/,
+            envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
             configurationFile: {
                 input: 'configurationFile',
                 env: 'RENOVATE_CONFIG_FILE',
