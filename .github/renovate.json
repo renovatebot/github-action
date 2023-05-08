@@ -9,7 +9,7 @@
       "matchUpdateTypes": ["major", "minor", "patch"]
     },
     {
-      "description": "Update references in markdown files weekly",
+      "description": "Update references in Markdown files weekly",
       "matchPaths": ["**/*.md"],
       "extends": ["schedule:weekly"],
       "automerge": true,
@@ -21,7 +21,7 @@
       "additionalBranchPrefix": "docs-"
     },
     {
-      "description": "use build semanctic type for some deps",
+      "description": "Use build semantic type for some deps",
       "matchPackageNames": [
         "@vercel/ncc",
         "conventional-changelog-conventionalcommits",
@@ -32,7 +32,7 @@
       "semanticCommitType": "build"
     },
     {
-      "description": "use ci semanctic type for some deps",
+      "description": "Use ci semantic type for some deps",
       "matchPaths": [".github/workflows/**"],
       "semanticCommitType": "ci"
     }
