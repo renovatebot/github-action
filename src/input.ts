@@ -8,7 +8,7 @@ interface EnvironmentVariable {
 
 class Input {
   readonly options = {
-    envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$/,
+    envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
     configurationFile: {
       input: 'configurationFile',
       env: 'RENOVATE_CONFIG_FILE',
