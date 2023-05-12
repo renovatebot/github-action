@@ -4133,7 +4133,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const docker_1 = __importDefault(__nccwpck_require__(512));
 const exec_1 = __nccwpck_require__(514);
 const fs_1 = __importDefault(__nccwpck_require__(147));
-const os_1 = __importDefault(__nccwpck_require__(37));
 const path_1 = __importDefault(__nccwpck_require__(17));
 class Renovate {
     constructor(input) {
@@ -4153,8 +4152,7 @@ class Renovate {
             const mountPath = path_1.default.join(this.configFileMountDir, baseName);
             dockerArguments.push(`--env ${configurationFile.key}=${mountPath}`, `--volume ${configurationFile.value}:${mountPath}`);
         }
-        const user = os_1.default.userInfo();
-        dockerArguments.push('--volume /tmp:/tmp', `--user ${user.uid}:0`, '--rm', this.docker.image());
+        dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
         const command = `docker run ${dockerArguments.join(' ')}`;
         const code = await (0, exec_1.exec)(command);
         if (code !== 0) {
