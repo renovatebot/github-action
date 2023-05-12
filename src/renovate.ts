@@ -2,7 +2,6 @@ import Docker from './docker';
 import { Input } from './input';
 import { exec } from '@actions/exec';
 import fs from 'fs';
-import os from 'os';
 import path from 'path';
 
 class Renovate {
@@ -32,14 +31,7 @@ class Renovate {
       );
     }
 
-    const user = os.userInfo();
-
-    dockerArguments.push(
-      '--volume /tmp:/tmp',
-      `--user ${user.uid}:0`,
-      '--rm',
-      this.docker.image()
-    );
+    dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
 
     const command = `docker run ${dockerArguments.join(' ')}`;
 
