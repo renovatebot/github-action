@@ -63,7 +63,7 @@ class Input {
     return core.getInput('useSlim') !== 'false';
   }
 
-  getDockerImage(): string | null {
+  getDockerImage(): string {
     const dockerImage = core.getInput('renovate-docker-image');
     return !!dockerImage && dockerImage !== '' ? dockerImage : 'renovate/renovate';
   }
