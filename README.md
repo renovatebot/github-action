@@ -170,6 +170,21 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
+### Example for GitHub Enterprise
+
+If you want to use the Renovate Action on a GitHub Enterprise instance you have to add the following environment variable:
+
+```yml
+....
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          configurationFile: example/renovate-config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          RENOVATE_ENDPOINT: "https://git.your-company.com/api/v3"
+```
+
 ### Example with GitHub App
 
 Instead of using a Personal Access Token (PAT) that is tied to a particular user you can use a [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps) where permissions can be even better tuned. [Create a new app](https://docs.github.com/en/developers/apps/creating-a-github-app) and configure the app permissions and your `config.js` as described in the [Renovate documentation](https://docs.renovatebot.com/modules/platform/github/#running-as-a-github-app).
