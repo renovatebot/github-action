@@ -104,7 +104,7 @@ jobs:
 
 The Renovate docker image name to use.
 If omited or `renovate-docker-image === ''` the action will use the `renovate/renovate` docker image name otherwise.
-If a docker image name is definded, the action will use that name to pull the image.
+If a docker image name is defined, the action will use that name to pull the image.
 
 This sample will use `myproxyhub.domain.com/renovate/renovate:slim` image.
 
