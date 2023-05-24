@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import Docker from './docker';
 import path from 'path';
 
 interface EnvironmentVariable {
@@ -8,7 +9,8 @@ interface EnvironmentVariable {
 
 class Input {
   readonly options = {
-    envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
+    envRegex:
+      /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
     configurationFile: {
       input: 'configurationFile',
       env: 'RENOVATE_CONFIG_FILE',
@@ -64,8 +66,8 @@ class Input {
   }
 
   getDockerImage(): string {
-    const dockerImage = core.getInput('renovate-docker-image');
-    return !!dockerImage && dockerImage !== '' ? dockerImage : 'renovate/renovate';
+    const dockerImage = core.getInput('renovate-image');
+    return dockerImage ? dockerImage : Docker.repository;
   }
 
   getVersion(): string | null {

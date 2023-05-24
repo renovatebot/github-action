@@ -100,10 +100,10 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
-## `renovate-docker-image`
+## `renovate-image`
 
 The Renovate docker image name to use.
-If omited or `renovate-docker-image === ''` the action will use the `renovate/renovate` docker image name otherwise.
+If omited or `renovate-image === ''` the action will use the `renovate/renovate` docker image name otherwise.
 If a docker image name is defined, the action will use that name to pull the image.
 
 This sample will use `myproxyhub.domain.com/renovate/renovate:slim` image.
@@ -119,7 +119,7 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v36.0.0
         with:
-          renovate-docker-image: myproxyhub.domain.com/renovate/renovate
+          renovate-image: myproxyhub.domain.com/renovate/renovate
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 

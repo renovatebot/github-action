@@ -30,7 +30,7 @@ inputs:
     description: |
       Renovate version to use. Defaults to latest.
     required: false
-  renovate-docker-image:
+  renovate-image:
     description: |
       Renovate docker image name.
       Defaults to `renovate/renovate`
