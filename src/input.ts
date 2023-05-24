@@ -1,5 +1,4 @@
 import * as core from '@actions/core';
-import Docker from './docker';
 import path from 'path';
 
 interface EnvironmentVariable {
@@ -65,9 +64,9 @@ class Input {
     return core.getInput('useSlim') !== 'false';
   }
 
-  getDockerImage(): string {
+  getDockerImage(): string | null {
     const dockerImage = core.getInput('renovate-image');
-    return dockerImage ? dockerImage : Docker.repository;
+    return dockerImage ? dockerImage : null;
   }
 
   getVersion(): string | null {

@@ -1,7 +1,7 @@
 import type { Input } from './input';
 
 class Docker {
-  public static readonly repository = 'renovate/renovate';
+  private static readonly repository = 'renovate/renovate';
 
   private readonly dockerImage: string;
   private readonly fullTag: string;
@@ -9,7 +9,7 @@ class Docker {
   constructor(input: Input) {
     const tag = input.getVersion();
 
-    this.dockerImage = input.getDockerImage();
+    this.dockerImage = input.getDockerImage() ?? Docker.repository;
     this.fullTag = input.useSlim()
       ? tag
         ? `${tag}-slim`
