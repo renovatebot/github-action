@@ -16,6 +16,7 @@ GitHub Action to run Renovate self-hosted.
   - [`renovate-image`](#renovate-image)
   - [`renovate-version`](#renovate-version)
   - [`useSlim`](#useslim)
+  - [`mount-docker-socket`](#mount-docker-socket)
 - [Example](#example)
 - [Environment Variables](#environment-variables)
   - [Passing other environment variables](#passing-other-environment-variables)
@@ -150,6 +151,13 @@ jobs:
 ### `useSlim`
 
 If set to `false` the action will use the full renovate image instead of the slim image.
+
+## `mount-docker-socket`
+
+Default to `false`. If set to `true` the action will mount the Docker socket
+inside the renovate container so that the commands can use Docker. Can be useful
+for `postUpgradeTasks`'s commands. Also add the user inside the renovate
+container to the docker group for socket permissions.
 
 ## Example
 

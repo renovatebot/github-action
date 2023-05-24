@@ -73,6 +73,10 @@ class Input {
     return !!version && version !== '' ? version : null;
   }
 
+  mountDockerSocket(): boolean {
+    return core.getInput('mount-docker-socket').toLowerCase() === 'true';
+  }
+
   /**
    * Convert to environment variables.
    *

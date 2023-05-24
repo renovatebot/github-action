@@ -1,6 +1,7 @@
 import Docker from './docker';
 import { Input } from './input';
 import { exec } from '@actions/exec';
+import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
@@ -31,6 +32,13 @@ class Renovate {
       );
     }
 
+    if (this.input.mountDockerSocket()) {
+      dockerArguments.push(
+        '--volume /var/run/docker.sock:/var/run/docker.sock',
+        `--group-add ${this.getDockerGroupId()}`
+      );
+    }
+
     dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
 
     const command = `docker run ${dockerArguments.join(' ')}`;
@@ -39,6 +47,23 @@ class Renovate {
     if (code !== 0) {
       new Error(`'docker run' failed with exit code ${code}.`);
     }
+  }
+
+  /**
+   * Fetch the host docker group of the GitHub Action runner.
+   *
+   * The Renovate container needs access to this group in order to have the
+   * required permissions on the Docker socket.
+   */
+  private getDockerGroupId(): string {
+    const groupInfo = execSync(`getent group docker`)
+      .toString()
+      .trim()
+      .split(':');
+    if (groupInfo.length < 3) {
+      throw new Error(`Could not find docker group ID`);
+    }
+    return groupInfo[2];
   }
 
   private validateArguments(): void {
