@@ -3943,6 +3943,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 class Docker {
     constructor(input) {
         const tag = input.getVersion();
+        this.dockerImage = input.getDockerImage() ?? Docker.repository;
         this.fullTag = input.useSlim()
             ? tag
                 ? `${tag}-slim`
@@ -3950,7 +3951,7 @@ class Docker {
             : tag ?? 'latest';
     }
     image() {
-        return `${Docker.repository}:${this.fullTag}`;
+        return `${this.dockerImage}:${this.fullTag}`;
     }
 }
 Docker.repository = 'renovate/renovate';
@@ -4081,6 +4082,9 @@ class Input {
     }
     useSlim() {
         return core.getInput('useSlim') !== 'false';
+    }
+    getDockerImage() {
+        return core.getInput('renovate-image') || null;
     }
     getVersion() {
         const version = core.getInput('renovate-version');
