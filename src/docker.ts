@@ -1,7 +1,7 @@
 import type { Input } from './input';
 
 class Docker {
-  private static readonly image = 'ghcr.io/renovate/renovate';
+  private static readonly image = 'ghcr.io/renovatebot/renovate';
 
   private readonly dockerImage: string;
   private readonly fullTag: string;
