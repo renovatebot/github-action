@@ -2,7 +2,6 @@ import Docker from './docker';
 import { Input } from './input';
 import { exec } from '@actions/exec';
 import fs from 'fs';
-import os from 'os';
 import path from 'path';
 
 class Renovate {
@@ -22,23 +21,17 @@ class Renovate {
       .map((e) => `--env ${e.key}`)
       .concat([`--env ${this.input.token.key}=${this.input.token.value}`]);
 
-    if (this.input.configurationFile() !== null) {
-      const baseName = path.basename(this.input.configurationFile().value);
+    const configurationFile = this.input.configurationFile();
+    if (configurationFile !== null) {
+      const baseName = path.basename(configurationFile.value);
       const mountPath = path.join(this.configFileMountDir, baseName);
       dockerArguments.push(
-        `--env ${this.input.configurationFile().key}=${mountPath}`,
-        `--volume ${this.input.configurationFile().value}:${mountPath}`
+        `--env ${configurationFile.key}=${mountPath}`,
+        `--volume ${configurationFile.value}:${mountPath}`
       );
     }
 
-    const user = os.userInfo();
-
-    dockerArguments.push(
-      '--volume /tmp:/tmp',
-      `--user ${user.uid}:0`,
-      '--rm',
-      this.docker.image()
-    );
+    dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
 
     const command = `docker run ${dockerArguments.join(' ')}`;
 

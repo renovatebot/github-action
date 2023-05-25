@@ -8,7 +8,8 @@ interface EnvironmentVariable {
 
 class Input {
   readonly options = {
-    envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$/,
+    envRegex:
+      /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
     configurationFile: {
       input: 'configurationFile',
       env: 'RENOVATE_CONFIG_FILE',
@@ -31,7 +32,9 @@ class Input {
       ? new RegExp(envRegexInput)
       : this.options.envRegex;
     this._environmentVariables = new Map(
-      Object.entries(process.env).filter(([key]) => envRegex.test(key))
+      Object.entries(process.env)
+        .filter(([key]) => envRegex.test(key))
+        .filter((pair): pair is [string, string] => pair[1] !== undefined)
     );
 
     this.token = this.get(
@@ -59,6 +62,10 @@ class Input {
 
   useSlim(): boolean {
     return core.getInput('useSlim') !== 'false';
+  }
+
+  getDockerImage(): string | null {
+    return core.getInput('renovate-image') || null;
   }
 
   getVersion(): string | null {

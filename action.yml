@@ -24,11 +24,16 @@ inputs:
   env-regex:
     description: |
       Override the environment variables which will be passsed into the renovate container.
-      Defaults to `^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$`
+      Defaults to `^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$`
     required: false
   renovate-version:
     description: |
       Renovate version to use. Defaults to latest.
+    required: false
+  renovate-image:
+    description: |
+      Renovate docker image name.
+      Defaults to `ghcr.io/renovate/renovate`.
     required: false
 runs:
   using: node16

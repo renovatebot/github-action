@@ -11,11 +11,14 @@ GitHub Action to run Renovate self-hosted.
 - [Badges](#badges)
 - [Options](#options)
   - [`configurationFile`](#configurationfile)
+  - [`env-regex`](#env-regex)
   - [`token`](#token)
+  - [`renovate-image`](#renovate-image)
   - [`renovate-version`](#renovate-version)
   - [`useSlim`](#useslim)
 - [Example](#example)
 - [Environment Variables](#environment-variables)
+  - [Passing other environment variables](#passing-other-environment-variables)
 - [Troubleshooting](#troubleshooting)
   - [Debug Logging](#debug-logging)
   - [Special token requirements when using the `github-actions` manager](#special-token-requirements-when-using-the-github-actions-manager)
@@ -35,7 +38,7 @@ Options can be passed using the inputs of this action or the corresponding envir
 When both are passed, the input takes precedence over the environment variable.
 For the available environment variables, see the Renovate [Self-Hosted Configuration](https://docs.renovatebot.com/self-hosted-configuration/) docs.
 
-## `configurationFile`
+### `configurationFile`
 
 Configuration file to configure Renovate.
 The supported configurations files:
@@ -61,7 +64,12 @@ This disables the requirement of a configuration file for the repository and dis
   requireConfig: false,
 ```
 
-## `token`
+### `env-regex`
+
+Allows to configure the regex to define which environment variables are passed to the renovate container.
+See [Passing other environment variables](#passing-other-environment-variables) section for more details.
+
+### `token`
 
 [Generate a Personal Access Token](https://github.com/settings/tokens), with the `repo:public_repo` scope for only public repositories or the `repo` scope for public and private repositories, and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`.
 You can also create a token without a specific scope, which gives read-only access to public repositories, for testing.
@@ -73,14 +81,53 @@ In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more
 
 If you want to use the `github-actions` manager, you must setup a [special token](#special-token-requirements-when-using-the-github-actions-manager) with some requirements.
 
-## `renovate-version`
+### `renovate-image`
+
+The Renovate docker image name to use.
+If omited or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` docker image name otherwise.
+If a docker image name is defined, the action will use that name to pull the image.
+
+This sample will use `myproxyhub.domain.com/renovate/renovate:slim` image.
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          renovate-image: myproxyhub.domain.com/renovate/renovate
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
+This sample will use `ghcr.io/renovatebot/renovate:slim` image.
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
+### `renovate-version`
 
 The Renovate version to use.
 If omitted and `useSlim !== false` the action will use the `slim` Docker tag and the `latest` tag otherwise.
 If a version is defined, the action will add `-slim` suffix to the tag if `useSlim !== false`.
 Checkout Docker Hub for available [tags](https://hub.docker.com/r/renovate/renovate/tags).
 
-This sample will use `renovate/renovate:35.0.0-slim` image:
+This sample will use `ghcr.io/renovatebot/renovate:35.0.0-slim` image.
 
 ```yml
 ....
@@ -97,7 +144,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
-This sample will use `renovate/renovate:latest` image:
+This sample will use `ghcr.io/renovatebot/renovate:latest` image.
 
 ```yml
 ....
@@ -114,7 +161,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
-## `useSlim`
+### `useSlim`
 
 If set to `false` the action will use the full Renovate image instead of the slim image.
 
@@ -145,6 +192,21 @@ jobs:
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
+### Example for GitHub Enterprise
+
+If you want to use the Renovate Action on a GitHub Enterprise instance you have to add the following environment variable:
+
+```yml
+....
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          configurationFile: example/renovate-config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          RENOVATE_ENDPOINT: "https://git.your-company.com/api/v3"
 ```
 
 ### Example with GitHub App
@@ -196,36 +258,36 @@ For example if you wish to pass through some credentials for a [host rule](https
 
 1. In your workflow pass in the environment variable
 
-```yml
-....
-jobs:
-  renovate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3.3.0
-      - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v36.0.0
-        with:
-          configurationFile: example/renovate-config.js
-          token: ${{ secrets.RENOVATE_TOKEN }}
-        env:
-          RENOVATE_TFE_TOKEN: ${{ secrets.MY_TFE_TOKEN }}
-```
+   ```yml
+   ....
+   jobs:
+     renovate:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Checkout
+           uses: actions/checkout@v3.3.0
+         - name: Self-hosted Renovate
+           uses: renovatebot/github-action@v36.0.0
+           with:
+             configurationFile: example/renovate-config.js
+             token: ${{ secrets.RENOVATE_TOKEN }}
+           env:
+             RENOVATE_TFE_TOKEN: ${{ secrets.MY_TFE_TOKEN }}
+   ```
 
-2. In `example/renovate-config.js` include the `hostRules` block
+1. In `example/renovate-config.js` include the hostRules block
 
-```js
-module.exports = {
-  hostRules: [
-    {
-      hostType: 'terraform-module',
-      matchHost: 'app.terraform.io',
-      token: process.env.RENOVATE_TFE_TOKEN,
-    },
-  ],
-};
-```
+   ```js
+   module.exports = {
+     hostRules: [
+       {
+         hostType: 'terraform-module',
+         matchHost: 'app.terraform.io',
+         token: process.env.RENOVATE_TFE_TOKEN,
+       },
+     ],
+   };
+   ```
 
 ### Passing other environment variables
 

@@ -1,12 +1,9 @@
 {
+  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "outDir": "dist"
-  }
+  },
+  "ts-node": { "transpileOnly": true }
 }
