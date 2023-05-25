@@ -56,14 +56,24 @@ class Renovate {
    * required permissions on the Docker socket.
    */
   private getDockerGroupId(): string {
-    const groupInfo = execSync(`getent group docker`)
-      .toString()
-      .trim()
-      .split(':');
-    if (groupInfo.length < 3) {
-      throw new Error(`Could not find docker group ID`);
+    const groupFile = '/etc/group';
+    const groups = fs.readFileSync(groupFile, {
+      encoding: 'utf-8',
+    });
+
+    /**
+     * The group file has `groupname:group-password:GID:username-list` as
+     * structure and we're interested in the `GID` (the group ID).
+     *
+     * Source: https://www.thegeekdiary.com/etcgroup-file-explained/
+     */
+    const re = new RegExp('^docker:x:(?<groupId>[1-9][0-9]*):', 'm');
+    const match = re.exec(groups);
+    if (match?.groups?.groupId === undefined) {
+      throw new Error(`Could not find group docker in ${groupFile}`);
     }
-    return groupInfo[2];
+
+    return match.groups.groupId;
   }
 
   private validateArguments(): void {

@@ -12,11 +12,11 @@ GitHub Action to run Renovate self-hosted.
 - [Options](#options)
   - [`configurationFile`](#configurationfile)
   - [`env-regex`](#env-regex)
+  - [`mount-docker-socket`](#mount-docker-socket)
   - [`token`](#token)
   - [`renovate-image`](#renovate-image)
   - [`renovate-version`](#renovate-version)
   - [`useSlim`](#useslim)
-  - [`mount-docker-socket`](#mount-docker-socket)
 - [Example](#example)
 - [Environment Variables](#environment-variables)
   - [Passing other environment variables](#passing-other-environment-variables)
@@ -59,6 +59,13 @@ If you want to use this with just the single configuration file, make sure to in
 
 Allows to configure the regex to define which environment variables are passed to the renovate container.
 See [Passing other environment variables](#passing-other-environment-variables) section for more details.
+
+## `mount-docker-socket`
+
+Default to `false`. If set to `true` the action will mount the Docker socket
+inside the renovate container so that the commands can use Docker. Can be useful
+for `postUpgradeTasks`'s commands. Also add the user inside the renovate
+container to the docker group for socket permissions.
 
 ### `token`
 
@@ -151,13 +158,6 @@ jobs:
 ### `useSlim`
 
 If set to `false` the action will use the full renovate image instead of the slim image.
-
-## `mount-docker-socket`
-
-Default to `false`. If set to `true` the action will mount the Docker socket
-inside the renovate container so that the commands can use Docker. Can be useful
-for `postUpgradeTasks`'s commands. Also add the user inside the renovate
-container to the docker group for socket permissions.
 
 ## Example
 
