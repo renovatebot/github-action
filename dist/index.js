@@ -3943,7 +3943,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 class Docker {
     constructor(input) {
         const tag = input.getVersion();
-        this.dockerImage = input.getDockerImage() ?? Docker.repository;
+        this.dockerImage = input.getDockerImage() ?? Docker.image;
         this.fullTag = input.useSlim()
             ? tag
                 ? `${tag}-slim`
@@ -3954,7 +3954,7 @@ class Docker {
         return `${this.dockerImage}:${this.fullTag}`;
     }
 }
-Docker.repository = 'renovate/renovate';
+Docker.image = 'ghcr.io/renovatebot/renovate';
 exports["default"] = Docker;
 
 
