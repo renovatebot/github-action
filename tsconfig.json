@@ -4,5 +4,6 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "outDir": "dist"
-  }
+  },
+  "ts-node": { "transpileOnly": true }
 }

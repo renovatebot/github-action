@@ -3,12 +3,6 @@
   "extends": ["github>renovatebot/.github", ":pinDependencies"],
   "packageRules": [
     {
-      "description": "Automerge Renovate updates",
-      "semanticCommitType": "fix",
-      "matchPackageNames": ["renovate/renovate"],
-      "matchUpdateTypes": ["major", "minor", "patch"]
-    },
-    {
       "description": "Update references in Markdown files weekly",
       "matchPaths": ["**/*.md"],
       "extends": ["schedule:weekly"],
