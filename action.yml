@@ -33,7 +33,7 @@ inputs:
   renovate-image:
     description: |
       Renovate docker image name.
-      Defaults to `renovate/renovate`.
+      Defaults to `ghcr.io/renovate/renovate`.
     required: false
 runs:
   using: node16
