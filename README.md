@@ -15,7 +15,7 @@ GitHub Action to run Renovate self-hosted.
   - [`token`](#token)
   - [`renovate-iamge`](#renovate-image)
   - [`renovate-version`](#renovate-version)
-  - [`useSlim`](#useslim)
+  - [`useSlim`](#useslim) (**Deprecated**)
 - [Example](#example)
 - [Environment Variables](#environment-variables)
   - [Passing other environment variables](#passing-other-environment-variables)
@@ -109,8 +109,7 @@ jobs:
 ### `renovate-version`
 
 The Renovate version to use.
-If omited and `useSlim !== false` the action will use the `slim` docker tag and the `latest` tag otherwise.
-If a version is definded, the action will add `-slim` suffix to the tag if `useSlim !== false`.
+If omited the action will use the `slim` docker tag.
 Checkout docker hub for available [tag](https://hub.docker.com/r/renovate/renovate/tags).
 
 This sample will use `ghcr.io/renovatebot/renovate:35.0.0-slim` image.
@@ -130,6 +129,24 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
+**Warning** On next major version this will use `ghcr.io/renovatebot/renovate:35.0.0` full image.
+Add `-slim` to the version to stay on slim image to use `ghcr.io/renovatebot/renovate:35.0.0-slim` image.
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          renovate-version: 35.0.0-slim
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
 This sample will use `ghcr.io/renovatebot/renovate:latest` image.
 
 ```yml
@@ -143,13 +160,13 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v36.0.0
         with:
-          useSlim: false
+          renovate-version: latest
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
 ### `useSlim`
 
-If set to `false` the action will use the full renovate image instead of the slim image.
+**Deprecated** If set to `false` the action will not add `-slim` suffix to version.
 
 ## Example
 

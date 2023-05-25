@@ -18,8 +18,7 @@ inputs:
     required: false
   useSlim:
     description: |
-      Use a lightweight renovate container without any third-party binaries.
-      Defaults to true if not set.
+      Deprecated. Add `slim` to `renovate-version` instead.
     required: false
   env-regex:
     description: |
@@ -28,7 +27,7 @@ inputs:
     required: false
   renovate-version:
     description: |
-      Renovate version to use. Defaults to latest.
+      Renovate version to use. Defaults to `slim`.
     required: false
   renovate-image:
     description: |

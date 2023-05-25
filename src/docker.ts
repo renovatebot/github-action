@@ -7,14 +7,18 @@ class Docker {
   private readonly fullTag: string;
 
   constructor(input: Input) {
-    const tag = input.getVersion();
-
     this.dockerImage = input.getDockerImage() ?? Docker.image;
-    this.fullTag = input.useSlim()
-      ? tag
-        ? `${tag}-slim`
-        : 'slim'
-      : tag ?? 'latest';
+
+    const tag = input.getVersion();
+    const slim = input.useSlim();
+
+    if (tag === 'latest' || tag === 'slim') {
+      this.fullTag = tag;
+    } else if (!tag) {
+      this.fullTag = slim ? 'slim' : 'latest';
+    } else {
+      this.fullTag = slim && !tag.endsWith('-slim') ? `${tag}-slim` : tag;
+    }
   }
 
   image(): string {

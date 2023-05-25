@@ -61,7 +61,13 @@ class Input {
   }
 
   useSlim(): boolean {
-    return core.getInput('useSlim') !== 'false';
+    const useSlim = core.getInput('useSlim');
+    if (useSlim !== 'false') {
+      core.warning(
+        "'useSlim' is deprecated. Add 'slim' to 'renovate-version' instead."
+      );
+    }
+    return useSlim !== 'false';
   }
 
   getDockerImage(): string | null {
@@ -69,8 +75,7 @@ class Input {
   }
 
   getVersion(): string | null {
-    const version = core.getInput('renovate-version');
-    return !!version && version !== '' ? version : null;
+    return core.getInput('renovate-version') || null;
   }
 
   /**
