@@ -65,8 +65,7 @@ class Input {
   }
 
   getDockerImage(): string | null {
-    const dockerImage = core.getInput('renovate-image');
-    return dockerImage ? dockerImage : null;
+    return core.getInput('renovate-image') || null;
   }
 
   getVersion(): string | null {
