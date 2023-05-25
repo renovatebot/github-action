@@ -100,6 +100,45 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
+## `renovate-image`
+
+The Renovate docker image name to use.
+If omited or `renovate-image === ''` the action will use the `renovate/renovate` docker image name otherwise.
+If a docker image name is defined, the action will use that name to pull the image.
+
+This sample will use `myproxyhub.domain.com/renovate/renovate:slim` image.
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          renovate-image: myproxyhub.domain.com/renovate/renovate
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
+This sample will use `renovate/renovate:slim` image.
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v36.0.0
+        with:
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
 ## `useSlim`
 
 If set to `false` the action will use the full renovate image instead of the slim image.

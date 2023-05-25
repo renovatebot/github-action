@@ -30,6 +30,11 @@ inputs:
     description: |
       Renovate version to use. Defaults to latest.
     required: false
+  renovate-image:
+    description: |
+      Renovate docker image name.
+      Defaults to `renovate/renovate`.
+    required: false
 runs:
   using: node16
   main: dist/index.js
