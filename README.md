@@ -83,9 +83,9 @@ If you want to use the `github-actions` manager, you must setup a [special token
 
 ### `renovate-image`
 
-The Renovate docker image name to use.
-If omited or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` docker image name otherwise.
-If a docker image name is defined, the action will use that name to pull the image.
+The Renovate Docker image name to use.
+If omited or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` Docker image name otherwise.
+If a Docker image name is defined, the action will use that name to pull the image.
 
 This sample will use `myproxyhub.domain.com/renovate/renovate:slim` image.
 
@@ -125,7 +125,7 @@ jobs:
 The Renovate version to use.
 If omitted and `useSlim !== false` the action will use the `slim` Docker tag and the `latest` tag otherwise.
 If a version is defined, the action will add `-slim` suffix to the tag if `useSlim !== false`.
-Checkout Docker Hub for available [tags](https://hub.docker.com/r/renovate/renovate/tags).
+Check [the available tags on Docker Hub](https://hub.docker.com/r/renovate/renovate/tags).
 
 This sample will use `ghcr.io/renovatebot/renovate:35.0.0-slim` image.
 
@@ -159,6 +159,15 @@ jobs:
         with:
           useSlim: false
           token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
+We recommend you pin the version of Renovate to a full version or a full checksum, and use Renovate's regex manager to create PRs to update the pinned version.
+We created a [Regex Manager Preset, UPDATE TEXT AND LINK TO POINT TO CORRECT LOCATION](https://docs.renovatebot.com/presets-regexManagers/) to help you.
+
+```json
+{
+  "extends": ["regexManagers:AAAAAAAAA"]
+}
 ```
 
 ### `useSlim`
