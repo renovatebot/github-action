@@ -13,7 +13,7 @@ GitHub Action to run Renovate self-hosted.
   - [`configurationFile`](#configurationfile)
   - [`env-regex`](#env-regex)
   - [`token`](#token)
-  - [`renovate-iamge`](#renovate-image)
+  - [`renovate-image`](#renovate-image)
   - [`renovate-version`](#renovate-version)
   - [`useSlim`](#useslim)
 - [Example](#example)
