@@ -172,7 +172,7 @@ If set to `false` the action will use the full Renovate image instead of the sli
 This example uses a Personal Access Token and will run every 15 minutes.
 The Personal Access token is configured as a GitHub secret named `RENOVATE_TOKEN`.
 This example uses the [`example/renovate-config.js`](./example/renovate-config.js) file as configuration.
-You can also see a live example of this action in my [github-renovate](https://github.com/vidavidorra/github-renovate) repository, which also includes a more [advanced configuration](https://github.com/vidavidorra/github-renovate/blob/master/src/renovate-config.ts) for updating GitHub Action workflows.
+You can also see a live example of this action in the [`vidavidorra/github-renovate` repository](https://github.com/vidavidorra/github-renovate) repository, which also includes a more [advanced configuration](https://github.com/vidavidorra/github-renovate/blob/master/src/renovate-config.ts) for updating GitHub Action workflows.
 
 **Remark** Update the action version to the most current, see [here](https://github.com/renovatebot/github-action/releases/latest) for latest release.
 
