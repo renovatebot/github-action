@@ -162,13 +162,6 @@ jobs:
 ```
 
 We recommend you pin the version of Renovate to a full version or a full checksum, and use Renovate's regex manager to create PRs to update the pinned version.
-We created a [Regex Manager Preset, UPDATE TEXT AND LINK TO POINT TO CORRECT LOCATION](https://docs.renovatebot.com/presets-regexManagers/) to help you.
-
-```json
-{
-  "extends": ["regexManagers:AAAAAAAAA"]
-}
-```
 
 ### `useSlim`
 
