@@ -1,11 +1,11 @@
 import Docker from './docker';
 import { Input } from './input';
 import { exec } from '@actions/exec';
-import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
 class Renovate {
+  static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
   private configFileMountDir = '/github-action';
 
   private docker: Docker;
@@ -67,8 +67,7 @@ class Renovate {
      *
      * Source: https://www.thegeekdiary.com/etcgroup-file-explained/
      */
-    const re = new RegExp('^docker:x:(?<groupId>[1-9][0-9]*):', 'm');
-    const match = re.exec(groups);
+    const match = Renovate.dockerGroupRegex.exec(groups);
     if (match?.groups?.groupId === undefined) {
       throw new Error(`Could not find group docker in ${groupFile}`);
     }

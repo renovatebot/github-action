@@ -74,7 +74,7 @@ class Input {
   }
 
   mountDockerSocket(): boolean {
-    return core.getInput('mount-docker-socket').toLowerCase() === 'true';
+    return core.getInput('mount-docker-socket') === 'true';
   }
 
   /**
