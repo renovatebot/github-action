@@ -220,7 +220,7 @@ Generate and download a new private key for the app, adding the contents of the 
 
 Adjust your Renovate configuration file to specify the username of your bot.
 
-Going forward we will be using the [tibdex/github-app-token](https://github.com/tibdex/github-app-token) action in order to exchange the GitHub App certificate for an access token that Renovate can use.
+Going forward we will be using the [`tibdex/github-app-token` action](https://github.com/tibdex/github-app-token) in order to exchange the GitHub App certificate for an access token that Renovate can use.
 
 The final workflow will look like this:
 
