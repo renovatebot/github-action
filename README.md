@@ -84,7 +84,7 @@ If you want to use the `github-actions` manager, you must setup a [special token
 ### `renovate-image`
 
 The Renovate Docker image name to use.
-If omited or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` Docker image name otherwise.
+If omitted or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` Docker image name otherwise.
 If a Docker image name is defined, the action will use that name to pull the image.
 
 This sample will use `myproxyhub.domain.com/renovate/renovate:slim` image.
