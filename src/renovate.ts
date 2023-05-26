@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 class Renovate {
+  static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
   private configFileMountDir = '/github-action';
 
   private docker: Docker;
@@ -31,6 +32,13 @@ class Renovate {
       );
     }
 
+    if (this.input.mountDockerSocket()) {
+      dockerArguments.push(
+        '--volume /var/run/docker.sock:/var/run/docker.sock',
+        `--group-add ${this.getDockerGroupId()}`
+      );
+    }
+
     dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
 
     const command = `docker run ${dockerArguments.join(' ')}`;
@@ -39,6 +47,32 @@ class Renovate {
     if (code !== 0) {
       new Error(`'docker run' failed with exit code ${code}.`);
     }
+  }
+
+  /**
+   * Fetch the host docker group of the GitHub Action runner.
+   *
+   * The Renovate container needs access to this group in order to have the
+   * required permissions on the Docker socket.
+   */
+  private getDockerGroupId(): string {
+    const groupFile = '/etc/group';
+    const groups = fs.readFileSync(groupFile, {
+      encoding: 'utf-8',
+    });
+
+    /**
+     * The group file has `groupname:group-password:GID:username-list` as
+     * structure and we're interested in the `GID` (the group ID).
+     *
+     * Source: https://www.thegeekdiary.com/etcgroup-file-explained/
+     */
+    const match = Renovate.dockerGroupRegex.exec(groups);
+    if (match?.groups?.groupId === undefined) {
+      throw new Error(`Could not find group docker in ${groupFile}`);
+    }
+
+    return match.groups.groupId;
   }
 
   private validateArguments(): void {
