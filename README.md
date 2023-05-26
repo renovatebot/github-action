@@ -35,20 +35,30 @@ GitHub Action to run Renovate self-hosted.
 
 ## Options
 
-Options can be passed using the inputs of this action or the corresponding environment variables. When both are passed, the input takes precedence over the environment variable. For the available environment variables see the Renovate [Self-Hosted Configuration](https://docs.renovatebot.com/self-hosted-configuration/) docs.
+Options can be passed using the inputs of this action or the corresponding environment variables.
+When both are passed, the input takes precedence over the environment variable.
+For the available environment variables, see the Renovate [Self-Hosted Configuration](https://docs.renovatebot.com/self-hosted-configuration/) docs.
 
 ### `configurationFile`
 
-Configuration file to configure Renovate. The supported configurations files can be one of the configuration files listed in the Renovate Docs for [Configuration Options](https://docs.renovatebot.com/configuration-options/) or a JavaScript file that exports a configuration object. For both of these options, an example can be found in the [example](./example) directory.
+Configuration file to configure Renovate.
+The supported configurations files:
 
-The configurations that can be done in this file consists of two parts, as listed below. Refer to the links to the [Renovate Docs](https://docs.renovatebot.com/) for all options.
+- one of the configuration files listed in the Renovate Docs for [Configuration Options](https://docs.renovatebot.com/configuration-options/)
+- or a JavaScript file that exports a configuration object
+
+For both of these options, an example can be found in the [example](./example) directory.
+
+The configurations that can be done in this file consists of two parts, as listed below.
+Refer to the links to the [Renovate Docs](https://docs.renovatebot.com/) for all options.
 
 1. [Self-Hosted Configuration Options](https://docs.renovatebot.com/self-hosted-configuration/)
 2. [Configuration Options](https://docs.renovatebot.com/configuration-options/)
 
 The [`branchPrefix`](https://docs.renovatebot.com/configuration-options/#branchprefix) option is important to configure and should be configured to a value other than the default to prevent interference with e.g. the Renovate GitHub App.
 
-If you want to use this with just the single configuration file, make sure to include the following two configuration lines. This disables the requirement of a configuration file for the repository and disables onboarding.
+If you want to use this with just the single configuration file, make sure to include the following two configuration lines.
+This disables the requirement of a configuration file for the repository and disables onboarding.
 
 ```js
   onboarding: false,
@@ -69,17 +79,21 @@ container to the docker group for socket permissions.
 
 ### `token`
 
-[Generate a personal access token](https://github.com/settings/tokens), with the `repo:public_repo` scope for only public repositories or the `repo` scope for public and private repositories, and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`. You can also create a token without a specific scope, which gives read-only access to public repositories, for testing. This token is only used by Renovate, see the [token configuration](https://docs.renovatebot.com/self-hosted-configuration/#token), and gives it access to the repositories. The name of the secret can be anything as long as it matches the argument given to the `token` option.
+[Generate a Personal Access Token](https://github.com/settings/tokens), with the `repo:public_repo` scope for only public repositories or the `repo` scope for public and private repositories, and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`.
+You can also create a token without a specific scope, which gives read-only access to public repositories, for testing.
+This token is only used by Renovate, see the [token configuration](https://docs.renovatebot.com/self-hosted-configuration/#token), and gives it access to the repositories.
+The name of the secret can be anything as long as it matches the argument given to the `token` option.
 
-Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate because it has too restrictive permissions. In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more types of Github Workflows results in `Pull Requests` that [do not trigger your `Pull Request` and `Push` CI events](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow).
+Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate because it has too restrictive permissions.
+In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more types of Github Workflows results in `Pull Requests` that [do not trigger your `Pull Request` and `Push` CI events](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow).
 
 If you want to use the `github-actions` manager, you must setup a [special token](#special-token-requirements-when-using-the-github-actions-manager) with some requirements.
 
 ### `renovate-image`
 
-The Renovate docker image name to use.
-If omited or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` docker image name otherwise.
-If a docker image name is defined, the action will use that name to pull the image.
+The Renovate Docker image name to use.
+If omitted or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` Docker image name otherwise.
+If a Docker image name is defined, the action will use that name to pull the image.
 
 This sample will use `myproxyhub.domain.com/renovate/renovate:slim` image.
 
@@ -117,9 +131,9 @@ jobs:
 ### `renovate-version`
 
 The Renovate version to use.
-If omited and `useSlim !== false` the action will use the `slim` docker tag and the `latest` tag otherwise.
-If a version is definded, the action will add `-slim` suffix to the tag if `useSlim !== false`.
-Checkout docker hub for available [tag](https://hub.docker.com/r/renovate/renovate/tags).
+If omitted and `useSlim !== false` the action will use the `slim` Docker tag and the `latest` tag otherwise.
+If a version is defined, the action will add `-slim` suffix to the tag if `useSlim !== false`.
+Check [the available tags on Docker Hub](https://hub.docker.com/r/renovate/renovate/tags).
 
 This sample will use `ghcr.io/renovatebot/renovate:35.0.0-slim` image.
 
@@ -155,14 +169,18 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
+We recommend you pin the version of Renovate to a full version or a full checksum, and use Renovate's regex manager to create PRs to update the pinned version.
+
 ### `useSlim`
 
-If set to `false` the action will use the full renovate image instead of the slim image.
+If set to `false` the action will use the full Renovate image instead of the slim image.
 
 ## Example
 
-This example uses a personal access token and will run every 15 minutes. The personal access token is configured as a GitHub secret named `RENOVATE_TOKEN`. This example uses the [`example/renovate-config.js`](./example/renovate-config.js) file as configuration.
-You can also see a live example of this action in my [github-renovate](https://github.com/vidavidorra/github-renovate) repository, which also includes a more [advanced configuration](https://github.com/vidavidorra/github-renovate/blob/master/src/renovate-config.ts) for updating GitHub Action workflows.
+This example uses a Personal Access Token and will run every 15 minutes.
+The Personal Access token is configured as a GitHub secret named `RENOVATE_TOKEN`.
+This example uses the [`example/renovate-config.js`](./example/renovate-config.js) file as configuration.
+You can also see a live example of this action in the [`vidavidorra/github-renovate` repository](https://github.com/vidavidorra/github-renovate) repository, which also includes a more [advanced configuration](https://github.com/vidavidorra/github-renovate/blob/master/src/renovate-config.ts) for updating GitHub Action workflows.
 
 **Remark** Update the action version to the most current, see [here](https://github.com/renovatebot/github-action/releases/latest) for latest release.
 
@@ -203,13 +221,14 @@ If you want to use the Renovate Action on a GitHub Enterprise instance you have 
 
 ### Example with GitHub App
 
-Instead of using a Personal Access Token (PAT) that is tied to a particular user you can use a [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps) where permissions can be even better tuned. [Create a new app](https://docs.github.com/en/developers/apps/creating-a-github-app) and configure the app permissions and your `config.js` as described in the [Renovate documentation](https://docs.renovatebot.com/modules/platform/github/#running-as-a-github-app).
+Instead of using a Personal Access Token (PAT) that is tied to a particular user you can use a [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps) where permissions can be even better tuned.
+[Create a new app](https://docs.github.com/en/developers/apps/creating-a-github-app) and configure the app permissions and your `config.js` as described in the [Renovate documentation](https://docs.renovatebot.com/modules/platform/github/#running-as-a-github-app).
 
 Generate and download a new private key for the app, adding the contents of the downloaded `.pem` file to _Secrets_ (repository settings) with the name `private_key` and app ID as a secret with name `app_id`.
 
 Adjust your Renovate configuration file to specify the username of your bot.
 
-Going forward we will be using the [tibdex/github-app-token](https://github.com/tibdex/github-app-token) action in order to exchange the GitHub App certificate for an access token that renovate can use.
+Going forward we will be using the [`tibdex/github-app-token` action](https://github.com/tibdex/github-app-token) in order to exchange the GitHub App certificate for an access token that Renovate can use.
 
 The final workflow will look like this:
 
@@ -243,7 +262,7 @@ jobs:
 
 ## Environment Variables
 
-If you wish to pass through environment variables through to the Docker Run that powers this action you need to prefix the environment variable with `RENOVATE_`.
+If you wish to pass through environment variables through to the Docker container that powers this action you need to prefix the environment variable with `RENOVATE_`.
 
 For example if you wish to pass through some credentials for a [host rule](https://docs.renovatebot.com/configuration-options/#hostrules) to the `config.js` then you should do so like this.
 
@@ -324,4 +343,4 @@ To enable debug logging, add the environment variable `LOG_LEVEL: 'debug'` to th
 ### Special token requirements when using the `github-actions` manager
 
 If you want to use the `github-actions` [manager](https://docs.renovatebot.com/modules/manager/github-actions/) in Renovate, ensure that the `token` you provide contains the `workflow` scope.
-Otherwise, GitHub does not allow Renovate to update worklow files and therefore it will be unable to create update PRs for affected packages (like `actions/checkout` or `renovatebot/github-action` itself).
+Otherwise, GitHub does not allow Renovate to update workflow files and therefore it will be unable to create update PRs for affected packages (like `actions/checkout` or `renovatebot/github-action` itself).
