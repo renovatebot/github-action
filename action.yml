@@ -35,6 +35,12 @@ inputs:
       Renovate docker image name.
       Defaults to `ghcr.io/renovate/renovate`.
     required: false
+  mount-docker-socket:
+    description: |
+      Mount the Docker socket inside the renovate container so that the commands
+      can use Docker. Also add the user inside the renovate container to the
+      docker group for socket permissions.
+    required: false
 runs:
   using: node16
   main: dist/index.js
