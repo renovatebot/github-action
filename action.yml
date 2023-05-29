@@ -33,7 +33,7 @@ inputs:
   renovate-image:
     description: |
       Renovate docker image name.
-      Defaults to `ghcr.io/renovate/renovate`.
+      Defaults to `ghcr.io/renovatebot/renovate`.
     required: false
   mount-docker-socket:
     description: |
