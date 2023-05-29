@@ -135,7 +135,7 @@ If omitted and `useSlim !== false` the action will use the `slim` Docker tag and
 If a version is defined, the action will add `-slim` suffix to the tag if `useSlim !== false`.
 Check [the available tags on Docker Hub](https://hub.docker.com/r/renovate/renovate/tags).
 
-This sample will use `ghcr.io/renovatebot/renovate:35.0.0-slim` image.
+This sample will use `ghcr.io/renovatebot/renovate:35.103.0-slim` image.
 
 ```yml
 ....
