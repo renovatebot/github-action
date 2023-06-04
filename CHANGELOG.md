@@ -1,4 +1,3 @@
 # Changelog
 
-The changelog is only available on the `release` branch.
-Please read [the `CHANGELOG.md` on the `release` branch](https://github.com/renovatebot/github-action/blob/release/CHANGELOG.md).
+You can find the changelogs on the [GitHub releases page for `renovatebot/github-action`](https://github.com/renovatebot/github-action/releases/).
