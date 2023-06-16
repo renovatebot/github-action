@@ -29,6 +29,11 @@
       "description": "Use ci semantic type for some deps",
       "matchPaths": [".github/workflows/**"],
       "semanticCommitType": "ci"
+    },
+    {
+      "description": "Use slim tags for renovate",
+      "matchDepNames": ["renovate"],
+      "extractVersion": "^(?<version>\\d+\\.\\d+\\.\\d+)-slim$"
     }
   ],
   "regexManagers": [
