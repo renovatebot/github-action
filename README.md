@@ -104,7 +104,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.5.3
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
         with:
@@ -121,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.5.3
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
         with:
@@ -144,7 +144,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.5.3
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
         with:
@@ -161,7 +161,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.5.3
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
         with:
@@ -196,7 +196,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.5.3
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
         with:
@@ -251,7 +251,7 @@ jobs:
           app_id: ${{ secrets.app_id }}
 
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.5.3
 
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
@@ -275,7 +275,7 @@ For example if you wish to pass through some credentials for a [host rule](https
        runs-on: ubuntu-latest
        steps:
          - name: Checkout
-           uses: actions/checkout@v3.3.0
+           uses: actions/checkout@v3.5.3
          - name: Self-hosted Renovate
            uses: renovatebot/github-action@v38.1.6
            with:
@@ -312,7 +312,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v3.5.3
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
         with:
