@@ -4,7 +4,7 @@
   "packageRules": [
     {
       "description": "Update references in Markdown files weekly",
-      "matchPaths": ["**/*.md"],
+      "matchFileNames": ["**/*.md"],
       "extends": ["schedule:weekly"],
       "automerge": true,
       "minimumReleaseAge": null,
@@ -27,7 +27,7 @@
     },
     {
       "description": "Use ci semantic type for some deps",
-      "matchPaths": [".github/workflows/**"],
+      "matchFileNames": [".github/workflows/**"],
       "semanticCommitType": "ci"
     },
     {
