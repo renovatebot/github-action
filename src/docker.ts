@@ -10,11 +10,7 @@ class Docker {
     const tag = input.getVersion();
 
     this.dockerImage = input.getDockerImage() ?? Docker.image;
-    this.fullTag = input.useSlim()
-      ? tag
-        ? `${tag}-slim`
-        : 'slim'
-      : tag ?? 'full';
+    this.fullTag = tag ?? 'latest';
   }
 
   image(): string {
