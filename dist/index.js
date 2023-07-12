@@ -3948,7 +3948,7 @@ class Docker {
             ? tag
                 ? `${tag}-slim`
                 : 'slim'
-            : tag ?? 'latest';
+            : tag ?? 'full';
     }
     image() {
         return `${this.dockerImage}:${this.fullTag}`;
