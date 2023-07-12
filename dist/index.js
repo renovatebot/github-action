@@ -3944,11 +3944,7 @@ class Docker {
     constructor(input) {
         const tag = input.getVersion();
         this.dockerImage = input.getDockerImage() ?? Docker.image;
-        this.fullTag = input.useSlim()
-            ? tag
-                ? `${tag}-slim`
-                : 'slim'
-            : tag ?? 'full';
+        this.fullTag = tag ?? 'latest';
     }
     image() {
         return `${this.dockerImage}:${this.fullTag}`;
@@ -4079,9 +4075,6 @@ class Input {
             };
         }
         return null;
-    }
-    useSlim() {
-        return core.getInput('useSlim') !== 'false';
     }
     getDockerImage() {
         return core.getInput('renovate-image') || null;
