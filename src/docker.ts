@@ -14,7 +14,7 @@ class Docker {
       ? tag
         ? `${tag}-slim`
         : 'slim'
-      : tag ?? 'latest';
+      : tag ?? 'full';
   }
 
   image(): string {
