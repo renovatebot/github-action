@@ -16,7 +16,6 @@ GitHub Action to run Renovate self-hosted.
   - [`token`](#token)
   - [`renovate-image`](#renovate-image)
   - [`renovate-version`](#renovate-version)
-  - [`useSlim`](#useslim)
 - [Example](#example)
 - [Environment Variables](#environment-variables)
   - [Passing other environment variables](#passing-other-environment-variables)
@@ -97,7 +96,7 @@ The Renovate Docker image name to use.
 If omitted or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` Docker image name otherwise.
 If a Docker image name is defined, the action will use that name to pull the image.
 
-This sample will use `myproxyhub.domain.com/renovate/renovate:slim` image.
+This sample will use `myproxyhub.domain.com/renovate/renovate` image.
 
 ```yml
 ....
@@ -114,7 +113,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
-This sample will use `ghcr.io/renovatebot/renovate:slim` image.
+This sample will use `ghcr.io/renovatebot/renovate` image.
 
 ```yml
 ....
@@ -133,11 +132,10 @@ jobs:
 ### `renovate-version`
 
 The Renovate version to use.
-If omitted and `useSlim !== false` the action will use the `slim` Docker tag and the `latest` tag otherwise.
-If a version is defined, the action will add `-slim` suffix to the tag if `useSlim !== false`.
+If omitted the action will use the `latest` Docker tag.
 Check [the available tags on Docker Hub](https://hub.docker.com/r/renovate/renovate/tags).
 
-This sample will use `ghcr.io/renovatebot/renovate:35.103.0-slim` image.
+This sample will use `ghcr.io/renovatebot/renovate:35.103.0` image.
 
 ```yml
 ....
@@ -150,11 +148,11 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
         with:
-          renovate-version: 35.0.0
+          renovate-version: 35.103.0
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
-This sample will use `ghcr.io/renovatebot/renovate:latest` image.
+This sample will use `ghcr.io/renovatebot/renovate:full` image.
 
 ```yml
 ....
@@ -167,15 +165,12 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v38.1.6
         with:
-          useSlim: false
+          renovate-version: full
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
 We recommend you pin the version of Renovate to a full version or a full checksum, and use Renovate's regex manager to create PRs to update the pinned version.
-
-### `useSlim`
-
-If set to `false` the action will use the full Renovate image instead of the slim image.
+See `.github/workflows/build.yml` for an example of how to do this.
 
 ## Example
 

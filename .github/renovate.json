@@ -29,11 +29,6 @@
       "description": "Use ci semantic type for some deps",
       "matchFileNames": [".github/workflows/**"],
       "semanticCommitType": "ci"
-    },
-    {
-      "description": "Use slim tags for renovate",
-      "matchDepNames": ["renovate"],
-      "extractVersion": "^(?<version>\\d+\\.\\d+\\.\\d+)-slim$"
     }
   ],
   "regexManagers": [
@@ -44,6 +39,12 @@
       ],
       "depNameTemplate": "renovatebot/github-action",
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "fileMatch": ["^README\\.md$"],
+      "matchStrings": ["renovate-version: (?<currentValue>[^\\s]+)"],
+      "depNameTemplate": "ghcr.io/renovatebot/renovate",
+      "datasourceTemplate": "docker"
     }
   ]
 }

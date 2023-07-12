@@ -60,10 +60,6 @@ class Input {
     return null;
   }
 
-  useSlim(): boolean {
-    return core.getInput('useSlim') !== 'false';
-  }
-
   getDockerImage(): string | null {
     return core.getInput('renovate-image') || null;
   }
