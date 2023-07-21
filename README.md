@@ -16,6 +16,8 @@ GitHub Action to run Renovate self-hosted.
   - [`token`](#token)
   - [`renovate-image`](#renovate-image)
   - [`renovate-version`](#renovate-version)
+  - [`docker-cmd-file`](#docker-cmd-file)
+  - [`docker-user`](#docker-user)
 - [Example](#example)
 - [Environment Variables](#environment-variables)
   - [Passing other environment variables](#passing-other-environment-variables)
@@ -171,6 +173,51 @@ jobs:
 
 We recommend you pin the version of Renovate to a full version or a full checksum, and use Renovate's regex manager to create PRs to update the pinned version.
 See `.github/workflows/build.yml` for an example of how to do this.
+
+### `docker-cmd-file`
+
+Specify a command to run when the image start. By default the image run
+`renovate`
+
+This option is useful to customize the image before running `renovate`
+
+For example you can create a simple script like this one (let's call it
+`renovate-entrypoint.sh`)
+
+```sh
+#!/bin/bash
+
+apt update
+
+apt install -y build-essential libpq-dev
+
+runuser -u ubuntu renovate
+```
+
+Now use this action
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.5.3
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v39.0.0
+        with:
+          docker-cmd-file: .github/renovate-entrypoint.sh
+          docker-user: root
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
+### `docker-user`
+
+Specify a user (or user-id) to run docker command.
+
+You can use it with [`docker-cmd-file`](#docker-cmd-file) in order to start the
+image as root, do some customization and switch back to a unprivileged user.
 
 ## Example
 

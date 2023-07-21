@@ -7,6 +7,7 @@ import path from 'path';
 class Renovate {
   static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
   private configFileMountDir = '/github-action';
+  private entrypointMountDir = '/';
 
   private docker: Docker;
 
@@ -39,7 +40,25 @@ class Renovate {
       );
     }
 
+    const docker_cmd_file = this.input.getDockerCmdFile();
+    let docker_cmd = null;
+    if (docker_cmd_file !== null) {
+      const baseName = path.basename(docker_cmd_file);
+      const mountPath = path.join(this.entrypointMountDir, baseName);
+      dockerArguments.push(`--volume ${docker_cmd_file}:${mountPath}`);
+      docker_cmd = mountPath;
+    }
+
+    const docker_user = this.input.getDockerUser();
+    if (docker_user !== null) {
+      dockerArguments.push(`--user ${docker_user}`);
+    }
+
     dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
+
+    if (docker_cmd !== null) {
+      dockerArguments.push(docker_cmd);
+    }
 
     const command = `docker run ${dockerArguments.join(' ')}`;
 
