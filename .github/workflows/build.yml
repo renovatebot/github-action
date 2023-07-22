@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Lint commit messages
-        uses: wagoid/commitlint-github-action@456526eec71276a59e74aafdfe06a9632ac2eee1 # v5.4.1
+        uses: wagoid/commitlint-github-action@295fb249a86603a0cf87ae19aacf64c0ba8b87fc # v5.4.2
         continue-on-error: true
 
   lint:
