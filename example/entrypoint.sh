@@ -2,6 +2,6 @@
 
 set -e
 
-apt update && apt install -y sl
+install-apt sl
 
 exec runuser -u ubuntu renovate
