@@ -324,7 +324,7 @@ jobs:
 
 In some cases, Renovate can update PRs more frequently than you expect. The repository cache helps to avoid this issue. To set this up in GitHub Actions, you need a few things:
 
-1. Enable the `repositoryCache` option via env vars or renovate.json.
+1. Enable the `repositoryCache` [option](https://docs.renovatebot.com/self-hosted-configuration/#repositorycache) via env vars or renovate.json.
 2. Persist `/tmp/renovate/cache/renovate/repository` as an artifact.
 4. Restore the artifact before renovate runs.
 
