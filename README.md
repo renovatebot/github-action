@@ -322,13 +322,15 @@ jobs:
 
 ## Persisting the repository cache
 
-In some cases, Renovate can update PRs more frequently than you expect. The repository cache helps to avoid this issue. To set this up in GitHub Actions, you need a few things:
+In some cases, Renovate can update PRs more frequently than you expect. The [repository cache](https://docs.renovatebot.com/self-hosted-configuration/#repositorycache) can help with this issue. You need a few things to persist this cache in GitHub actions:
 
 1. Enable the `repositoryCache` [option](https://docs.renovatebot.com/self-hosted-configuration/#repositorycache) via env vars or renovate.json.
 2. Persist `/tmp/renovate/cache/renovate/repository` as an artifact.
 4. Restore the artifact before renovate runs.
 
-Here's a workflow which does this:
+Below is a workflow example with caching.
+
+Note that while archiving and compressing the cache is more performant, especially if you need to handle lots of files within the cache, it's not strictly necessary. You could simplify this workflow and only upload and download a single artifact file (or directory) with a direct path (e.g. `/tmp/renovate/cache/renovate/repository/github/$org/$repo.json`). However, you'll still need to set the correct permissions with `chown` as shown in the example.
 
 ```yml
 name: Renovate
@@ -379,7 +381,7 @@ jobs:
           path: cache-download
 
       # Using tar to compress and extract the archive isn't strictly necessary, but it can improve
-      # performance significantly when uploading the artifact. 
+      # performance significantly when uploading artifacts with lots of files. 
       - name: Extract renovate cache
         run: |
           set -x
@@ -395,8 +397,8 @@ jobs:
 
           # Unfortunately, the permissions expected within renovate's docker container
           # are different than the ones given after the cache is restored. We have to
-          # change ownership to solve this. We need to have correct permissions in the
-          # entire /tmp/renovate tree, not just the section with the repo cache.
+          # change ownership to solve this. We also need to have correct permissions in
+          # the entire /tmp/renovate tree, not just the section with the repo cache.
           sudo chown -R runneradmin:root /tmp/renovate/
           ls -R $cache_dir
 
@@ -423,9 +425,9 @@ jobs:
         with:
           name: ${{ env.cache_key }}
           path: ${{ env.cache_archive }}
-          # Since this is created frequently, we don't need to keep it for long.
-          # Just make sure this value is large enough that multiple renovate runs
-          # can happen before older archives are deleted.
+          # Since this is updated and restored on every run, we don't need to keep it
+          # for long. Just make sure this value is large enough that multiple renovate
+          # runs can happen before older cache archives are deleted.
           retention-days: 1
 ```
 
