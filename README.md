@@ -320,6 +320,115 @@ jobs:
           AWS_TOKEN: ${{ secrets.AWS_TOKEN }}
 ```
 
+## Persisting the repository cache
+
+In some cases, Renovate can update PRs more frequently than you expect. The repository cache helps to avoid this issue. To set this up in GitHub Actions, you need a few things:
+
+1. Enable the `repositoryCache` option via env vars or renovate.json.
+2. Persist `/tmp/renovate/cache/renovate/repository` as an artifact.
+4. Restore the artifact before renovate runs.
+
+Here's a workflow which does this:
+
+```yml
+name: Renovate
+on:
+  # This lets you dispatch a renovate job with different cache options if you want to reset or disable the cache manually.
+  workflow_dispatch:
+    inputs:
+      repoCache:
+        description: 'Reset or disable the cache?'
+        type: choice
+        default: enabled
+        options:
+          - enabled
+          - disabled
+          - reset
+  schedule:
+    # Run every 30 minutes:
+    - cron: '0,30 * * * *'
+
+# Adding these as env variables makes it easy to re-use them in different steps and in bash.
+env:
+  cache_archive: renovate_cache.tar.gz
+  # This is the dir renovate provides -- if we set our own directory via cacheDir, we can run into permissions issues.
+  # It is also possible to cache a higher level of the directory, but it has minimal benefit. While renovate execution
+  # time gets faster, it also takes longer to upload the cache as it grows bigger.
+  cache_dir: /tmp/renovate/cache/renovate/repository
+  # This can be manually changed to bust the cache if neccessary.
+  cache_key: renovate-cache
+
+jobs:
+  renovate:
+    name: Renovate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # This third party action allows you to download the cache artifact from different workflow runs
+      # Note that actions/cache doesn't work well because the cache key would need to be computed from
+      # a file within the cache, meaning there would never be any data to restore. With other keys, the
+      # cache wouldn't necessarily upload when it changes. actions/download-artifact also doesn't work
+      # because it only handles artifacts uploaded in the same run, and we want to restore from the
+      # previous successful run.
+      - uses: dawidd6/action-download-artifact@v2
+        if: github.event.inputs.repoCache != 'disabled'
+        continue-on-error: true
+        with:
+          name: ${{ env.cache_key }}
+          path: cache-download
+
+      # Using tar to compress and extract the archive isn't strictly necessary, but it can improve
+      # performance significantly when uploading the artifact. 
+      - name: Extract renovate cache
+        run: |
+          set -x
+          # Skip if no cache is set, such as the first time it runs.
+          if [ ! -d cache-download ] ; then
+            echo "No cache found."
+            exit 0
+          fi
+
+          # Make sure the directory exists, and extract it there. Note that it's nested in the download directory.
+          mkdir -p $cache_dir
+          tar -xzf cache-download/$cache_archive -C $cache_dir
+
+          # Unfortunately, the permissions expected within renovate's docker container
+          # are different than the ones given after the cache is restored. We have to
+          # change ownership to solve this. We need to have correct permissions in the
+          # entire /tmp/renovate tree, not just the section with the repo cache.
+          sudo chown -R runneradmin:root /tmp/renovate/
+          ls -R $cache_dir
+
+      - uses: renovatebot/github-action@v39.0.1
+        with:
+          configurationFile: renovate.json5
+          token: ${{ secrets.RENOVATE_TOKEN }}
+          renovate-version: 36.31.0
+        env:
+          # This enables the cache -- if this is set, it's not necessary to add it to renovate.json.
+          RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
+
+      # Compression helps performance in the upload step!
+      - name: Compress renovate cache
+        run: |
+          ls $cache_dir
+          # The -C is important -- otherwise we end up extracting the files with
+          # their full path, ultimately leading to a nested directory situation.
+          # To solve *that*, we'd have to extract to root (/), which isn't safe.
+          tar -czvf $cache_archive -C $cache_dir .
+
+      - uses: actions/upload-artifact@v3
+        if: github.event.inputs.repoCache != 'disabled'
+        with:
+          name: ${{ env.cache_key }}
+          path: ${{ env.cache_archive }}
+          # Since this is created frequently, we don't need to keep it for long.
+          # Just make sure this value is large enough that multiple renovate runs
+          # can happen before older archives are deleted.
+          retention-days: 1
+```
+
 ## Troubleshooting
 
 ### Debug logging
