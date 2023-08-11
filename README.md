@@ -327,7 +327,7 @@ In some cases, Renovate can update PRs more frequently than you expect. The [rep
 
 1. Enable the `repositoryCache` [option](https://docs.renovatebot.com/self-hosted-configuration/#repositorycache) via env vars or renovate.json.
 2. Persist `/tmp/renovate/cache/renovate/repository` as an artifact.
-4. Restore the artifact before renovate runs.
+3. Restore the artifact before renovate runs.
 
 Below is a workflow example with caching.
 
@@ -382,7 +382,7 @@ jobs:
           path: cache-download
 
       # Using tar to compress and extract the archive isn't strictly necessary, but it can improve
-      # performance significantly when uploading artifacts with lots of files. 
+      # performance significantly when uploading artifacts with lots of files.
       - name: Extract renovate cache
         run: |
           set -x
