@@ -19,6 +19,7 @@ GitHub Action to run Renovate self-hosted.
 - [Example](#example)
 - [Environment Variables](#environment-variables)
   - [Passing other environment variables](#passing-other-environment-variables)
+- [Persisting the Repository Cache](#persisting-the-repository-cache)
 - [Troubleshooting](#troubleshooting)
   - [Debug Logging](#debug-logging)
   - [Special token requirements when using the `github-actions` manager](#special-token-requirements-when-using-the-github-actions-manager)
