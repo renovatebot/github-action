@@ -136,7 +136,7 @@ The Renovate version to use.
 If omitted the action will use the `latest` Docker tag.
 Check [the available tags on Docker Hub](https://hub.docker.com/r/renovate/renovate/tags).
 
-This sample will use `ghcr.io/renovatebot/renovate:36.40.3` image.
+This sample will use `ghcr.io/renovatebot/renovate:36.42.4` image.
 
 ```yml
 ....
@@ -149,7 +149,7 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v39.0.1
         with:
-          renovate-version: 36.40.3
+          renovate-version: 36.42.4
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
