@@ -176,13 +176,16 @@ See `.github/workflows/build.yml` for an example of how to do this.
 
 ### `docker-cmd-file`
 
-Specify a command to run when the image start. By default the image run
-`renovate`
-
-This option is useful to customize the image before running `renovate`
+Specify a command to run when the image start.
+By default the image run
+`renovate`.
+This option is useful to customize the image before running `renovate`.
+It must be an existing executable file on the local system.
+It will be mounted to the docker container.
 
 For example you can create a simple script like this one (let's call it
-`renovate-entrypoint.sh`)
+`renovate-entrypoint.sh`).
+
 
 ```sh
 #!/bin/bash
