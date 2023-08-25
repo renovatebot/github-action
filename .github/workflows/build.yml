@@ -93,6 +93,14 @@ jobs:
         with:
           configurationFile: ${{ matrix.configurationFile }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
+
+      - name: Renovate test with entrypoint
+        uses: ./
+        env:
+          LOG_LEVEL: debug
+        with:
+          configurationFile: ${{ matrix.configurationFile }}
+          renovate-version: ${{ env.RENOVATE_VERSION }}
           docker-cmd-file: example/entrypoint.sh
           docker-user: root
 
