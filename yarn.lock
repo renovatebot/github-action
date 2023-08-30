@@ -787,10 +787,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
-"@types/node@16.18.43":
-  version "16.18.43"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.43.tgz#580905f150e1008474bc9bd5a098b82eddc1b6c8"
-  integrity sha512-YFpgPKPRcwYbeNOimfu70B+TVJe6tr88WiW/TzEldkwGxQXrmabpU+lDjrFlNqdqIi3ON0o69EQBW62VH4MIxw==
+"@types/node@16.18.44":
+  version "16.18.44"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.44.tgz#3c3ea2a832014b869f0f370630d98bb026171e76"
+  integrity sha512-PZXtT+wqSMHnLPVExTh+tMt1VK+GvjRLsGZMbcQ4Mb/cG63xJig/TUmgrDa9aborl2i22UnpIzHYNu7s97NbBQ==
 
 "@types/node@20.4.7":
   version "20.4.7"
