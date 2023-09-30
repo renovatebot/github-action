@@ -43,7 +43,7 @@
     "@commitlint/cli": "17.7.1",
     "@commitlint/config-conventional": "17.7.0",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "9.0.6",
+    "@semantic-release/github": "9.0.7",
     "@semantic-release/npm": "10.0.6",
     "@tsconfig/node16": "16.1.1",
     "@types/node": "16.18.53",
