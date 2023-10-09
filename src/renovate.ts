@@ -40,7 +40,7 @@ class Renovate {
     }
 
     const docker_cmd_file = this.input.getDockerCmdFile();
-    let docker_cmd = null;
+    let docker_cmd: string | null = null;
     if (docker_cmd_file !== null) {
       const baseName = path.basename(docker_cmd_file);
       const mountPath = path.join('/', baseName);
