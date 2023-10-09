@@ -31,8 +31,9 @@
       "semanticCommitType": "ci"
     }
   ],
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": ["^README\\.md$"],
       "matchStrings": [
         "uses: renovatebot/github-action@(?<currentValue>[^\\s]+)"
@@ -41,6 +42,7 @@
       "datasourceTemplate": "github-releases"
     },
     {
+      "customType": "regex",
       "fileMatch": ["^README\\.md$"],
       "matchStrings": ["renovate-version: (?<currentValue>[^\\s]+)"],
       "depNameTemplate": "ghcr.io/renovatebot/renovate",

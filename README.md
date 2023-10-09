@@ -21,6 +21,7 @@ GitHub Action to run Renovate self-hosted.
 - [Example](#example)
 - [Environment Variables](#environment-variables)
   - [Passing other environment variables](#passing-other-environment-variables)
+- [Persisting the Repository Cache](#persisting-the-repository-cache)
 - [Troubleshooting](#troubleshooting)
   - [Debug Logging](#debug-logging)
   - [Special token requirements when using the `github-actions` manager](#special-token-requirements-when-using-the-github-actions-manager)
@@ -154,9 +155,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v39.0.0
+        uses: renovatebot/github-action@v39.0.5
         with:
           renovate-image: myproxyhub.domain.com/renovate/renovate
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -171,9 +172,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v39.0.0
+        uses: renovatebot/github-action@v39.0.5
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
@@ -184,7 +185,7 @@ The Renovate version to use.
 If omitted the action will use the `latest` Docker tag.
 Check [the available tags on Docker Hub](https://hub.docker.com/r/renovate/renovate/tags).
 
-This sample will use `ghcr.io/renovatebot/renovate:35.103.0` image.
+This sample will use `ghcr.io/renovatebot/renovate:36.107.1` image.
 
 ```yml
 ....
@@ -193,11 +194,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v39.0.0
+        uses: renovatebot/github-action@v39.0.5
         with:
-          renovate-version: 35.103.0
+          renovate-version: 36.107.1
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
@@ -210,9 +211,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v39.0.0
+        uses: renovatebot/github-action@v39.0.5
         with:
           renovate-version: full
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -242,9 +243,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v39.0.0
+        uses: renovatebot/github-action@v39.0.5
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -257,7 +258,7 @@ If you want to use the Renovate Action on a GitHub Enterprise instance you have 
 ```yml
 ....
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v39.0.0
+        uses: renovatebot/github-action@v39.0.5
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -297,10 +298,10 @@ jobs:
           app_id: ${{ secrets.app_id }}
 
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v39.0.0
+        uses: renovatebot/github-action@v39.0.5
         with:
           configurationFile: example/renovate-config.js
           token: '${{ steps.get_token.outputs.token }}'
@@ -321,9 +322,9 @@ For example if you wish to pass through some credentials for a [host rule](https
        runs-on: ubuntu-latest
        steps:
          - name: Checkout
-           uses: actions/checkout@v3.5.3
+           uses: actions/checkout@v3.6.0
          - name: Self-hosted Renovate
-           uses: renovatebot/github-action@v39.0.0
+           uses: renovatebot/github-action@v39.0.5
            with:
              configurationFile: example/renovate-config.js
              token: ${{ secrets.RENOVATE_TOKEN }}
@@ -358,15 +359,126 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v3.6.0
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v39.0.0
+        uses: renovatebot/github-action@v39.0.5
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
           env-regex: "^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|AWS_TOKEN)$"
         env:
           AWS_TOKEN: ${{ secrets.AWS_TOKEN }}
+```
+
+## Persisting the repository cache
+
+In some cases, Renovate can update PRs more frequently than you expect. The [repository cache](https://docs.renovatebot.com/self-hosted-configuration/#repositorycache) can help with this issue. You need a few things to persist this cache in GitHub actions:
+
+1. Enable the `repositoryCache` [option](https://docs.renovatebot.com/self-hosted-configuration/#repositorycache) via env vars or renovate.json.
+2. Persist `/tmp/renovate/cache/renovate/repository` as an artifact.
+3. Restore the artifact before renovate runs.
+
+Below is a workflow example with caching.
+
+Note that while archiving and compressing the cache is more performant, especially if you need to handle lots of files within the cache, it's not strictly necessary. You could simplify this workflow and only upload and download a single artifact file (or directory) with a direct path (e.g. `/tmp/renovate/cache/renovate/repository/github/$org/$repo.json`). However, you'll still need to set the correct permissions with `chown` as shown in the example.
+
+```yml
+name: Renovate
+on:
+  # This lets you dispatch a renovate job with different cache options if you want to reset or disable the cache manually.
+  workflow_dispatch:
+    inputs:
+      repoCache:
+        description: 'Reset or disable the cache?'
+        type: choice
+        default: enabled
+        options:
+          - enabled
+          - disabled
+          - reset
+  schedule:
+    # Run every 30 minutes:
+    - cron: '0,30 * * * *'
+
+# Adding these as env variables makes it easy to re-use them in different steps and in bash.
+env:
+  cache_archive: renovate_cache.tar.gz
+  # This is the dir renovate provides -- if we set our own directory via cacheDir, we can run into permissions issues.
+  # It is also possible to cache a higher level of the directory, but it has minimal benefit. While renovate execution
+  # time gets faster, it also takes longer to upload the cache as it grows bigger.
+  cache_dir: /tmp/renovate/cache/renovate/repository
+  # This can be manually changed to bust the cache if neccessary.
+  cache_key: renovate-cache
+
+jobs:
+  renovate:
+    name: Renovate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # This third party action allows you to download the cache artifact from different workflow runs
+      # Note that actions/cache doesn't work well because the cache key would need to be computed from
+      # a file within the cache, meaning there would never be any data to restore. With other keys, the
+      # cache wouldn't necessarily upload when it changes. actions/download-artifact also doesn't work
+      # because it only handles artifacts uploaded in the same run, and we want to restore from the
+      # previous successful run.
+      - uses: dawidd6/action-download-artifact@v2
+        if: github.event.inputs.repoCache != 'disabled'
+        continue-on-error: true
+        with:
+          name: ${{ env.cache_key }}
+          path: cache-download
+
+      # Using tar to compress and extract the archive isn't strictly necessary, but it can improve
+      # performance significantly when uploading artifacts with lots of files.
+      - name: Extract renovate cache
+        run: |
+          set -x
+          # Skip if no cache is set, such as the first time it runs.
+          if [ ! -d cache-download ] ; then
+            echo "No cache found."
+            exit 0
+          fi
+
+          # Make sure the directory exists, and extract it there. Note that it's nested in the download directory.
+          mkdir -p $cache_dir
+          tar -xzf cache-download/$cache_archive -C $cache_dir
+
+          # Unfortunately, the permissions expected within renovate's docker container
+          # are different than the ones given after the cache is restored. We have to
+          # change ownership to solve this. We also need to have correct permissions in
+          # the entire /tmp/renovate tree, not just the section with the repo cache.
+          sudo chown -R runneradmin:root /tmp/renovate/
+          ls -R $cache_dir
+
+      - uses: renovatebot/github-action@v39.0.5
+        with:
+          configurationFile: renovate.json5
+          token: ${{ secrets.RENOVATE_TOKEN }}
+          renovate-version: 36.107.1
+        env:
+          # This enables the cache -- if this is set, it's not necessary to add it to renovate.json.
+          RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
+
+      # Compression helps performance in the upload step!
+      - name: Compress renovate cache
+        run: |
+          ls $cache_dir
+          # The -C is important -- otherwise we end up extracting the files with
+          # their full path, ultimately leading to a nested directory situation.
+          # To solve *that*, we'd have to extract to root (/), which isn't safe.
+          tar -czvf $cache_archive -C $cache_dir .
+
+      - uses: actions/upload-artifact@v3
+        if: github.event.inputs.repoCache != 'disabled'
+        with:
+          name: ${{ env.cache_key }}
+          path: ${{ env.cache_archive }}
+          # Since this is updated and restored on every run, we don't need to keep it
+          # for long. Just make sure this value is large enough that multiple renovate
+          # runs can happen before older cache archives are deleted.
+          retention-days: 1
 ```
 
 ## Troubleshooting
@@ -378,7 +490,7 @@ To enable debug logging, add the environment variable `LOG_LEVEL: 'debug'` to th
 
 ```yml
 - name: Self-hosted Renovate
-  uses: renovatebot/github-action@v39.0.0
+  uses: renovatebot/github-action@v39.0.5
   with:
     configurationFile: example/renovate-config.js
     token: ${{ secrets.RENOVATE_TOKEN }}
