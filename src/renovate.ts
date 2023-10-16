@@ -39,24 +39,24 @@ class Renovate {
       );
     }
 
-    const docker_cmd_file = this.input.getDockerCmdFile();
-    let docker_cmd: string | null = null;
-    if (docker_cmd_file !== null) {
-      const baseName = path.basename(docker_cmd_file);
+    const dockerCmdFile = this.input.getDockerCmdFile();
+    let dockerCmd: string | null = null;
+    if (dockerCmdFile !== null) {
+      const baseName = path.basename(dockerCmdFile);
       const mountPath = `/${baseName}`;
-      dockerArguments.push(`--volume ${docker_cmd_file}:${mountPath}`);
-      docker_cmd = mountPath;
+      dockerArguments.push(`--volume ${dockerCmdFile}:${mountPath}`);
+      dockerCmd = mountPath;
     }
 
-    const docker_user = this.input.getDockerUser();
-    if (docker_user !== null) {
-      dockerArguments.push(`--user ${docker_user}`);
+    const dockerUser = this.input.getDockerUser();
+    if (dockerUser !== null) {
+      dockerArguments.push(`--user ${dockerUser}`);
     }
 
     dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
 
-    if (docker_cmd !== null) {
-      dockerArguments.push(docker_cmd);
+    if (dockerCmd !== null) {
+      dockerArguments.push(dockerCmd);
     }
 
     const command = `docker run ${dockerArguments.join(' ')}`;
