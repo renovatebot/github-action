@@ -36,6 +36,15 @@ inputs:
       can use Docker. Also add the user inside the renovate container to the
       docker group for socket permissions.
     required: false
+  docker-cmd-file:
+    description: |
+      Override docker command. Default command is `renovate`
+    required: false
+  docker-user:
+    description: |
+      Docker user. Default to an unprivileged user
+    required: false
+
 runs:
   using: node16
   main: dist/index.js

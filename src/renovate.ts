@@ -39,7 +39,25 @@ class Renovate {
       );
     }
 
+    const dockerCmdFile = this.input.getDockerCmdFile();
+    let dockerCmd: string | null = null;
+    if (dockerCmdFile !== null) {
+      const baseName = path.basename(dockerCmdFile);
+      const mountPath = `/${baseName}`;
+      dockerArguments.push(`--volume ${dockerCmdFile}:${mountPath}`);
+      dockerCmd = mountPath;
+    }
+
+    const dockerUser = this.input.getDockerUser();
+    if (dockerUser !== null) {
+      dockerArguments.push(`--user ${dockerUser}`);
+    }
+
     dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
+
+    if (dockerCmd !== null) {
+      dockerArguments.push(dockerCmd);
+    }
 
     const command = `docker run ${dockerArguments.join(' ')}`;
 
