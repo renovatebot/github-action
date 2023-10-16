@@ -26978,6 +26978,13 @@ class Input {
     mountDockerSocket() {
         return core.getInput('mount-docker-socket') === 'true';
     }
+    getDockerCmdFile() {
+        const cmdFile = core.getInput('docker-cmd-file');
+        return !!cmdFile && cmdFile !== '' ? path_1.default.resolve(cmdFile) : null;
+    }
+    getDockerUser() {
+        return core.getInput('docker-user') || null;
+    }
     /**
      * Convert to environment variables.
      *
@@ -27047,7 +27054,22 @@ class Renovate {
         if (this.input.mountDockerSocket()) {
             dockerArguments.push('--volume /var/run/docker.sock:/var/run/docker.sock', `--group-add ${this.getDockerGroupId()}`);
         }
+        const dockerCmdFile = this.input.getDockerCmdFile();
+        let dockerCmd = null;
+        if (dockerCmdFile !== null) {
+            const baseName = path_1.default.basename(dockerCmdFile);
+            const mountPath = `/${baseName}`;
+            dockerArguments.push(`--volume ${dockerCmdFile}:${mountPath}`);
+            dockerCmd = mountPath;
+        }
+        const dockerUser = this.input.getDockerUser();
+        if (dockerUser !== null) {
+            dockerArguments.push(`--user ${dockerUser}`);
+        }
         dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
+        if (dockerCmd !== null) {
+            dockerArguments.push(dockerCmd);
+        }
         const command = `docker run ${dockerArguments.join(' ')}`;
         const code = await (0, exec_1.exec)(command);
         if (code !== 0) {
