@@ -43,7 +43,7 @@ class Renovate {
     let docker_cmd: string | null = null;
     if (docker_cmd_file !== null) {
       const baseName = path.basename(docker_cmd_file);
-      const mountPath = path.join('/', baseName);
+      const mountPath = `/${baseName}`;
       dockerArguments.push(`--volume ${docker_cmd_file}:${mountPath}`);
       docker_cmd = mountPath;
     }
