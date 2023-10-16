@@ -73,6 +73,15 @@ class Input {
     return core.getInput('mount-docker-socket') === 'true';
   }
 
+  getDockerCmdFile(): string | null {
+    const cmdFile = core.getInput('docker-cmd-file');
+    return !!cmdFile && cmdFile !== '' ? path.resolve(cmdFile) : null;
+  }
+
+  getDockerUser(): string | null {
+    return core.getInput('docker-user') || null;
+  }
+
   /**
    * Convert to environment variables.
    *
