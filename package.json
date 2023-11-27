@@ -62,7 +62,7 @@
     "rimraf": "5.0.5",
     "semantic-release": "21.1.2",
     "ts-node": "10.9.1",
-    "typescript": "5.2.2"
+    "typescript": "5.3.2"
   },
   "packageManager": "yarn@1.22.21"
 }
