@@ -44,6 +44,11 @@ inputs:
     description: |
       Docker user. Default to an unprivileged user
     required: false
+  docker-volume-mounts:
+    description: |
+      Docker volume mounts. Default to /tmp:/tmp
+    default: /tmp:/tmp
+    required: false
 
 runs:
   using: node16
