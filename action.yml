@@ -44,7 +44,7 @@ inputs:
     description: |
       Docker user. Default to an unprivileged user
     required: false
-  docker-volume-mounts:
+  docker-volumes:
     description: |
       Docker volume mounts. Default to /tmp:/tmp
     default: /tmp:/tmp

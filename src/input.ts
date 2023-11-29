@@ -84,7 +84,7 @@ class Input {
 
   getDockerVolumeMounts(): string[] {
     return core
-      .getInput('docker-volume-mounts')
+      .getInput('docker-volumes')
       .split(';')
       .map((v) => v.trim())
       .filter((v) => v.length !== 0);

@@ -53,9 +53,9 @@ class Renovate {
       dockerArguments.push(`--user ${dockerUser}`);
     }
 
-    this.input
-      .getDockerVolumeMounts()
-      .forEach((v) => dockerArguments.push(`--volume ${v}`));
+    for (const volumeMount of this.input.getDockerVolumeMounts()) {
+      dockerArguments.push(`--volume ${volumeMount}`);
+    }
 
     dockerArguments.push('--rm', this.docker.image());
 

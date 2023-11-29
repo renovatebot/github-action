@@ -13,7 +13,7 @@ GitHub Action to run Renovate self-hosted.
   - [`configurationFile`](#configurationfile)
   - [`docker-cmd-file`](#docker-cmd-file)
   - [`docker-user`](#docker-user)
-  - [`docker-volume-mounts`](#docker-volume-mounts)
+  - [`docker-volumes`](#docker-volumes)
   - [`env-regex`](#env-regex)
   - [`mount-docker-socket`](#mount-docker-socket)
   - [`token`](#token)
@@ -115,9 +115,10 @@ Specify a user (or user-id) to run docker command.
 You can use it with [`docker-cmd-file`](#docker-cmd-file) in order to start the
 image as root, do some customization and switch back to a unprivileged user.
 
-### `docker-volume-mounts`
+### `docker-volumes`
 
-Specify volume mounts. Defaults to `/tmp:/tmp`. The volume mounts are separated through `;`.
+Specify volume mounts. Defaults to `/tmp:/tmp`.
+The volume mounts are separated through `;`.
 
 This sample will mount `/tmp:/tmp`, `/home:/home` and `/foo:/bar`.
 
@@ -133,7 +134,7 @@ jobs:
         uses: renovatebot/github-action@v39.1.3
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
-          docker-volume-mounts: |
+          docker-volumes: |
             /tmp:/tmp ;
             /home:/home ;
             /foo:/bar
