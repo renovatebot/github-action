@@ -817,10 +817,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.5.tgz#ec10755e871497bcd83efe927e43ec46e8c0747e"
   integrity sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==
 
-"@types/node@16.18.63":
-  version "16.18.63"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.63.tgz#17703190b6f623cf2dfb4cc624b1db9b60b4c634"
-  integrity sha512-Q2VSI/lVKza0Z5qeY/JrHcwi9fxzBktDvNHthr0TVA/D3yMdHDw9syggng+wJPlsBLgx4jPpOrcJ100wnpniTg==
+"@types/node@16.18.64":
+  version "16.18.64"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.64.tgz#cd4e41420b77b346695def5a342f6dea0f9d9329"
+  integrity sha512-TiY2gIDob8+QOPIcVpS0ZY+H1DVTfplBW6UgL2b4gOYbigIlKVIh6Lcv+7YDUciUTqhVLG91PrZBXW10IoBhtw==
 
 "@types/node@20.5.1":
   version "20.5.1"
