@@ -87,7 +87,7 @@ class Input {
       .getInput('docker-volumes')
       .split(';')
       .map((v) => v.trim())
-      .filter((v) => v.length !== 0);
+      .filter((v) => !!v);
   }
 
   /**
