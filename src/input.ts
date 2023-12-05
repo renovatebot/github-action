@@ -82,6 +82,14 @@ class Input {
     return core.getInput('docker-user') || null;
   }
 
+  getDockerVolumeMounts(): string[] {
+    return core
+      .getInput('docker-volumes')
+      .split(';')
+      .map((v) => v.trim())
+      .filter((v) => !!v);
+  }
+
   /**
    * Convert to environment variables.
    *

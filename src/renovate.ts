@@ -53,7 +53,11 @@ class Renovate {
       dockerArguments.push(`--user ${dockerUser}`);
     }
 
-    dockerArguments.push('--volume /tmp:/tmp', '--rm', this.docker.image());
+    for (const volumeMount of this.input.getDockerVolumeMounts()) {
+      dockerArguments.push(`--volume ${volumeMount}`);
+    }
+
+    dockerArguments.push('--rm', this.docker.image());
 
     if (dockerCmd !== null) {
       dockerArguments.push(dockerCmd);
