@@ -673,29 +673,7 @@
     micromatch "^4.0.0"
     p-reduce "^2.0.0"
 
-"@semantic-release/github@9.2.3":
-  version "9.2.3"
-  resolved "https://registry.yarnpkg.com/@semantic-release/github/-/github-9.2.3.tgz#d8eeba7c00bf3145cee1bb9b60940d475af3e9f9"
-  integrity sha512-FAjXb1F84CVI6IG8fWi+XS9ErYD+s3MHkP03zBa3+GyUrV4kqwYu/WPppIciHxujGFR51SAWPkOY5rnH6ZlrxA==
-  dependencies:
-    "@octokit/core" "^5.0.0"
-    "@octokit/plugin-paginate-rest" "^9.0.0"
-    "@octokit/plugin-retry" "^6.0.0"
-    "@octokit/plugin-throttling" "^8.0.0"
-    "@semantic-release/error" "^4.0.0"
-    aggregate-error "^5.0.0"
-    debug "^4.3.4"
-    dir-glob "^3.0.1"
-    globby "^14.0.0"
-    http-proxy-agent "^7.0.0"
-    https-proxy-agent "^7.0.0"
-    issue-parser "^6.0.0"
-    lodash-es "^4.17.21"
-    mime "^3.0.0"
-    p-filter "^3.0.0"
-    url-join "^5.0.0"
-
-"@semantic-release/github@^9.0.0":
+"@semantic-release/github@9.2.4", "@semantic-release/github@^9.0.0":
   version "9.2.4"
   resolved "https://registry.yarnpkg.com/@semantic-release/github/-/github-9.2.4.tgz#0f8db03b44d6157b2d46d2c518c8242ea23f9fe5"
   integrity sha512-VMzqiuSLhHc0/1Q8M/FmWnOaclh5aXL2pQWceldWBYSWLNzQu8GOR4bkGl57ciUtvm+MCMi4FaStZxSDJGEfUg==
@@ -3496,11 +3474,6 @@ micromatch@4.0.5, micromatch@^4.0.0, micromatch@^4.0.2, micromatch@^4.0.4:
   dependencies:
     braces "^3.0.2"
     picomatch "^2.3.1"
-
-mime@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-3.0.0.tgz#b374550dca3a0c18443b0c950a6a58f1931cf7a7"
-  integrity sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==
 
 mime@^4.0.0:
   version "4.0.0"
