@@ -2,7 +2,7 @@ name: Renovate
 on:
   schedule:
     # Run every 2nd hour
-    - cron: '0 */2 * * *'
+    - cron: '30 * * * *'
 jobs:
   renovate:
     runs-on: ubuntu-latest
