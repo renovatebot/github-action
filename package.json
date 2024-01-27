@@ -46,7 +46,7 @@
     "@semantic-release/github": "9.2.6",
     "@semantic-release/npm": "10.0.6",
     "@tsconfig/node20": "20.1.2",
-    "@types/node": "16.18.73",
+    "@types/node": "20.11.5",
     "@typescript-eslint/eslint-plugin": "6.19.0",
     "@typescript-eslint/parser": "6.19.0",
     "@vercel/ncc": "0.38.1",
