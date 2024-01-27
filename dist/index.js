@@ -25940,6 +25940,9 @@ exports["default"] = _default;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 class Docker {
+    static image = 'ghcr.io/renovatebot/renovate';
+    dockerImage;
+    fullTag;
     constructor(input) {
         const tag = input.getVersion();
         this.dockerImage = input.getDockerImage() ?? Docker.image;
@@ -25949,7 +25952,6 @@ class Docker {
         return `${this.dockerImage}:${this.fullTag}`;
     }
 }
-Docker.image = 'ghcr.io/renovatebot/renovate';
 exports["default"] = Docker;
 
 
@@ -26042,20 +26044,23 @@ exports.Input = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const path_1 = __importDefault(__nccwpck_require__(1017));
 class Input {
+    options = {
+        envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
+        configurationFile: {
+            input: 'configurationFile',
+            env: 'RENOVATE_CONFIG_FILE',
+            optional: true,
+        },
+        token: {
+            input: 'token',
+            env: 'RENOVATE_TOKEN',
+            optional: false,
+        },
+    };
+    token;
+    _environmentVariables;
+    _configurationFile;
     constructor() {
-        this.options = {
-            envRegex: /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
-            configurationFile: {
-                input: 'configurationFile',
-                env: 'RENOVATE_CONFIG_FILE',
-                optional: true,
-            },
-            token: {
-                input: 'token',
-                env: 'RENOVATE_TOKEN',
-                optional: false,
-            },
-        };
         const envRegexInput = core.getInput('env-regex');
         const envRegex = envRegexInput
             ? new RegExp(envRegexInput)
@@ -26148,9 +26153,12 @@ const exec_1 = __nccwpck_require__(1514);
 const fs_1 = __importDefault(__nccwpck_require__(7147));
 const path_1 = __importDefault(__nccwpck_require__(1017));
 class Renovate {
+    input;
+    static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
+    configFileMountDir = '/github-action';
+    docker;
     constructor(input) {
         this.input = input;
-        this.configFileMountDir = '/github-action';
         this.validateArguments();
         this.docker = new docker_1.default(input);
     }
@@ -26228,7 +26236,6 @@ class Renovate {
         }
     }
 }
-Renovate.dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
 exports["default"] = Renovate;
 
 
