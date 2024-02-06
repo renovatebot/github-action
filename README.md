@@ -254,6 +254,7 @@ This example uses a Personal Access Token and will run every 15 minutes.
 The Personal Access token is configured as a GitHub secret named `RENOVATE_TOKEN`.
 This example uses the [`example/renovate-config.js`](./example/renovate-config.js) file as configuration.
 Live examples with more advanced configurations of this action can be found in the following repositories:
+
 - [vidavidorra/renovate](https://github.com/vidavidorra/renovate/blob/main/.github/renovate.json)
 - [jenkinsci/helm-charts](https://github.com/jenkinsci/helm-charts/blob/main/.github/renovate-config.json5)
 
