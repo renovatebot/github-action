@@ -15,8 +15,8 @@
   },
   "main": "src/index.ts",
   "engines": {
-    "node": ">=20.11.0",
-    "yarn": "^1.22.0"
+    "node": ">=20.9.0",
+    "pnpm": "^8.0.0"
   },
   "scripts": {
     "build": "run-s clean compile",
@@ -64,5 +64,16 @@
     "ts-node": "10.9.2",
     "typescript": "5.3.3"
   },
-  "packageManager": "yarn@1.22.21"
+  "packageManager": "pnpm@8.15.1",
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": [
+        "linux",
+        "win32"
+      ],
+      "cpu": [
+        "x64"
+      ]
+    }
+  }
 }
