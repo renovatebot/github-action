@@ -34,18 +34,18 @@ class Input {
     this._environmentVariables = new Map(
       Object.entries(process.env)
         .filter(([key]) => envRegex.test(key))
-        .filter((pair): pair is [string, string] => pair[1] !== undefined)
+        .filter((pair): pair is [string, string] => pair[1] !== undefined),
     );
 
     this.token = this.get(
       this.options.token.input,
       this.options.token.env,
-      this.options.token.optional
+      this.options.token.optional,
     );
     this._configurationFile = this.get(
       this.options.configurationFile.input,
       this.options.configurationFile.env,
-      this.options.configurationFile.optional
+      this.options.configurationFile.optional,
     );
   }
 
@@ -107,7 +107,7 @@ class Input {
   private get(
     input: string,
     env: string,
-    optional: boolean
+    optional: boolean,
   ): EnvironmentVariable {
     const fromInput = core.getInput(input);
     const fromEnv = this._environmentVariables.get(env);
@@ -117,7 +117,7 @@ class Input {
         [
           `'${input}' MUST be passed using its input or the '${env}'`,
           'environment variable',
-        ].join(' ')
+        ].join(' '),
       );
     }
 
