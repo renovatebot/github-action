@@ -147,13 +147,13 @@ jobs:
 
       - name: Push release branch
         run: git push origin release:release
-        if: ${{github.ref == 'refs/heads/main'}}
+        if: ${{ github.ref_name == github.event.repository.default_branch }}
 
       - name: Release
         run: |
           # override for semantic-release
           export GITHUB_REF=refs/heads/release GITHUB_SHA=${{ steps.merge.outputs.commit }}
           yarn release
-        if: ${{github.ref == 'refs/heads/main'}}
+        if: ${{ github.ref_name == github.event.repository.default_branch }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
