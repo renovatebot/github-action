@@ -28,14 +28,14 @@ class Renovate {
       const mountPath = path.join(this.configFileMountDir, baseName);
       dockerArguments.push(
         `--env ${configurationFile.key}=${mountPath}`,
-        `--volume ${configurationFile.value}:${mountPath}`
+        `--volume ${configurationFile.value}:${mountPath}`,
       );
     }
 
     if (this.input.mountDockerSocket()) {
       dockerArguments.push(
         '--volume /var/run/docker.sock:/var/run/docker.sock',
-        `--group-add ${this.getDockerGroupId()}`
+        `--group-add ${this.getDockerGroupId()}`,
       );
     }
 
@@ -109,7 +109,7 @@ class Renovate {
         !fs.statSync(configurationFile.value).isFile())
     ) {
       throw new Error(
-        `configuration file '${configurationFile.value}' MUST be an existing file`
+        `configuration file '${configurationFile.value}' MUST be an existing file`,
       );
     }
   }
