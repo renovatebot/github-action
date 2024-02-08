@@ -23,6 +23,9 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           fetch-depth: 0
+          show-progress: false
+          filter: blob:none # we don't need all blobs, only the full tree
+
       - name: Lint commit messages
         uses: wagoid/commitlint-github-action@5ce82f5d814d4010519d15f0552aec4f17a1e1fe # v5.4.5
         continue-on-error: true
@@ -34,19 +37,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          show-progress: false
+
+      - name: enable corepack
+        run: corepack enable
+
       - name: Setup node
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: yarn
+          cache: pnpm
 
       - name: enable corepack
         run: corepack enable
 
       - name: Install project
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
   e2e:
     runs-on: ubuntu-latest
@@ -59,21 +68,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          show-progress: false
+
+      - name: enable corepack
+        run: corepack enable
 
       - name: Setup node
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: yarn
+          cache: pnpm
 
       - name: enable corepack
         run: corepack enable
 
       - name: Install project
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Configure renovate token
         run: |
@@ -115,13 +129,14 @@ jobs:
           git config --global core.symlinks true
           git config --global user.email 'bot@renovateapp.com'
           git config --global user.name  'Renovate Bot'
-          yarn config set version-git-tag false
 
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # required for semantic release
           ref: 'release'
+          show-progress: false
+          filter: blob:none # we don't need all blobs, only the full tree
 
       - name: fetch pr
         if: ${{github.event_name == 'pull_request'}}
@@ -133,17 +148,20 @@ jobs:
           git merge --no-ff -Xtheirs -m 'skip: merge (${{ github.sha }}) [skip release]' ${{ github.sha }}
           commit=$(git rev-parse HEAD)
 
+      - name: enable corepack
+        run: corepack enable
+
       - name: Setup node
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: yarn
+          cache: pnpm
 
       - name: enable corepack
         run: corepack enable
 
       - name: Install project
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Push release branch
         run: git push origin release:release
@@ -153,7 +171,7 @@ jobs:
         run: |
           # override for semantic-release
           export GITHUB_REF=refs/heads/release GITHUB_SHA=${{ steps.merge.outputs.commit }}
-          yarn release
+          pnpm release
         if: ${{ github.ref_name == github.event.repository.default_branch }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
