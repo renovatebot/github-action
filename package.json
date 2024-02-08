@@ -28,7 +28,7 @@
     "lint-es:file:fix": "eslint --fix",
     "lint-es:fix": "eslint --fix .",
     "lint:fix": "run-s lint-es:fix prettier-fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prettier": "prettier --cache --check --ignore-unknown \"{**/*,*}.*\"",
     "prettier-fix": "prettier --cache --write --ignore-unknown \"{**/*,*}.*\"",
     "release": "run-s clean build semantic-release",
