@@ -101,25 +101,39 @@ class Renovate {
     if (/\s/.test(this.input.token.value)) {
       throw new Error('Token MUST NOT contain whitespace');
     }
+    this.validateConfigFileArgument();
+    this.validateDockerCmdFileArgument();
+  }
 
+  private validateConfigFileArgument(): void {
     const configurationFile = this.input.configurationFile();
-    if (configurationFile !== null) {
+    if (
+      configurationFile !== null &&
+      (!fs.existsSync(configurationFile.value) ||
+        !fs.statSync(configurationFile.value).isFile())
+    ) {
+      throw new Error(
+        `configuration file '${configurationFile.value}' MUST be an existing file`,
+      );
+    }
+  }
+
+  private validateDockerCmdFileArgument(): void {
+    const dockerCmdFile = this.input.getDockerCmdFile();
+    if (dockerCmdFile !== null) {
       if (
-        !fs.existsSync(configurationFile.value) ||
-        !fs.statSync(configurationFile.value).isFile()
+        !fs.existsSync(dockerCmdFile) ||
+        !fs.statSync(dockerCmdFile).isFile()
       ) {
         throw new Error(
-          `configuration file '${configurationFile.value}' MUST be an existing file`,
+          `dockerCmdFile '${dockerCmdFile}' MUST be an existing file`,
         );
       }
       try {
-        fs.accessSync(
-          configurationFile.value,
-          fs.constants.R_OK | fs.constants.X_OK,
-        );
+        fs.accessSync(dockerCmdFile, fs.constants.R_OK | fs.constants.X_OK);
       } catch {
         throw new Error(
-          `configuration file '${configurationFile.value}' MUST have read and execute rights`,
+          `dockerCmdFile '${dockerCmdFile}' MUST have read and execute rights`,
         );
       }
     }
