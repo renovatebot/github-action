@@ -103,14 +103,25 @@ class Renovate {
     }
 
     const configurationFile = this.input.configurationFile();
-    if (
-      configurationFile !== null &&
-      (!fs.existsSync(configurationFile.value) ||
-        !fs.statSync(configurationFile.value).isFile())
-    ) {
-      throw new Error(
-        `configuration file '${configurationFile.value}' MUST be an existing file`,
-      );
+    if (configurationFile !== null) {
+      if (
+        !fs.existsSync(configurationFile.value) ||
+        !fs.statSync(configurationFile.value).isFile()
+      ) {
+        throw new Error(
+          `configuration file '${configurationFile.value}' MUST be an existing file`,
+        );
+      }
+      try {
+        fs.accessSync(
+          configurationFile.value,
+          fs.constants.S_IXUSR | fs.constants.S_IRUSR,
+        );
+      } catch {
+        throw new Error(
+          `configuration file '${configurationFile.value}' MUST have read and execute rights`,
+        );
+      }
     }
   }
 }
