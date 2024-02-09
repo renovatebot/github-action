@@ -104,6 +104,16 @@ jobs:
           docker-cmd-file: example/entrypoint.sh
           docker-user: root
 
+      - name: Renovate test with entrypoint
+        uses: ./
+        env:
+          LOG_LEVEL: debug
+        with:
+          configurationFile: ${{ matrix.configurationFile }}
+          renovate-version: ${{ env.RENOVATE_VERSION }}
+          docker-cmd-file: .github/workflows/non-executable-entrypoint.sh
+          docker-user: root
+
   release:
     needs: [lint, commitlint, e2e]
     runs-on: ubuntu-latest
