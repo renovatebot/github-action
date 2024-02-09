@@ -115,7 +115,7 @@ class Renovate {
       try {
         fs.accessSync(
           configurationFile.value,
-          fs.constants.S_IXUSR | fs.constants.S_IRUSR,
+          fs.constants.R_OK | fs.constants.X_OK,
         );
       } catch {
         throw new Error(
