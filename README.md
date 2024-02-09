@@ -74,7 +74,7 @@ Specify a command to run when the image start.
 By default the image run
 `renovate`.
 This option is useful to customize the image before running `renovate`.
-It must be an existing file on the local system and the it must have execute permission.
+It must be an existing file on the local system and it must have execute permission.
 It will be mounted to the docker container.
 
 For example you can create a simple script like this one (let's call it
