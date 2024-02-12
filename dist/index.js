@@ -26153,7 +26153,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const docker_1 = __importDefault(__nccwpck_require__(5762));
 const exec_1 = __nccwpck_require__(7775);
-const fs_1 = __importDefault(__nccwpck_require__(7147));
+const promises_1 = __importDefault(__nccwpck_require__(3292));
 const path_1 = __importDefault(__nccwpck_require__(1017));
 class Renovate {
     input;
@@ -26162,10 +26162,10 @@ class Renovate {
     docker;
     constructor(input) {
         this.input = input;
-        this.validateArguments();
         this.docker = new docker_1.default(input);
     }
     async runDockerContainer() {
+        await this.validateArguments();
         const dockerArguments = this.input
             .toEnvironmentVariables()
             .map((e) => `--env ${e.key}`)
@@ -26177,7 +26177,7 @@ class Renovate {
             dockerArguments.push(`--env ${configurationFile.key}=${mountPath}`, `--volume ${configurationFile.value}:${mountPath}`);
         }
         if (this.input.mountDockerSocket()) {
-            dockerArguments.push('--volume /var/run/docker.sock:/var/run/docker.sock', `--group-add ${this.getDockerGroupId()}`);
+            dockerArguments.push('--volume /var/run/docker.sock:/var/run/docker.sock', `--group-add ${await this.getDockerGroupId()}`);
         }
         const dockerCmdFile = this.input.getDockerCmdFile();
         let dockerCmd = null;
@@ -26210,9 +26210,9 @@ class Renovate {
      * The Renovate container needs access to this group in order to have the
      * required permissions on the Docker socket.
      */
-    getDockerGroupId() {
+    async getDockerGroupId() {
         const groupFile = '/etc/group';
-        const groups = fs_1.default.readFileSync(groupFile, {
+        const groups = await promises_1.default.readFile(groupFile, {
             encoding: 'utf-8',
         });
         /**
@@ -26227,14 +26227,13 @@ class Renovate {
         }
         return match.groups.groupId;
     }
-    validateArguments() {
+    async validateArguments() {
         if (/\s/.test(this.input.token.value)) {
             throw new Error('Token MUST NOT contain whitespace');
         }
         const configurationFile = this.input.configurationFile();
         if (configurationFile !== null &&
-            (!fs_1.default.existsSync(configurationFile.value) ||
-                !fs_1.default.statSync(configurationFile.value).isFile())) {
+            !(await promises_1.default.stat(configurationFile.value)).isFile()) {
             throw new Error(`configuration file '${configurationFile.value}' MUST be an existing file`);
         }
     }
@@ -26313,6 +26312,14 @@ module.exports = require("events");
 
 "use strict";
 module.exports = require("fs");
+
+/***/ }),
+
+/***/ 3292:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs/promises");
 
 /***/ }),
 
