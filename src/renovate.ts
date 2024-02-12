@@ -1,7 +1,7 @@
 import Docker from './docker';
 import { Input } from './input';
 import { exec } from '@actions/exec';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 
 class Renovate {
@@ -11,12 +11,12 @@ class Renovate {
   private docker: Docker;
 
   constructor(private input: Input) {
-    this.validateArguments();
-
     this.docker = new Docker(input);
   }
 
   async runDockerContainer(): Promise<void> {
+    await this.validateArguments();
+
     const dockerArguments = this.input
       .toEnvironmentVariables()
       .map((e) => `--env ${e.key}`)
@@ -35,7 +35,7 @@ class Renovate {
     if (this.input.mountDockerSocket()) {
       dockerArguments.push(
         '--volume /var/run/docker.sock:/var/run/docker.sock',
-        `--group-add ${this.getDockerGroupId()}`,
+        `--group-add ${await this.getDockerGroupId()}`,
       );
     }
 
@@ -77,9 +77,9 @@ class Renovate {
    * The Renovate container needs access to this group in order to have the
    * required permissions on the Docker socket.
    */
-  private getDockerGroupId(): string {
+  private async getDockerGroupId(): Promise<string> {
     const groupFile = '/etc/group';
-    const groups = fs.readFileSync(groupFile, {
+    const groups = await fs.readFile(groupFile, {
       encoding: 'utf-8',
     });
 
@@ -97,7 +97,7 @@ class Renovate {
     return match.groups.groupId;
   }
 
-  private validateArguments(): void {
+  private async validateArguments(): Promise<void> {
     if (/\s/.test(this.input.token.value)) {
       throw new Error('Token MUST NOT contain whitespace');
     }
@@ -105,8 +105,7 @@ class Renovate {
     const configurationFile = this.input.configurationFile();
     if (
       configurationFile !== null &&
-      (!fs.existsSync(configurationFile.value) ||
-        !fs.statSync(configurationFile.value).isFile())
+      !(await fs.stat(configurationFile.value)).isFile()
     ) {
       throw new Error(
         `configuration file '${configurationFile.value}' MUST be an existing file`,
