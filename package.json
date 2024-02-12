@@ -3,21 +3,17 @@
   "version": "0.0.0-PLACEHOLDER",
   "private": true,
   "description": "GitHub Action to run Renovate self-hosted.",
-  "license": "GPL-3.0-or-later",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/renovatebot/github-action.git"
-  },
-  "author": "Jeroen de Bruijn",
   "homepage": "https://github.com/renovatebot/github-action#readme",
   "bugs": {
     "url": "https://github.com/renovatebot/github-action/issues"
   },
-  "main": "src/index.ts",
-  "engines": {
-    "node": ">=20.9.0",
-    "pnpm": "^8.0.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renovatebot/github-action.git"
   },
+  "license": "GPL-3.0-or-later",
+  "author": "Jeroen de Bruijn",
+  "main": "src/index.ts",
   "scripts": {
     "build": "run-s clean compile",
     "clean": "rimraf dist/",
@@ -57,14 +53,18 @@
     "husky": "9.0.10",
     "lint-staged": "15.2.1",
     "npm-run-all2": "6.1.2",
-    "prettier": "2.8.8",
-    "prettier-plugin-package": "1.4.0",
+    "prettier": "3.2.5",
+    "prettier-plugin-packagejson": "2.4.10",
     "rimraf": "5.0.5",
     "semantic-release": "23.0.0",
     "ts-node": "10.9.2",
     "typescript": "5.3.3"
   },
   "packageManager": "pnpm@8.15.1",
+  "engines": {
+    "node": ">=20.9.0",
+    "pnpm": "^8.0.0"
+  },
   "pnpm": {
     "supportedArchitectures": {
       "os": [

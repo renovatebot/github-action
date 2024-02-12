@@ -16,13 +16,12 @@
     },
     {
       "description": "Use build semantic type for some deps",
-      "matchPackageNames": [
-        "@vercel/ncc",
-        "conventional-changelog-conventionalcommits",
-        "semantic-release",
-        "typescript"
-      ],
-      "matchPackagePrefixes": ["@semantic-release/"],
+      "matchPackageNames": ["@vercel/ncc", "typescript"],
+      "semanticCommitType": "build"
+    },
+    {
+      "description": "Use `build` semantic commit scope for lockfile maintenance",
+      "matchUpdateTypes": ["lockFileMaintenance"],
       "semanticCommitType": "build"
     },
     {
