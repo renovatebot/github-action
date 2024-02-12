@@ -16,10 +16,7 @@
     },
     {
       "description": "Use build semantic type for some deps",
-      "matchPackageNames": [
-        "@vercel/ncc",
-        "typescript"
-      ],
+      "matchPackageNames": ["@vercel/ncc", "typescript"],
       "semanticCommitType": "build"
     },
     {
