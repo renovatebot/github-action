@@ -1,5 +1,5 @@
 {
   "singleQuote": true,
   "trailingComma": "all",
-  "plugins": ["prettier-plugin-package"]
+  "plugins": ["prettier-plugin-packagejson"]
 }
