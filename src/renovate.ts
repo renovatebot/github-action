@@ -101,11 +101,11 @@ class Renovate {
     if (/\s/.test(this.input.token.value)) {
       throw new Error('Token MUST NOT contain whitespace');
     }
-    this.validateConfigFileArgument();
-    this.validateDockerCmdFileArgument();
+    await this.validateConfigFileArgument();
+    await this.validateDockerCmdFileArgument();
   }
 
-  private validateConfigFileArgument(): void {
+  private async validateConfigFileArgument(): Promise<void> {
     const configurationFile = this.input.configurationFile();
     if (
       configurationFile !== null &&
