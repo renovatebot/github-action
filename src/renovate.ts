@@ -117,7 +117,7 @@ class Renovate {
     }
   }
 
-  private validateDockerCmdFileArgument(): void {
+  private async validateDockerCmdFileArgument(): Promise<void> {
     const dockerCmdFile = this.input.getDockerCmdFile();
     if (dockerCmdFile !== null) {
       if (
