@@ -57,7 +57,7 @@ Now we add the PAT you created as a secret in your GitHub repo.
 2. Navigate to Settings -> Secrets -> Actions.
 3. Click `New repository secret.`
 4. Name your secret `RENOVATE_TOKEN` and paste your PAT in the value field.
-5. Click "Add secret."
+5. Click `Add secret`.
 
 ### `Step 4: Create renovate.json`
 Renovate requires this .json file so lets setup a basic one.
