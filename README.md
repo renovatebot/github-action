@@ -19,6 +19,8 @@ ask to be given direct commit access.
 
 Maintenance is mainly limited to once in a while updating the version of renovate, and to maintain `solr/renovate-config.js`.
 
+Also the two secrets `RENOVATE_TOKEN` and `RENOVATE_FORK_TOKEN` needs to be re-generated each year. The first should have commit access to `solrbot` repositories. The latter should be a generic github token that is allowed to fork the `apache/solr` repo.
+
 ## Contributing to PRs filed by this bot
 
 Some dependency upgrades will require further work in Solr before they pass tests.
