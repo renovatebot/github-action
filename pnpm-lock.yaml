@@ -15,7 +15,7 @@ dependencies:
 devDependencies:
   '@commitlint/cli':
     specifier: 18.6.0
-    version: 18.6.0(@types/node@20.11.16)(typescript@5.3.3)
+    version: 18.6.0(@types/node@20.11.17)(typescript@5.3.3)
   '@commitlint/config-conventional':
     specifier: 18.6.0
     version: 18.6.0
@@ -32,8 +32,8 @@ devDependencies:
     specifier: 20.1.2
     version: 20.1.2
   '@types/node':
-    specifier: 20.11.16
-    version: 20.11.16
+    specifier: 20.11.17
+    version: 20.11.17
   '@typescript-eslint/eslint-plugin':
     specifier: 6.21.0
     version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -78,7 +78,7 @@ devDependencies:
     version: 23.0.2(typescript@5.3.3)
   ts-node:
     specifier: 10.9.2
-    version: 10.9.2(@types/node@20.11.16)(typescript@5.3.3)
+    version: 10.9.2(@types/node@20.11.17)(typescript@5.3.3)
   typescript:
     specifier: 5.3.3
     version: 5.3.3
@@ -143,14 +143,14 @@ packages:
     dev: true
     optional: true
 
-  /@commitlint/cli@18.6.0(@types/node@20.11.16)(typescript@5.3.3):
+  /@commitlint/cli@18.6.0(@types/node@20.11.17)(typescript@5.3.3):
     resolution: {integrity: sha512-FiH23cr9QG8VdfbmvJJZmdfHGVMCouOOAzoXZ3Cd7czGC52RbycwNt8YCI7SA69pAl+t30vh8LMaO/N+kcel6w==}
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
       '@commitlint/format': 18.6.0
       '@commitlint/lint': 18.6.0
-      '@commitlint/load': 18.6.0(@types/node@20.11.16)(typescript@5.3.3)
+      '@commitlint/load': 18.6.0(@types/node@20.11.17)(typescript@5.3.3)
       '@commitlint/read': 18.6.0
       '@commitlint/types': 18.6.0
       execa: 5.1.1
@@ -221,7 +221,7 @@ packages:
       '@commitlint/types': 18.6.0
     dev: true
 
-  /@commitlint/load@18.6.0(@types/node@20.11.16)(typescript@5.3.3):
+  /@commitlint/load@18.6.0(@types/node@20.11.17)(typescript@5.3.3):
     resolution: {integrity: sha512-RRssj7TmzT0bowoEKlgwg8uQ7ORXWkw7lYLsZZBMi9aInsJuGNLNWcMxJxRZbwxG3jkCidGUg85WmqJvRjsaDA==}
     engines: {node: '>=v18'}
     dependencies:
@@ -231,7 +231,7 @@ packages:
       '@commitlint/types': 18.6.0
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@5.3.3)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.11.16)(cosmiconfig@8.3.6)(typescript@5.3.3)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.11.17)(cosmiconfig@8.3.6)(typescript@5.3.3)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -710,8 +710,8 @@ packages:
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
     dev: true
 
-  /@types/node@20.11.16:
-    resolution: {integrity: sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==}
+  /@types/node@20.11.17:
+    resolution: {integrity: sha512-QmgQZGWu1Yw9TDyAP9ZzpFJKynYNeOvwMJmaxABfieQoVoiVOS6MN1WSpqpRcbeA5+RW82kraAVxCCJg+780Qw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -1240,7 +1240,7 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
-  /cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.16)(cosmiconfig@8.3.6)(typescript@5.3.3):
+  /cosmiconfig-typescript-loader@5.0.0(@types/node@20.11.17)(cosmiconfig@8.3.6)(typescript@5.3.3):
     resolution: {integrity: sha512-+8cK7jRAReYkMwMiG+bxhcNKiHJDM6bR9FD/nGBXOWdMLuYawjF5cGrtLilJ+LGd3ZjCXnJjR5DkfWPoIVlqJA==}
     engines: {node: '>=v16'}
     peerDependencies:
@@ -1248,7 +1248,7 @@ packages:
       cosmiconfig: '>=8.2'
       typescript: '>=4'
     dependencies:
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       cosmiconfig: 8.3.6(typescript@5.3.3)
       jiti: 1.21.0
       typescript: 5.3.3
@@ -3609,7 +3609,7 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /ts-node@10.9.2(@types/node@20.11.16)(typescript@5.3.3):
+  /ts-node@10.9.2(@types/node@20.11.17)(typescript@5.3.3):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -3628,7 +3628,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
