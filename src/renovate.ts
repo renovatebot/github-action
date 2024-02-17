@@ -119,22 +119,23 @@ class Renovate {
 
   private async validateDockerCmdFileArgument(): Promise<void> {
     const dockerCmdFile = this.input.getDockerCmdFile();
-    if (dockerCmdFile !== null) {
+    if (dockerCmdFile === null) return;
+
+    try {
+      const s = await fs.stat(dockerCmdFile);
+      if (!s.isFile)
+        throw new Error(`dockerCmdFile '${dockerCmdFile}' MUST be a file`);
       if (
-        !fs.existsSync(dockerCmdFile) ||
-        !fs.statSync(dockerCmdFile).isFile()
-      ) {
-        throw new Error(
-          `dockerCmdFile '${dockerCmdFile}' MUST be an existing file`,
-        );
-      }
-      try {
-        fs.accessSync(dockerCmdFile, fs.constants.R_OK | fs.constants.X_OK);
-      } catch {
+        (s.mode & fs.constants.R_OK) === 0 ||
+        (s.mode & fs.constants.X_OK) === 0
+      )
         throw new Error(
           `dockerCmdFile '${dockerCmdFile}' MUST have read and execute rights`,
         );
-      }
+    } catch (err) {
+      if (err instanceof Error && 'code' in err && err.code === 'ENOENT')
+        throw new Error(`dockerCmdFile '${dockerCmdFile}' does not exist`);
+      throw new Error(err as string);
     }
   }
 }
