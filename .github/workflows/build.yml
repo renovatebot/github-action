@@ -11,7 +11,7 @@ concurrency:
 
 env:
   NODE_VERSION: 20
-  RENOVATE_VERSION: 37.224.2 # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
+  RENOVATE_VERSION: 37.224.4 # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
 
 jobs:
   commitlint:
