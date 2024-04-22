@@ -67,12 +67,12 @@
   },
   "pnpm": {
     "supportedArchitectures": {
+      "cpu": [
+        "x64"
+      ],
       "os": [
         "linux",
         "win32"
-      ],
-      "cpu": [
-        "x64"
       ]
     }
   }
