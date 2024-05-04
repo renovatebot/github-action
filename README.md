@@ -44,13 +44,10 @@ For the available environment variables, see the Renovate [Self-Hosted Configura
 
 ### `configurationFile`
 
-Configuration file to configure Renovate.
-The supported configurations files:
+Configuration file to configure Renovate ("global" config) in JavaScript or JSON format.
+It is recommended to not name it one of the repository configuration filenames listed in the Renovate Docs for [Configuration Options](https://docs.renovatebot.com/configuration-options/).
 
-- one of the configuration files listed in the Renovate Docs for [Configuration Options](https://docs.renovatebot.com/configuration-options/)
-- or a JavaScript file that exports a configuration object
-
-For both of these options, an example can be found in the [example](./example) directory.
+Config examples can be found in the [example](./example) directory.
 
 The configurations that can be done in this file consists of two parts, as listed below.
 Refer to the links to the [Renovate Docs](https://docs.renovatebot.com/) for all options.
