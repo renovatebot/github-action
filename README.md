@@ -337,9 +337,10 @@ jobs:
 
 ### Commit signing with GitHub App
 
-Renovate can sign commits when using a GitHub App. The trick is to use the platform API to perform commits.
+Renovate can sign commits when deployed as a GitHub App by utilizing GitHub's API-based commits.
+To activate this, ensure that `platformCommit` is set to `true` in global config.
 If a configuration file is defined, include `platformCommit: true` to activate this feature.
-Alternatively, enable commit signing by setting the environment variable `RENOVATE_PLATFORM_COMMIT=true`. For example:
+For example:
 
 ```yaml
 - name: Self-hosted Renovate
