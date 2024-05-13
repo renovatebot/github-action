@@ -335,6 +335,21 @@ jobs:
           token: '${{ steps.get_token.outputs.token }}'
 ```
 
+### Commit signing with GitHub App
+
+Renovate can sign commits when using a GitHub App. The trick is to use the platform API to perform commits.
+If a configuration file is defined, include `platformCommit: true` to activate this feature.
+Alternatively, enable commit signing by setting the environment variable `RENOVATE_PLATFORM_COMMIT=true`. For example:
+
+```yaml
+- name: Self-hosted Renovate
+  uses: renovatebot/github-action@v40.1.11
+  with:
+    token: '${{ steps.get_token.outputs.token }}'
+  env:
+    RENOVATE_PLATFORM_COMMIT: 'true'
+```
+
 ## Environment Variables
 
 If you wish to pass through environment variables through to the Docker container that powers this action you need to prefix the environment variable with `RENOVATE_`.
