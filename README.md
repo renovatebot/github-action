@@ -147,7 +147,6 @@ You can also create a token with no specific scope, which gives read-only access
 This token is only used by Renovate, see the [token configuration](https://docs.renovatebot.com/self-hosted-configuration/#token), and gives it access to the repositories.
 The name of the secret can be anything, as long as it matches the argument given to the `token` option.
 
-
 You can not use a [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret to authenticate Renovate because the `GITHUB_TOKEN` limits permissions too much.
 In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more types of Github Workflows results in `Pull Requests` that [do not trigger your `Pull Request` and `Push` CI events](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow).
 
