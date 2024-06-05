@@ -32,10 +32,10 @@ Refer to the links to the [Renovate Docs](https://docs.renovatebot.com/) for all
 1. [Self-Hosted Configuration Options](https://docs.renovatebot.com/self-hosted-configuration/)
 2. [Configuration Options](https://docs.renovatebot.com/configuration-options/)
 
-You must set the [`branchPrefix`](https://docs.renovatebot.com/configuration-options/#branchprefix) to a different value than the default!
+If you want to use the Mend Renovate app _and_ this `renovatebot/github-action`, then you must set the [`branchPrefix`](https://docs.renovatebot.com/configuration-options/#branchprefix) to a different value than the default!
 This prevents interference with the Mend Renovate app (app you can install into GitHub), or other apps.
 
-If you want to use this (?????What does `this` refer to in this sentence?????) with just the single configuration file, make sure to include the following two configuration lines.
+If you want to use a single configuration file, make sure to include the following two configuration lines.
 This disables the requirement of a configuration file for the repository and disables onboarding.
 
 ```js
@@ -123,7 +123,7 @@ jobs:
 ### `env-regex`
 
 Use `env-regex` to set which environment variables are passed to the Renovate container.
-Uses the regex syntax.
+Uses the JavaScript regex syntax.
 
 Read the [Passing other environment variables](#passing-other-environment-variables) section to learn more.
 
@@ -147,7 +147,6 @@ You can also create a token with no specific scope, which gives read-only access
 This token is only used by Renovate, see the [token configuration](https://docs.renovatebot.com/self-hosted-configuration/#token), and gives it access to the repositories.
 The name of the secret can be anything, as long as it matches the argument given to the `token` option.
 
-Renovate can _not_ use [Fine-grained Personal Access Tokens](https://github.com/settings/tokens?type=beta) as they do not support the GitHub GraphQL API.
 
 You can not use a [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret to authenticate Renovate because the `GITHUB_TOKEN` limits permissions too much.
 In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more types of Github Workflows results in `Pull Requests` that [do not trigger your `Pull Request` and `Push` CI events](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow).
