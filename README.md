@@ -33,7 +33,7 @@ Refer to the links to the [Renovate Docs](https://docs.renovatebot.com/) for all
 2. [Configuration Options](https://docs.renovatebot.com/configuration-options/)
 
 If you want to use the Mend Renovate app _and_ this `renovatebot/github-action`, then you must set the [`branchPrefix`](https://docs.renovatebot.com/configuration-options/#branchprefix) to a different value than the default!
-This prevents interference with the Mend Renovate app (app you can install into GitHub), or other apps.
+This prevents interference with the Mend Renovate app, or other apps.
 
 If you want to use a single configuration file, make sure to include the following two configuration lines.
 This disables the requirement of a configuration file for the repository and disables onboarding.
