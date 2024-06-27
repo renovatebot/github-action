@@ -90,6 +90,10 @@ class Input {
       .filter((v) => !!v);
   }
 
+  getDockerNetwork(): string | null {
+    return core.getInput('docker-network') || null;
+  }
+
   /**
    * Convert to environment variables.
    *

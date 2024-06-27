@@ -49,6 +49,10 @@ inputs:
       Docker volume mounts. Default to /tmp:/tmp
     default: /tmp:/tmp
     required: false
+  docker-network:
+    description: |
+      Docker network.
+    required: false
 
 runs:
   using: node20
