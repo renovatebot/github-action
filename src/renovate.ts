@@ -58,7 +58,7 @@ class Renovate {
     }
 
     const dockerNetwork = this.input.getDockerNetwork();
-    if (dockerNetwork !== null) {
+    if (dockerNetwork) {
       dockerArguments.push(`--network ${dockerNetwork}`);
     }
 

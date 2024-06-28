@@ -90,8 +90,8 @@ class Input {
       .filter((v) => !!v);
   }
 
-  getDockerNetwork(): string | null {
-    return core.getInput('docker-network') || null;
+  getDockerNetwork(): string {
+    return core.getInput('docker-network');
   }
 
   /**
