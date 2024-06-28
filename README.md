@@ -110,7 +110,7 @@ jobs:
 
 Specify a network to run container in.
 
-You can use `${{ job.container.network }}` to run renovate container [in the same network as other containers for this job](https://docs.github.com/en/actions/learn-github-actions/contexts#job-context), 
+You can use `${{ job.container.network }}` to run renovate container [in the same network as other containers for this job](https://docs.github.com/en/actions/learn-github-actions/contexts#job-context),
 or set it to `host` to run in the same network as github runner, or specify any custom network.
 
 ### `docker-user`
