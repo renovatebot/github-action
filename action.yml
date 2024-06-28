@@ -40,6 +40,10 @@ inputs:
     description: |
       Override docker command. Default command is `renovate`
     required: false
+  docker-network:
+    description: |
+      Docker network.
+    required: false
   docker-user:
     description: |
       Docker user. Default to an unprivileged user
@@ -48,10 +52,6 @@ inputs:
     description: |
       Docker volume mounts. Default to /tmp:/tmp
     default: /tmp:/tmp
-    required: false
-  docker-network:
-    description: |
-      Docker network.
     required: false
 
 runs:
