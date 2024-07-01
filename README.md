@@ -12,6 +12,7 @@ GitHub Action to run Renovate self-hosted.
 - [Options](#options)
   - [`configurationFile`](#configurationfile)
   - [`docker-cmd-file`](#docker-cmd-file)
+  - [`docker-network`](#docker-network)
   - [`docker-user`](#docker-user)
   - [`docker-volumes`](#docker-volumes)
   - [`env-regex`](#env-regex)
@@ -104,6 +105,13 @@ jobs:
           docker-user: root
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
+
+### `docker-network`
+
+Specify a network to run container in.
+
+You can use `${{ job.container.network }}` to run renovate container [in the same network as other containers for this job](https://docs.github.com/en/actions/learn-github-actions/contexts#job-context),
+or set it to `host` to run in the same network as github runner, or specify any custom network.
 
 ### `docker-user`
 

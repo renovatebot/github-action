@@ -57,6 +57,11 @@ class Renovate {
       dockerArguments.push(`--volume ${volumeMount}`);
     }
 
+    const dockerNetwork = this.input.getDockerNetwork();
+    if (dockerNetwork) {
+      dockerArguments.push(`--network ${dockerNetwork}`);
+    }
+
     dockerArguments.push('--rm', this.docker.image());
 
     if (dockerCmd !== null) {
