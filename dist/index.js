@@ -26318,6 +26318,9 @@ class Input {
             .map((v) => v.trim())
             .filter((v) => !!v);
     }
+    getDockerNetwork() {
+        return core.getInput('docker-network');
+    }
     /**
      * Convert to environment variables.
      *
@@ -26404,6 +26407,10 @@ class Renovate {
         }
         for (const volumeMount of this.input.getDockerVolumeMounts()) {
             dockerArguments.push(`--volume ${volumeMount}`);
+        }
+        const dockerNetwork = this.input.getDockerNetwork();
+        if (dockerNetwork) {
+            dockerArguments.push(`--network ${dockerNetwork}`);
         }
         dockerArguments.push('--rm', this.docker.image());
         if (dockerCmd !== null) {
