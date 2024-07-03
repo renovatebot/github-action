@@ -40,6 +40,10 @@ inputs:
     description: |
       Override docker command. Default command is `renovate`
     required: false
+  docker-network:
+    description: |
+      Docker network.
+    required: false
   docker-user:
     description: |
       Docker user. Default to an unprivileged user
