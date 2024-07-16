@@ -3,6 +3,9 @@ on:
   schedule:
     # Run every 4th hour
     - cron: '0 */4 * * *'
+  # Or run on demand
+  workflow_dispatch:
+
 jobs:
   renovate:
     runs-on: ubuntu-latest
