@@ -4,7 +4,7 @@ module.exports = {
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
   onboarding: false,
   platform: 'github',
-  forkProcessing: "enabled",
+  forkProcessing: 'enabled',
   dryRun: 'full',
   repositories: ['renovate-tests/cocoapods1', 'renovate-tests/gomod1'],
   packageRules: [
