@@ -4,7 +4,7 @@ module.exports = {
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
   onboarding: false,
   platform: 'github',
-  includeForks: true,
+  forkProcessing: 'enabled',
   dryRun: 'full',
   repositories: ['renovate-tests/cocoapods1', 'renovate-tests/gomod1'],
   packageRules: [
@@ -19,7 +19,7 @@ module.exports = {
         'lockFileMaintenance',
       ],
       dependencyDashboardApproval: false,
-      stabilityDays: 0,
+      minimumReleaseAge: 0,
     },
   ],
 };

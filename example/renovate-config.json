@@ -5,7 +5,7 @@
   "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
   "onboarding": false,
   "platform": "github",
-  "includeForks": true,
+  "forkProcessing": "enabled",
   "repositories": [
     "renovatebot/github-action",
     "renovate-tests/cocoapods1",
@@ -23,7 +23,7 @@
         "lockFileMaintenance"
       ],
       "dependencyDashboardApproval": false,
-      "stabilityDays": 0
+      "minimumReleaseAge": 0
     }
   ]
 }
