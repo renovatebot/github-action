@@ -27,8 +27,7 @@ class Renovate {
       const baseName = path.basename(configurationFile.value);
       const mountPath = path.join(this.configFileMountDir, baseName);
       dockerArguments.push(
-        `--env ${configurationFile.key}=${mountPath}`,
-        `--volume ${configurationFile.value}:${mountPath}`,
+        `--env ${configurationFile.key}=${mountPath}`
       );
     }
 
