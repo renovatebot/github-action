@@ -27,7 +27,7 @@ jobs:
           filter: blob:none # we don't need all blobs, only the full tree
 
       - name: Lint commit messages
-        uses: wagoid/commitlint-github-action@9763196e10f27aef304c9b8b660d31d97fce0f99 # v5.5.1
+        uses: wagoid/commitlint-github-action@baa1b236f990293a1b2d94c19e41c2313a85e749 # v6.0.2
         continue-on-error: true
 
   lint:
