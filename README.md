@@ -17,6 +17,7 @@ GitHub Action to run Renovate self-hosted.
   - [`docker-volumes`](#docker-volumes)
   - [`env-regex`](#env-regex)
   - [`mount-docker-socket`](#mount-docker-socket)
+  - [`docker-socket-host-path`](#docker-socket-host-path)
   - [`token`](#token)
   - [`renovate-image`](#renovate-image)
   - [`renovate-version`](#renovate-version)
@@ -156,6 +157,12 @@ Default to `false`. If set to `true` the action will mount the Docker socket
 inside the renovate container so that the commands can use Docker. Can be useful
 for `postUpgradeTasks`'s commands. Also add the user inside the renovate
 container to the docker group for socket permissions.
+
+## `docker-socket-host-path`
+
+Allows the overriding of the host path for the Docker socket that is mounted into the container.
+Useful on systems where the host Docker socket is located somewhere other than `/var/run/docker.sock` (the default).
+Only applicable when `mount-docker-socket` is true.
 
 ### `token`
 
