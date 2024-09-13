@@ -25,8 +25,8 @@ importers:
         specifier: 10.0.1
         version: 10.0.1(semantic-release@24.1.0(typescript@5.5.4))
       '@semantic-release/github':
-        specifier: 10.3.2
-        version: 10.3.2(semantic-release@24.1.0(typescript@5.5.4))
+        specifier: 10.3.3
+        version: 10.3.3(semantic-release@24.1.0(typescript@5.5.4))
       '@semantic-release/npm':
         specifier: 12.0.1
         version: 12.0.1(semantic-release@24.1.0(typescript@5.5.4))
@@ -340,8 +340,8 @@ packages:
     peerDependencies:
       semantic-release: '>=18.0.0'
 
-  '@semantic-release/github@10.3.2':
-    resolution: {integrity: sha512-zAbLS+RZsLdkfs49/ezzP8T5WTDq24EvHcaaMvBNVWvn7EbZ4Cq1sFHIIEUcU4H1GwJ7p8Z7KtcpTWGhjaFtrQ==}
+  '@semantic-release/github@10.3.3':
+    resolution: {integrity: sha512-zrEdwRZ7ZTEM2JYhF4E+ZgApIfv6iHfQBnnAP1g2LqYZtj56+qWEUo/xW36cbZRDOweejxU40PGZckx6TZzFmg==}
     engines: {node: '>=20.8.1'}
     peerDependencies:
       semantic-release: '>=20.1.0'
@@ -2527,7 +2527,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@semantic-release/github@10.3.2(semantic-release@24.1.0(typescript@5.5.4))':
+  '@semantic-release/github@10.3.3(semantic-release@24.1.0(typescript@5.5.4))':
     dependencies:
       '@octokit/core': 6.1.2
       '@octokit/plugin-paginate-rest': 11.3.3(@octokit/core@6.1.2)
@@ -3931,7 +3931,7 @@ snapshots:
     dependencies:
       '@semantic-release/commit-analyzer': 13.0.0(semantic-release@24.1.0(typescript@5.5.4))
       '@semantic-release/error': 4.0.0
-      '@semantic-release/github': 10.3.2(semantic-release@24.1.0(typescript@5.5.4))
+      '@semantic-release/github': 10.3.3(semantic-release@24.1.0(typescript@5.5.4))
       '@semantic-release/npm': 12.0.1(semantic-release@24.1.0(typescript@5.5.4))
       '@semantic-release/release-notes-generator': 14.0.1(semantic-release@24.1.0(typescript@5.5.4))
       aggregate-error: 5.0.0
