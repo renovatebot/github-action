@@ -33,8 +33,16 @@ class Renovate {
     }
 
     if (this.input.mountDockerSocket()) {
+      const sockPath = this.input.dockerSocketHostPath();
+      const stat = await fs.stat(sockPath);
+      if (!stat.isSocket()) {
+        throw new Error(
+          `docker socket host path '${sockPath}' MUST exist and be a socket`,
+        );
+      }
+
       dockerArguments.push(
-        '--volume /var/run/docker.sock:/var/run/docker.sock',
+        `--volume ${sockPath}:/var/run/docker.sock`,
         `--group-add ${await this.getDockerGroupId()}`,
       );
     }
