@@ -26317,6 +26317,9 @@ class Input {
     mountDockerSocket() {
         return core.getInput('mount-docker-socket') === 'true';
     }
+    dockerSocketHostPath() {
+        return core.getInput('docker-socket-host-path') || '/var/run/docker.sock';
+    }
     getDockerCmdFile() {
         const cmdFile = core.getInput('docker-cmd-file');
         return !!cmdFile && cmdFile !== '' ? path_1.default.resolve(cmdFile) : null;
@@ -26404,7 +26407,12 @@ class Renovate {
             dockerArguments.push(`--env ${configurationFile.key}=${mountPath}`, `--volume ${configurationFile.value}:${mountPath}`);
         }
         if (this.input.mountDockerSocket()) {
-            dockerArguments.push('--volume /var/run/docker.sock:/var/run/docker.sock', `--group-add ${await this.getDockerGroupId()}`);
+            const sockPath = this.input.dockerSocketHostPath();
+            const stat = await promises_1.default.stat(sockPath);
+            if (!stat.isSocket()) {
+                throw new Error(`docker socket host path '${sockPath}' MUST exist and be a socket`);
+            }
+            dockerArguments.push(`--volume ${sockPath}:/var/run/docker.sock`, `--group-add ${await this.getDockerGroupId()}`);
         }
         const dockerCmdFile = this.input.getDockerCmdFile();
         let dockerCmd = null;
