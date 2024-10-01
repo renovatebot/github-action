@@ -73,6 +73,10 @@ class Input {
     return core.getInput('mount-docker-socket') === 'true';
   }
 
+  dockerSocketHostPath(): string {
+    return core.getInput('docker-socket-host-path') || '/var/run/docker.sock';
+  }
+
   getDockerCmdFile(): string | null {
     const cmdFile = core.getInput('docker-cmd-file');
     return !!cmdFile && cmdFile !== '' ? path.resolve(cmdFile) : null;
