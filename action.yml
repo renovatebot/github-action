@@ -23,11 +23,11 @@ inputs:
     required: false
   renovate-version:
     description: |
-      Renovate version to use. Defaults to latest.
+      Renovate version to use. Also used as image tag together with the parameter `renovate-image`. Defaults to latest.
     required: false
   renovate-image:
     description: |
-      Renovate docker image name.
+      Renovate docker image name. Use the parameter `renovate-version` to set the image tag.
       Defaults to `ghcr.io/renovatebot/renovate`.
     required: false
   mount-docker-socket:
