@@ -47,12 +47,12 @@ class Renovate {
       );
     }
 
-    const dockerCmdFile = this.input.getDockerCmdFile();
+    const dockerEntryPointFile = this.input.getDockerEntrypointFile();
     let dockerCmd: string | null = null;
-    if (dockerCmdFile !== null) {
-      const baseName = path.basename(dockerCmdFile);
+    if (dockerEntryPointFile !== null) {
+      const baseName = path.basename(dockerEntryPointFile);
       const mountPath = `/${baseName}`;
-      dockerArguments.push(`--volume ${dockerCmdFile}:${mountPath}`);
+      dockerArguments.push(`--volume ${dockerEntryPointFile}:${mountPath}`);
       dockerCmd = mountPath;
     }
 

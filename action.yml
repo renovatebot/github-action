@@ -43,9 +43,9 @@ inputs:
       Only applicable when 'mount-docker-socket' is true.
     required: false
     default: /var/run/docker.sock
-  docker-cmd-file:
+  docker-entrypoint-file:
     description: |
-      Override docker command. Default command is `renovate`
+      Override docker docker entrypoint. Use with `docker-user: root`. See the example for usage.
     required: false
   docker-network:
     description: |

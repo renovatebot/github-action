@@ -11,7 +11,7 @@ GitHub Action to run Renovate self-hosted.
 - [Badges](#badges)
 - [Options](#options)
   - [`configurationFile`](#configurationfile)
-  - [`docker-cmd-file`](#docker-cmd-file)
+  - [`docker-entrypoint-file`](#docker-entrypoint-file)
   - [`docker-network`](#docker-network)
   - [`docker-socket-host-path`](#docker-socket-host-path)
   - [`docker-user`](#docker-user)
@@ -67,11 +67,10 @@ This disables the requirement of a configuration file for the repository and dis
   requireConfig: false,
 ```
 
-### `docker-cmd-file`
+### `docker-entrypoint-file`
 
-Specify a command to run when the image start.
-By default the image run
-`renovate`.
+Specify an entrypoint file to run when the image starts.
+The default is [renovate-entrypoint.sh](https://github.com/renovatebot/renovate/blob/main/tools/docker/bin/renovate-entrypoint.sh) located in `/usr/local/sbin/renovate-entrypoint.sh`
 This option is useful to customize the image before running `renovate`.
 It must be an existing executable file on the local system.
 It will be mounted to the docker container.
@@ -102,7 +101,7 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v40.2.10
         with:
-          docker-cmd-file: .github/renovate-entrypoint.sh
+          docker-entrypoint-file: .github/renovate-entrypoint.sh
           docker-user: root
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
@@ -124,7 +123,7 @@ Only applicable when `mount-docker-socket` is true.
 
 Specify a user (or user-id) to run docker command.
 
-You can use it with [`docker-cmd-file`](#docker-cmd-file) in order to start the
+You can use it with [`docker-entrypoint-file`](#docker-entrypoint-file) in order to start the
 image as root, do some customization and switch back to a unprivileged user.
 
 ### `docker-volumes`

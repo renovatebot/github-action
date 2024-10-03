@@ -77,9 +77,11 @@ class Input {
     return core.getInput('docker-socket-host-path') || '/var/run/docker.sock';
   }
 
-  getDockerCmdFile(): string | null {
-    const cmdFile = core.getInput('docker-cmd-file');
-    return !!cmdFile && cmdFile !== '' ? path.resolve(cmdFile) : null;
+  getDockerEntrypointFile(): string | null {
+    const entryPointFile = core.getInput('docker-entrypoint-file');
+    return !!entryPointFile && entryPointFile !== ''
+      ? path.resolve(entryPointFile)
+      : null;
   }
 
   getDockerUser(): string | null {
