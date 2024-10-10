@@ -19,15 +19,15 @@ inputs:
   env-regex:
     description: |
       Override the environment variables which will be passsed into the renovate container.
-      Defaults to `^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$`
+      Defaults to `^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$`
     required: false
   renovate-version:
     description: |
-      Renovate version to use. Defaults to latest.
+      Renovate version to use. Also used as image tag together with the parameter `renovate-image`. Defaults to latest.
     required: false
   renovate-image:
     description: |
-      Renovate docker image name.
+      Renovate docker image name. Use the parameter `renovate-version` to set the image tag.
       Defaults to `ghcr.io/renovatebot/renovate`.
     required: false
   mount-docker-socket:
@@ -43,9 +43,9 @@ inputs:
       Only applicable when 'mount-docker-socket' is true.
     required: false
     default: /var/run/docker.sock
-  docker-cmd-file:
+  docker-entrypoint-file:
     description: |
-      Override docker command. Default command is `renovate`
+      Override docker docker entrypoint. Use with `docker-user: root`. See the example for usage.
     required: false
   docker-network:
     description: |
