@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import path from 'path';
+import _ from 'lodash';
 
 interface EnvironmentVariable {
   key: string;
@@ -29,7 +30,7 @@ class Input {
   constructor() {
     const envRegexInput = core.getInput('env-regex');
     const envRegex = envRegexInput
-      ? new RegExp(envRegexInput)
+      ? new RegExp(_.escapeRegExp(envRegexInput))
       : this.options.envRegex;
     this._environmentVariables = new Map(
       Object.entries(process.env)
