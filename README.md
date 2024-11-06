@@ -508,7 +508,7 @@ jobs:
           # are different than the ones given after the cache is restored. We have to
           # change ownership to solve this. We also need to have correct permissions in
           # the entire /tmp/renovate tree, not just the section with the repo cache.
-          sudo chown -R runneradmin:root /tmp/renovate/
+          sudo chown -R 12021:0 /tmp/renovate/
           ls -R $cache_dir
 
       - uses: renovatebot/github-action@v40.3.4
