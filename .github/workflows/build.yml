@@ -117,7 +117,7 @@ jobs:
         with:
           configurationFile: ${{ matrix.configurationFile }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
-          docker-cmd-file: example/entrypoint.sh
+          docker-entrypoint-file: example/entrypoint.sh
           docker-user: root
 
   release:
