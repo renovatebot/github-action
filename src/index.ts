@@ -1,6 +1,6 @@
-import * as core from '@actions/core';
-import Input from './input';
-import Renovate from './renovate';
+import { Input } from './input';
+import { Renovate } from './renovate';
+import { setFailed } from '@actions/core';
 
 async function run(): Promise<void> {
   try {
@@ -10,7 +10,7 @@ async function run(): Promise<void> {
     await renovate.runDockerContainer();
   } catch (error) {
     console.error(error);
-    core.setFailed(error as Error);
+    setFailed(error as Error);
   }
 }
 

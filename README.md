@@ -132,7 +132,7 @@ image as root, do some customization and switch back to a unprivileged user.
 Specify volume mounts. Defaults to `/tmp:/tmp`.
 The volume mounts are separated through `;`.
 
-This sample will mount `/tmp:/tmp`, `/home:/home` and `/foo:/bar`.
+This sample will mount `/tmp:/tmp` and `/foo:/bar`.
 
 ```yml
 ....
@@ -148,7 +148,6 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
           docker-volumes: |
             /tmp:/tmp ;
-            /home:/home ;
             /foo:/bar
 ```
 
