@@ -1,5 +1,5 @@
 import { getInput } from '@actions/core';
-import path from 'path';
+import path from 'node:path';
 
 export interface EnvironmentVariable {
   key: string;

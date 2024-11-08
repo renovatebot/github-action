@@ -13,6 +13,7 @@
   },
   "license": "GPL-3.0-or-later",
   "author": "Jeroen de Bruijn",
+  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "build": "run-s clean compile",

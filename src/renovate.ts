@@ -1,8 +1,8 @@
 import { Docker } from './docker';
 import { Input } from './input';
 import { exec } from '@actions/exec';
-import fs from 'fs/promises';
-import path from 'path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 export class Renovate {
   static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;

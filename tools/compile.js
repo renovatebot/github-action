@@ -9,6 +9,6 @@ await build({
   minify: !!env['CI'],
   tsconfig: 'tsconfig.dist.json',
   sourcemap: true,
-  // format: 'esm', // TODO: later PR
+  format: 'esm',
   outdir: './dist/',
 });
