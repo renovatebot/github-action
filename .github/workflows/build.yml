@@ -102,7 +102,6 @@ jobs:
           LOG_LEVEL: debug
         with:
           configurationFile: ${{ matrix.configurationFile }}
-          renovate-version: ${{ env.RENOVATE_VERSION }}
 
       - name: Renovate test with entrypoint
         uses: ./
