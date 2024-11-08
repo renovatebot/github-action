@@ -131,6 +131,6 @@ export class Input {
     if (fromInput !== '') {
       return { key: env, value: fromInput };
     }
-    return { key: env, value: fromEnv !== undefined ? fromEnv : '' };
+    return { key: env, value: fromEnv ?? '' };
   }
 }
