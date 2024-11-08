@@ -11,5 +11,5 @@
     "noImplicitAny": false,
     "noPropertyAccessFromIndexSignature": false /* makes code more complex */
   },
-  "ts-node": { "transpileOnly": true }
+  "exclude": ["node_modules/", "**/__mocks__/*", "dist/", "coverage/", "html/"]
 }
