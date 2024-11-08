@@ -55,8 +55,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.1)
       eslint-plugin-json:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 4.0.1
+        version: 4.0.1
       husky:
         specifier: 9.1.6
         version: 9.1.6
@@ -811,9 +811,9 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-plugin-json@3.1.0:
-    resolution: {integrity: sha512-MrlG2ynFEHe7wDGwbUuFPsaT2b1uhuEFhJ+W1f1u+1C2EkXmTYJp4B1aAdQQ8M+CC3t//N/oRKiIVw14L2HR1g==}
-    engines: {node: '>=12.0'}
+  eslint-plugin-json@4.0.1:
+    resolution: {integrity: sha512-3An5ISV5dq/kHfXdNyY5TUe2ONC3yXFSkLX2gu+W8xAhKhfvrRvkSAeKXCxZqZ0KJLX15ojBuLPyj+UikQMkOA==}
+    engines: {node: '>=18.0'}
 
   eslint-scope@7.2.2:
     resolution: {integrity: sha512-dOt21O7lTMhDM+X9mB4GX+DZrZtCUJPL/wlcTqxyrx5IvO0IYtILdtrQGQp+8n5S0gwSVmOf9NQrjMOgfQZlIg==}
@@ -3046,7 +3046,7 @@ snapshots:
     dependencies:
       eslint: 8.57.1
 
-  eslint-plugin-json@3.1.0:
+  eslint-plugin-json@4.0.1:
     dependencies:
       lodash: 4.17.21
       vscode-json-languageservice: 4.2.1
