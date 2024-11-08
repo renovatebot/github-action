@@ -55,7 +55,7 @@ export default tseslint.config(
   },
   json.configs.recommended,
   {
-    files: ['**/tsconfig.json'],
+    files: ['**/tsconfig.json', '**/tsconfig.*.json'],
     rules: {
       'json/*': ['error', { allowComments: true }],
     },
