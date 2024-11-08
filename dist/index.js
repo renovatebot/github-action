@@ -25636,76 +25636,37 @@ module.exports = {
 /***/ }),
 
 /***/ 7958:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Docker = void 0;
+const core_1 = __nccwpck_require__(4708);
 class Docker {
     static image = 'ghcr.io/renovatebot/renovate';
+    static version = 'latest';
     dockerImage;
     fullTag;
     constructor(input) {
-        const tag = input.getVersion();
-        this.dockerImage = input.getDockerImage() ?? Docker.image;
-        this.fullTag = tag ?? 'latest';
+        let image = input.getDockerImage();
+        let version = input.getVersion();
+        if (!image) {
+            (0, core_1.warning)(`No Docker image specified, using ${Docker.image}`);
+            image = Docker.image;
+        }
+        if (!version) {
+            (0, core_1.warning)(`No Docker version specified, using ${Docker.version}`);
+            version = Docker.version;
+        }
+        this.dockerImage = image;
+        this.fullTag = version;
     }
     image() {
         return `${this.dockerImage}:${this.fullTag}`;
     }
 }
-exports["default"] = Docker;
-
-
-/***/ }),
-
-/***/ 3300:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(4708));
-const input_1 = __importDefault(__nccwpck_require__(9500));
-const renovate_1 = __importDefault(__nccwpck_require__(1698));
-async function run() {
-    try {
-        const input = new input_1.default();
-        const renovate = new renovate_1.default(input);
-        await renovate.runDockerContainer();
-    }
-    catch (error) {
-        console.error(error);
-        core.setFailed(error);
-    }
-}
-void run();
+exports.Docker = Docker;
 
 
 /***/ }),
@@ -25715,35 +25676,12 @@ void run();
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Input = void 0;
-const core = __importStar(__nccwpck_require__(4708));
+const core_1 = __nccwpck_require__(4708);
 const path_1 = __importDefault(__nccwpck_require__(6928));
 class Input {
     options = {
@@ -25763,7 +25701,7 @@ class Input {
     _environmentVariables;
     _configurationFile;
     constructor() {
-        const envRegexInput = core.getInput('env-regex');
+        const envRegexInput = (0, core_1.getInput)('env-regex');
         const envRegex = envRegexInput
             ? new RegExp(envRegexInput)
             : this.options.envRegex;
@@ -25783,34 +25721,32 @@ class Input {
         return null;
     }
     getDockerImage() {
-        return core.getInput('renovate-image') || null;
+        return (0, core_1.getInput)('renovate-image') || null;
     }
     getVersion() {
-        const version = core.getInput('renovate-version');
-        return !!version && version !== '' ? version : null;
+        return (0, core_1.getInput)('renovate-version') || null;
     }
     mountDockerSocket() {
-        return core.getInput('mount-docker-socket') === 'true';
+        return (0, core_1.getInput)('mount-docker-socket') === 'true';
     }
     dockerSocketHostPath() {
-        return core.getInput('docker-socket-host-path') || '/var/run/docker.sock';
+        return (0, core_1.getInput)('docker-socket-host-path') || '/var/run/docker.sock';
     }
     getDockerCmdFile() {
-        const cmdFile = core.getInput('docker-cmd-file');
+        const cmdFile = (0, core_1.getInput)('docker-cmd-file');
         return !!cmdFile && cmdFile !== '' ? path_1.default.resolve(cmdFile) : null;
     }
     getDockerUser() {
-        return core.getInput('docker-user') || null;
+        return (0, core_1.getInput)('docker-user') || null;
     }
     getDockerVolumeMounts() {
-        return core
-            .getInput('docker-volumes')
+        return (0, core_1.getInput)('docker-volumes')
             .split(';')
             .map((v) => v.trim())
             .filter((v) => !!v);
     }
     getDockerNetwork() {
-        return core.getInput('docker-network');
+        return (0, core_1.getInput)('docker-network');
     }
     /**
      * Convert to environment variables.
@@ -25826,7 +25762,7 @@ class Input {
         }));
     }
     get(input, env, optional) {
-        const fromInput = core.getInput(input);
+        const fromInput = (0, core_1.getInput)(input);
         const fromEnv = this._environmentVariables.get(env);
         if (fromInput === '' && fromEnv === undefined && !optional) {
             throw new Error([
@@ -25842,7 +25778,6 @@ class Input {
     }
 }
 exports.Input = Input;
-exports["default"] = Input;
 
 
 /***/ }),
@@ -25856,7 +25791,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const docker_1 = __importDefault(__nccwpck_require__(7958));
+exports.Renovate = void 0;
+const docker_1 = __nccwpck_require__(7958);
 const exec_1 = __nccwpck_require__(9365);
 const promises_1 = __importDefault(__nccwpck_require__(1943));
 const path_1 = __importDefault(__nccwpck_require__(6928));
@@ -25867,7 +25803,7 @@ class Renovate {
     docker;
     constructor(input) {
         this.input = input;
-        this.docker = new docker_1.default(input);
+        this.docker = new docker_1.Docker(input);
     }
     async runDockerContainer() {
         await this.validateArguments();
@@ -25952,7 +25888,7 @@ class Renovate {
         }
     }
 }
-exports["default"] = Renovate;
+exports.Renovate = Renovate;
 
 
 /***/ }),
@@ -27868,12 +27804,31 @@ module.exports = parseParams
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(3300);
-/******/ 	module.exports = __webpack_exports__;
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+var exports = __webpack_exports__;
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const input_1 = __nccwpck_require__(9500);
+const renovate_1 = __nccwpck_require__(1698);
+const core_1 = __nccwpck_require__(4708);
+async function run() {
+    try {
+        const input = new input_1.Input();
+        const renovate = new renovate_1.Renovate(input);
+        await renovate.runDockerContainer();
+    }
+    catch (error) {
+        console.error(error);
+        (0, core_1.setFailed)(error);
+    }
+}
+void run();
+
+})();
+
+module.exports = __webpack_exports__;
 /******/ })()
 ;
