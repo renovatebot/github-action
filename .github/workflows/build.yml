@@ -129,8 +129,8 @@ jobs:
         run: |
           git config --global core.autocrlf false
           git config --global core.symlinks true
-          git config --global user.email 'bot@renovateapp.com'
-          git config --global user.name  'Renovate Bot'
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
