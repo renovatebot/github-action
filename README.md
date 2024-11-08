@@ -180,10 +180,10 @@ If you want to use the `github-actions` manager, you must setup a [special token
 ### `renovate-image`
 
 The Renovate Docker image name to use.
-If omitted or `renovate-image === ''` the action will use the `ghcr.io/renovatebot/renovate` Docker image name otherwise.
+If omitted the action will use the `ghcr.io/renovatebot/renovate:<renovate-version>` Docker image name otherwise.
 If a Docker image name is defined, the action will use that name to pull the image.
 
-This sample will use `myproxyhub.domain.com/renovate/renovate` image.
+This sample will use `myproxyhub.domain.com/renovate/renovate:<renovate-version>` image.
 
 ```yml
 ....
@@ -200,7 +200,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
-This sample will use `ghcr.io/renovatebot/renovate` image.
+This sample will use `ghcr.io/renovatebot/renovate:<renovate-version>` image.
 
 ```yml
 ....
@@ -219,7 +219,7 @@ jobs:
 ### `renovate-version`
 
 The Renovate version to use.
-If omitted the action will use the `latest` Docker tag.
+If omitted the action will use the [`default version`](./action.yml#L28) Docker tag.
 Check [the available tags on Docker Hub](https://hub.docker.com/r/renovate/renovate/tags).
 
 This sample will use `ghcr.io/renovatebot/renovate:39.7.6` image.
