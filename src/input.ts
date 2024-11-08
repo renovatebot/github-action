@@ -1,12 +1,12 @@
-import * as core from '@actions/core';
+import { getInput } from '@actions/core';
 import path from 'path';
 
-interface EnvironmentVariable {
+export interface EnvironmentVariable {
   key: string;
   value: string;
 }
 
-class Input {
+export class Input {
   readonly options = {
     envRegex:
       /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
@@ -27,7 +27,7 @@ class Input {
   private readonly _configurationFile: Readonly<EnvironmentVariable>;
 
   constructor() {
-    const envRegexInput = core.getInput('env-regex');
+    const envRegexInput = getInput('env-regex');
     const envRegex = envRegexInput
       ? new RegExp(envRegexInput)
       : this.options.envRegex;
@@ -61,41 +61,39 @@ class Input {
   }
 
   getDockerImage(): string | null {
-    return core.getInput('renovate-image') || null;
+    return getInput('renovate-image') || null;
   }
 
   getVersion(): string | null {
-    const version = core.getInput('renovate-version');
-    return !!version && version !== '' ? version : null;
+    return getInput('renovate-version') || null;
   }
 
   mountDockerSocket(): boolean {
-    return core.getInput('mount-docker-socket') === 'true';
+    return getInput('mount-docker-socket') === 'true';
   }
 
   dockerSocketHostPath(): string {
-    return core.getInput('docker-socket-host-path') || '/var/run/docker.sock';
+    return getInput('docker-socket-host-path') || '/var/run/docker.sock';
   }
 
   getDockerCmdFile(): string | null {
-    const cmdFile = core.getInput('docker-cmd-file');
+    const cmdFile = getInput('docker-cmd-file');
     return !!cmdFile && cmdFile !== '' ? path.resolve(cmdFile) : null;
   }
 
   getDockerUser(): string | null {
-    return core.getInput('docker-user') || null;
+    return getInput('docker-user') || null;
   }
 
   getDockerVolumeMounts(): string[] {
-    return core
-      .getInput('docker-volumes')
+    return getInput('docker-volumes')
       .split(';')
       .map((v) => v.trim())
       .filter((v) => !!v);
   }
 
   getDockerNetwork(): string {
-    return core.getInput('docker-network');
+    return getInput('docker-network');
   }
 
   /**
@@ -117,7 +115,7 @@ class Input {
     env: string,
     optional: boolean,
   ): EnvironmentVariable {
-    const fromInput = core.getInput(input);
+    const fromInput = getInput(input);
     const fromEnv = this._environmentVariables.get(env);
 
     if (fromInput === '' && fromEnv === undefined && !optional) {
@@ -136,6 +134,3 @@ class Input {
     return { key: env, value: fromEnv !== undefined ? fromEnv : '' };
   }
 }
-
-export default Input;
-export { EnvironmentVariable, Input };

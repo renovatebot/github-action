@@ -28,6 +28,28 @@
       "description": "Use ci semantic type for some deps",
       "matchFileNames": [".github/workflows/**"],
       "semanticCommitType": "ci"
+    },
+    {
+      "description": "Don't require approval for renovate",
+      "matchDepNames": [
+        "ghcr.io/renovatebot/renovate",
+        "renovatebot/github-action"
+      ],
+      "dependencyDashboardApproval": false
+    },
+    {
+      "description": "Don't pin renovate updates",
+      "matchDepNames": ["ghcr.io/renovatebot/renovate"],
+      "matchFileNames": ["action.yml", "src/docker.ts"],
+      "pinDigests": false
+    },
+    {
+      "description": "Use feat! semantic type for renovate major",
+      "matchDepNames": ["ghcr.io/renovatebot/renovate"],
+      "matchFileNames": ["action.yml", "src/docker.ts"],
+      "matchUpdateTypes": ["major"],
+      "commitMessagePrefix": "feat(deps)!:",
+      "additionalBranchPrefix": "renovate-major"
     }
   ],
   "customManagers": [
@@ -44,6 +66,22 @@
       "customType": "regex",
       "fileMatch": ["^README\\.md$"],
       "matchStrings": ["renovate-version: (?<currentValue>[^\\s]+)"],
+      "depNameTemplate": "ghcr.io/renovatebot/renovate",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "description": "Update renovate version in action.yml",
+      "customType": "regex",
+      "fileMatch": ["^action\\.yml$"],
+      "matchStrings": ["default: '(?<currentValue>[^\\s]+)' # renovate"],
+      "depNameTemplate": "ghcr.io/renovatebot/renovate",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "description": "Update renovate version in src/docker.ts",
+      "customType": "regex",
+      "fileMatch": ["^src/docker\\.ts$"],
+      "matchStrings": ["version = '(?<currentValue>[^\\s]+)'; // renovate"],
       "depNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
     }

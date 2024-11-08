@@ -1,21 +1,31 @@
 import type { Input } from './input';
+import { warning } from '@actions/core';
 
-class Docker {
+export class Docker {
   private static readonly image = 'ghcr.io/renovatebot/renovate';
+  private static readonly version = 'latest';
 
   private readonly dockerImage: string;
   private readonly fullTag: string;
 
   constructor(input: Input) {
-    const tag = input.getVersion();
+    let image = input.getDockerImage();
+    let version = input.getVersion();
 
-    this.dockerImage = input.getDockerImage() ?? Docker.image;
-    this.fullTag = tag ?? 'latest';
+    if (!image) {
+      warning(`No Docker image specified, using ${Docker.image}`);
+      image = Docker.image;
+    }
+    if (!version) {
+      warning(`No Docker version specified, using ${Docker.version}`);
+      version = Docker.version;
+    }
+
+    this.dockerImage = image;
+    this.fullTag = version;
   }
 
   image(): string {
     return `${this.dockerImage}:${this.fullTag}`;
   }
 }
-
-export default Docker;
