@@ -25645,7 +25645,7 @@ exports.Docker = void 0;
 const core_1 = __nccwpck_require__(4708);
 class Docker {
     static image = 'ghcr.io/renovatebot/renovate';
-    static version = 'latest';
+    static version = '39'; // renovate
     dockerImage;
     fullTag;
     constructor(input) {
