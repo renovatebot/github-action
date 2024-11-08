@@ -11,4 +11,5 @@ await build({
   sourcemap: true,
   format: 'esm',
   outdir: './dist/',
+  inject: ['tools/cjs-shim.ts'], // https://github.com/evanw/esbuild/issues/1921#issuecomment-1898197331
 });
