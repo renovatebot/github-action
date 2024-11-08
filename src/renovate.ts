@@ -1,10 +1,10 @@
-import Docker from './docker';
+import { Docker } from './docker';
 import { Input } from './input';
 import { exec } from '@actions/exec';
 import fs from 'fs/promises';
 import path from 'path';
 
-class Renovate {
+export class Renovate {
   static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
   private configFileMountDir = '/github-action';
 
@@ -126,5 +126,3 @@ class Renovate {
     }
   }
 }
-
-export default Renovate;

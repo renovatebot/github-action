@@ -23,13 +23,14 @@ inputs:
     required: false
   renovate-version:
     description: |
-      Renovate version to use. Defaults to latest.
+      Renovate version to use.
     required: false
+    default: 'latest'
   renovate-image:
     description: |
       Renovate docker image name.
-      Defaults to `ghcr.io/renovatebot/renovate`.
     required: false
+    default: ghcr.io/renovatebot/renovate
   mount-docker-socket:
     description: |
       Mount the Docker socket inside the renovate container so that the commands
