@@ -47,7 +47,7 @@
     "@typescript-eslint/parser": "8.12.2",
     "@vercel/ncc": "0.38.2",
     "conventional-changelog-conventionalcommits": "8.0.0",
-    "eslint": "8.57.1",
+    "eslint": "9.13.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-json": "4.0.1",
     "husky": "9.1.6",
