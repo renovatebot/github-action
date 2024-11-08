@@ -31,7 +31,7 @@
     },
     {
       "description": "Don't require approval for renovate",
-      "matchDepNames": [
+      "matchPackageNames": [
         "ghcr.io/renovatebot/renovate",
         "renovatebot/github-action"
       ],
@@ -39,13 +39,13 @@
     },
     {
       "description": "Don't pin renovate updates",
-      "matchDepNames": ["ghcr.io/renovatebot/renovate"],
+      "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
       "matchFileNames": ["action.yml", "src/docker.ts"],
       "pinDigests": false
     },
     {
       "description": "Use feat! semantic type for renovate major",
-      "matchDepNames": ["ghcr.io/renovatebot/renovate"],
+      "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
       "matchFileNames": ["action.yml", "src/docker.ts"],
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(deps)!:",
@@ -66,7 +66,8 @@
       "customType": "regex",
       "fileMatch": ["^README\\.md$"],
       "matchStrings": ["renovate-version: (?<currentValue>[^\\s]+)"],
-      "depNameTemplate": "ghcr.io/renovatebot/renovate",
+      "depNameTemplate": "renovate",
+      "packageNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
     },
     {
@@ -74,7 +75,8 @@
       "customType": "regex",
       "fileMatch": ["^action\\.yml$"],
       "matchStrings": ["default: '(?<currentValue>[^\\s]+)' # renovate"],
-      "depNameTemplate": "ghcr.io/renovatebot/renovate",
+      "depNameTemplate": "renovate",
+      "packageNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
     },
     {
@@ -82,7 +84,8 @@
       "customType": "regex",
       "fileMatch": ["^src/docker\\.ts$"],
       "matchStrings": ["version = '(?<currentValue>[^\\s]+)'; // renovate"],
-      "depNameTemplate": "ghcr.io/renovatebot/renovate",
+      "depNameTemplate": "renovate",
+      "packageNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
     }
   ]
