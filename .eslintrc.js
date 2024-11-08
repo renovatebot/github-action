@@ -38,7 +38,7 @@ module.exports = {
     },
     {
       files: ['*.json'],
-      extends: ['plugin:json/recommended', 'prettier'],
+      extends: ['plugin:json/recommended-legacy', 'prettier'],
     },
   ],
 };
