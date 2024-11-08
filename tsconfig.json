@@ -1,9 +1,15 @@
 {
-  "extends": "@tsconfig/node20/tsconfig.json",
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/node20/tsconfig.json"
+  ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "allowJs": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noImplicitAny": false,
+    "noPropertyAccessFromIndexSignature": false /* makes code more complex */
   },
   "ts-node": { "transpileOnly": true }
 }
