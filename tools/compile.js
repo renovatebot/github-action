@@ -9,6 +9,7 @@ await build({
   minify: !!env['CI'],
   tsconfig: 'tsconfig.dist.json',
   sourcemap: true,
-  // format: 'esm', // TODO: later PR
+  format: 'esm',
   outdir: './dist/',
+  inject: ['tools/cjs-shim.ts'], // https://github.com/evanw/esbuild/issues/1921#issuecomment-1898197331
 });
