@@ -47,6 +47,10 @@ inputs:
     description: |
       Override docker docker entrypoint. Use with `docker-user: root`. See the example for usage.
     required: false
+  docker-cmd-file:
+    description: |
+      Deprecated, keeping it around for the backward compatibility. Use `docker-entrypoint-file` instead.
+    required: false
   docker-network:
     description: |
       Docker network.

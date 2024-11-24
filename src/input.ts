@@ -78,7 +78,12 @@ class Input {
   }
 
   getDockerEntrypointFile(): string | null {
-    const entryPointFile = core.getInput('docker-entrypoint-file');
+    const cmdFile = core.getInput('docker-entrypoint-file');
+    const entryPointFile =
+      !!cmdFile && cmdFile !== ''
+        ? cmdFile
+        : core.getInput('docker-entrypoint-file');
+
     return !!entryPointFile && entryPointFile !== ''
       ? path.resolve(entryPointFile)
       : null;
