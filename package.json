@@ -57,7 +57,7 @@
     "lint-staged": "15.2.10",
     "npm-run-all2": "7.0.1",
     "prettier": "3.3.3",
-    "prettier-plugin-packagejson": "2.5.5",
+    "prettier-plugin-packagejson": "2.5.6",
     "rimraf": "6.0.1",
     "semantic-release": "24.2.0",
     "typescript": "5.7.2",
