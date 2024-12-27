@@ -64,7 +64,7 @@ This disables the requirement of a configuration file for the repository and dis
 
 ```js
   onboarding: false,
-  requireConfig: false,
+  requireConfig: ignored,
 ```
 
 ### `docker-cmd-file`
