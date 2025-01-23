@@ -6,6 +6,7 @@ module.exports = {
   forkProcessing: "disabled",
   repositories: ['apache/solr'],
   baseBranches: ["branch_9x"],
+  useBaseBranchConfig: "merge",
   allowedPostUpgradeCommands: ["./gradlew.*"],
   branchPrefix: "renovate-9x/",
   commitMessageSuffix: " (branch_9x)",
