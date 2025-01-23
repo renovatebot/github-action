@@ -8,5 +8,6 @@ module.exports = {
   baseBranches: ["branch_9x"],
   allowedPostUpgradeCommands: ["./gradlew.*"],
   branchPrefix: "renovate-9x/",
+  commitMessageSuffix: " (branch_9x)",
   dryRun: "extract",
 };
