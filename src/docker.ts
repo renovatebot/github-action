@@ -3,7 +3,7 @@ import { warning } from '@actions/core';
 
 export class Docker {
   private static readonly image = 'ghcr.io/renovatebot/renovate';
-  private static readonly version = '39'; // renovate
+  private static readonly version = '40'; // renovate
 
   private readonly dockerImage: string;
   private readonly fullTag: string;
