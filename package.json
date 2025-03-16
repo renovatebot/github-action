@@ -39,7 +39,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.8.0",
     "@commitlint/config-conventional": "19.8.0",
-    "@eslint/js": "9.21.0",
+    "@eslint/js": "9.22.0",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "11.0.1",
     "@semantic-release/npm": "12.0.1",
@@ -49,8 +49,8 @@
     "@types/node": "20.17.19",
     "conventional-changelog-conventionalcommits": "8.0.0",
     "esbuild": "0.25.0",
-    "eslint": "9.21.0",
-    "eslint-config-prettier": "10.0.1",
+    "eslint": "9.22.0",
+    "eslint-config-prettier": "10.1.1",
     "eslint-plugin-json": "4.0.1",
     "globals": "16.0.0",
     "husky": "9.1.7",
@@ -61,7 +61,7 @@
     "rimraf": "6.0.1",
     "semantic-release": "24.2.3",
     "typescript": "5.8.2",
-    "typescript-eslint": "8.24.1"
+    "typescript-eslint": "8.26.0"
   },
   "packageManager": "pnpm@10.4.1",
   "engines": {
