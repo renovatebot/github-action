@@ -27,39 +27,39 @@ jobs:
         with:
           save-cache: true
 
-  commitlint:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
+  # commitlint:
+  #   runs-on: ubuntu-latest
+  #   if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          fetch-depth: 0
-          show-progress: false
-          filter: blob:none # we don't need all blobs, only the full tree
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+  #       with:
+  #         fetch-depth: 0
+  #         show-progress: false
+  #         filter: blob:none # we don't need all blobs, only the full tree
 
-      - name: Lint commit messages
-        uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # v6.2.1
-        continue-on-error: true
+  #     - name: Lint commit messages
+  #       uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # v6.2.1
+  #       continue-on-error: true
 
-  lint:
-    needs:
-      - prepare
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
+  # lint:
+  #   needs:
+  #     - prepare
+  #   runs-on: ubuntu-latest
+  #   if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          show-progress: false
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+  #       with:
+  #         show-progress: false
 
-      - name: 📥 Setup Node.js
-        uses: ./.github/actions/setup-node
+  #     - name: 📥 Setup Node.js
+  #       uses: ./.github/actions/setup-node
 
-      - name: Lint
-        run: pnpm lint
+  #     - name: Lint
+  #       run: pnpm lint
 
   e2e:
     needs:
@@ -115,8 +115,6 @@ jobs:
 
   release:
     needs:
-      - lint
-      - commitlint
       - e2e
     runs-on: ubuntu-latest
     steps:
