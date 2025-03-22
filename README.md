@@ -315,6 +315,8 @@ Generate and download a new private key for the app, adding the contents of the 
 
 Adjust your Renovate configuration file to specify the username of your bot.
 
+From the Github app configuration page, install the app in your account or your organization's account, and configure the repository access.
+
 Going forward we will be using the [`actions/create-github-app-token` action](https://github.com/actions/create-github-app-token) in order to exchange the GitHub App certificate for an access token that Renovate can use.
 
 The final workflow will look like this:
