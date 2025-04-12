@@ -60,7 +60,7 @@
     "prettier-plugin-packagejson": "2.5.10",
     "rimraf": "6.0.1",
     "semantic-release": "24.2.3",
-    "typescript": "5.8.2",
+    "typescript": "5.8.3",
     "typescript-eslint": "8.29.0"
   },
   "packageManager": "pnpm@10.7.1",
