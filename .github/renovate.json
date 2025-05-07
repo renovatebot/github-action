@@ -55,7 +55,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["^README\\.md$"],
+      "managerFilePatterns": ["/^README\\.md$/"],
       "matchStrings": [
         "uses: renovatebot/github-action@(?<currentValue>[^\\s]+)"
       ],
@@ -64,7 +64,7 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["^README\\.md$"],
+      "managerFilePatterns": ["/^README\\.md$/"],
       "matchStrings": ["renovate-version: (?<currentValue>[^\\s]+)"],
       "depNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
@@ -72,7 +72,7 @@
     {
       "description": "Update renovate version in action.yml",
       "customType": "regex",
-      "fileMatch": ["^action\\.yml$"],
+      "managerFilePatterns": ["/^action\\.yml$/"],
       "matchStrings": ["default: '(?<currentValue>[^\\s]+)' # renovate"],
       "depNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
@@ -80,7 +80,7 @@
     {
       "description": "Update renovate version in src/docker.ts",
       "customType": "regex",
-      "fileMatch": ["^src/docker\\.ts$"],
+      "managerFilePatterns": ["/^src/docker\\.ts$/"],
       "matchStrings": ["version = '(?<currentValue>[^\\s]+)'; // renovate"],
       "depNameTemplate": "ghcr.io/renovatebot/renovate",
       "datasourceTemplate": "docker"
