@@ -46,7 +46,7 @@
     "@tsconfig/node20": "20.1.5",
     "@tsconfig/strictest": "2.0.5",
     "@types/eslint-config-prettier": "6.11.3",
-    "@types/node": "20.17.38",
+    "@types/node": "20.17.40",
     "conventional-changelog-conventionalcommits": "8.0.0",
     "esbuild": "0.25.4",
     "eslint": "9.26.0",
