@@ -1,6 +1,6 @@
 {
   "name": "github-action",
-  "version": "42.0.4",
+  "version": "42.0.5",
   "private": true,
   "description": "GitHub Action to run Renovate self-hosted.",
   "homepage": "https://github.com/renovatebot/github-action#readme",
