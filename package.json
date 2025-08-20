@@ -48,7 +48,7 @@
     "@types/eslint-config-prettier": "6.11.3",
     "@types/node": "20.19.10",
     "conventional-changelog-conventionalcommits": "8.0.0",
-    "esbuild": "0.25.8",
+    "esbuild": "0.25.9",
     "eslint": "9.33.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-json": "4.0.1",
