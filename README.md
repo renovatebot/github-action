@@ -14,6 +14,7 @@ GitHub Action to run Renovate self-hosted.
   - [`docker-cmd-file`](#docker-cmd-file)
   - [`docker-network`](#docker-network)
   - [`docker-socket-host-path`](#docker-socket-host-path)
+  - [`docker-ssh`](#docker-ssh)
   - [`docker-user`](#docker-user)
   - [`docker-volumes`](#docker-volumes)
   - [`env-regex`](#env-regex)
@@ -119,6 +120,29 @@ or set it to `host` to run in the same network as github runner, or specify any 
 Allows the overriding of the host path for the Docker socket that is mounted into the container.
 Useful on systems where the host Docker socket is located somewhere other than `/var/run/docker.sock` (the default).
 Only applicable when `mount-docker-socket` is true.
+
+### `docker-ssh`
+
+List of SSH agent socket or keys to expose to the build. This is passed to the Docker container via the `--ssh` flag.
+
+This is useful when Renovate needs to access private repositories or registries via SSH during the build process.
+
+Example usage:
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v43.0.17
+        with:
+          token: ${{ secrets.RENOVATE_TOKEN }}
+          docker-ssh: default=${{ env.SSH_AUTH_SOCK }}
+```
 
 ### `docker-user`
 

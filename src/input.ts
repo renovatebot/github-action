@@ -96,6 +96,10 @@ export class Input {
     return getInput('docker-network');
   }
 
+  getDockerSsh(): string | null {
+    return getInput('docker-ssh') || null;
+  }
+
   /**
    * Convert to environment variables.
    *

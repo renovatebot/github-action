@@ -70,6 +70,11 @@ export class Renovate {
       dockerArguments.push(`--network ${dockerNetwork}`);
     }
 
+    const dockerSsh = this.input.getDockerSsh();
+    if (dockerSsh) {
+      dockerArguments.push(`--ssh ${dockerSsh}`);
+    }
+
     dockerArguments.push('--rm', this.docker.image());
 
     if (dockerCmd !== null) {

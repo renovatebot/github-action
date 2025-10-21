@@ -61,6 +61,11 @@ inputs:
       Docker volume mounts. Default to /tmp:/tmp
     default: /tmp:/tmp
     required: false
+  docker-ssh:
+    description: |
+      List of SSH agent socket or keys to expose to the build.
+      This maps to the --ssh flag in docker buildx build.
+    required: false
 
 runs:
   using: node20
