@@ -25,7 +25,7 @@ inputs:
     description: |
       Renovate version to use.
     required: false
-    default: '41' # renovate
+    default: '42' # renovate
   renovate-image:
     description: |
       Renovate docker image name.
