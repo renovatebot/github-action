@@ -23,7 +23,7 @@
         "lockFileMaintenance"
       ],
       "dependencyDashboardApproval": false,
-      "minimumReleaseAge": 0
+      "minimumReleaseAge": "1 day"
     }
   ]
 }
