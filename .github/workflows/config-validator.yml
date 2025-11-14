@@ -1,0 +1,42 @@
+name: Validate example configuration
+
+on:
+  push:
+    paths:
+      - example/*
+      - .github/workflows/config-validator.yml
+  pull_request:
+    paths:
+      - example/*
+      - .github/workflows/config-validator.yml
+  workflow_dispatch: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  RENOVATE_VERSION: 41.173.1 # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
+
+jobs:
+  renovate-config-validator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          show-progress: false
+
+      # When running the config validator in this repo, with the `package.json`, we receive error:
+      #
+      #   module is not defined in ES module scope
+      #
+      # So we need to delete the `package.json` to allow us to validate the `config.js`
+      - name: Remove `package.json`
+        run: rm package.json
+
+      - name: Validate Renovate configuration
+        run: |
+          cd example
+          env LOG_LEVEL=debug npx --yes --package renovate@${{ env.RENOVATE_VERSION }} -- renovate-config-validator *.json *.js
