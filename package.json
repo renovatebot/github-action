@@ -43,7 +43,7 @@
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "11.0.6",
     "@semantic-release/npm": "12.0.2",
-    "@tsconfig/node20": "20.1.7",
+    "@tsconfig/node20": "20.1.8",
     "@tsconfig/strictest": "2.0.6",
     "@types/eslint-config-prettier": "6.11.3",
     "@types/node": "20.19.25",
