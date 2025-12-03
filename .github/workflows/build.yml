@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  RENOVATE_VERSION: 42.32.3 # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
+  RENOVATE_VERSION: 42.34.0 # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
 
 jobs:
   prepare:
