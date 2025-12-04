@@ -73,11 +73,11 @@ importers:
         specifier: 8.0.4
         version: 8.0.4
       prettier:
-        specifier: 3.7.0
-        version: 3.7.0
+        specifier: 3.7.1
+        version: 3.7.1
       prettier-plugin-packagejson:
         specifier: 2.5.19
-        version: 2.5.19(prettier@3.7.0)
+        version: 2.5.19(prettier@3.7.1)
       rimraf:
         specifier: 6.1.2
         version: 6.1.2
@@ -1814,8 +1814,8 @@ packages:
       prettier:
         optional: true
 
-  prettier@3.7.0:
-    resolution: {integrity: sha512-pBiBj/gjRY9Qpk1b7cDda6Rbwvkaggos779AHQ0Ek/odwDx6xG6DRBxtnp1QmxbuD7pAO8/SQ8vuhtGv9LoLWA==}
+  prettier@3.7.1:
+    resolution: {integrity: sha512-RWKXE4qB3u5Z6yz7omJkjWwmTfLdcbv44jUVHC5NpfXwFGzvpQM798FGv/6WNK879tc+Cn0AAyherCl1KjbyZQ==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -3897,14 +3897,14 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-packagejson@2.5.19(prettier@3.7.0):
+  prettier-plugin-packagejson@2.5.19(prettier@3.7.1):
     dependencies:
       sort-package-json: 3.4.0
       synckit: 0.11.11
     optionalDependencies:
-      prettier: 3.7.0
+      prettier: 3.7.1
 
-  prettier@3.7.0: {}
+  prettier@3.7.1: {}
 
   pretty-ms@9.3.0:
     dependencies:
