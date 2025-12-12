@@ -76,7 +76,7 @@ export class Renovate {
       dockerArguments.push(dockerCmd);
     }
 
-    const command = `docker run ${dockerArguments.join(' ')}`;
+    const command = `docker run -t ${dockerArguments.join(' ')}`;
 
     const code = await exec(command);
     if (code !== 0) {
