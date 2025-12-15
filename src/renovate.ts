@@ -1,6 +1,6 @@
+import { exec, getExecOutput } from '@actions/exec';
 import { Docker } from './docker';
 import { Input } from './input';
-import { exec } from '@actions/exec';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -12,6 +12,17 @@ export class Renovate {
 
   constructor(private input: Input) {
     this.docker = new Docker(input);
+  }
+
+  async runDockerContainerForVersion(): Promise<string> {
+    const command = `docker run -t --rm ${this.docker.image()} --version`;
+
+    const { exitCode, stdout } = await getExecOutput(command);
+    if (exitCode !== 0) {
+      new Error(`'docker run' failed with exit code ${exitCode}.`);
+    }
+
+    return stdout.trim();
   }
 
   async runDockerContainer(): Promise<void> {
