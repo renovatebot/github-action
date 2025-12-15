@@ -113,11 +113,30 @@ jobs:
           docker-cmd-file: example/entrypoint.sh
           docker-user: root
 
+  renovate-config-validator:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    container:
+      image: ghcr.io/renovatebot/renovate:42.54.1@sha256:c4aa5b11d1462705fb2c315970600cedb326d80b24ba1883f8098d93934c4483
+      # github hosted runners are running as `1001:127` (ubuntu:docker)
+      options: -u 1001:0 --group-add 1000 --group-add 12021 --group-add 127
+
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          show-progress: false
+
+      - name: Validate Renovate configuration
+        working-directory: example
+        run: |
+          renovate-config-validator renovate-config.js renovate-config.json
+
   release:
     needs:
       - lint
       - commitlint
       - e2e
+      - renovate-config-validator
     runs-on: ubuntu-latest
     steps:
       - name: Setup Git user
