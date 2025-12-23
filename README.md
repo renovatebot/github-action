@@ -165,12 +165,9 @@ container to the docker group for socket permissions.
 
 ### `token`
 
-[Generate a Personal Access Token (classic)](https://github.com/settings/tokens), with the `repo:public_repo` scope for only public repositories or the `repo` scope for public and private repositories, and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`.
+[Generate a GitHub Personal Access Token (fine-grained is recommended)](https://github.com/settings/tokens) (see the [GitHub authentication docs](https://docs.renovatebot.com/modules/platform/github/#authentication)) and add it to _Secrets_ (repository settings) as `RENOVATE_TOKEN`.
 You can also create a token without a specific scope, which gives read-only access to public repositories, for testing.
-This token is only used by Renovate, see the [token configuration](https://docs.renovatebot.com/self-hosted-configuration/#token), and gives it access to the repositories.
-The name of the secret can be anything as long as it matches the argument given to the `token` option.
-
-Note that Renovate _cannot_ currently use [Fine-grained Personal Access Tokens](https://github.com/settings/tokens?type=beta) since they do not support the GitHub GraphQL API, yet.
+The secret's name can be anything if it matches the argument given to the `token` option.
 
 Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#permissions-for-the-github_token) secret can't be used for authenticating Renovate because it has too restrictive permissions.
 In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more types of Github Workflows results in `Pull Requests` that [do not trigger your `Pull Request` and `Push` CI events](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow).
