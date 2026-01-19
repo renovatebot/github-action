@@ -61,7 +61,7 @@
     "rimraf": "6.1.2",
     "semantic-release": "25.0.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.52.0"
+    "typescript-eslint": "8.53.0"
   },
   "packageManager": "pnpm@10.28.0",
   "engines": {
