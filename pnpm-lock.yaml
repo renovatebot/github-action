@@ -987,8 +987,8 @@ packages:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
 
-  eventemitter3@5.0.1:
-    resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
+  eventemitter3@5.0.4:
+    resolution: {integrity: sha512-mlsTRyGaPBjPedk6Bvw+aqbsXDtoAyAzm5MO7JgU+yVRyMQ5O8bD4Kcci7BS85f93veegeCPkL8R4GLClnjLFw==}
 
   execa@5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
@@ -1390,8 +1390,8 @@ packages:
     resolution: {integrity: sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  lodash-es@4.17.22:
-    resolution: {integrity: sha512-XEawp1t0gxSi9x01glktRZ5HDy0HXqrM0x5pXQM98EaI0NxO6jVM7omDOxsuEo5UIASAnm2bRp1Jt/e0a2XU8Q==}
+  lodash-es@4.17.23:
+    resolution: {integrity: sha512-kVI48u3PZr38HdYz98UmfPnXl2DXrpdctLrFLCd3kOx1xUkOmpFPx7gCWWM5MPkL/fD8zb+Ph0QzjGFs4+hHWg==}
 
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
@@ -1432,8 +1432,8 @@ packages:
   lodash.upperfirst@4.3.1:
     resolution: {integrity: sha512-sReKOYJIJf74dhJONhU4e0/shzi1trVbSWDOhKYE5XV2O+H7Sb2Dihwuc7xWxVl+DgFPyTqIN3zMfT9cq5iWDg==}
 
-  lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+  lodash@4.17.23:
+    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
 
   log-update@6.1.0:
     resolution: {integrity: sha512-9ie8ItPR6tjY5uYJh8K/Zrv/RMZ5VOlOWvtZdEHYSTFKZfIBPQa9tOAEeAWhd+AnIneLJ22w5fjOYtoutpWq5w==}
@@ -1442,8 +1442,8 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  lru-cache@11.2.4:
-    resolution: {integrity: sha512-B5Y16Jr9LB9dHVkh6ZevG+vAbOsNOYCX+sXvFWFu7B3Iz5mijW3zdbMyhsh8ANd2mSWBYdJgnqi+mL7/LrOPYg==}
+  lru-cache@11.2.5:
+    resolution: {integrity: sha512-vFrFJkWtJvJnD5hg+hJvVE8Lh/TcMzKnTgCWmtBipwI5yLX/iX+5UB2tfuyODF5E7k9xEzMdYgGqaSb1c0c5Yw==}
     engines: {node: 20 || >=22}
 
   make-asynchronous@1.0.1:
@@ -1571,8 +1571,8 @@ packages:
     resolution: {integrity: sha512-9qny7Z9DsQU8Ou39ERsPU4OZQlSTP47ShQzuKZ6PRXpYLtIFgl/DEBYEXKlvcEa+9tHVcK8CF81Y2V72qaZhWA==}
     engines: {node: '>=18'}
 
-  npm@11.7.0:
-    resolution: {integrity: sha512-wiCZpv/41bIobCoJ31NStIWKfAxxYyD1iYnWCtiyns8s5v3+l8y0HCP/sScuH6B5+GhIfda4HQKiqeGZwJWhFw==}
+  npm@11.8.0:
+    resolution: {integrity: sha512-n19sJeW+RGKdkHo8SCc5xhSwkKhQUFfZaFzSc+EsYXLjSqIV0tl72aDYQVuzVvfrbysGwdaQsNLNy58J10EBSQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
     hasBin: true
     bundledDependencies:
@@ -2062,8 +2062,8 @@ packages:
     resolution: {integrity: sha512-nHc6S/bwIilKHNRgK/3jlhDoIHcp45YgyiwcAk46Tr0LfEqGBVpmiAyuiuxeVE44m3mXnEeVhaipLOEWmH+Njw==}
     engines: {node: '>=14.16'}
 
-  tempy@3.1.0:
-    resolution: {integrity: sha512-7jDLIdD2Zp0bDe5r3D2qtkd1QOCacylBuL7oa4udvN6v2pqr4+LcCr67C8DR1zkpaZ8XosF5m1yQSabKAW6f2g==}
+  tempy@3.1.2:
+    resolution: {integrity: sha512-pD3+21EbFZFBKDnVztX32wU6IBwkalOduWdx1OKvB5y6y1f2Xn8HU/U6o9EmlfdSyUYe9IybirmYPj/7rilA6Q==}
     engines: {node: '>=14.16'}
 
   text-extensions@2.4.0:
@@ -2157,8 +2157,8 @@ packages:
     resolution: {integrity: sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==}
     engines: {node: '>=14.0'}
 
-  undici@7.18.2:
-    resolution: {integrity: sha512-y+8YjDFzWdQlSE9N5nzKMT3g4a5UBX1HKowfdXh0uvAnTaqqwqB92Jt4UXBAeKekDs5IaDKyJFR4X1gYVCgXcw==}
+  undici@7.19.1:
+    resolution: {integrity: sha512-Gpq0iNm5M6cQWlyHQv9MV+uOj1jWk7LpkoE5vSp/7zjb4zMdAcUD+VL5y0nH4p9EbUklq00eVIIX/XcDHzu5xg==}
     engines: {node: '>=20.18.1'}
 
   unicode-emoji-modifier-base@1.0.0:
@@ -2668,7 +2668,7 @@ snapshots:
       conventional-commits-parser: 6.2.1
       debug: 4.4.3
       import-from-esm: 2.0.0
-      lodash-es: 4.17.22
+      lodash-es: 4.17.23
       micromatch: 4.0.8
       semantic-release: 25.0.2(typescript@5.9.3)
     transitivePeerDependencies:
@@ -2685,7 +2685,7 @@ snapshots:
       debug: 4.4.3
       dir-glob: 3.0.1
       execa: 5.1.1
-      lodash: 4.17.21
+      lodash: 4.17.23
       micromatch: 4.0.8
       p-reduce: 2.1.0
       semantic-release: 25.0.2(typescript@5.9.3)
@@ -2705,12 +2705,12 @@ snapshots:
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       issue-parser: 7.0.1
-      lodash-es: 4.17.22
+      lodash-es: 4.17.23
       mime: 4.1.0
       p-filter: 4.1.0
       semantic-release: 25.0.2(typescript@5.9.3)
       tinyglobby: 0.2.15
-      undici: 7.18.2
+      undici: 7.19.1
       url-join: 5.0.0
     transitivePeerDependencies:
       - supports-color
@@ -2723,16 +2723,16 @@ snapshots:
       env-ci: 11.2.0
       execa: 9.6.1
       fs-extra: 11.3.3
-      lodash-es: 4.17.22
+      lodash-es: 4.17.23
       nerf-dart: 1.0.0
       normalize-url: 8.1.1
-      npm: 11.7.0
+      npm: 11.8.0
       rc: 1.2.8
       read-pkg: 10.0.0
       registry-auth-token: 5.1.1
       semantic-release: 25.0.2(typescript@5.9.3)
       semver: 7.7.3
-      tempy: 3.1.0
+      tempy: 3.1.2
 
   '@semantic-release/release-notes-generator@14.1.0(semantic-release@25.0.2(typescript@5.9.3))':
     dependencies:
@@ -2744,7 +2744,7 @@ snapshots:
       get-stream: 7.0.1
       import-from-esm: 2.0.0
       into-stream: 7.0.0
-      lodash-es: 4.17.22
+      lodash-es: 4.17.23
       read-package-up: 11.0.0
       semantic-release: 25.0.2(typescript@5.9.3)
     transitivePeerDependencies:
@@ -3194,7 +3194,7 @@ snapshots:
 
   eslint-plugin-json@4.0.1:
     dependencies:
-      lodash: 4.17.21
+      lodash: 4.17.23
       vscode-json-languageservice: 4.2.1
 
   eslint-scope@8.4.0:
@@ -3265,7 +3265,7 @@ snapshots:
 
   esutils@2.0.3: {}
 
-  eventemitter3@5.0.1: {}
+  eventemitter3@5.0.4: {}
 
   execa@5.1.1:
     dependencies:
@@ -3455,7 +3455,7 @@ snapshots:
 
   hosted-git-info@9.0.2:
     dependencies:
-      lru-cache: 11.2.4
+      lru-cache: 11.2.5
 
   http-proxy-agent@7.0.2:
     dependencies:
@@ -3621,7 +3621,7 @@ snapshots:
     dependencies:
       cli-truncate: 5.1.1
       colorette: 2.0.20
-      eventemitter3: 5.0.1
+      eventemitter3: 5.0.4
       log-update: 6.1.0
       rfdc: 1.4.1
       wrap-ansi: 9.0.2
@@ -3646,7 +3646,7 @@ snapshots:
     dependencies:
       p-locate: 6.0.0
 
-  lodash-es@4.17.22: {}
+  lodash-es@4.17.23: {}
 
   lodash.camelcase@4.3.0: {}
 
@@ -3674,7 +3674,7 @@ snapshots:
 
   lodash.upperfirst@4.3.1: {}
 
-  lodash@4.17.21: {}
+  lodash@4.17.23: {}
 
   log-update@6.1.0:
     dependencies:
@@ -3686,7 +3686,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  lru-cache@11.2.4: {}
+  lru-cache@11.2.5: {}
 
   make-asynchronous@1.0.1:
     dependencies:
@@ -3807,7 +3807,7 @@ snapshots:
       path-key: 4.0.0
       unicorn-magic: 0.3.0
 
-  npm@11.7.0: {}
+  npm@11.8.0: {}
 
   object-assign@4.1.1: {}
 
@@ -3924,7 +3924,7 @@ snapshots:
 
   path-scurry@2.0.1:
     dependencies:
-      lru-cache: 11.2.4
+      lru-cache: 11.2.5
       minipass: 7.1.2
 
   path-type@4.0.0: {}
@@ -4059,7 +4059,7 @@ snapshots:
       hook-std: 4.0.0
       hosted-git-info: 9.0.2
       import-from-esm: 2.0.0
-      lodash-es: 4.17.22
+      lodash-es: 4.17.23
       marked: 15.0.12
       marked-terminal: 7.3.0(marked@15.0.12)
       micromatch: 4.0.8
@@ -4217,7 +4217,7 @@ snapshots:
 
   temp-dir@3.0.0: {}
 
-  tempy@3.1.0:
+  tempy@3.1.2:
     dependencies:
       is-stream: 3.0.0
       temp-dir: 3.0.0
@@ -4300,7 +4300,7 @@ snapshots:
     dependencies:
       '@fastify/busboy': 2.1.1
 
-  undici@7.18.2: {}
+  undici@7.19.1: {}
 
   unicode-emoji-modifier-base@1.0.0: {}
 
