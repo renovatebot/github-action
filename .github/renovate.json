@@ -3,6 +3,11 @@
   "extends": ["github>renovatebot/.github", ":pinDependencies"],
   "packageRules": [
     {
+      "description": "Always group updates to the Renovate Docker image",
+      "groupName": "renovate",
+      "matchPackageNames": ["ghcr.io/renovatebot/renovate"]
+    },
+    {
       "description": "Update references in Markdown files weekly",
       "matchFileNames": ["**/*.md"],
       "extends": ["schedule:weekly"],
@@ -13,6 +18,13 @@
       "semanticCommitType": "docs",
       "semanticCommitScope": null,
       "additionalBranchPrefix": "docs-"
+    },
+    {
+      "description": "Always group major updates to the Renovate Docker image (docs and code)",
+      "groupName": "renovate-major",
+      "matchUpdateTypes": ["major"],
+      "additionalBranchPrefix": "",
+      "matchPackageNames": ["ghcr.io/renovatebot/renovate"]
     },
     {
       "description": "Use build semantic type for some deps",
