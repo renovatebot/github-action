@@ -4,6 +4,7 @@
     "@tsconfig/node20/tsconfig.json"
   ],
   "compilerOptions": {
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "outDir": "dist",
     "module": "ESNext",
