@@ -5,7 +5,7 @@ await build({
   entryPoints: ['./src/index.ts'],
   bundle: true,
   platform: 'node',
-  target: 'node20',
+  target: 'node24',
   minify: !!env['CI'],
   tsconfig: 'tsconfig.dist.json',
   sourcemap: true,
