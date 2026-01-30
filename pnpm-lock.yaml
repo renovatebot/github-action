@@ -12,8 +12,8 @@ importers:
         specifier: 1.11.1
         version: 1.11.1
       '@actions/exec':
-        specifier: 1.1.1
-        version: 1.1.1
+        specifier: 2.0.0
+        version: 2.0.0
     devDependencies:
       '@commitlint/cli':
         specifier: 20.3.1
