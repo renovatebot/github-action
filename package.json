@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@actions/core": "2.0.2",
-    "@actions/exec": "2.0.0"
+    "@actions/exec": "3.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "20.3.1",
