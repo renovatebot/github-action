@@ -6,7 +6,7 @@ await build({
   bundle: true,
   platform: 'node',
   target: 'node24',
-  minify: !!env['CI'],
+  minify: !!env.CI,
   tsconfig: 'tsconfig.dist.json',
   sourcemap: true,
   format: 'esm',
