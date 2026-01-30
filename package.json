@@ -33,7 +33,7 @@
     "start": "run-s build && node dist"
   },
   "dependencies": {
-    "@actions/core": "2.0.2",
+    "@actions/core": "3.0.0",
     "@actions/exec": "3.0.0"
   },
   "devDependencies": {
