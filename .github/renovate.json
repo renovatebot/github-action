@@ -10,6 +10,7 @@
     {
       "description": "Update references in Markdown files weekly",
       "matchFileNames": ["**/*.md"],
+      "matchUpdateTypes": ["!major"],
       "extends": ["schedule:weekly"],
       "automerge": true,
       "minimumReleaseAge": null,
@@ -18,13 +19,6 @@
       "semanticCommitType": "docs",
       "semanticCommitScope": null,
       "additionalBranchPrefix": "docs-"
-    },
-    {
-      "description": "Always group major updates to the Renovate Docker image (docs and code)",
-      "groupName": "renovate-major",
-      "matchUpdateTypes": ["major"],
-      "additionalBranchPrefix": "",
-      "matchPackageNames": ["ghcr.io/renovatebot/renovate"]
     },
     {
       "description": "Use build semantic type for some deps",
