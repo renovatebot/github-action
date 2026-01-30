@@ -3,11 +3,6 @@
   "extends": ["github>renovatebot/.github", ":pinDependencies"],
   "packageRules": [
     {
-      "description": "Always group updates to the Renovate Docker image",
-      "groupName": "renovate",
-      "matchPackageNames": ["ghcr.io/renovatebot/renovate"]
-    },
-    {
       "description": "Use build semantic type for some deps",
       "matchPackageNames": ["@vercel/ncc", "typescript"],
       "semanticCommitType": "build"
