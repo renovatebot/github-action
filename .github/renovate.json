@@ -3,8 +3,14 @@
   "extends": ["github>renovatebot/.github", ":pinDependencies"],
   "packageRules": [
     {
+      "description": "Always group updates to the Renovate Docker image",
+      "groupName": "renovate",
+      "matchPackageNames": ["ghcr.io/renovatebot/renovate"]
+    },
+    {
       "description": "Update references in Markdown files weekly",
       "matchFileNames": ["**/*.md"],
+      "matchUpdateTypes": ["!major"],
       "extends": ["schedule:weekly"],
       "automerge": true,
       "minimumReleaseAge": null,
