@@ -3,11 +3,6 @@
   "extends": ["github>renovatebot/.github", ":pinDependencies"],
   "packageRules": [
     {
-      "description": "Always group updates to the Renovate Docker image",
-      "groupName": "renovate",
-      "matchPackageNames": ["ghcr.io/renovatebot/renovate"]
-    },
-    {
       "description": "Use build semantic type for some deps",
       "matchPackageNames": ["@vercel/ncc", "typescript"],
       "semanticCommitType": "build"
@@ -33,21 +28,11 @@
     {
       "description": "Don't pin renovate updates",
       "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
-      "matchFileNames": [
-        "action.yml",
-        "src/docker.ts",
-        ".github/workflows/build.yml"
-      ],
       "pinDigests": false
     },
     {
       "description": "Use feat! semantic type for renovate major",
       "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
-      "matchFileNames": [
-        "action.yml",
-        "src/docker.ts",
-        ".github/workflows/build.yml"
-      ],
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(deps)!:",
       "additionalBranchPrefix": "renovate-major"
