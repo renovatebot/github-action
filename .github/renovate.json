@@ -33,21 +33,11 @@
     {
       "description": "Don't pin renovate updates",
       "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
-      "matchFileNames": [
-        "action.yml",
-        "src/docker.ts",
-        ".github/workflows/build.yml"
-      ],
       "pinDigests": false
     },
     {
       "description": "Use feat! semantic type for renovate major",
       "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
-      "matchFileNames": [
-        "action.yml",
-        "src/docker.ts",
-        ".github/workflows/build.yml"
-      ],
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(deps)!:",
       "additionalBranchPrefix": "renovate-major"
