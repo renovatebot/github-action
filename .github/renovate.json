@@ -8,19 +8,6 @@
       "matchPackageNames": ["ghcr.io/renovatebot/renovate"]
     },
     {
-      "description": "Update references in Markdown files weekly",
-      "matchFileNames": ["**/*.md"],
-      "matchUpdateTypes": ["!major"],
-      "extends": ["schedule:weekly"],
-      "automerge": true,
-      "minimumReleaseAge": null,
-      "separateMajorMinor": false,
-      "commitMessageTopic": "references to {{{depName}}}",
-      "semanticCommitType": "docs",
-      "semanticCommitScope": null,
-      "additionalBranchPrefix": "docs-"
-    },
-    {
       "description": "Use build semantic type for some deps",
       "matchPackageNames": ["@vercel/ncc", "typescript"],
       "semanticCommitType": "build"
