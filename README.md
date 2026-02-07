@@ -222,7 +222,7 @@ The Renovate version to use.
 If omitted the action will use the [`default version`](./action.yml#L28) Docker tag.
 Check [the available tags on Docker Hub](https://hub.docker.com/r/renovate/renovate/tags).
 
-This sample will use `ghcr.io/renovatebot/renovate:43.4.1` image.
+This sample will use `ghcr.io/renovatebot/renovate:43.4.2` image.
 
 ```yml
 ....
@@ -235,7 +235,7 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.0.1
         with:
-          renovate-version: 43.4.1
+          renovate-version: 43.4.2
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
@@ -516,7 +516,7 @@ jobs:
         with:
           configurationFile: renovate.json5
           token: ${{ secrets.RENOVATE_TOKEN }}
-          renovate-version: 43.4.1
+          renovate-version: 43.4.2
         env:
           # This enables the cache -- if this is set, it's not necessary to add it to renovate.json.
           RENOVATE_REPOSITORY_CACHE: ${{ github.event.inputs.repoCache || 'enabled' }}
