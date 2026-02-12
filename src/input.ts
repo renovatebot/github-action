@@ -9,7 +9,7 @@ export interface EnvironmentVariable {
 export class Input {
   readonly options = {
     envRegex:
-      /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
+      /^(?:RENOVATE_\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|NO_COLOR|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy)$/,
     configurationFile: {
       input: 'configurationFile',
       env: 'RENOVATE_CONFIG_FILE',
