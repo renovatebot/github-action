@@ -46,7 +46,7 @@
     "@tsconfig/node24": "24.0.4",
     "@tsconfig/strictest": "2.0.8",
     "@types/eslint-config-prettier": "6.11.3",
-    "@types/node": "24.10.11",
+    "@types/node": "24.10.12",
     "conventional-changelog-conventionalcommits": "9.1.0",
     "esbuild": "0.27.3",
     "eslint": "9.39.2",
