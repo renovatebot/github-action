@@ -177,6 +177,7 @@ Note that the [`GITHUB_TOKEN`](https://help.github.com/en/actions/configuring-an
 In particular, using the `GITHUB_TOKEN` to create a new `Pull Request` from more types of Github Workflows results in `Pull Requests` that [do not trigger your `Pull Request` and `Push` CI events](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow).
 
 If you want to use the `github-actions` manager, you must setup a [special token](#special-token-requirements-when-using-the-github-actions-manager) with some requirements.
+
 ### `renovate-image`
 
 The Renovate Docker image name to use.
