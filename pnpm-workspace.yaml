@@ -1,2 +1,16 @@
+strictPeerDependencies: true
+saveExact: true
+dedupePeers: true
+# updates are handled by Renovate itself
+updateNotifier: false
+
 allowBuilds:
   esbuild: false
+
+# in line with https://github.com/renovatebot/.github/blob/main/default.json,
+# all non-Renovate or non-Containerbase packages should only be installed after
+# 7 days
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - '@renovatebot/*'
+  - '@containerbase/*'
