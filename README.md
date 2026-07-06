@@ -100,7 +100,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.3
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           docker-cmd-file: .github/renovate-entrypoint.sh
           docker-user: root
@@ -143,7 +143,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.3
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
           docker-volumes: |
@@ -195,7 +195,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.3
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           renovate-image: myproxyhub.domain.com/renovate/renovate
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -212,7 +212,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.3
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
@@ -234,7 +234,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.3
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           renovate-version: 43.252.1
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -251,7 +251,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.3
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           renovate-version: full
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -286,7 +286,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.3
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -299,7 +299,7 @@ If you want to use the Renovate Action on a GitHub Enterprise instance you have 
 ```yml
 ....
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -346,7 +346,7 @@ jobs:
         uses: actions/checkout@v6.0.3
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           configurationFile: example/renovate-config.js
           token: '${{ steps.get_token.outputs.token }}'
@@ -361,7 +361,7 @@ For example:
 
 ```yaml
 - name: Self-hosted Renovate
-  uses: renovatebot/github-action@v46.1.17
+  uses: renovatebot/github-action@v46.1.18
   with:
     token: '${{ steps.get_token.outputs.token }}'
   env:
@@ -385,7 +385,7 @@ For example if you wish to pass through some credentials for a [host rule](https
          - name: Checkout
            uses: actions/checkout@v6.0.3
          - name: Self-hosted Renovate
-           uses: renovatebot/github-action@v46.1.17
+           uses: renovatebot/github-action@v46.1.18
            with:
              configurationFile: example/renovate-config.js
              token: ${{ secrets.RENOVATE_TOKEN }}
@@ -422,7 +422,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6.0.3
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.17
+        uses: renovatebot/github-action@v46.1.18
         with:
           configurationFile: example/renovate-config.js
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -513,7 +513,7 @@ jobs:
           sudo chown -R 12021:0 /tmp/renovate/
           ls -R $cache_dir
 
-      - uses: renovatebot/github-action@v46.1.17
+      - uses: renovatebot/github-action@v46.1.18
         with:
           configurationFile: renovate.json5
           token: ${{ secrets.RENOVATE_TOKEN }}
@@ -551,7 +551,7 @@ To enable debug logging, add the environment variable `LOG_LEVEL: 'debug'` to th
 
 ```yml
 - name: Self-hosted Renovate
-  uses: renovatebot/github-action@v46.1.17
+  uses: renovatebot/github-action@v46.1.18
   with:
     configurationFile: example/renovate-config.js
     token: ${{ secrets.RENOVATE_TOKEN }}
