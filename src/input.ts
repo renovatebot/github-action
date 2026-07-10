@@ -96,6 +96,10 @@ export class Input {
     return getInput('docker-network');
   }
 
+  dockerTty(): boolean {
+    return getInput('dockerTty') !== 'false';
+  }
+
   /**
    * Convert to environment variables.
    *

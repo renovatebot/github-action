@@ -1,8 +1,8 @@
 import { exec, getExecOutput } from '@actions/exec';
-import { Docker } from './docker';
-import { Input } from './input';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { Docker } from './docker';
+import { Input } from './input';
 
 export class Renovate {
   static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
@@ -15,7 +15,8 @@ export class Renovate {
   }
 
   async runDockerContainerForVersion(): Promise<string> {
-    const command = `docker run -t --rm ${this.docker.image()} --version`;
+    const ttyArgument = this.input.dockerTty() ? '-t ' : '';
+    const command = `docker run ${ttyArgument}--rm ${this.docker.image()} --version`;
 
     const { exitCode, stdout } = await getExecOutput(command);
     if (exitCode !== 0) {
@@ -87,7 +88,8 @@ export class Renovate {
       dockerArguments.push(dockerCmd);
     }
 
-    const command = `docker run -t ${dockerArguments.join(' ')}`;
+    const ttyArgument = this.input.dockerTty() ? '-t ' : '';
+    const command = `docker run ${ttyArgument}${dockerArguments.join(' ')}`;
 
     const code = await exec(command);
     if (code !== 0) {
