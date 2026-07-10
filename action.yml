@@ -61,7 +61,7 @@ inputs:
       Docker volume mounts. Default to /tmp:/tmp
     default: /tmp:/tmp
     required: false
-  dockerTty:
+  docker-tty:
     description: |
       Allocate a pseudo-TTY (`-t`) for Docker runs.
       Set to `false` to disable TTY allocation.

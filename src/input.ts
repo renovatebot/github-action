@@ -97,7 +97,7 @@ export class Input {
   }
 
   dockerTty(): boolean {
-    return getInput('dockerTty') !== 'false';
+    return getInput('docker-tty') !== 'false';
   }
 
   /**

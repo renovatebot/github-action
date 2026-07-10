@@ -14,7 +14,7 @@ GitHub Action to run Renovate self-hosted.
   - [`docker-cmd-file`](#docker-cmd-file)
   - [`docker-network`](#docker-network)
   - [`docker-socket-host-path`](#docker-socket-host-path)
-  - [`dockerTty`](#dockertty)
+  - [`docker-tty`](#docker-tty)
   - [`docker-user`](#docker-user)
   - [`docker-volumes`](#docker-volumes)
   - [`env-regex`](#env-regex)
@@ -121,7 +121,7 @@ Allows the overriding of the host path for the Docker socket that is mounted int
 Useful on systems where the host Docker socket is located somewhere other than `/var/run/docker.sock` (the default).
 Only applicable when `mount-docker-socket` is true.
 
-### `dockerTty`
+### `docker-tty`
 
 Defaults to `true`. When enabled, Docker commands are run with `-t` (allocate pseudo-TTY).
 Set to `false` to disable TTY allocation.
