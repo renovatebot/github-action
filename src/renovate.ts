@@ -1,8 +1,8 @@
 import { exec, getExecOutput } from '@actions/exec';
-import fs from 'node:fs/promises';
-import path from 'node:path';
 import { Docker } from './docker';
 import { Input } from './input';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 export class Renovate {
   static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
