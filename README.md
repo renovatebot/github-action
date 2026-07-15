@@ -370,7 +370,9 @@ For example:
 
 ## Environment Variables
 
-If you wish to pass through environment variables through to the Docker container that powers this action you need to prefix the environment variable with `RENOVATE_`.
+Environment variables prefixed with `RENOVATE_` are passed through to the Docker container automatically. This prefix is reserved for [Renovate self-hosted configuration](https://docs.renovatebot.com/self-hosted-configuration/), so using it for unrelated credentials can accidentally conflict with a Renovate option.
+
+For custom credentials, use a distinct prefix and add the variable to [`env-regex`](#passing-other-environment-variables).
 
 For example if you wish to pass through some credentials for a [host rule](https://docs.renovatebot.com/configuration-options/#hostrules) to the `config.js` then you should do so like this.
 
@@ -389,8 +391,9 @@ For example if you wish to pass through some credentials for a [host rule](https
            with:
              configurationFile: example/renovate-config.js
              token: ${{ secrets.RENOVATE_TOKEN }}
+             env-regex: "^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS|NO_COLOR|(?:HTTPS?|NO)_PROXY|(?:https?|no)_proxy|CUSTOM_TFE_TOKEN)$"
            env:
-             RENOVATE_TFE_TOKEN: ${{ secrets.MY_TFE_TOKEN }}
+             CUSTOM_TFE_TOKEN: ${{ secrets.MY_TFE_TOKEN }}
    ```
 
 1. In `example/renovate-config.js` include the hostRules block
@@ -401,7 +404,7 @@ For example if you wish to pass through some credentials for a [host rule](https
        {
          hostType: 'terraform-module',
          matchHost: 'app.terraform.io',
-         token: process.env.RENOVATE_TFE_TOKEN,
+         token: process.env.CUSTOM_TFE_TOKEN,
        },
      ],
    };
