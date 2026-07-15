@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  RENOVATE_VERSION: 43.263.6 # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
+  RENOVATE_VERSION: 43.263.7 # renovate: datasource=docker depName=ghcr.io/renovatebot/renovate
 
 jobs:
   prepare:
@@ -133,7 +133,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     container:
-      image: ghcr.io/renovatebot/renovate:43.263.6@sha256:98ec7a9df71f91f1d137cfb26c6028e55b2e8c5adf8fcb70201eceb6d361834e
+      image: ghcr.io/renovatebot/renovate:43.263.7@sha256:961d3785fb5a27ecffe3f82b3a1764d320f42cea71311637722bc23c866ac4e3
       # github hosted runners are running as `1001:127` (ubuntu:docker)
       options: -u 1001:0 --group-add 1000 --group-add 12021 --group-add 127
 
