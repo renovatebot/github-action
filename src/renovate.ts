@@ -125,7 +125,11 @@ export class Renovate {
     if (/\s/.test(this.input.token.value)) {
       throw new Error('Token MUST NOT contain whitespace');
     }
+    await this.validateConfigFileArgument();
+    await this.validateDockerCmdFileArgument();
+  }
 
+  private async validateConfigFileArgument(): Promise<void> {
     const configurationFile = this.input.configurationFile();
     if (
       configurationFile !== null &&
@@ -134,6 +138,28 @@ export class Renovate {
       throw new Error(
         `configuration file '${configurationFile.value}' MUST be an existing file`,
       );
+    }
+  }
+
+  private async validateDockerCmdFileArgument(): Promise<void> {
+    const dockerCmdFile = this.input.getDockerCmdFile();
+    if (dockerCmdFile === null) return;
+
+    try {
+      const s = await fs.stat(dockerCmdFile);
+      if (!s.isFile)
+        throw new Error(`dockerCmdFile '${dockerCmdFile}' MUST be a file`);
+      if (
+        (s.mode & fs.constants.R_OK) === 0 ||
+        (s.mode & fs.constants.X_OK) === 0
+      )
+        throw new Error(
+          `dockerCmdFile '${dockerCmdFile}' MUST have read and execute rights`,
+        );
+    } catch (err) {
+      if (err instanceof Error && 'code' in err && err.code === 'ENOENT')
+        throw new Error(`dockerCmdFile '${dockerCmdFile}' does not exist`);
+      throw new Error(err as string);
     }
   }
 }
