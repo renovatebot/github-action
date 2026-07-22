@@ -7,8 +7,8 @@ GitHub Action to run Renovate self-hosted.
 <a name="toc"></a>
 
 ## Table of contents
-
 - [Badges](#badges)
+- [Quick Start](#quick-start)
 - [Options](#options)
   - [`configurationFile`](#configurationfile)
   - [`docker-cmd-file`](#docker-cmd-file)
@@ -37,6 +37,70 @@ GitHub Action to run Renovate self-hosted.
 | <a href="https://conventionalcommits.org"><img alt="Conventional Commits: 1.0.0" src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square"></a>                                      | Commit style | Conventional Commits |
 | <a href="https://renovatebot.com"><img alt="Renovate enabled" src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg?style=flat-square"></a>                                                                | Dependencies | Renovate             |
 | <a href="https://github.com/renovatebot/github-action/actions"><img alt="GitHub workflow status" src="https://img.shields.io/github/actions/workflow/status/renovatebot/github-action/build.yml?style=flat-square"></a> | Build        | GitHub Actions       |
+
+## Quick Start
+
+### `Step 1: Renovate Explained`
+Renovate is a nifty tool for automatically updating your projects dependencies so you don't have to manually! Lets go through how to setup a GitHub Action for Renovate.
+
+### `Step 2: Generate Personal Access Token (PAT)`
+We must generate a PAT for Renovate in order for it to be able to interact with your GitHub.
+
+1. Go to your GitHub settings.
+2. Navigate to Developer settings (the very bottom) and then select Personal access tokens (Tokens (classic)).
+3. Click `Generate new token`.
+4. Choose the 'repo' category at the top.
+5. Click `Generate token` at the bottom (and save it for later).
+
+### `Step 3: Add Your PAT as a Secret in Your Repo`
+Now we add the PAT you created as a secret in your GitHub repo.
+
+1. Go to your repository.
+2. Navigate to Settings -> Secrets -> Actions.
+3. Click `New repository secret.`
+4. Name your secret `RENOVATE_TOKEN` and paste your PAT in the value field.
+5. Click `Add secret`.
+
+### `Step 4: Create renovate.json`
+Renovate requires this .json file so lets setup a basic one.
+
+1. Create `renovate.json` in the base of your repo.
+2. Specify a base configuration:
+
+```json
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"]
+}
+```
+### `Step 5: Set Up GitHub Action Workflow`
+Here we need to setup the yaml for your Github Action Workflow.
+
+1. Make a new directory in your repo titled `.github/workflows`.
+2. Inside your new directory create a file `renovate.yml`.
+3. Define the workflow 
+
+```yaml
+name: Renovate
+
+on:
+  schedule:
+    - cron: '0 3 * * *' 
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Renovate
+        uses: renovatebot/github-action@v40.0.3
+        with:
+          token: ${{ secrets.RENOVATE_TOKEN }}
+
+```
+
+this sets up your workflow to run at 3am daily (editable) which is when Renovate will check your dependencies for updates.
 
 ## Options
 
