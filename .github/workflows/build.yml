@@ -75,7 +75,7 @@ jobs:
       - name: Run zizmor
         uses: zizmorcore/zizmor-action@6fc4b006235f201fdab3722e17240ab420d580e5 # v0.6.1
         with:
-          version: 1.28.0
+          version: 1.29.0
 
   e2e:
     needs:
