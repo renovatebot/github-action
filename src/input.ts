@@ -1,4 +1,4 @@
-import { getInput } from '@actions/core';
+import { getInput, getMultilineInput, warning } from '@actions/core';
 import path from 'node:path';
 
 export interface EnvironmentVariable {
@@ -31,11 +31,21 @@ export class Input {
     const envRegex = envRegexInput
       ? new RegExp(envRegexInput)
       : this.options.envRegex;
+    const additionalEnvVarNames = getMultilineInput('additional-env-list');
     this._environmentVariables = new Map(
       Object.entries(process.env)
-        .filter(([key]) => envRegex.test(key))
+        .filter(
+          ([key]) => envRegex.test(key) || additionalEnvVarNames.includes(key),
+        )
         .filter((pair): pair is [string, string] => pair[1] !== undefined),
     );
+    for (const name of additionalEnvVarNames) {
+      if (!this._environmentVariables.has(name)) {
+        warning(
+          `Environment variable '${name}' listed in 'additional-env-list' was not found in the parent process environment; it will not be passed to the renovate container.`,
+        );
+      }
+    }
 
     this.token = this.get(
       this.options.token.input,
