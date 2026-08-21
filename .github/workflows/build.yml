@@ -174,13 +174,18 @@ jobs:
 
       - name: fetch pr
         if: ${{github.event_name == 'pull_request'}}
-        run: git fetch origin +${{ github.sha }}:${{ github.ref }}
+        run: git fetch origin +$GH_SHA:$GH_REF
+        env:
+          GH_SHA: ${{ github.sha }}
+          GH_REF: ${{ github.ref }}
 
       - name: Merge main
         id: merge
         run: |
-          git merge --no-ff -Xtheirs -m 'skip: merge (${{ github.sha }}) [skip release]' ${{ github.sha }}
+          git merge --no-ff -Xtheirs -m "skip: merge ($GH_SHA) [skip release]" $GH_SHA
           commit=$(git rev-parse HEAD)
+        env:
+          GH_SHA: ${{ github.sha }}
 
       - name: 📥 Setup Node.js
         uses: ./.github/actions/setup-node
