@@ -98,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
         with:
@@ -141,7 +141,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
         with:
@@ -197,7 +197,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
         with:
@@ -214,7 +214,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
         with:
@@ -236,7 +236,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
         with:
@@ -253,7 +253,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
         with:
@@ -288,7 +288,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
         with:
@@ -347,7 +347,7 @@ jobs:
           repositories: 'repo1,repo2'
 
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
 
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
@@ -389,7 +389,7 @@ For example if you wish to pass through some credentials for a [host rule](https
        runs-on: ubuntu-latest
        steps:
          - name: Checkout
-           uses: actions/checkout@v6.1.0
+           uses: actions/checkout@v7.0.1
          - name: Self-hosted Renovate
            uses: renovatebot/github-action@v46.2.2
            with:
@@ -427,7 +427,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.1.0
+        uses: actions/checkout@v7.0.1
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v46.2.2
         with:
@@ -482,7 +482,7 @@ jobs:
     name: Renovate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.1.0
+      - uses: actions/checkout@v7.0.1
 
       - name: Restore renovate cache
         id: cache-restore
