@@ -15,7 +15,7 @@ export class Renovate {
   }
 
   async runDockerContainerForVersion(): Promise<string> {
-    const command = `docker run -t --rm ${this.docker.image()} --version`;
+    const command = `docker run --rm ${this.docker.image()} --version`;
 
     const { exitCode, stdout } = await getExecOutput(command);
     if (exitCode !== 0) {
@@ -87,7 +87,7 @@ export class Renovate {
       dockerArguments.push(dockerCmd);
     }
 
-    const command = `docker run -t ${dockerArguments.join(' ')}`;
+    const command = `docker run ${dockerArguments.join(' ')}`;
 
     const code = await exec(command);
     if (code !== 0) {
