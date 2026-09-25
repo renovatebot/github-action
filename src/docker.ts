@@ -1,16 +1,23 @@
+import { info, warning } from '@actions/core';
 import type { Input } from './input';
-import { warning } from '@actions/core';
 
 export class Docker {
   private static readonly image = 'ghcr.io/renovatebot/renovate';
   private static readonly version = '44'; // renovate
 
-  private readonly dockerImage: string;
-  private readonly fullTag: string;
+  private readonly fullImageReference: string;
 
   constructor(input: Input) {
     let image = input.getDockerImage();
     let version = input.getVersion();
+
+    if (image?.includes(':')) {
+      info(
+        `Docker image looks like it contains a version, using that as the image itself`,
+      );
+      this.fullImageReference = image;
+      return;
+    }
 
     if (!image) {
       warning(`No Docker image specified, using ${Docker.image}`);
@@ -21,11 +28,10 @@ export class Docker {
       version = Docker.version;
     }
 
-    this.dockerImage = image;
-    this.fullTag = version;
+    this.fullImageReference = `${image}:${version}`;
   }
 
   image(): string {
-    return `${this.dockerImage}:${this.fullTag}`;
+    return this.fullImageReference;
   }
 }
