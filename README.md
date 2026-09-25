@@ -227,6 +227,23 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 ```
 
+It is also possible to specify a full Docker image pinned to a version (and optionally, a digest) like so:
+
+```yml
+....
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v46.3.1
+        with:
+          renovate-image: ghcr.io/renovatebot/renovate@sha256:0f7ba2b70c5d1a7e2d95b0f6c3d5b4a1e2f6b6a1e2f6b6a1e2f6b6a1e2f6b6a1
+          token: ${{ secrets.RENOVATE_TOKEN }}
+```
+
 ### `renovate-version`
 
 The Renovate version to use.
