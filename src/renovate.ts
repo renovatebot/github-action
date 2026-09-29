@@ -31,7 +31,9 @@ export class Renovate {
     const dockerArguments = this.input
       .toEnvironmentVariables()
       .map((e) => `--env ${e.key}`)
-      .concat([`--env ${this.input.token.key}=${this.input.token.value} --env FORCE_COLOR=3`]);
+      .concat([
+        `--env ${this.input.token.key}=${this.input.token.value} --env FORCE_COLOR=3`,
+      ]);
 
     const configurationFile = this.input.configurationFile();
     if (configurationFile !== null) {
