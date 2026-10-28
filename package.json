@@ -55,7 +55,7 @@
     "globals": "17.13.0",
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
-    "npm-run-all2": "9.0.3",
+    "npm-run-all2": "9.0.4",
     "prettier": "3.9.10",
     "prettier-plugin-packagejson": "3.0.2",
     "rimraf": "6.1.3",
