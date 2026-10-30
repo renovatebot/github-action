@@ -1,5 +1,5 @@
-import { build } from 'esbuild';
 import { env } from 'node:process';
+import { build } from 'esbuild';
 
 await build({
   entryPoints: ['./src/index.ts'],
