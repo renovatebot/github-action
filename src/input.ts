@@ -1,5 +1,5 @@
-import { getInput, getMultilineInput, warning } from '@actions/core';
 import path from 'node:path';
+import { getInput, getMultilineInput, warning } from '@actions/core';
 
 export interface EnvironmentVariable {
   key: string;
@@ -28,15 +28,11 @@ export class Input {
 
   constructor() {
     const envRegexInput = getInput('env-regex');
-    const envRegex = envRegexInput
-      ? new RegExp(envRegexInput)
-      : this.options.envRegex;
+    const envRegex = envRegexInput ? new RegExp(envRegexInput) : this.options.envRegex;
     const additionalEnvVarNames = getMultilineInput('additional-env-list');
     this._environmentVariables = new Map(
       Object.entries(process.env)
-        .filter(
-          ([key]) => envRegex.test(key) || additionalEnvVarNames.includes(key),
-        )
+        .filter(([key]) => envRegex.test(key) || additionalEnvVarNames.includes(key))
         .filter((pair): pair is [string, string] => pair[1] !== undefined),
     );
     for (const name of additionalEnvVarNames) {
@@ -120,20 +116,15 @@ export class Input {
     }));
   }
 
-  private get(
-    input: string,
-    env: string,
-    optional: boolean,
-  ): EnvironmentVariable {
+  private get(input: string, env: string, optional: boolean): EnvironmentVariable {
     const fromInput = getInput(input);
     const fromEnv = this._environmentVariables.get(env);
 
     if (fromInput === '' && fromEnv === undefined && !optional) {
       throw new Error(
-        [
-          `'${input}' MUST be passed using its input or the '${env}'`,
-          'environment variable',
-        ].join(' '),
+        [`'${input}' MUST be passed using its input or the '${env}'`, 'environment variable'].join(
+          ' ',
+        ),
       );
     }
 

@@ -1,0 +1,102 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "import", "vitest", "promise", "oxc"],
+  "jsPlugins": ["@containerbase/oxlint-plugin"],
+  "options": {
+    "typeAware": true,
+    "reportUnusedDisableDirectives": "error"
+  },
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "builtin": true,
+    "node": true
+  },
+  "ignorePatterns": ["dist/", "coverage/", ".claude/worktrees/", ".pnpm-store"],
+  "rules": {
+    "containerbase/enforce-ts-extension": "error",
+    "containerbase/no-undeclared-dependencies": "error",
+    "containerbase/organize-imports": "error",
+    "containerbase/test-root-describe": "error",
+
+    "import/no-cycle": "error",
+    "import/no-duplicates": "error",
+    "import/export": "error",
+
+    "curly": ["error", "all"],
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "no-empty": "error",
+    "no-prototype-builtins": "error",
+    "no-useless-escape": "error",
+    "no-fallthrough": "error",
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
+    "no-unused-expressions": "error",
+    "no-empty-function": "error",
+    "no-array-constructor": "error",
+
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }
+    ],
+
+    "typescript/unbound-method": ["error", { "ignoreStatic": true }],
+    "typescript/restrict-plus-operands": "error",
+    "typescript/restrict-template-expressions": "error",
+    "typescript/no-empty-object-type": "error",
+    "typescript/ban-ts-comment": "error",
+    "typescript/no-explicit-any": "error",
+    "typescript/no-namespace": "error",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-require-imports": "error",
+    "typescript/no-unsafe-argument": "error",
+    "typescript/no-unsafe-assignment": "error",
+    "typescript/no-unsafe-call": "error",
+    "typescript/no-unsafe-member-access": "error",
+    "typescript/no-unsafe-return": "error",
+    "typescript/no-unsafe-function-type": "error",
+    "typescript/no-wrapper-object-types": "error",
+    "typescript/only-throw-error": "error",
+    "typescript/prefer-promise-reject-errors": "error",
+    "typescript/require-await": "error",
+    "typescript/triple-slash-reference": "error",
+    "typescript/no-unsafe-enum-comparison": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/no-redundant-type-constituents": "error",
+    "typescript/no-duplicate-type-constituents": "error",
+    "typescript/no-base-to-string": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/no-floating-promises": "error",
+    "typescript/await-thenable": "error",
+    "typescript/no-for-in-array": "error",
+    "typescript/no-implied-eval": "error",
+    "typescript/no-array-delete": "error",
+    "typescript/no-this-alias": "error",
+
+    "promise/always-return": "error",
+    "promise/catch-or-return": "error",
+    "promise/no-return-wrap": "error",
+    "promise/param-names": "error",
+    "promise/valid-params": "error",
+
+    "vitest/require-mock-type-parameters": "off",
+    "vitest/require-to-throw-message": "off"
+  },
+  "overrides": [
+    {
+      "files": ["tools/**", "commitlint.config.js"],
+      "rules": {
+        "containerbase/no-undeclared-dependencies": ["error", { "allowDevDependencies": true }],
+        "typescript/no-explicit-any": "off"
+      }
+    }
+  ]
+}

@@ -14,14 +14,7 @@
   "packageRules": [
     {
       "description": "lockFileMaintenance",
-      "matchUpdateTypes": [
-        "pin",
-        "digest",
-        "patch",
-        "minor",
-        "major",
-        "lockFileMaintenance"
-      ],
+      "matchUpdateTypes": ["pin", "digest", "patch", "minor", "major", "lockFileMaintenance"],
       "dependencyDashboardApproval": false,
       "minimumReleaseAge": "1 day"
     }

@@ -19,10 +19,7 @@
     },
     {
       "description": "Don't require approval for renovate",
-      "matchPackageNames": [
-        "ghcr.io/renovatebot/renovate",
-        "renovatebot/github-action"
-      ],
+      "matchPackageNames": ["ghcr.io/renovatebot/renovate", "renovatebot/github-action"],
       "dependencyDashboardApproval": false
     },
     {
@@ -42,9 +39,7 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["README.md"],
-      "matchStrings": [
-        "uses: renovatebot/github-action@(?<currentValue>[^\\s]+)"
-      ],
+      "matchStrings": ["uses: renovatebot/github-action@(?<currentValue>[^\\s]+)"],
       "depNameTemplate": "renovatebot/github-action",
       "datasourceTemplate": "github-releases"
     },

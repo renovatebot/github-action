@@ -12,9 +12,7 @@ export class Docker {
     let version = input.getVersion();
 
     if (image?.includes(':')) {
-      info(
-        `Docker image looks like it contains a version, using that as the image itself`,
-      );
+      info(`Docker image looks like it contains a version, using that as the image itself`);
       this.fullImageReference = image;
       return;
     }
