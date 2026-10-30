@@ -19,7 +19,7 @@ export class Renovate {
 
     const { exitCode, stdout } = await getExecOutput(command);
     if (exitCode !== 0) {
-      new Error(`'docker run' failed with exit code ${exitCode}.`);
+      throw new Error(`'docker run' failed with exit code ${exitCode}.`);
     }
 
     return stdout.trim();
@@ -93,7 +93,7 @@ export class Renovate {
 
     const code = await exec(command);
     if (code !== 0) {
-      new Error(`'docker run' failed with exit code ${code}.`);
+      throw new Error(`'docker run' failed with exit code ${code}.`);
     }
   }
 
