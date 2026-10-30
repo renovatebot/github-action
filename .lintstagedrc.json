@@ -1,7 +1,4 @@
 {
-  "*.{ts,tsx,js,jsx,json}": [
-    "eslint --cache --fix",
-    "prettier --cache --write"
-  ],
-  "!*.{ts,tsx,js,jsx,json}": "prettier --cache --ignore-unknown --write"
+  "*.{js,ts,cjs,mjs}": ["oxlint --fix", "oxfmt"],
+  "!*.{js,ts,cjs,mjs}": "oxfmt --no-error-on-unmatched-pattern"
 }
