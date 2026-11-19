@@ -41,7 +41,7 @@
     "@semantic-release/git": "11.0.1",
     "@semantic-release/github": "12.0.10",
     "@semantic-release/npm": "13.2.0",
-    "@tsconfig/node24": "24.0.5",
+    "@tsconfig/node24": "24.0.6",
     "@tsconfig/strictest": "2.0.8",
     "@types/node": "24.19.2",
     "conventional-changelog-conventionalcommits": "9.3.1",
