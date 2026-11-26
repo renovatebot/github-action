@@ -3,7 +3,7 @@ import type { Input } from './input';
 
 export class Docker {
   private static readonly image = 'ghcr.io/renovatebot/renovate';
-  private static readonly version = '44'; // renovate
+  private static readonly version = '45'; // renovate
 
   private readonly fullImageReference: string;
 
