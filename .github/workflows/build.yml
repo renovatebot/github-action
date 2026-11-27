@@ -113,14 +113,14 @@ jobs:
           RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
 
       - name: Renovate test
-        uses: ./
+        uses: $/
         env:
           LOG_LEVEL: debug
         with:
           configurationFile: ${{ matrix.configurationFile }}
 
       - name: Renovate test with entrypoint
-        uses: ./
+        uses: $/
         env:
           LOG_LEVEL: debug
         with:
@@ -130,7 +130,7 @@ jobs:
           docker-user: root
 
       - name: Renovate test with image and digest
-        uses: ./
+        uses: $/
         env:
           LOG_LEVEL: debug
         with:
