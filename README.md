@@ -437,6 +437,12 @@ For example if you wish to pass through some credentials for a [host rule](https
    };
    ```
 
+### User agent
+
+By default, the Action sets [`RENOVATE_USER_AGENT`](https://docs.renovatebot.com/self-hosted-configuration/#useragent) to `Renovate/{{renovateVersion}} (https://github.com/renovatebot/github-action)`, so that operators of registries can identify traffic coming from this Action.
+
+To override it, set the `RENOVATE_USER_AGENT` environment variable on the Action step.
+
 ### Passing other environment variables
 
 There are two ways to pass additional variables through to the Renovate container:
