@@ -6,6 +6,9 @@ import { Input } from './input';
 
 export class Renovate {
   static dockerGroupRegex = /^docker:x:(?<groupId>[1-9][0-9]*):/m;
+  private static readonly userAgentKey = 'RENOVATE_USER_AGENT';
+  private static readonly defaultUserAgent =
+    'Renovate/{{renovateVersion}} (https://github.com/renovatebot/github-action)';
   private configFileMountDir = '/github-action';
 
   private docker: Docker;
@@ -32,6 +35,10 @@ export class Renovate {
       .toEnvironmentVariables()
       .map((e) => `--env ${e.key}`)
       .concat([`--env ${this.input.token.key}=${this.input.token.value} --env FORCE_COLOR=3`]);
+
+    if (!this.input.toEnvironmentVariables().some((e) => e.key === Renovate.userAgentKey)) {
+      dockerArguments.push(`--env "${Renovate.userAgentKey}=${Renovate.defaultUserAgent}"`);
+    }
 
     const configurationFile = this.input.configurationFile();
     if (configurationFile !== null) {
